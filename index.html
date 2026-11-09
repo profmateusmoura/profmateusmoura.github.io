@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f5">
+  <meta name="description" content="Portal de materiais didáticos de ALP, PED, POO, DW1, DW2, DW3 e PJE, com exemplos e apostilas gratuitas.">
+  <title>Portal de Estudos | ALP · PED · POO · DW1 · DW2 · DW3 · PJE</title>
+  <link rel="icon" href="assets/portal-favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/portal.css">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('portal-theme')||'light'}catch(e){}</script>
+  <script src="conteudos.js" defer></script>
+  <script src="assets/portal.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#materiais">Pular para os materiais</a>
+  <div class="site-shell">
+    <header class="header" id="inicio">
+      <div class="header-inner">
+        <a class="brand" href="./index.html" aria-label="Portal de Estudos, início">
+          <span class="logo" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M6 8.5h10.5a5 5 0 0 1 5 5V29H11a5 5 0 0 0-5 2V8.5Zm24 0H20a5 5 0 0 0-5 5V29h10a5 5 0 0 1 5 2V8.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+          <span class="brand-wordmark"><strong>Portal de Estudos</strong><small>Biblioteca de materiais</small></span>
+        </a>
+        <nav class="header-nav" aria-label="Navegação principal">
+          <a href="#materiais">Materiais</a>
+          <a href="#como-estudar">Como estudar</a>
+          <a href="#sobre">Sobre o portal</a>
+        </nav>
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Ativar tema escuro" title="Alternar tema">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.1A8.5 8.5 0 0 1 9.9 3.5 8.5 8.5 0 1 0 20.5 14.1Z"/></svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> APRENDIZAGEM ABERTA • NO SEU RITMO</div>
+          <h1 id="hero-title">Seu próximo assunto<br><em>começa aqui.</em></h1>
+          <p>Sete disciplinas, cada uma com seu espaço de aprendizagem. Explicações passo a passo, exemplos práticos e conteúdos que você pode consultar sempre que precisar.</p>
+          <a class="hero-cta" href="#materiais">Explorar os materiais <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 14 0m-6-6 6 6-6 6"/></svg></a>
+          <div class="hero-summary"><span><strong id="total-materiais">1</strong> <span id="label-materiais">material disponível</span></span><span class="vertical-line" aria-hidden="true"></span><span>Acesso gratuito</span><span class="vertical-line" aria-hidden="true"></span><span>Conteúdo em português</span></div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-grid"></div>
+          <div class="art-halo"></div>
+          <div class="art-note art-note-a"><span class="art-note-dot blue"></span> EXPLORE</div>
+          <div class="art-window">
+            <div class="art-window-head"><span></span><span></span><span></span><small>MATERIAIS / PYTHON</small></div>
+            <div class="art-window-body">
+              <span class="art-line l1"></span><span class="art-line l2"></span>
+              <div class="art-structure"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><div>12</div><div>28</div><div>16</div><div>40</div><div>24</div></div>
+              <span class="art-line l3"></span><span class="art-line l4"></span>
+            </div>
+            <div class="art-window-footer"><span class="status-dot"></span> Aprenda passo a passo</div>
+          </div>
+          <div class="art-note art-note-b">✦ ENTENDA</div>
+          <div class="art-corner">01 <span>/ ∞</span></div>
+        </div>
+      </section>
+
+      <section class="library" id="materiais" aria-labelledby="library-heading">
+        <div class="section-head"><div><div class="kicker">BIBLIOTECA</div><h2 id="library-heading">Disciplinas para explorar</h2><p>Acesse PED agora e acompanhe os próximos materiais: ALP, POO, DW1, DW2, DW3 e PJE.</p></div><div class="counter" id="cards-counter" aria-live="polite"></div></div>
+        <div class="catalog-tools"><label class="search-box" for="search"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="search" type="search" placeholder="Buscar disciplina, assunto ou palavra-chave…" autocomplete="off"><kbd>/</kbd></label><div class="filter-options" id="filters" role="group" aria-label="Filtrar materiais por área"></div></div>
+        <div class="card-grid" id="catalog-grid">
+          <noscript><article class="material-card"><h3>PED — Programação e Estruturas de Dados</h3><p>Listas, dicionários, buscas, ordenação e outros algoritmos em Python.</p><a href="materiais/ped/index.html">Abrir PED</a></article></noscript>
+        </div>
+        <div class="empty" id="empty" hidden><div class="empty-mark">⌕</div><h3>Nenhum material encontrado</h3><p>Tente outro termo ou limpe o filtro.</p><button type="button" id="clear-filters">Mostrar todos os materiais</button></div>
+        <div class="future"><div class="future-icon" aria-hidden="true">＋</div><div><strong>Uma biblioteca em expansão</strong><p>Novas disciplinas e materiais poderão ser adicionados ao portal, cada um com sua própria página de estudos.</p></div></div>
+      </section>
+
+      <section class="how" id="como-estudar" aria-labelledby="how-title"><div class="kicker">COMO ESTUDAR</div><h2 id="how-title">Aprenda com calma, um passo de cada vez.</h2><div class="steps"><article><span class="step-number">01</span><h3>Escolha o assunto</h3><p>Abra o material da disciplina que deseja estudar. Cada conteúdo tem sua própria organização.</p></article><article><span class="step-number">02</span><h3>Entenda os exemplos</h3><p>Acompanhe as explicações e observe as demonstrações antes de tentar resolver problemas sozinho.</p></article><article><span class="step-number">03</span><h3>Volte quando precisar</h3><p>Releia conceitos, consulte exemplos e utilize os arquivos de apoio sempre que necessário.</p></article></div></section>
+      <section class="about" id="sobre"><div class="about-icon" aria-hidden="true">✳</div><div><div class="kicker">SOBRE O PORTAL</div><h2>Conhecimento organizado para aprender melhor.</h2><p>Este espaço reúne materiais de apoio ao estudo, preparados com explicações acessíveis, exemplos e aplicações práticas. Cada disciplina possui seu próprio conteúdo e pode ser ampliada sem alterar as demais.</p></div></section>
+    </main>
+    <footer class="footer"><span>© <span id="year">2026</span> · Portal de Estudos</span><span>Materiais didáticos • Acesso gratuito • <a href="LICENCA_CONTEUDOS.md">Licenças de uso</a></span><a href="#inicio">Voltar ao topo ↑</a></footer>
+  </div>
+</body>
+</html>
