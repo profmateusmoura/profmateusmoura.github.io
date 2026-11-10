@@ -1,12 +1,23 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="Índices, percursos, operações e organização de dados"><title>Listas · PED</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/pygments.css"><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script></head>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="Índices, percursos, operações e organização de dados"><title>Listas · PED</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/pygments.css"><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><style>
+.lr-lab{margin:1.75rem 0;padding:clamp(.85rem,3vw,1.45rem);border:1px solid var(--border,currentColor);border-radius:1rem;background:var(--bg,Canvas);color:var(--ink,CanvasText)}
+.lr-lab h3{margin-top:0}.lr-lab [hidden]{display:none!important}
+.lr-lab .lr-cards{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0}
+.lr-lab .lr-card{display:flex;flex-direction:column;gap:.25rem;align-items:flex-start;min-width:5.4rem;padding:.55rem .7rem;border:1px solid currentColor;border-radius:.55rem;background:Canvas;color:CanvasText;font:inherit}
+.lr-lab .lr-card strong{overflow-wrap:anywhere}.lr-lab .lr-card small{font-size:.8rem}
+.lr-lab .lr-card[data-active]{background:var(--deep,Highlight);color:var(--paper,HighlightText);border-color:var(--deep,Highlight)}
+.lr-lab .lr-actions{display:flex;flex-wrap:wrap;align-items:end;gap:.65rem;margin:.75rem 0}
+.lr-lab label{display:grid;gap:.2rem;max-width:100%}.lr-lab input[type=number]{width:5rem}
+.lr-lab button,.lr-lab select,.lr-lab input[type=number]{font:inherit;max-width:100%;min-height:2.5rem;padding:.3rem .65rem;border:1px solid currentColor;border-radius:.5rem;background:Canvas;color:CanvasText}
+.lr-lab button:enabled{cursor:pointer}.lr-lab button:disabled{opacity:.55}.lr-lab :focus-visible{outline:3px solid Highlight;outline-offset:3px}
+.lr-lab .lr-feedback{min-height:1.5em;margin:.75rem 0 0;font-weight:600}.lr-lab code{overflow-wrap:anywhere}
+</style></head>
 <body data-root="../" data-page="Listas"><a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 <div class="app-frame"><aside class="sidebar" id="sidebar"><a class="portal-return" href="../../../index.html" aria-label="Voltar ao portal de materiais"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Todos os materiais</span></a><a class="brand" href="../index.html"><span class="brand-mark"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></span><span><strong>PED</strong><small>Estruturas de Dados</small></span></a><div class="sidebar-section-title">VOLUME II <span>06 CADERNOS</span></div><nav class="site-nav" aria-label="Cadernos do volume"><a href="../cadernos/listas.html" class="nav-module active"><span class="nav-index">01</span><span class="nav-label">Listas</span><span class="visit-dot" data-visited="listas" title="Caderno visitado"></span></a><a href="../cadernos/tuplas-dicionarios-conjuntos.html" class="nav-module "><span class="nav-index">02</span><span class="nav-label">Tuplas, dicionários e conjuntos</span><span class="visit-dot" data-visited="tuplas-dicionarios-conjuntos" title="Caderno visitado"></span></a><a href="../cadernos/estruturas-combinadas-json.html" class="nav-module "><span class="nav-index">03</span><span class="nav-label">Estruturas combinadas e JSON</span><span class="visit-dot" data-visited="estruturas-combinadas-json" title="Caderno visitado"></span></a><a href="../cadernos/buscas-ordenacao.html" class="nav-module "><span class="nav-index">04</span><span class="nav-label">Buscas e ordenação</span><span class="visit-dot" data-visited="buscas-ordenacao" title="Caderno visitado"></span></a><a href="../cadernos/pilhas-filas-encadeamento-hash.html" class="nav-module "><span class="nav-index">05</span><span class="nav-label">Pilhas, filas, encadeamento e hash</span><span class="visit-dot" data-visited="pilhas-filas-encadeamento-hash" title="Caderno visitado"></span></a><a href="../cadernos/complexidade-arvores-grafos.html" class="nav-module "><span class="nav-index">06</span><span class="nav-label">Complexidade, árvores e grafos</span><span class="visit-dot" data-visited="complexidade-arvores-grafos" title="Caderno visitado"></span></a></nav><div class="sidebar-foot"><div class="progress-title">Seu percurso <span id="progress-count">0/6</span></div><div class="progress-bar"><span id="progress-line" style="width:0%"></span></div><p>Seu progresso fica salvo apenas neste navegador.</p></div></aside>
 <div class="main-area"><header class="topbar"><div class="top-left"><button type="button" class="icon-button menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-controls="sidebar" aria-expanded="false"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a href="../index.html" class="top-home">Volume II <span class="top-sep">/</span> <span class="top-current">Listas</span></a></div><div class="top-actions"><button type="button" class="search-open" id="search-open"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Buscar no material</span><kbd>Ctrl K</kbd></button><button type="button" class="icon-button theme-toggle" id="theme-toggle" aria-label="Alternar tema claro e escuro"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.1A8 8 0 0 1 9.9 3.5 8 8 0 1 0 20.5 14.1Z"/></svg></button></div></header>
 <main id="conteudo"><div class="reading-layout"><article class="article" id="article"><div class="article-header"><div class="article-path">CADERNO 01 <span>·</span> COLEÇÕES</div><h1>Listas</h1><p class="article-subtitle">Índices, percursos, operações e organização de dados</p><div class="article-controls"><a class="download-link" href="../arquivos/01_Listas.pdf" download><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4-4 4 4 4-4M5 17v4h14v-4"/></svg> Baixar PDF</a><button class="complete-btn" type="button" data-complete="listas"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg> <span>Marcar como lido</span></button></div></div><div class="article-content"><h2 id="percurso-do-volume-ii">Percurso do Volume II <a class="anchor" href="#percurso-do-volume-ii" aria-label="Link para a seção">#</a></h2>
 <p>O Volume II começa com as estruturas elementares do Python. Depois que o estudante souber localizar, modificar e percorrer dados, os algoritmos de busca e ordenação passam a ter significado concreto. A coleção também aborda implementações clássicas e análise de eficiência.</p>
 <div class="table-scroll" tabindex="0" aria-label="Tabela com rolagem horizontal"><table><thead><tr><th>Unidade</th><th>Assuntos previstos</th></tr></thead><tbody><tr><td>01 • Listas</td><td>Índices, mutabilidade, operações, percursos, cortes, cópias e aninhamento (este caderno).</td></tr><tr><td>02 • Tuplas</td><td>Sequências imutáveis, acesso, desempacotamento e critérios de escolha.</td></tr><tr><td>03 • Dicionários</td><td>Chaves, valores, atualizações, percursos e registros.</td></tr><tr><td>04 • Conjuntos</td><td>Unicidade, união, interseção, diferença e pertencimento.</td></tr><tr><td>05 • Estruturas combinadas e JSON</td><td>Dados de produtos, unidades, estoque e pedidos em arquivos.</td></tr><tr><td>06 • Buscas</td><td>Busca sequencial e busca binária; requisitos e verificações.</td></tr><tr><td>07 • Ordenação</td><td>Bubble Sort, Selection Sort, Insertion Sort, Merge Sort e Quick Sort.</td></tr><tr><td>08 • Pilhas e filas</td><td>Regras LIFO/FIFO, implementações e aplicações.</td></tr><tr><td>09 • Estruturas clássicas</td><td>Listas encadeadas, tabelas hash, recursão; introdução a árvores e grafos.</td></tr><tr><td>10 • Complexidade</td><td>Contagem de operações, Big O, custo de tempo e de memória.</td></tr></tbody></table></div>
-<aside class="callout"><div class="callout-label">DECISÃO DE ESCOPO</div><p>Merge Sort e Quick Sort são conteúdos previstos e mantidos na Unidade 7. Não serão tratados como menções opcionais: terão explicação visual, implementação e comparação com os demais métodos.</p></aside>
 <h3 id="como-ler-este-caderno">Como ler este caderno <a class="anchor" href="#como-ler-este-caderno" aria-label="Link para a seção">#</a></h3>
 <p>Cada capítulo parte de uma situação reconhecível, apresenta uma representação visual, introduz a operação em Python e explica o resultado. Os códigos são curtos e podem ser testados; alguns retomam variáveis declaradas no exemplo imediatamente anterior. Nas linhas identificadas como “Saída”, a barra / separa resultados mostrados em linhas diferentes e não faz parte do que Python imprime. Para facilitar a leitura, os exemplos usam nomes e preços curtos e não dependem inicialmente de banco de dados ou de arquivo JSON.</p>
 <p>Os quadros “No mundo físico” mostram como representar as instruções usando objetos e estudantes nas posições de uma mesa ou de uma fila. Essas comparações ajudam a compreender o comportamento de uma lista, mas não descrevem literalmente como a memória do computador é organizada.</p>
@@ -51,6 +62,7 @@
 <p>Saída: 4 / Creme</p>
 <p>Tentar acessar produtos[5] provoca IndexError, porque não existe elemento com esse índice. Isso não significa que a lista não possa crescer: significa apenas que a posição ainda não existe.</p>
 <aside class="callout"><div class="callout-label">ATENÇÃO</div><p>Em Python, índices representam posições e não uma contagem “de primeiro a quinto”. A sexta posição é o índice 5. Os números no chão ou sobre a mesa devem permanecer fixos quando os elementos mudam de lugar.</p></aside>
+<section class="lr-lab" data-lab="indices" aria-labelledby="atividade-listas-indices"><h3 id="atividade-listas-indices">Atividade 1 · Onde está o produto?</h3><p>Clique na ficha que corresponde ao índice pedido. Depois explique como contou as posições.</p><noscript><p>Ative o JavaScript para manipular as fichas desta atividade.</p></noscript><div class="lr-interactive" hidden><p data-prompt></p><div class="lr-cards" data-board></div><button data-action="next">Próximo desafio</button><p class="lr-feedback" data-feedback role="status"></p></div></section>
 <h2 id="3-criando-listas">3. Criando listas <a class="anchor" href="#3-criando-listas" aria-label="Link para a seção">#</a></h2>
 <p>Os colchetes [ ] indicam uma lista literal. Os elementos ficam separados por vírgulas. Podemos criar listas de textos, de números, vazias ou com diferentes tipos. Em programas reais, entretanto, manter uma coleção com elementos semelhantes costuma tornar o código mais fácil de entender.</p>
 <div class="code-shell"><div class="code-head"><span class="code-lang">Python</span><button type="button" class="copy-code" aria-label="Copiar código">Copiar</button></div><pre class="highlight"><code><span class="n">nomes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Shampoo&quot;</span><span class="p">,</span> <span class="s2">&quot;Batom&quot;</span><span class="p">,</span> <span class="s2">&quot;Creme&quot;</span><span class="p">]</span>
@@ -138,6 +150,7 @@
 <p>Saída: Shampoo / Batom / Protetor</p>
 <p>O while também funciona, mas exige atualizar o índice de maneira explícita. Se esquecermos indice += 1, o laço poderá não terminar. Para simples leitura de todos os elementos, for costuma ser mais apropriado.</p>
 <aside class="callout"><div class="callout-label">IDEIA CENTRAL</div><p>Percorrer é visitar; buscar é tentar encontrar um valor específico; ordenar é mudar a disposição dos elementos segundo uma regra. Essas ações são relacionadas, mas não significam a mesma coisa.</p></aside>
+<section class="lr-lab" data-lab="percurso" aria-labelledby="atividade-listas-percurso"><h3 id="atividade-listas-percurso">Atividade 2 · Percorra uma ficha por vez</h3><p>Avance pelo laço e acompanhe o índice, o produto e a saída.</p><noscript><p>Ative o JavaScript para manipular as fichas desta atividade.</p></noscript><div class="lr-interactive" hidden><div class="lr-cards" data-board></div><div class="lr-actions"><button data-action="step">Próximo passo</button><button data-action="reset">Reiniciar</button></div><p>Saída acumulada</p><ol data-log></ol><p class="lr-feedback" data-feedback role="status"></p></div></section>
 <h2 id="7-adicionando-elementos-append-extend-e-insert">7. Adicionando elementos: append(), extend() e insert() <a class="anchor" href="#7-adicionando-elementos-append-extend-e-insert" aria-label="Link para a seção">#</a></h2>
 <p>As listas podem crescer. Entretanto, “acrescentar ao final”, “adicionar vários elementos” e “inserir em determinada posição” são operações diferentes. A posição de entrada é parte do significado de cada método.</p>
 <h3 id="append-acrescentar-um-elemento-ao-final">append(): acrescentar um elemento ao final <a class="anchor" href="#append-acrescentar-um-elemento-ao-final" aria-label="Link para a seção">#</a></h3>
@@ -198,6 +211,7 @@
 <p>Saída: ['Batom', 'Creme'] / []</p>
 <p>del é uma instrução da linguagem que pode excluir por índice ou por fatia; clear() é um método que retira todos os elementos sem eliminar a própria lista. Após a remoção de um elemento intermediário, os elementos seguintes passam a ocupar índices menores.</p>
 <div class="table-scroll" tabindex="0" aria-label="Tabela com rolagem horizontal"><table><thead><tr><th>Operação</th><th>O que informamos</th><th>O que acontece</th></tr></thead><tbody><tr><td>remove(valor)</td><td>Valor existente</td><td>Exclui a primeira ocorrência; não devolve o elemento.</td></tr><tr><td>pop(indice)</td><td>Posição (opcional)</td><td>Exclui e devolve o elemento; sem índice, retira o último.</td></tr><tr><td>del lista[indice]</td><td>Posição</td><td>Exclui o elemento da posição informada.</td></tr><tr><td>clear()</td><td>Nenhum argumento</td><td>Deixa a lista vazia.</td></tr></tbody></table></div>
+<section class="lr-lab" data-lab="operacoes" aria-labelledby="atividade-listas-operacoes"><h3 id="atividade-listas-operacoes">Atividade 3 · Monte e modifique uma lista</h3><p>Preveja a nova sequência antes de aplicar cada operação. Observe quais fichas mudam de posição.</p><noscript><p>Ative o JavaScript para manipular as fichas desta atividade.</p></noscript><div class="lr-interactive" hidden><div class="lr-cards" data-board></div><div class="lr-actions"><label>Operação <select data-op><option value="append">append · acrescentar no fim</option><option value="insert">insert · inserir antes do índice</option><option value="pop">pop · retirar pelo índice</option></select></label><label data-value-field>Produto <select data-value><option>Máscara</option><option>Gloss</option><option>Shampoo</option></select></label><label data-index-field hidden>Índice <input data-index type="number" min="0" value="0" step="1"></label></div><div class="lr-actions"><button data-action="apply">Aplicar</button><button data-action="reset">Reiniciar</button></div><p><code data-code>produtos = ["Shampoo", "Batom", "Protetor", "Sabonete", "Creme"]</code></p><p class="lr-feedback" data-feedback role="status"></p></div></section>
 <h2 id="9-consultas-tamanho-presenca-quantidade-e-posicao">9. Consultas: tamanho, presença, quantidade e posição <a class="anchor" href="#9-consultas-tamanho-presenca-quantidade-e-posicao" aria-label="Link para a seção">#</a></h2>
 <p>Em muitas situações, o programa precisa consultar informações sobre uma lista sem modificá-la. Consultas respondem a necessidades diferentes: saber a quantidade de elementos, descobrir se um produto existe ou identificar onde está sua primeira ocorrência.</p>
 <div class="code-shell"><div class="code-head"><span class="code-lang">Python</span><button type="button" class="copy-code" aria-label="Copiar código">Copiar</button></div><pre class="highlight"><code><span class="n">produtos</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Shampoo&quot;</span><span class="p">,</span> <span class="s2">&quot;Batom&quot;</span><span class="p">,</span> <span class="s2">&quot;Creme&quot;</span><span class="p">,</span> <span class="s2">&quot;Batom&quot;</span><span class="p">]</span>
@@ -234,6 +248,7 @@
 </code></pre></div>
 <p>Saída: ['A', 'C', 'E'] / ['F', 'E', 'D', 'C', 'B', 'A'] / ['D', 'E', 'F']</p>
 <p>O terceiro campo do fatiamento é o passo: lista[inicio:fim:passo]. Um passo de 2 visita índices alternados. Um passo de -1 percorre a sequência de trás para a frente. O fatiamento usual cria uma nova lista com os elementos selecionados; não reorganiza a lista original.</p>
+<section class="lr-lab" data-lab="fatias" aria-labelledby="atividade-listas-fatias"><h3 id="atividade-listas-fatias">Atividade 4 · Veja quais fichas entram na fatia</h3><p>Mude o início e o fim. As fichas destacadas pertencem à fatia. O índice final fica de fora.</p><noscript><p>Ative o JavaScript para manipular as fichas desta atividade.</p></noscript><div class="lr-interactive" hidden><div class="lr-actions"><label>Início <input type="range" data-start min="0" max="5" value="1"><output data-start-value>1</output></label><label>Fim <input type="range" data-end min="0" max="5" value="4"><output data-end-value>4</output></label></div><div class="lr-cards" data-board></div><p><code data-code></code></p><p class="lr-feedback" data-feedback role="status"></p></div></section>
 <h2 id="11-ordenacao-pronta-sort-sorted-e-reverse">11. Ordenação pronta: sort(), sorted() e reverse() <a class="anchor" href="#11-ordenacao-pronta-sort-sorted-e-reverse" aria-label="Link para a seção">#</a></h2>
 <p>É comum precisar mostrar preços do menor para o maior ou nomes em ordem alfabética. O Python já possui recursos prontos para isso. Mais adiante, construiremos algoritmos como Selection Sort, Merge Sort e Quick Sort para compreender o processo de ordenação; neste momento, o objetivo é aprender a utilizar as operações nativas corretamente.</p>
 <h3 id="sort-reorganiza-a-propria-lista">sort(): reorganiza a própria lista <a class="anchor" href="#sort-reorganiza-a-propria-lista" aria-label="Link para a seção">#</a></h3>
@@ -263,6 +278,7 @@
 <p>Saída: [59.9, 12.0, 29.9]</p>
 <p>reverse() apenas inverte as posições atuais: o primeiro passa a ser o último, o segundo passa a ser o penúltimo etc. Ele não verifica os valores e, portanto, não garante ordem crescente ou decrescente. Também modifica a própria lista e retorna None.</p>
 <aside class="callout"><div class="callout-label">DISTINÇÃO ESSENCIAL</div><p>sort() ordena no mesmo objeto; sorted() produz uma nova lista ordenada; reverse() somente troca o sentido da sequência. Ordenar e inverter são operações diferentes.</p></aside>
+<section class="lr-lab" data-lab="ordem" aria-labelledby="atividade-listas-ordem"><h3 id="atividade-listas-ordem">Atividade 5 · Compare ordenar e inverter</h3><p>Escolha uma operação e compare as duas linhas. Qual delas muda a lista original?</p><noscript><p>Ative o JavaScript para manipular as fichas desta atividade.</p></noscript><div class="lr-interactive" hidden><p>Lista original após a operação</p><div class="lr-cards" data-board></div><p>Resultado da operação</p><div class="lr-cards" data-result></div><div class="lr-actions"><button data-action="sorted">sorted()</button><button data-action="sort">sort()</button><button data-action="reverse">reverse()</button><button data-action="reset">Reiniciar</button></div><p><code data-code></code></p><p class="lr-feedback" data-feedback role="status"></p></div></section>
 <h2 id="12-referencias-e-copias-duas-variaveis-podem-apontar-para-a-mesma-lista">12. Referências e cópias: duas variáveis podem apontar para a mesma lista <a class="anchor" href="#12-referencias-e-copias-duas-variaveis-podem-apontar-para-a-mesma-lista" aria-label="Link para a seção">#</a></h2>
 <p>Ao estudar variáveis simples, o aluno costuma imaginar que atribuir um valor sempre cria uma cópia independente. Com listas, essa impressão pode provocar erros. Uma variável guarda uma referência a um objeto de lista, e duas variáveis podem referenciar o mesmo objeto.</p>
 <div class="code-shell"><div class="code-head"><span class="code-lang">Python</span><button type="button" class="copy-code" aria-label="Copiar código">Copiar</button></div><pre class="highlight"><code><span class="n">original</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Shampoo&quot;</span><span class="p">,</span> <span class="s2">&quot;Batom&quot;</span><span class="p">]</span>
@@ -402,5 +418,177 @@
 <p>Referência metodológica: https://www.manning.com/books/grokking-algorithms-second-edition</p>
 <p>Aulas complementares: https://www.cursoemvideo.com/curso/python-3-mundo-3/</p>
 <p>Exemplos adicionais: https://developers.google.com/edu/python/lists?hl=pt-br</p>
-<p>Nota editorial: as unidades seguintes serão redigidas com o mesmo padrão — explicação progressiva, demonstração de estados, comentários de código, resultados e cuidados com erros comuns —, evitando capítulos compostos apenas de definições ou listas de métodos.</p></div><div class="article-finish"><div class="article-finish-symbol">✓</div><h2>Você chegou ao fim deste caderno.</h2><p>Releia os trechos que ainda não estiverem claros e experimente modificar os exemplos no Python.</p><button class="complete-btn complete-end" type="button" data-complete="listas"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg> <span>Marcar como lido</span></button></div><nav class="pager" aria-label="Próximo e anterior"><span></span><a href="tuplas-dicionarios-conjuntos.html" class="pager-link pager-next"><span>Próximo caderno →</span><strong>Tuplas, dicionários e conjuntos</strong></a></nav></article><aside class="page-toc" aria-label="Nesta página"><div class="toc-title">NESTE CADERNO</div><a href="#percurso-do-volume-ii" class="toc-link ">Percurso do Volume II</a><a href="#como-ler-este-caderno" class="toc-link toc-sub">Como ler este caderno</a><a href="#conhecimentos-que-ja-serao-utilizados" class="toc-link toc-sub">Conhecimentos que já serão utilizados</a><a href="#1-por-que-precisamos-de-listas" class="toc-link ">1. Por que precisamos de listas?</a><a href="#2-elementos-indices-e-tamanho" class="toc-link ">2. Elementos, índices e tamanho</a><a href="#3-criando-listas" class="toc-link ">3. Criando listas</a><a href="#4-consultando-elementos-pelo-indice" class="toc-link ">4. Consultando elementos pelo índice</a><a href="#5-alterando-o-valor-de-uma-posicao" class="toc-link ">5. Alterando o valor de uma posição</a><a href="#6-percorrendo-todos-os-elementos" class="toc-link ">6. Percorrendo todos os elementos</a><a href="#percurso-direto-o-elemento-vem-pronto" class="toc-link toc-sub">Percurso direto: o elemento vem pronto</a><a href="#percurso-por-indice-a-posicao-importa" class="toc-link toc-sub">Percurso por índice: a posição importa</a><a href="#percurso-com-enumerate-indice-e-valor-juntos" class="toc-link toc-sub">Percurso com enumerate(): índice e valor juntos</a><a href="#percurso-com-while" class="toc-link toc-sub">Percurso com while</a><a href="#7-adicionando-elementos-append-extend-e-insert" class="toc-link ">7. Adicionando elementos: append(), extend() e insert()</a><a href="#append-acrescentar-um-elemento-ao-final" class="toc-link toc-sub">append(): acrescentar um elemento ao final</a><a href="#extend-acrescentar-os-elementos-de-uma-sequencia" class="toc-link toc-sub">extend(): acrescentar os elementos de uma sequência</a><a href="#insert-inserir-antes-de-uma-posicao" class="toc-link toc-sub">insert(): inserir antes de uma posição</a><a href="#8-removendo-elementos-remove-pop-del-e-clear" class="toc-link ">8. Removendo elementos: remove(), pop(), del e clear()</a><a href="#remove-remover-pelo-valor" class="toc-link toc-sub">remove(): remover pelo valor</a><a href="#pop-remover-por-indice-e-recuperar-o-valor" class="toc-link toc-sub">pop(): remover por índice e recuperar o valor</a><a href="#del-e-clear" class="toc-link toc-sub">del e clear()</a><a href="#9-consultas-tamanho-presenca-quantidade-e-posicao" class="toc-link ">9. Consultas: tamanho, presença, quantidade e posição</a><a href="#10-fatiamento-trabalhando-com-partes-da-lista" class="toc-link ">10. Fatiamento: trabalhando com partes da lista</a><a href="#passo-e-sentido" class="toc-link toc-sub">Passo e sentido</a><a href="#11-ordenacao-pronta-sort-sorted-e-reverse" class="toc-link ">11. Ordenação pronta: sort(), sorted() e reverse()</a><a href="#sort-reorganiza-a-propria-lista" class="toc-link toc-sub">sort(): reorganiza a própria lista</a><a href="#sorted-devolve-uma-nova-lista" class="toc-link toc-sub">sorted(): devolve uma nova lista</a><a href="#reverse-inverter-nao-e-ordenar" class="toc-link toc-sub">reverse(): inverter não é ordenar</a><a href="#12-referencias-e-copias-duas-variaveis-podem-apontar-para-a-mesma-lista" class="toc-link ">12. Referências e cópias: duas variáveis podem apontar para a mesma lista</a><a href="#o-limite-da-copia-superficial" class="toc-link toc-sub">O limite da cópia superficial</a><a href="#13-listas-aninhadas-linhas-e-colunas" class="toc-link ">13. Listas aninhadas: linhas e colunas</a><a href="#percorrendo-uma-estrutura-em-duas-dimensoes" class="toc-link toc-sub">Percorrendo uma estrutura em duas dimensões</a><a href="#um-erro-comum-ao-criar-varias-linhas" class="toc-link toc-sub">Um erro comum ao criar várias linhas</a><a href="#14-compreensao-de-listas-uma-forma-compacta-de-construir-colecoes" class="toc-link ">14. Compreensão de listas: uma forma compacta de construir coleções</a><a href="#primeiro-a-versao-passo-a-passo" class="toc-link toc-sub">Primeiro, a versão passo a passo</a><a href="#agora-a-mesma-transformacao-em-uma-expressao" class="toc-link toc-sub">Agora, a mesma transformação em uma expressão</a><a href="#filtrando-valores" class="toc-link toc-sub">Filtrando valores</a><a href="#15-estudo-acompanhado-uma-pequena-vitrine" class="toc-link ">15. Estudo acompanhado: uma pequena vitrine</a><a href="#dados-iniciais" class="toc-link toc-sub">Dados iniciais</a><a href="#atualizacao-do-estoque" class="toc-link toc-sub">Atualização do estoque</a><a href="#filtrando-os-produtos-com-estoque-baixo" class="toc-link toc-sub">Filtrando os produtos com estoque baixo</a><a href="#mostrando-os-precos-em-outra-ordem" class="toc-link toc-sub">Mostrando os preços em outra ordem</a><a href="#16-o-que-consolidamos-e-o-que-vem-depois" class="toc-link ">16. O que consolidamos e o que vem depois</a><a href="#referencias-de-estudo-e-criterios-de-elaboracao" class="toc-link ">Referências de estudo e critérios de elaboração</a></aside></div></main><footer class="site-footer"><span>PED · Estruturas de Dados em Python</span><span>Material didático · Lojas Rede (cenário fictício)</span></footer></div></div><div class="sidebar-scrim" id="sidebar-scrim"></div>
-<div class="search-backdrop" id="search-backdrop" hidden><section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-dialog-head"><h2 id="search-title">Encontre um assunto</h2><button type="button" class="search-close" id="search-close" aria-label="Fechar busca">Esc ×</button></div><label class="search-input-wrap"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="search-input" type="search" autocomplete="off" placeholder="Ex.: busca binária, dicionário, Merge Sort…" aria-label="Buscar assuntos"></label><div class="search-results" id="search-results" aria-live="polite"></div><p class="search-tip">Pesquise por conceito, método ou palavra do texto. Funciona sem internet.</p></section></div><div id="toast" class="toast" role="status" aria-live="polite"></div><script src="../assets/site.js" defer></script></body></html>
+<p>Nota editorial: as unidades seguintes serão redigidas com o mesmo padrão — explicação progressiva, demonstração de estados, comentários de código, resultados e cuidados com erros comuns —, evitando capítulos compostos apenas de definições ou listas de métodos.</p></div><div class="article-finish"><div class="article-finish-symbol">✓</div><h2>Você chegou ao fim deste caderno.</h2><p>Releia os trechos que ainda não estiverem claros e experimente modificar os exemplos no Python.</p><button class="complete-btn complete-end" type="button" data-complete="listas"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg> <span>Marcar como lido</span></button></div><nav class="pager" aria-label="Próximo e anterior"><span></span><a href="tuplas-dicionarios-conjuntos.html" class="pager-link pager-next"><span>Próximo caderno →</span><strong>Tuplas, dicionários e conjuntos</strong></a></nav></article><aside class="page-toc" aria-label="Nesta página"><div class="toc-title">NESTE CADERNO</div><a href="#percurso-do-volume-ii" class="toc-link ">Percurso do Volume II</a><a href="#como-ler-este-caderno" class="toc-link toc-sub">Como ler este caderno</a><a href="#conhecimentos-que-ja-serao-utilizados" class="toc-link toc-sub">Conhecimentos que já serão utilizados</a><a href="#1-por-que-precisamos-de-listas" class="toc-link ">1. Por que precisamos de listas?</a><a href="#2-elementos-indices-e-tamanho" class="toc-link ">2. Elementos, índices e tamanho</a><a href="#atividade-listas-indices" class="toc-link toc-sub">Atividade 1 · Onde está o produto?</a><a href="#3-criando-listas" class="toc-link ">3. Criando listas</a><a href="#4-consultando-elementos-pelo-indice" class="toc-link ">4. Consultando elementos pelo índice</a><a href="#5-alterando-o-valor-de-uma-posicao" class="toc-link ">5. Alterando o valor de uma posição</a><a href="#6-percorrendo-todos-os-elementos" class="toc-link ">6. Percorrendo todos os elementos</a><a href="#percurso-direto-o-elemento-vem-pronto" class="toc-link toc-sub">Percurso direto: o elemento vem pronto</a><a href="#percurso-por-indice-a-posicao-importa" class="toc-link toc-sub">Percurso por índice: a posição importa</a><a href="#percurso-com-enumerate-indice-e-valor-juntos" class="toc-link toc-sub">Percurso com enumerate(): índice e valor juntos</a><a href="#percurso-com-while" class="toc-link toc-sub">Percurso com while</a><a href="#atividade-listas-percurso" class="toc-link toc-sub">Atividade 2 · Percorra uma ficha por vez</a><a href="#7-adicionando-elementos-append-extend-e-insert" class="toc-link ">7. Adicionando elementos: append(), extend() e insert()</a><a href="#append-acrescentar-um-elemento-ao-final" class="toc-link toc-sub">append(): acrescentar um elemento ao final</a><a href="#extend-acrescentar-os-elementos-de-uma-sequencia" class="toc-link toc-sub">extend(): acrescentar os elementos de uma sequência</a><a href="#insert-inserir-antes-de-uma-posicao" class="toc-link toc-sub">insert(): inserir antes de uma posição</a><a href="#8-removendo-elementos-remove-pop-del-e-clear" class="toc-link ">8. Removendo elementos: remove(), pop(), del e clear()</a><a href="#remove-remover-pelo-valor" class="toc-link toc-sub">remove(): remover pelo valor</a><a href="#pop-remover-por-indice-e-recuperar-o-valor" class="toc-link toc-sub">pop(): remover por índice e recuperar o valor</a><a href="#del-e-clear" class="toc-link toc-sub">del e clear()</a><a href="#atividade-listas-operacoes" class="toc-link toc-sub">Atividade 3 · Monte e modifique uma lista</a><a href="#9-consultas-tamanho-presenca-quantidade-e-posicao" class="toc-link ">9. Consultas: tamanho, presença, quantidade e posição</a><a href="#10-fatiamento-trabalhando-com-partes-da-lista" class="toc-link ">10. Fatiamento: trabalhando com partes da lista</a><a href="#passo-e-sentido" class="toc-link toc-sub">Passo e sentido</a><a href="#atividade-listas-fatias" class="toc-link toc-sub">Atividade 4 · Veja quais fichas entram na fatia</a><a href="#11-ordenacao-pronta-sort-sorted-e-reverse" class="toc-link ">11. Ordenação pronta: sort(), sorted() e reverse()</a><a href="#sort-reorganiza-a-propria-lista" class="toc-link toc-sub">sort(): reorganiza a própria lista</a><a href="#sorted-devolve-uma-nova-lista" class="toc-link toc-sub">sorted(): devolve uma nova lista</a><a href="#reverse-inverter-nao-e-ordenar" class="toc-link toc-sub">reverse(): inverter não é ordenar</a><a href="#atividade-listas-ordem" class="toc-link toc-sub">Atividade 5 · Compare ordenar e inverter</a><a href="#12-referencias-e-copias-duas-variaveis-podem-apontar-para-a-mesma-lista" class="toc-link ">12. Referências e cópias: duas variáveis podem apontar para a mesma lista</a><a href="#o-limite-da-copia-superficial" class="toc-link toc-sub">O limite da cópia superficial</a><a href="#13-listas-aninhadas-linhas-e-colunas" class="toc-link ">13. Listas aninhadas: linhas e colunas</a><a href="#percorrendo-uma-estrutura-em-duas-dimensoes" class="toc-link toc-sub">Percorrendo uma estrutura em duas dimensões</a><a href="#um-erro-comum-ao-criar-varias-linhas" class="toc-link toc-sub">Um erro comum ao criar várias linhas</a><a href="#14-compreensao-de-listas-uma-forma-compacta-de-construir-colecoes" class="toc-link ">14. Compreensão de listas: uma forma compacta de construir coleções</a><a href="#primeiro-a-versao-passo-a-passo" class="toc-link toc-sub">Primeiro, a versão passo a passo</a><a href="#agora-a-mesma-transformacao-em-uma-expressao" class="toc-link toc-sub">Agora, a mesma transformação em uma expressão</a><a href="#filtrando-valores" class="toc-link toc-sub">Filtrando valores</a><a href="#15-estudo-acompanhado-uma-pequena-vitrine" class="toc-link ">15. Estudo acompanhado: uma pequena vitrine</a><a href="#dados-iniciais" class="toc-link toc-sub">Dados iniciais</a><a href="#atualizacao-do-estoque" class="toc-link toc-sub">Atualização do estoque</a><a href="#filtrando-os-produtos-com-estoque-baixo" class="toc-link toc-sub">Filtrando os produtos com estoque baixo</a><a href="#mostrando-os-precos-em-outra-ordem" class="toc-link toc-sub">Mostrando os preços em outra ordem</a><a href="#16-o-que-consolidamos-e-o-que-vem-depois" class="toc-link ">16. O que consolidamos e o que vem depois</a><a href="#referencias-de-estudo-e-criterios-de-elaboracao" class="toc-link ">Referências de estudo e critérios de elaboração</a></aside></div></main><footer class="site-footer"><span>PED · Estruturas de Dados em Python</span><span>Material didático · Lojas Rede (cenário fictício)</span></footer></div></div><div class="sidebar-scrim" id="sidebar-scrim"></div>
+<div class="search-backdrop" id="search-backdrop" hidden><section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-dialog-head"><h2 id="search-title">Encontre um assunto</h2><button type="button" class="search-close" id="search-close" aria-label="Fechar busca">Esc ×</button></div><label class="search-input-wrap"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="search-input" type="search" autocomplete="off" placeholder="Ex.: busca binária, dicionário, Merge Sort…" aria-label="Buscar assuntos"></label><div class="search-results" id="search-results" aria-live="polite"></div><p class="search-tip">Pesquise por conceito, método ou palavra do texto. Funciona sem internet.</p></section></div><div id="toast" class="toast" role="status" aria-live="polite"></div><script src="../assets/site.js" defer></script><script>
+(() => {
+  "use strict";
+  const initial = ["Shampoo", "Batom", "Protetor", "Sabonete", "Creme"];
+  const format = values => JSON.stringify(values).replaceAll('","', '", "');
+
+  function draw(board, values, selected = [], choose) {
+    board.replaceChildren();
+    if (!values.length) board.textContent = "Lista vazia";
+    values.forEach((value, index) => {
+      const card = document.createElement(choose ? "button" : "div");
+      card.className = "lr-card";
+      if (choose) {
+        card.type = "button";
+        card.onclick = () => choose(index, board);
+      }
+      const label = document.createElement("small");
+      label.textContent = "Índice " + index;
+      const name = document.createElement("strong");
+      name.textContent = value;
+      card.append(label, name);
+      if (selected.includes(index)) {
+        card.dataset.active = "";
+        const mark = document.createElement("small");
+        mark.textContent = "Selecionado";
+        card.append(mark);
+      }
+      board.append(card);
+    });
+  }
+
+  document.querySelectorAll(".lr-lab").forEach(lab => {
+    const get = selector => lab.querySelector(selector);
+    const on = (action, fn) => { get('[data-action="' + action + '"]').onclick = fn; };
+    const say = message => { get("[data-feedback]").textContent = message; };
+    const board = get("[data-board]");
+    let values = [...initial];
+
+    if (lab.dataset.lab === "indices") {
+      const challenges = [2, 0, 4, 1, 3];
+      let round = 0;
+      const next = get('[data-action="next"]');
+      const ask = () => {
+        const target = challenges[round];
+        get("[data-prompt]").textContent = "Qual produto ocupa o índice " + target + "?";
+        next.disabled = true;
+        draw(board, values, [], (index, cards) => {
+          for (const card of cards.children) card.removeAttribute("data-active");
+          if (index === target) {
+            cards.children[index].dataset.active = "";
+            say("Correto. " + values[index] + " ocupa o índice " + index + ".");
+            next.disabled = false;
+          } else {
+            say("Você escolheu o índice " + index + ". Conte as posições a partir de zero e tente novamente.");
+            next.disabled = true;
+          }
+        });
+      };
+      on("next", () => { round = (round + 1) % challenges.length; say(""); ask(); board.firstElementChild.focus(); });
+      ask();
+    }
+
+    if (lab.dataset.lab === "percurso") {
+      let index = -1;
+      const step = get('[data-action="step"]');
+      const log = get("[data-log]");
+      on("step", () => {
+        index++;
+        draw(board, values, [index]);
+        const entry = document.createElement("li");
+        entry.textContent = index + " → " + values[index];
+        log.append(entry);
+        const finished = index === values.length - 1;
+        say(entry.textContent + (finished ? ". Percurso concluído." : "."));
+        if (finished) get('[data-action="reset"]').focus();
+        step.disabled = finished;
+      });
+      const reset = () => { index = -1; log.replaceChildren(); draw(board, values); step.disabled = false; say("Pronto para visitar o índice 0."); };
+      on("reset", reset);
+      reset();
+    }
+
+    if (lab.dataset.lab === "operacoes") {
+      const op = get("[data-op]");
+      const indexInput = get("[data-index]");
+      const product = get("[data-value]");
+      const code = get("[data-code]");
+      const updateFields = () => {
+        get("[data-value-field]").hidden = op.value === "pop";
+        get("[data-index-field]").hidden = op.value === "append";
+        indexInput.max = Math.max(0, values.length - (op.value === "pop" ? 1 : 0));
+      };
+      op.onchange = updateFields;
+      on("apply", () => {
+        const operation = op.value;
+        const index = operation === "append" ? values.length : indexInput.valueAsNumber;
+        if (operation === "pop" && !values.length) {
+          say("A lista está vazia. Acrescente um produto antes de usar pop().");
+          return;
+        }
+        if (!Number.isInteger(index) || index < 0 || index > values.length - (operation === "pop" ? 1 : 0)) {
+          say("Escolha um índice inteiro de 0 a " + indexInput.max + " para esta operação.");
+          return;
+        }
+        if (operation === "pop") {
+          const [removed] = values.splice(index, 1);
+          code.textContent = "produtos.pop(" + index + ") → " + JSON.stringify(removed);
+          say(removed + " saiu. A lista agora tem " + values.length + " elementos.");
+          draw(board, values);
+        } else {
+          values.splice(index, 0, product.value);
+          code.textContent = "produtos." + operation + "(" + (operation === "insert" ? index + ", " : "") + JSON.stringify(product.value) + ")";
+          say(product.value + " entrou no índice " + index + ". A lista agora tem " + values.length + " elementos.");
+          draw(board, values, [index]);
+        }
+        updateFields();
+      });
+      const reset = () => {
+        values = [...initial]; op.value = "append"; product.selectedIndex = 0; indexInput.value = "0";
+        updateFields(); draw(board, values); code.textContent = "produtos = " + format(values); say("Lista inicial restaurada.");
+      };
+      on("reset", reset);
+      reset();
+    }
+
+    if (lab.dataset.lab === "fatias") {
+      const start = get("[data-start]");
+      const end = get("[data-end]");
+      const show = () => {
+        const from = Number(start.value), to = Number(end.value);
+        get("[data-start-value]").textContent = from;
+        get("[data-end-value]").textContent = to;
+        const result = values.slice(from, to);
+        draw(board, values, values.map((_, i) => i).filter(i => i >= from && i < to));
+        get("[data-code]").textContent = "produtos[" + from + ":" + to + "] → " + format(result);
+        say(result.length ? result.length + " elementos na fatia." : "Fatia vazia.");
+      };
+      start.oninput = end.oninput = show;
+      show();
+    }
+
+    if (lab.dataset.lab === "ordem") {
+      const result = get("[data-result]");
+      const code = get("[data-code]");
+      const reset = () => {
+        values = ["Creme", "Shampoo", "Batom", "Sabonete"];
+        draw(board, values); result.textContent = "Escolha uma operação."; code.textContent = "produtos = " + format(values); say("");
+      };
+      on("reset", reset);
+      for (const operation of ["sorted", "sort", "reverse"]) {
+        on(operation, () => {
+          if (operation === "sorted") {
+            draw(result, [...values].sort());
+            code.textContent = "nova_lista = sorted(produtos)";
+            say("sorted() devolveu uma nova lista. A primeira linha continua igual.");
+          } else {
+            if (operation === "sort") values.sort();
+            else values.reverse();
+            draw(result, []);
+            result.textContent = "Retorno: None";
+            code.textContent = "produtos." + operation + "()";
+            say(operation === "sort" ? "A primeira linha foi ordenada na própria lista." : "A primeira linha foi invertida na própria lista.");
+          }
+          draw(board, values);
+        });
+      }
+      reset();
+    }
+    get(".lr-interactive").hidden = false;
+  });
+})();
+
+</script></body></html>
