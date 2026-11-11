@@ -1,0 +1,339 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Algoritmos e Lógica de Programação em Python: Teste de mesa"><title>Teste de mesa · ALP</title><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/alp.css"></head><body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><div class="app-frame"><aside class="sidebar" id="sidebar"><a class="brand" href="../index.html"><strong>ALP</strong><small>Algoritmos e Lógica de Programação</small></a><nav class="site-nav" aria-label="Cadernos"><a class="nav-module " href="../cadernos/01_output.html"><span class="nav-index">01</span><span>Saída de dados</span></a><a class="nav-module " href="../cadernos/02_input.html"><span class="nav-index">02</span><span>Entrada de dados</span></a><a class="nav-module " href="../cadernos/03_variaveis_e_tipos.html"><span class="nav-index">03</span><span>Variáveis e tipos</span></a><a class="nav-module " href="../cadernos/04_operadores.html"><span class="nav-index">04</span><span>Operadores</span></a><a class="nav-module " href="../cadernos/05_if_elif_else.html"><span class="nav-index">05</span><span>Decisões com if, elif e else</span></a><a class="nav-module " href="../cadernos/06_match_case.html"><span class="nav-index">06</span><span>Seleção com match/case</span></a><a class="nav-module " href="../cadernos/07_while.html"><span class="nav-index">07</span><span>Repetição com while</span></a><a class="nav-module " href="../cadernos/08_for_e_range.html"><span class="nav-index">08</span><span>Repetição com for e range</span></a><a class="nav-module " href="../cadernos/09_algoritmos_basicos.html"><span class="nav-index">09</span><span>Algoritmos básicos</span></a><a class="nav-module " href="../cadernos/10_validacao_e_controle_de_fluxo.html"><span class="nav-index">10</span><span>Validação e controle de fluxo</span></a><a class="nav-module " href="../cadernos/11_funcoes.html"><span class="nav-index">11</span><span>Funções</span></a><a class="nav-module " href="../cadernos/12_decomposicao_de_problemas.html"><span class="nav-index">12</span><span>Decomposição de problemas</span></a><a class="nav-module active" href="../cadernos/13_teste_de_mesa.html"><span class="nav-index">13</span><span>Teste de mesa</span></a></nav><a class="portal" href="../../../index.html">← Portal de materiais</a></aside><div class="main-area"><header class="topbar"><button id="menu" aria-controls="sidebar" aria-expanded="false">Cadernos</button><a href="../index.html">ALP · Lojas Blue</a><button id="theme" aria-label="Alternar tema claro e escuro">Tema claro/escuro</button></header><main id="conteudo" class="alp-content"><div class="article-header"><p>CADERNO 13 · FUNDAMENTOS</p><h1>Teste de mesa</h1><p>Prever estados, verificar limites e explicar o comportamento de algoritmos.</p><p>7 exemplos e 14 exercícios da trilha original.</p><a class="download" href="../arquivos/ALP_13_teste_de_mesa.zip" download>Baixar exemplos e exercícios deste assunto</a></div><nav class="local-nav" aria-label="Seções"><a href="#conceitos">Entender</a><a href="#acompanhado">Acompanhar</a><a href="#exemplos">Exemplos</a><a href="#exercicios">Exercícios</a><a href="#avancar">Conferir aprendizagem</a></nav><section id="conceitos"><h2>Entenda a ideia</h2><h3>Executar mentalmente com um registro explícito</h3><p>Teste de mesa é acompanhar instrução por instrução sem depender do computador. Prepare colunas para o ponto de execução, variáveis relevantes, condições e saída. Registre o estado inicial. Em cada atribuição, avalie o lado direito com os valores daquele instante e só então atualize o lado esquerdo. Uma previsão sem registro intermediário pode esconder um raciocínio incorreto.</p><h3>Fronteiras revelam regras esquecidas</h3><p>Escolha casos que façam o programa tomar caminhos distintos: abaixo, igual e acima de um limite; laço com nenhuma, uma e várias repetições; sentinela como primeira leitura; empate entre valores. O caso comum mostra que um caminho funciona, mas não verifica todos os limites. Escreva o resultado esperado antes de executar para não ajustar a previsão ao que o programa produziu.</p><h3>Comparar a primeira divergência</h3><p>Execute o programa depois de concluir a tabela e compare os estados. Ao encontrar uma diferença, procure a primeira instrução em que previsão e execução se separam. Uma divergência posterior pode ser apenas consequência dela. Corrija o raciocínio ou o código, repita os casos e explique a propriedade que deve permanecer verdadeira. O objetivo é justificar o comportamento, não apenas obter uma saída que pareça correta.</p></section><aside class="callout"><strong>Erros para observar</strong><p>Registrar só o resultado final; omitir a condição que encerra o laço; misturar estado local e externo; escolher os resultados esperados somente depois de observar o programa.</p></aside><section id="acompanhado"><h2>Um exemplo acompanhado</h2><p>Leia o código antes de avançar. Cada passo explica uma mudança ou decisão. A simulação tem uma sequência fixa; os arquivos Python permitem experimentar outras entradas.</p><pre><code>a = 2
+b = 5
+auxiliar = a
+a = b + 1
+b = auxiliar * 2
+print(a, b)</code></pre><details><summary>Conferir a saída</summary><pre>6 4</pre></details><div class="trace" data-trace="12"><p data-state role="status"></p><progress value="0" max="5" aria-label="Progresso do exemplo"></progress><div class="actions"><button data-back>Voltar</button><button data-next>Próximo passo</button><button data-reset>Recomeçar</button></div></div><fieldset class="quiz"><legend>Por que b termina com 4?</legend><button data-correct="false" data-why="O lado direito usa auxiliar, que continua com o valor 2.">Porque usa o novo a</button><button data-correct="true" data-why="O lado direito usa auxiliar, que continua com o valor 2.">Porque auxiliar preservou 2</button><button data-correct="false" data-why="O lado direito usa auxiliar, que continua com o valor 2.">Porque b não foi atualizado</button><p data-feedback role="status"></p></fieldset></section><section id="exemplos"><h2>Estude os exemplos do assunto</h2><p>Abra os exemplos em ordem. Os comentários apresentam objetivo, demonstração e cuidados. Use o arquivo baixado para executar Python; o caderno apresenta o código para leitura.</p><details id="exemplo-01_atribuicoes"><summary>01 — Rastrear atribuições</summary><a class="download" href="../pratica/13_teste_de_mesa/exemplos/01_atribuicoes.py" download>Baixar este exemplo .py</a><pre><code># 01 — Rastrear atribuições
+# Objetivo: Registrar o estado depois de cada atualização.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: As colunas abaixo são uma tabela em comentários, não uma coleção Python.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;b: 4&#x27;
+
+# Antes de executar, cubra a tabela preenchida e refaça no papel.
+# Ponto                 | a | b | auxiliar
+# após inicialização    | 2 | 5 | —
+# após auxiliar = a     | 2 | 5 | 2
+# após a = b + 1        | 6 | 5 | 2
+# após b = auxiliar * 2 | 6 | 4 | 2
+a = 2
+b = 5
+auxiliar = a
+a = b + 1
+b = auxiliar * 2
+print(&quot;a:&quot;, a)
+print(&quot;b:&quot;, b)
+# Leia sempre o lado direito usando os valores daquele instante.
+</code></pre></details><details id="exemplo-02_ramos_e_limites"><summary>02 — Rastrear ramos e limites</summary><a class="download" href="../pratica/13_teste_de_mesa/exemplos/02_ramos_e_limites.py" download>Baixar este exemplo .py</a><pre><code># 02 — Rastrear ramos e limites
+# Objetivo: Conferir exatamente onde uma classificação muda.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Uma cadeia if/elif executa somente o primeiro ramo verdadeiro.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;7: A&#x27;
+
+def classificar(nota):
+    &quot;&quot;&quot;Classifique nota válida de 0 a 10 com cortes em 5 e 7.&quot;&quot;&quot;
+    if nota &gt;= 7:
+        return &quot;A&quot;
+    elif nota &gt;= 5:
+        return &quot;R&quot;
+    return &quot;F&quot;
+
+# nota | &gt;=7  | &gt;=5 avaliada? | retorno
+# 4.9  | False| sim, False   | F
+# 5    | False| sim, True    | R
+# 7    | True | não          | A
+print(&quot;4.9:&quot;, classificar(4.9))
+print(&quot;5:&quot;, classificar(5))
+print(&quot;7:&quot;, classificar(7))
+# São casos de fronteira; não basta testar somente notas intermediárias.
+</code></pre></details><details id="exemplo-03_rastrear_while"><summary>03 — Rastrear um while</summary><a class="download" href="../pratica/13_teste_de_mesa/exemplos/03_rastrear_while.py" download>Baixar este exemplo .py</a><pre><code># 03 — Rastrear um while
+# Objetivo: Incluir a avaliação final falsa na simulação.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A tabela usa o estado antes da avaliação da condição.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;i final: 4&#x27;
+
+# avaliação | i antes | soma antes | i &lt;= 3 | soma após corpo
+# 1         | 1       | 0          | True   | 1
+# 2         | 2       | 1          | True   | 3
+# 3         | 3       | 3          | True   | 6
+# 4         | 4       | 6          | False  | corpo não executado
+i = 1
+soma = 0
+while i &lt;= 3:
+    soma += i
+    i += 1
+print(&quot;Soma:&quot;, soma)
+print(&quot;i final:&quot;, i)
+# Foram três execuções do corpo e quatro avaliações da condição.
+</code></pre></details><details id="exemplo-04_rastrear_sentinela"><summary>04 — Rastrear uma sentinela</summary><a class="download" href="../pratica/13_teste_de_mesa/exemplos/04_rastrear_sentinela.py" download>Baixar este exemplo .py</a><pre><code># 04 — Rastrear uma sentinela
+# Objetivo: Verificar que o marcador de término não entra nos dados.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A tabela separa a leitura da decisão de processar.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   0
+#   4
+#   -1
+# Confira na saída: &#x27;Quantidade: 2&#x27;
+
+# entrada | valor != -1 | quantidade após corpo | soma após corpo
+# 0       | True        | 1                     | 0
+# 4       | True        | 2                     | 4
+# -1      | False       | permanece 2           | permanece 4
+quantidade = 0
+soma = 0
+valor = int(input(&quot;Inteiro; -1 encerra: &quot;))
+while valor != -1:
+    soma += valor
+    quantidade += 1
+    valor = int(input(&quot;Inteiro; -1 encerra: &quot;))
+print(&quot;Quantidade:&quot;, quantidade)
+print(&quot;Soma:&quot;, soma)
+# Repita com -1 como primeira entrada: o corpo deve executar zero vezes.
+</code></pre></details><details id="exemplo-05_rastrear_chamadas"><summary>05 — Rastrear chamadas e retornos</summary><a class="download" href="../pratica/13_teste_de_mesa/exemplos/05_rastrear_chamadas.py" download>Baixar este exemplo .py</a><pre><code># 05 — Rastrear chamadas e retornos
+# Objetivo: Manter separados os estados do chamador e da função.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Cada chamada começa com novos valores locais.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Resultado: 5&#x27;
+
+def incrementar(valor):
+    &quot;&quot;&quot;Retorne o inteiro valor acrescido de um.&quot;&quot;&quot;
+    valor += 1
+    return valor
+
+# etapa                    | externo | local valor | retorno
+# externo = 3              | 3       | —           | —
+# incrementar(externo)     | 3       | 3 -&gt; 4      | 4
+# resultado recebe retorno | 3       | —           | 4
+# incrementar(resultado)   | 3       | 4 -&gt; 5      | 5
+externo = 3
+resultado = incrementar(externo)
+resultado = incrementar(resultado)
+print(&quot;Externo:&quot;, externo)
+print(&quot;Resultado:&quot;, resultado)
+</code></pre></details><details id="exemplo-06_verificacao_e_invariante"><summary>06 — Verificação e invariante</summary><a class="download" href="../pratica/13_teste_de_mesa/exemplos/06_verificacao_e_invariante.py" download>Baixar este exemplo .py</a><pre><code># 06 — Verificação e invariante
+# Objetivo: Explicar por que um resultado é coerente.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Invariante é uma propriedade que permanece válida durante a repetição.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Verificações concluídas&#x27;
+
+def somar_ate(limite):
+    &quot;&quot;&quot;Retorne 1 + ... + limite; limite deve ser inteiro não negativo.&quot;&quot;&quot;
+    soma = 0
+    # Antes de cada volta, soma contém os inteiros anteriores a atual.
+    for atual in range(1, limite + 1):
+        soma += atual
+        # Depois da volta, soma contém os inteiros de 1 até atual.
+    return soma
+
+# Para limite 3: (atual, soma após corpo) é 1/1, 2/3, 3/6.
+# Não construímos pares ou coleções; esta é só uma anotação no papel.
+assert somar_ate(0) == 0  # Caso sem repetições.
+assert somar_ate(1) == 1  # Menor caso com uma repetição.
+assert somar_ate(3) == 6  # Caso usual.
+# assert serve para conferir hipóteses, não para validar entrada de usuário.
+for limite in range(6):
+    esperado = limite * (limite + 1) // 2
+    assert somar_ate(limite) == esperado
+print(&quot;Verificações concluídas&quot;)
+# Se o laço usasse range(1, limite), o caso limite 1 revelaria a falha.
+</code></pre></details><details id="exemplo-90_rede_contexto"><summary>Rastrear um saldo — cenário didático Lojas Blue</summary><a class="download" href="../pratica/13_teste_de_mesa/exemplos/90_rede_contexto.py" download>Baixar este exemplo .py</a><pre><code># Rastrear um saldo — cenário didático Lojas Blue
+# Objetivo: Conferir o limite de retirada por teste de mesa.
+# Pré-requisito: tópicos anteriores e exemplos anteriores deste tópico.
+# Estude: preveja o resultado, execute e altere um dado por vez.
+# Confira na saída: &#x27;Saldo final: 0&#x27;
+# Sem entrada interativa.
+
+# Simulação: retiradas fixas de três unidades até não haver saldo.
+# avaliação | saldo antes | saldo &gt;= 3 | retiradas após corpo
+# 1         | 6           | True       | 1
+# 2         | 3           | True       | 2
+# 3         | 0           | False      | não executa
+saldo = 6
+retiradas = 0
+while saldo &gt;= 3:
+    saldo -= 3
+    retiradas += 1
+print(&quot;Retiradas:&quot;, retiradas)
+print(&quot;Saldo final:&quot;, saldo)
+# Refazer a tabela com saldo sete mostra por que pode haver restante.
+</code></pre></details></section><section id="exercicios"><h2>Pratique com os enunciados originais</h2><p>Resolva antes de consultar novamente o exemplo. Registre sua previsão e confira os casos indicados. Os arquivos de exercício contêm comentários e não produzem saída até você implementar a solução.</p><details id="exercicio-01_troca_no_papel"><summary>01 — Troca no papel</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/01_troca_no_papel.py" download>Baixar este exercício .py</a><pre class="enunciado"># 01 — Troca no papel
+# Enunciado:
+# Antes de executar 03_variaveis_e_tipos/exemplos/05_troca_escalar.py, faça uma tabela no papel com primeiro, segundo e auxiliar após cada atribuição. Depois varie os valores iniciais para -2 e 7.
+#
+# Dica:
+# Leia o lado direito usando o estado anterior à atribuição.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 13_teste_de_mesa/exemplos/01_atribuicoes.py
+#
+# Casos para conferir sua implementação:
+# Confira se o par final corresponde à troca e se algum valor original foi perdido.
+</pre></details><details id="exercicio-02_copia_e_reatribuicao"><summary>02 — Cópia e reatribuição</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/02_copia_e_reatribuicao.py" download>Baixar este exercício .py</a><pre class="enunciado"># 02 — Cópia e reatribuição
+# Enunciado:
+# Faça teste de mesa de 03_variaveis_e_tipos/exemplos/03_nomes_e_copia.py. Registre valor_original e valor_copiado a cada linha que muda estado. Explique quando os nomes deixam de ter valores iguais.
+#
+# Dica:
+# A cópia captura um valor em um instante específico.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 13_teste_de_mesa/exemplos/01_atribuicoes.py
+#
+# Casos para conferir sua implementação:
+# Compare sua previsão com a execução original e com original iniciado em zero.
+</pre></details><details id="exercicio-03_fronteiras_de_nota"><summary>03 — Fronteiras de nota</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/03_fronteiras_de_nota.py" download>Baixar este exercício .py</a><pre class="enunciado"># 03 — Fronteiras de nota
+# Enunciado:
+# Sem executar, preveja o ramo escolhido por 05_if_elif_else/exemplos/03_tres_faixas.py para notas 4.9, 5, 6.9, 7 e 10. Registre cada condição efetivamente avaliada.
+#
+# Dica:
+# Após um ramo verdadeiro, os demais da cadeia não são avaliados.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 13_teste_de_mesa/exemplos/02_ramos_e_limites.py
+#
+# Casos para conferir sua implementação:
+# Confira no terminal cada caso separadamente e explique as mudanças nos cortes.
+</pre></details><details id="exercicio-04_condicao_final_do_while"><summary>04 — Condição final do while</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/04_condicao_final_do_while.py" download>Baixar este exercício .py</a><pre class="enunciado"># 04 — Condição final do while
+# Enunciado:
+# Faça teste de mesa de 07_while/exemplos/03_acumulador.py com limites 0, 1 e 3. Inclua atual, soma e resultado da condição, inclusive a última avaliação falsa.
+#
+# Dica:
+# Uma avaliação da condição pode ocorrer sem execução do corpo.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 13_teste_de_mesa/exemplos/03_rastrear_while.py
+#
+# Casos para conferir sua implementação:
+# Compare quantidade de execuções do corpo com quantidade de avaliações da condição.
+</pre></details><details id="exercicio-05_sentinela_como_primeira_entrada"><summary>05 — Sentinela como primeira entrada</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/05_sentinela_como_primeira_entrada.py" download>Baixar este exercício .py</a><pre class="enunciado"># 05 — Sentinela como primeira entrada
+# Enunciado:
+# Rastreie 10_validacao_e_controle_de_fluxo/exemplos/03_sentinela_e_vazio.py primeiro com -1 e depois com 0, 4, -1. Anote quantidade e soma após cada entrada.
+#
+# Dica:
+# O zero é dado válido; -1 é marcador de término.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 13_teste_de_mesa/exemplos/04_rastrear_sentinela.py
+#
+# Casos para conferir sua implementação:
+# A primeira execução deve evitar a divisão; a segunda deve contabilizar dois dados.
+</pre></details><details id="exercicio-06_atualizacao_de_fibonacci"><summary>06 — Atualização de Fibonacci</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/06_atualizacao_de_fibonacci.py" download>Baixar este exercício .py</a><pre class="enunciado"># 06 — Atualização de Fibonacci
+# Enunciado:
+# Faça teste de mesa de 09_algoritmos_basicos/exemplos/07_fibonacci.py com quantidade 5. Registre anterior, atual e proximo antes e depois de cada atualização.
+#
+# Dica:
+# O valor temporário preserva uma soma que seria perdida por atualização prematura.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 13_teste_de_mesa/exemplos/01_atribuicoes.py
+# 13_teste_de_mesa/exemplos/03_rastrear_while.py
+#
+# Casos para conferir sua implementação:
+# Compare os cinco termos previstos com a execução e explique a necessidade do temporário.
+</pre></details><details id="exercicio-07_limites_de_range"><summary>07 — Limites de range</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/07_limites_de_range.py" download>Baixar este exercício .py</a><pre class="enunciado"># 07 — Limites de range
+# Enunciado:
+# Analise 08_for_e_range/exemplos/02_inicio_e_fim.py com limites 0, 1 e 4. Registre os valores assumidos pela variável do for e a quantidade de saídas. Depois investigue a troca de limite + 1 por limite em uma cópia.
+#
+# Dica:
+# A parada é excluída, independentemente do nome da variável.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 13_teste_de_mesa/exemplos/03_rastrear_while.py
+#
+# Casos para conferir sua implementação:
+# Identifique o menor caso que diferencia as duas versões; restaure a versão correta.
+</pre></details><details id="exercicio-08_flag_que_nao_deve_apagar"><summary>08 — Flag que não deve apagar</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/08_flag_que_nao_deve_apagar.py" download>Baixar este exercício .py</a><pre class="enunciado"># 08 — Flag que não deve apagar
+# Enunciado:
+# Rastreie 10_validacao_e_controle_de_fluxo/exemplos/04_flag.py com -1, 2, 3, 4. Em uma cópia, investigue o efeito de acrescentar else que atribui False à flag. Explique e corrija a falha.
+#
+# Dica:
+# Uma ocorrência anterior continua relevante depois de valores que não atendem à condição.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 13_teste_de_mesa/exemplos/03_rastrear_while.py
+# 13_teste_de_mesa/exemplos/04_rastrear_sentinela.py
+#
+# Casos para conferir sua implementação:
+# Use também 1, 2, 3, 4 para diferenciar ocorrência de ausência de ocorrência.
+</pre></details><details id="exercicio-09_escopo_e_retorno"><summary>09 — Escopo e retorno</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/09_escopo_e_retorno.py" download>Baixar este exercício .py</a><pre class="enunciado"># 09 — Escopo e retorno
+# Enunciado:
+# Faça teste de mesa de 11_funcoes/exemplos/06_escopo.py, separando uma coluna para pontos do chamador e outra para pontos local. Registre o valor retornado e o nome que o recebe.
+#
+# Dica:
+# Nomes iguais em escopos diferentes não representam a mesma variável local.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 13_teste_de_mesa/exemplos/05_rastrear_chamadas.py
+#
+# Casos para conferir sua implementação:
+# Confira as três linhas de saída; repita com valor externo zero.
+</pre></details><details id="exercicio-10_roteiro_de_validacao_final"><summary>10 — Roteiro de validação final</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/10_roteiro_de_validacao_final.py" download>Baixar este exercício .py</a><pre class="enunciado"># 10 — Roteiro de validação final
+# Enunciado:
+# Escolha seu projeto final do tópico 12 e construa, em comentários, um roteiro de teste de mesa: sessão vazia, opção inválida, entrada não inteira, entrada fora da faixa, primeiro registro, empate, novo extremo, reinício e saída. Execute cada roteiro e registre diferenças entre previsão e resultado.
+#
+# Dica:
+# Defina as colunas de estado e o resultado esperado antes de rodar cada caso.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 13_teste_de_mesa/exemplos/02_ramos_e_limites.py
+# 13_teste_de_mesa/exemplos/03_rastrear_while.py
+# 13_teste_de_mesa/exemplos/04_rastrear_sentinela.py
+# 13_teste_de_mesa/exemplos/05_rastrear_chamadas.py
+# 13_teste_de_mesa/exemplos/06_verificacao_e_invariante.py
+#
+# Casos para conferir sua implementação:
+# Todos os roteiros devem terminar; consultas vazias devem evitar divisões e extremos fictícios.
+</pre></details><details id="exercicio-91_rede_91"><summary>Prever todas as avaliações do laço</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/91_rede_91.py" download>Baixar este exercício .py</a><pre class="enunciado"># Prever todas as avaliações do laço
+# Enunciado:
+# No exemplo de teste de mesa do saldo, use saldo inicial 7 e registre cada avaliação, inclusive a última falsa.
+#
+# Dica:
+# Registre o estado antes da condição e depois de cada retirada de três.
+#
+# Conferência:
+# São duas retiradas, saldo final um e três avaliações da condição.
+#
+# Apoio: 13_teste_de_mesa/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-92_rede_92"><summary>Investigar uma divergência de estado</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/92_rede_92.py" download>Baixar este exercício .py</a><pre class="enunciado"># Investigar uma divergência de estado
+# Enunciado:
+# Em uma cópia do exemplo de saldo, troque a condição saldo &gt;= 3 por saldo &gt; 3. Descubra o menor saldo não negativo que diferencia as versões e corrija a condição.
+#
+# Dica:
+# Teste o valor exatamente na fronteira da retirada.
+#
+# Conferência:
+# A divergência aparece com saldo três; a versão correta permite uma retirada.
+#
+# Apoio: 13_teste_de_mesa/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-93_rede_93"><summary>Roteiro do fechamento — Lojas Blue</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/93_rede_93.py" download>Baixar este exercício .py</a><pre class="enunciado"># Roteiro do fechamento — Lojas Blue
+# Enunciado:
+# Use sua solução do fechamento escalar do tópico 12. Faça roteiros completos para consulta vazia, opção inválida, venda inválida, empate no maior e saída.
+#
+# Dica:
+# Anote as entradas, as saídas previstas e o estado esperado antes de executar.
+#
+# Conferência:
+# Cada roteiro inclui saída; não deve haver divisão por zero ou maior fictício.
+#
+# Apoio: 13_teste_de_mesa/exemplos/90_rede_contexto.py e exemplos básicos do tópico
+</pre></details><details id="exercicio-94_problema_evolutivo"><summary>Rastrear o recorte comum</summary><a class="download" href="../pratica/13_teste_de_mesa/exercicios/94_problema_evolutivo.py" download>Baixar este exercício .py</a><pre class="enunciado"># Rastrear o recorte comum
+# Enunciado:
+# Faça teste de mesa do caso de reposição do tópico 12. Registre falta atual, quantidade de críticas e total acumulado após cada posição. Repita após a retirada de nove unidades da primeira posição.
+#
+# Dica:
+# Use as mesmas quatro posições e altere somente o saldo indicado.
+#
+# Conferência:
+# Totais acumulados iniciais 0, 4, 8 e 9; após a retirada, 1, 5, 9 e 10.
+#
+# Apoio: 12_decomposicao_de_problemas/exemplos/91_caso_reposicao.py
+</pre></details></section><section id="avancar"><h2>Quando avançar</h2><p>Preveja e explique uma execução sem dados, uma comum e uma de fronteira. Encontre a primeira divergência de estado ao investigar um defeito.</p><p>Explique sua solução sem ler o código. Se houver uma divergência, encontre a primeira instrução em que seu raciocínio muda. Depois acrescente um caso próprio e confira novamente.</p></section><nav class="pager" aria-label="Sequência de estudo"><a href="12_decomposicao_de_problemas.html">← Decomposição de problemas</a></nav></main><footer class="site-footer">ALP · Cenário didático Lojas Blue · Python 3.10 ou superior</footer></div></div><script src="../assets/lessons.js"></script><script src="../assets/alp.js" defer></script></body></html>

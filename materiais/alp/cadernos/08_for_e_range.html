@@ -1,0 +1,686 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Algoritmos e Lógica de Programação em Python: Repetição com for e range"><title>Repetição com for e range · ALP</title><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/alp.css"></head><body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><div class="app-frame"><aside class="sidebar" id="sidebar"><a class="brand" href="../index.html"><strong>ALP</strong><small>Algoritmos e Lógica de Programação</small></a><nav class="site-nav" aria-label="Cadernos"><a class="nav-module " href="../cadernos/01_output.html"><span class="nav-index">01</span><span>Saída de dados</span></a><a class="nav-module " href="../cadernos/02_input.html"><span class="nav-index">02</span><span>Entrada de dados</span></a><a class="nav-module " href="../cadernos/03_variaveis_e_tipos.html"><span class="nav-index">03</span><span>Variáveis e tipos</span></a><a class="nav-module " href="../cadernos/04_operadores.html"><span class="nav-index">04</span><span>Operadores</span></a><a class="nav-module " href="../cadernos/05_if_elif_else.html"><span class="nav-index">05</span><span>Decisões com if, elif e else</span></a><a class="nav-module " href="../cadernos/06_match_case.html"><span class="nav-index">06</span><span>Seleção com match/case</span></a><a class="nav-module " href="../cadernos/07_while.html"><span class="nav-index">07</span><span>Repetição com while</span></a><a class="nav-module active" href="../cadernos/08_for_e_range.html"><span class="nav-index">08</span><span>Repetição com for e range</span></a><a class="nav-module " href="../cadernos/09_algoritmos_basicos.html"><span class="nav-index">09</span><span>Algoritmos básicos</span></a><a class="nav-module " href="../cadernos/10_validacao_e_controle_de_fluxo.html"><span class="nav-index">10</span><span>Validação e controle de fluxo</span></a><a class="nav-module " href="../cadernos/11_funcoes.html"><span class="nav-index">11</span><span>Funções</span></a><a class="nav-module " href="../cadernos/12_decomposicao_de_problemas.html"><span class="nav-index">12</span><span>Decomposição de problemas</span></a><a class="nav-module " href="../cadernos/13_teste_de_mesa.html"><span class="nav-index">13</span><span>Teste de mesa</span></a></nav><a class="portal" href="../../../index.html">← Portal de materiais</a></aside><div class="main-area"><header class="topbar"><button id="menu" aria-controls="sidebar" aria-expanded="false">Cadernos</button><a href="../index.html">ALP · Lojas Blue</a><button id="theme" aria-label="Alternar tema claro e escuro">Tema claro/escuro</button></header><main id="conteudo" class="alp-content"><div class="article-header"><p>CADERNO 08 · FUNDAMENTOS</p><h1>Repetição com for e range</h1><p>Repetir por intervalos numéricos e combinar laços.</p><p>10 exemplos e 45 exercícios da trilha original.</p><a class="download" href="../arquivos/ALP_08_for_e_range.zip" download>Baixar exemplos e exercícios deste assunto</a></div><nav class="local-nav" aria-label="Seções"><a href="#conceitos">Entender</a><a href="#acompanhado">Acompanhar</a><a href="#exemplos">Exemplos</a><a href="#exercicios">Exercícios</a><a href="#avancar">Conferir aprendizagem</a></nav><section id="conceitos"><h2>Entenda a ideia</h2><h3>Repetição sobre um intervalo numérico</h3><p>Em ALP, for percorre os números fornecidos por range. range(3) fornece 0, 1 e 2: o limite final fica de fora. Quando o início é informado, range(2, 5) fornece 2, 3 e 4. Não é necessário criar uma lista para percorrer esses números. Preveja o primeiro e o último valor antes de executar.</p><h3>O passo precisa apontar para o limite</h3><p>O terceiro argumento controla o avanço. Um passo negativo permite contagem decrescente, mas o início e o fim precisam ser coerentes com essa direção. range(5, 0, -2) fornece 5, 3 e 1. Um intervalo pode não produzir nenhum valor; isso é diferente de um erro. O passo zero, por outro lado, não é permitido.</p><h3>Laços aninhados multiplicam repetições</h3><p>Para cada execução do laço externo, o laço interno percorre todo o seu intervalo. Essa organização pode imprimir tabelas ou padrões retangulares. Registre o par de contadores em cada passagem para evitar confundir a sequência. Se a tarefa exige apenas um acumulador global, inicialize-o antes dos dois laços; se exige um total por linha, reinicialize-o dentro do externo e antes do interno.</p></section><aside class="callout"><strong>Erros para observar</strong><p>Excluir o último valor sem querer; usar passo na direção incompatível; atualizar manualmente a variável esperando controlar o próximo valor do for; colocar a quebra de linha no laço errado.</p></aside><section id="acompanhado"><h2>Um exemplo acompanhado</h2><p>Leia o código antes de avançar. Cada passo explica uma mudança ou decisão. A simulação tem uma sequência fixa; os arquivos Python permitem experimentar outras entradas.</p><pre><code>for numero in range(2, 7, 2):
+    print(numero)</code></pre><details><summary>Conferir a saída</summary><pre>2
+4
+6</pre></details><div class="trace" data-trace="7"><p data-state role="status"></p><progress value="0" max="5" aria-label="Progresso do exemplo"></progress><div class="actions"><button data-back>Voltar</button><button data-next>Próximo passo</button><button data-reset>Recomeçar</button></div></div><fieldset class="quiz"><legend>Qual valor não é produzido por range(2, 7, 2)?</legend><button data-correct="false" data-why="O limite final é exclusivo; os valores produzidos são 2, 4 e 6.">2</button><button data-correct="false" data-why="O limite final é exclusivo; os valores produzidos são 2, 4 e 6.">6</button><button data-correct="true" data-why="O limite final é exclusivo; os valores produzidos são 2, 4 e 6.">7</button><p data-feedback role="status"></p></fieldset></section><section id="exemplos"><h2>Estude os exemplos do assunto</h2><p>Abra os exemplos em ordem. Os comentários apresentam objetivo, demonstração e cuidados. Use o arquivo baixado para executar Python; o caderno apresenta o código para leitura.</p><details id="exemplo-01_range_basico"><summary>01 — range com um argumento</summary><a class="download" href="../pratica/08_for_e_range/exemplos/01_range_basico.py" download>Baixar este exemplo .py</a><pre><code># 01 — range com um argumento
+# Objetivo: Percorrer um intervalo numérico sem criar listas.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: range(5) fornece 0, 1, 2, 3 e 4: o limite final fica de fora.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Intervalo concluído&#x27;
+
+# range descreve um intervalo; não convertemos o resultado em lista.
+for numero in range(5):
+    print(numero)
+# O for controla a passagem ao próximo número automaticamente.
+print(&quot;Intervalo concluído&quot;)
+</code></pre></details><details id="exemplo-02_inicio_e_fim"><summary>02 — Início e fim</summary><a class="download" href="../pratica/08_for_e_range/exemplos/02_inicio_e_fim.py" download>Baixar este exemplo .py</a><pre><code># 02 — Início e fim
+# Objetivo: Ajustar um intervalo ao limite inclusivo do problema.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Para incluir n, use n + 1 como parada.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   3
+# Confira na saída: &#x27;Número: 3&#x27;
+
+limite = int(input(&quot;Limite inteiro não negativo: &quot;))
+for numero in range(1, limite + 1):
+    print(&quot;Número:&quot;, numero)
+# range(1, 1) seria vazio: nenhum número satisfaz os limites.
+</code></pre></details><details id="exemplo-03_passo"><summary>03 — Passo diferente de um</summary><a class="download" href="../pratica/08_for_e_range/exemplos/03_passo.py" download>Baixar este exemplo .py</a><pre><code># 03 — Passo diferente de um
+# Objetivo: Gerar uma progressão sem testar cada inteiro.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O terceiro argumento indica quanto avançar a cada volta.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Par: 10&#x27;
+
+# Começamos em dois e avançamos dois; a parada doze é excluída.
+for par in range(2, 12, 2):
+    print(&quot;Par:&quot;, par)
+# Um passo zero não é permitido por range.
+</code></pre></details><details id="exemplo-04_passo_negativo"><summary>04 — Intervalo decrescente</summary><a class="download" href="../pratica/08_for_e_range/exemplos/04_passo_negativo.py" download>Baixar este exemplo .py</a><pre><code># 04 — Intervalo decrescente
+# Objetivo: Usar início e parada compatíveis com o passo.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Para chegar até um, a parada é zero quando o passo vale menos um.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Contagem: 1&#x27;
+
+for numero in range(5, 0, -1):
+    print(&quot;Contagem:&quot;, numero)
+print(&quot;Já!&quot;)
+# range(1, 5, -1) seria vazio: o passo aponta na direção oposta.
+</code></pre></details><details id="exemplo-05_soma_e_produto"><summary>05 — Acumular em um for</summary><a class="download" href="../pratica/08_for_e_range/exemplos/05_soma_e_produto.py" download>Baixar este exemplo .py</a><pre><code># 05 — Acumular em um for
+# Objetivo: Escolher valores iniciais adequados.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A soma começa em zero; o produto começa em um.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Produto: 24&#x27;
+
+soma = 0
+produto = 1
+for numero in range(1, 5):
+    soma += numero
+    produto *= numero
+print(&quot;Soma:&quot;, soma)
+print(&quot;Produto:&quot;, produto)
+# Começar produto em zero faria todos os resultados serem zero.
+</code></pre></details><details id="exemplo-06_tabuada"><summary>06 — Tabuada</summary><a class="download" href="../pratica/08_for_e_range/exemplos/06_tabuada.py" download>Baixar este exemplo .py</a><pre><code># 06 — Tabuada
+# Objetivo: Separar valor fixo e fator que varia.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O número informado fica fixo enquanto o fator percorre o intervalo.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   3
+# Confira na saída: &#x27;3 x 10 = 30&#x27;
+
+numero = int(input(&quot;Número para a tabuada: &quot;))
+for fator in range(1, 11):
+    resultado = numero * fator
+    print(f&quot;{numero} x {fator} = {resultado}&quot;)
+# Dez fatores geram exatamente dez linhas de resultados.
+</code></pre></details><details id="exemplo-07_aninhados"><summary>07 — Repetições aninhadas</summary><a class="download" href="../pratica/08_for_e_range/exemplos/07_aninhados.py" download>Baixar este exemplo .py</a><pre><code># 07 — Repetições aninhadas
+# Objetivo: Relacionar volta externa e voltas internas.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O laço interno reinicia para cada valor do laço externo.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;3 x 3 = 9&#x27;
+
+for tabuada in range(2, 4):
+    print(&quot;Tabuada reduzida de&quot;, tabuada)
+    for fator in range(1, 4):
+        print(f&quot;{tabuada} x {fator} = {tabuada * fator}&quot;)
+    # Esta separação ocorre uma vez por tabuada, fora do laço interno.
+    print(&quot;---&quot;)
+</code></pre></details><details id="exemplo-08_padrao_triangular"><summary>08 — Padrão triangular</summary><a class="download" href="../pratica/08_for_e_range/exemplos/08_padrao_triangular.py" download>Baixar este exemplo .py</a><pre><code># 08 — Padrão triangular
+# Objetivo: Construir uma figura apenas com saída e laços.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A quantidade de colunas depende da linha atual.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;****&#x27;
+
+altura = 4
+for linha in range(1, altura + 1):
+    for coluna in range(1, linha + 1):
+        # end vazio mantém os símbolos na linha atual.
+        print(&quot;*&quot;, end=&quot;&quot;)
+    # Só depois de todas as colunas mudamos de linha.
+    print()
+# Não há matrizes ou multiplicação de strings nesta construção.
+</code></pre></details><details id="exemplo-09_comparar_while_e_for"><summary>O mesmo acumulador com while e for</summary><a class="download" href="../pratica/08_for_e_range/exemplos/09_comparar_while_e_for.py" download>Baixar este exemplo .py</a><pre><code># O mesmo acumulador com while e for
+# Execução: python 08_for_e_range/exemplos/09_comparar_while_e_for.py
+# Confira na saída: &#x27;Com for: 10&#x27;
+# Preveja o estado dos dados antes de executar; depois altere um caso de fronteira.
+
+limite = 4
+soma_while = 0
+atual = 1
+# No while, o programa inicializa e atualiza o estado de controle.
+while atual &lt;= limite:
+    soma_while += atual
+    atual += 1
+soma_for = 0
+# No for, range fornece os valores; limite + 1 inclui o último pretendido.
+for numero in range(1, limite + 1):
+    soma_for += numero
+print(&quot;Com while:&quot;, soma_while)
+print(&quot;Com for:&quot;, soma_for)
+# Limite zero produz soma zero nas duas versões, sem executar os corpos.
+# A escolha é pelo tipo de controle necessário, não pelo resultado da soma.
+</code></pre></details><details id="exemplo-90_rede_contexto"><summary>Conferência de três posições — cenário didático Lojas Blue</summary><a class="download" href="../pratica/08_for_e_range/exemplos/90_rede_contexto.py" download>Baixar este exemplo .py</a><pre><code># Conferência de três posições — cenário didático Lojas Blue
+# Objetivo: Contar saldos críticos sem armazenar histórico.
+# Pré-requisito: tópicos anteriores e exemplos anteriores deste tópico.
+# Estude: preveja o resultado, execute e altere um dado por vez.
+# Confira na saída: &#x27;Posições críticas: 1&#x27;
+# Entradas guiadas, uma por solicitação:
+#   18
+#   4
+#   10
+
+criticos = 0
+minimo = 10  # Regra simplificada, igual para as três leituras.
+for ordem in range(1, 4):
+    saldo = int(input(f&quot;Saldo não negativo da posição {ordem}: &quot;))
+    if saldo &lt; minimo:
+        criticos += 1
+print(&quot;Posições críticas:&quot;, criticos)
+# Saldos de unidades diferentes são consumidos um de cada vez.
+</code></pre></details></section><section id="exercicios"><h2>Pratique com os enunciados originais</h2><p>Resolva antes de consultar novamente o exemplo. Registre sua previsão e confira os casos indicados. Os arquivos de exercício contêm comentários e não produzem saída até você implementar a solução.</p><details id="exercicio-01_intervalo_iniciado_em_zero"><summary>01 — Intervalo iniciado em zero</summary><a class="download" href="../pratica/08_for_e_range/exercicios/01_intervalo_iniciado_em_zero.py" download>Baixar este exercício .py</a><pre class="enunciado"># 01 — Intervalo iniciado em zero
+# Enunciado:
+# Leia n não negativo e exiba de 0 até n - 1 usando for e range.
+#
+# Dica:
+# O limite final de range é excluído.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 08_for_e_range/exemplos/01_range_basico.py
+#
+# Casos para conferir sua implementação:
+# 3: 0, 1, 2; 0: nenhuma saída numérica.
+</pre></details><details id="exercicio-02_intervalo_fechado"><summary>02 — Intervalo fechado</summary><a class="download" href="../pratica/08_for_e_range/exercicios/02_intervalo_fechado.py" download>Baixar este exercício .py</a><pre class="enunciado"># 02 — Intervalo fechado
+# Enunciado:
+# Leia início e fim inteiros com início menor ou igual ao fim e exiba todos os inteiros entre eles.
+#
+# Dica:
+# Ajuste a parada para incluir o fim.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 08_for_e_range/exemplos/02_inicio_e_fim.py
+#
+# Casos para conferir sua implementação:
+# -1 até 2: -1, 0, 1, 2; 5 até 5: somente 5.
+</pre></details><details id="exercicio-03_multiplos_de_tres"><summary>03 — Múltiplos de três</summary><a class="download" href="../pratica/08_for_e_range/exercicios/03_multiplos_de_tres.py" download>Baixar este exercício .py</a><pre class="enunciado"># 03 — Múltiplos de três
+# Enunciado:
+# Leia limite não negativo e exiba múltiplos positivos de três até ele. Use o passo de range.
+#
+# Dica:
+# Comece no primeiro múltiplo positivo.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 08_for_e_range/exemplos/03_passo.py
+#
+# Casos para conferir sua implementação:
+# 10: 3, 6, 9; 2: nenhum.
+</pre></details><details id="exercicio-04_contagem_por_salto"><summary>04 — Contagem por salto</summary><a class="download" href="../pratica/08_for_e_range/exercicios/04_contagem_por_salto.py" download>Baixar este exercício .py</a><pre class="enunciado"># 04 — Contagem por salto
+# Enunciado:
+# Leia início inteiro não negativo e conte até onde for possível sem ficar negativo, diminuindo dois por vez.
+#
+# Dica:
+# A parada excluída precisa permitir o zero quando alcançável.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 08_for_e_range/exemplos/04_passo_negativo.py
+#
+# Casos para conferir sua implementação:
+# 6: 6, 4, 2, 0; 5: 5, 3, 1.
+</pre></details><details id="exercicio-05_soma_de_quadrados"><summary>05 — Soma de quadrados</summary><a class="download" href="../pratica/08_for_e_range/exercicios/05_soma_de_quadrados.py" download>Baixar este exercício .py</a><pre class="enunciado"># 05 — Soma de quadrados
+# Enunciado:
+# Leia n não negativo e some os quadrados de 1 até n com for.
+#
+# Dica:
+# Calcule cada quadrado antes de acumulá-lo.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 08_for_e_range/exemplos/05_soma_e_produto.py
+#
+# Casos para conferir sua implementação:
+# 3: 14; 0: 0.
+</pre></details><details id="exercicio-06_tabuada_completa"><summary>06 — Tabuada completa</summary><a class="download" href="../pratica/08_for_e_range/exercicios/06_tabuada_completa.py" download>Baixar este exercício .py</a><pre class="enunciado"># 06 — Tabuada completa
+# Enunciado:
+# Leia um inteiro e mostre seus produtos pelos fatores de 1 até 10.
+#
+# Dica:
+# O fator é o valor que muda no laço.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 08_for_e_range/exemplos/06_tabuada.py
+#
+# Casos para conferir sua implementação:
+# Para 4, primeira linha 4 x 1 = 4 e última 4 x 10 = 40.
+</pre></details><details id="exercicio-07_contagem_por_faixa"><summary>07 — Contagem por faixa</summary><a class="download" href="../pratica/08_for_e_range/exercicios/07_contagem_por_faixa.py" download>Baixar este exercício .py</a><pre class="enunciado"># 07 — Contagem por faixa
+# Enunciado:
+# Leia cinco números com for e informe quantos pertencem ao intervalo fechado de 10 a 20.
+#
+# Dica:
+# Todos são lidos, mas só alguns alteram o contador filtrado.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 08_for_e_range/exemplos/02_inicio_e_fim.py
+# 08_for_e_range/exemplos/05_soma_e_produto.py
+#
+# Casos para conferir sua implementação:
+# 9, 10, 15, 20, 21: três valores.
+</pre></details><details id="exercicio-08_duas_tabuadas"><summary>08 — Duas tabuadas</summary><a class="download" href="../pratica/08_for_e_range/exercicios/08_duas_tabuadas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 08 — Duas tabuadas
+# Enunciado:
+# Leia dois inteiros positivos a e b, com a &lt;= b. Mostre as tabuadas de todos os inteiros de a até b, com fatores de 1 até 10.
+#
+# Dica:
+# Um laço controla a tabuada; outro controla o fator.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 08_for_e_range/exemplos/06_tabuada.py
+# 08_for_e_range/exemplos/07_aninhados.py
+#
+# Casos para conferir sua implementação:
+# a=2 e b=3 devem produzir vinte produtos.
+</pre></details><details id="exercicio-09_triangulo_crescente"><summary>09 — Triângulo crescente</summary><a class="download" href="../pratica/08_for_e_range/exercicios/09_triangulo_crescente.py" download>Baixar este exercício .py</a><pre class="enunciado"># 09 — Triângulo crescente
+# Enunciado:
+# Leia altura inteira não negativa e desenhe linhas com uma, duas, três e assim por diante estrelas. Use laços e print, sem multiplicação de strings.
+#
+# Dica:
+# A largura depende do número da linha.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 08_for_e_range/exemplos/07_aninhados.py
+# 08_for_e_range/exemplos/08_padrao_triangular.py
+#
+# Casos para conferir sua implementação:
+# Altura 3: linhas com *, ** e ***; altura 0: nenhuma linha de estrelas.
+</pre></details><details id="exercicio-10_triangulo_decrescente"><summary>10 — Triângulo decrescente</summary><a class="download" href="../pratica/08_for_e_range/exercicios/10_triangulo_decrescente.py" download>Baixar este exercício .py</a><pre class="enunciado"># 10 — Triângulo decrescente
+# Enunciado:
+# Leia altura inteira não negativa e desenhe linhas de estrelas com largura da altura até um. Use laços aninhados.
+#
+# Dica:
+# O laço externo pode ter passo negativo.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 08_for_e_range/exemplos/04_passo_negativo.py
+# 08_for_e_range/exemplos/08_padrao_triangular.py
+#
+# Casos para conferir sua implementação:
+# Altura 3: linhas ***, ** e *; altura 1: uma estrela.
+</pre></details><details id="exercicio-11_intervalo_com_uma_unica_passagem"><summary>11 — Intervalo com uma única passagem</summary><a class="download" href="../pratica/08_for_e_range/exercicios/11_intervalo_com_uma_unica_passagem.py" download>Baixar este exercício .py</a><pre class="enunciado"># 11 — Intervalo com uma única passagem
+# Enunciado:
+# Leia inteiro n e exiba apenas n por meio de um for com range, ajustando início e parada.
+#
+# Dica:
+# A parada de range fica excluída.
+#
+# Casos para conferir sua implementação:
+# n=4 exibe só 4; n=-2 exibe só -2.
+#
+# Apoio: 08_for_e_range/exemplos/02_inicio_e_fim.py
+</pre></details><details id="exercicio-12_intervalo_vazio_explicado"><summary>12 — Intervalo vazio explicado</summary><a class="download" href="../pratica/08_for_e_range/exercicios/12_intervalo_vazio_explicado.py" download>Baixar este exercício .py</a><pre class="enunciado"># 12 — Intervalo vazio explicado
+# Enunciado:
+# Escreva um for usando range(4, 4) e outro usando range(4, 1). Conte as execuções de cada um e
+# explique o resultado.
+#
+# Dica:
+# Com passo positivo, o início precisa ser menor que a parada para haver valores.
+#
+# Casos para conferir sua implementação:
+# Os dois corpos executam zero vezes.
+#
+# Apoio: 08_for_e_range/exemplos/01_range_basico.py
+</pre></details><details id="exercicio-13_pares_incluindo_zero"><summary>13 — Pares incluindo zero</summary><a class="download" href="../pratica/08_for_e_range/exercicios/13_pares_incluindo_zero.py" download>Baixar este exercício .py</a><pre class="enunciado"># 13 — Pares incluindo zero
+# Enunciado:
+# Leia n não negativo e mostre pares de zero até n com passo dois, sem testar paridade dentro do
+# laço.
+#
+# Dica:
+# Ajuste a parada para admitir n quando ele for par.
+#
+# Casos para conferir sua implementação:
+# n=5: 0, 2, 4; n=6: 0, 2, 4, 6; n=0: só 0.
+#
+# Apoio: 08_for_e_range/exemplos/03_passo.py
+</pre></details><details id="exercicio-14_impares_em_ordem_decrescente"><summary>14 — Ímpares em ordem decrescente</summary><a class="download" href="../pratica/08_for_e_range/exercicios/14_impares_em_ordem_decrescente.py" download>Baixar este exercício .py</a><pre class="enunciado"># 14 — Ímpares em ordem decrescente
+# Enunciado:
+# Leia n positivo ímpar e mostre n, n-2 e assim por diante até 1.
+#
+# Dica:
+# Combine passo negativo com uma parada abaixo do último valor desejado.
+#
+# Casos para conferir sua implementação:
+# n=7: 7, 5, 3, 1; n=1: só 1.
+#
+# Apoio: 08_for_e_range/exemplos/04_passo_negativo.py
+</pre></details><details id="exercicio-15_intervalo_inclusivo_com_negativos"><summary>15 — Intervalo inclusivo com negativos</summary><a class="download" href="../pratica/08_for_e_range/exercicios/15_intervalo_inclusivo_com_negativos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 15 — Intervalo inclusivo com negativos
+# Enunciado:
+# Leia início e fim inteiros com início &lt;= fim. Mostre o intervalo e conte seus valores usando
+# for.
+#
+# Dica:
+# range também pode gerar valores negativos.
+#
+# Casos para conferir sua implementação:
+# De -3 até 1: -3, -2, -1, 0, 1 e contagem 5.
+#
+# Apoio: 08_for_e_range/exemplos/02_inicio_e_fim.py
+</pre></details><details id="exercicio-16_passo_que_nao_alcanca_a_ponta"><summary>16 — Passo que não alcança a ponta</summary><a class="download" href="../pratica/08_for_e_range/exercicios/16_passo_que_nao_alcanca_a_ponta.py" download>Baixar este exercício .py</a><pre class="enunciado"># 16 — Passo que não alcança a ponta
+# Enunciado:
+# Leia início, fim e passo positivos com início &lt;= fim. Exiba o intervalo com esse passo e conte
+# as exibições.
+#
+# Dica:
+# O limite apenas restringe a faixa; não obriga a última exibição a coincidir com ele.
+#
+# Casos para conferir sua implementação:
+# Início 3, fim 14 e passo 4: 3, 7, 11 e contagem 3.
+#
+# Apoio: 08_for_e_range/exemplos/03_passo.py
+</pre></details><details id="exercicio-17_soma_de_um_intervalo_deslocado"><summary>17 — Soma de um intervalo deslocado</summary><a class="download" href="../pratica/08_for_e_range/exercicios/17_soma_de_um_intervalo_deslocado.py" download>Baixar este exercício .py</a><pre class="enunciado"># 17 — Soma de um intervalo deslocado
+# Enunciado:
+# Leia início e fim inteiros com início &lt;= fim e some os valores da faixa inclusiva.
+#
+# Dica:
+# O acumulador começa em zero mesmo se o intervalo começar negativo.
+#
+# Casos para conferir sua implementação:
+# De -2 a 3: soma 3; de 5 a 5: soma 5.
+#
+# Apoio: 08_for_e_range/exemplos/05_soma_e_produto.py
+</pre></details><details id="exercicio-18_multiplos_sem_contagem_duplicada"><summary>18 — Múltiplos sem contagem duplicada</summary><a class="download" href="../pratica/08_for_e_range/exercicios/18_multiplos_sem_contagem_duplicada.py" download>Baixar este exercício .py</a><pre class="enunciado"># 18 — Múltiplos sem contagem duplicada
+# Enunciado:
+# Leia n não negativo. Percorra de 1 a n e some os números divisíveis por 3 ou por 5, uma vez
+# cada.
+#
+# Dica:
+# Um valor que satisfaz as duas condições entra somente uma vez.
+#
+# Casos para conferir sua implementação:
+# n=15: soma 60; n=2: soma zero.
+#
+# Apoio: 08_for_e_range/exemplos/05_soma_e_produto.py
+</pre></details><details id="exercicio-19_quantidade_de_leituras_exata"><summary>19 — Quantidade de leituras exata</summary><a class="download" href="../pratica/08_for_e_range/exercicios/19_quantidade_de_leituras_exata.py" download>Baixar este exercício .py</a><pre class="enunciado"># 19 — Quantidade de leituras exata
+# Enunciado:
+# Leia n não negativo e depois n inteiros. Exiba o número da leitura, começando em 1, e o valor
+# recebido.
+#
+# Dica:
+# A numeração de apresentação pode começar em um mesmo com n=0 permitido.
+#
+# Casos para conferir sua implementação:
+# n=2 com 7 e -1: leitura 1 vale 7 e leitura 2 vale -1; n=0 não solicita valores.
+#
+# Apoio: 08_for_e_range/exemplos/02_inicio_e_fim.py
+</pre></details><details id="exercicio-20_soma_de_produtos_sucessivos"><summary>20 — Soma de produtos sucessivos</summary><a class="download" href="../pratica/08_for_e_range/exercicios/20_soma_de_produtos_sucessivos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 20 — Soma de produtos sucessivos
+# Enunciado:
+# Leia n não negativo. Calcule a soma de i vezes (i+1) para i de 1 até n, mostrando também cada
+# parcela.
+#
+# Dica:
+# O contador fornece o i; o acumulador reúne as parcelas.
+#
+# Casos para conferir sua implementação:
+# n=3: parcelas 2, 6, 12 e soma 20; n=0: soma zero.
+#
+# Apoio: 08_for_e_range/exemplos/05_soma_e_produto.py
+</pre></details><details id="exercicio-21_media_de_precos_informados"><summary>21 — Média de preços informados</summary><a class="download" href="../pratica/08_for_e_range/exercicios/21_media_de_precos_informados.py" download>Baixar este exercício .py</a><pre class="enunciado"># 21 — Média de preços informados
+# Enunciado:
+# Leia n positivo e n preços não negativos. Mostre soma e média com duas casas decimais.
+#
+# Dica:
+# Cada preço pode ser processado assim que é lido.
+#
+# Casos para conferir sua implementação:
+# Preços 10, 20 e 30: soma 60.00 e média 20.00; um preço zero: média zero.
+#
+# Apoio: 08_for_e_range/exemplos/05_soma_e_produto.py
+</pre></details><details id="exercicio-22_contagens_em_duas_faixas"><summary>22 — Contagens em duas faixas</summary><a class="download" href="../pratica/08_for_e_range/exercicios/22_contagens_em_duas_faixas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 22 — Contagens em duas faixas
+# Enunciado:
+# Leia n não negativo e n saldos não negativos. Conte os menores que 10 e os demais.
+#
+# Dica:
+# O for controla as n leituras; a decisão controla em qual contagem cada saldo entra.
+#
+# Casos para conferir sua implementação:
+# Saldos 9, 10, 11 e 0: duas posições em cada faixa.
+#
+# Apoio: 08_for_e_range/exemplos/02_inicio_e_fim.py
+</pre></details><details id="exercicio-23_maior_e_menor_de_n_leituras"><summary>23 — Maior e menor de n leituras</summary><a class="download" href="../pratica/08_for_e_range/exercicios/23_maior_e_menor_de_n_leituras.py" download>Baixar este exercício .py</a><pre class="enunciado"># 23 — Maior e menor de n leituras
+# Enunciado:
+# Leia n positivo, faça uma primeira leitura e processe as n-1 restantes com for. Mostre maior e
+# menor.
+#
+# Dica:
+# Os dois candidatos começam com um dado real da entrada.
+#
+# Casos para conferir sua implementação:
+# -8, -2 e -5: maior -2 e menor -8; uma leitura 7: ambos 7.
+#
+# Apoio: 08_for_e_range/exemplos/02_inicio_e_fim.py
+</pre></details><details id="exercicio-24_tabuada_com_faixa_escolhida"><summary>24 — Tabuada com faixa escolhida</summary><a class="download" href="../pratica/08_for_e_range/exercicios/24_tabuada_com_faixa_escolhida.py" download>Baixar este exercício .py</a><pre class="enunciado"># 24 — Tabuada com faixa escolhida
+# Enunciado:
+# Leia número inteiro, primeiro fator e último fator, com primeiro &lt;= último. Mostre apenas essa
+# parte da tabuada.
+#
+# Dica:
+# O número permanece fixo; o fator varia no intervalo escolhido.
+#
+# Casos para conferir sua implementação:
+# Número 4, fatores 2 a 4: resultados 8, 12 e 16.
+#
+# Apoio: 08_for_e_range/exemplos/06_tabuada.py
+</pre></details><details id="exercicio-25_tabela_de_preco_por_quantidade"><summary>25 — Tabela de preço por quantidade</summary><a class="download" href="../pratica/08_for_e_range/exercicios/25_tabela_de_preco_por_quantidade.py" download>Baixar este exercício .py</a><pre class="enunciado"># 25 — Tabela de preço por quantidade
+# Enunciado:
+# Leia preço unitário não negativo e limite positivo. Mostre o custo de comprar de uma até limite
+# unidades, sem desconto.
+#
+# Dica:
+# Use o contador como quantidade em cada linha.
+#
+# Casos para conferir sua implementação:
+# Preço 7.9 e limite 3: 7.90, 15.80 e 23.70.
+#
+# Apoio: 08_for_e_range/exemplos/06_tabuada.py
+</pre></details><details id="exercicio-26_conferencia_de_unidades_e_valores"><summary>26 — Conferência de unidades e valores</summary><a class="download" href="../pratica/08_for_e_range/exercicios/26_conferencia_de_unidades_e_valores.py" download>Baixar este exercício .py</a><pre class="enunciado"># 26 — Conferência de unidades e valores
+# Enunciado:
+# Leia n não negativo. Para cada venda, leia quantidade positiva e preço não negativo. Some
+# unidades e faturamento.
+#
+# Dica:
+# O número de voltas conta vendas; a soma de quantidades conta unidades.
+#
+# Casos para conferir sua implementação:
+# Vendas 2 unidades a 10 e 3 unidades a 4: cinco unidades e faturamento 32.
+#
+# Apoio: 08_for_e_range/exemplos/05_soma_e_produto.py
+</pre></details><details id="exercicio-27_grade_de_posicoes_impressas"><summary>27 — Grade de posições impressas</summary><a class="download" href="../pratica/08_for_e_range/exercicios/27_grade_de_posicoes_impressas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 27 — Grade de posições impressas
+# Enunciado:
+# Leia números positivos de linhas e colunas. Use dois for para exibir cada par de coordenadas,
+# começando em 1, sem guardar a grade.
+#
+# Dica:
+# O laço das colunas reinicia a cada linha.
+#
+# Casos para conferir sua implementação:
+# Duas linhas e três colunas geram seis posições; a última é linha 2, coluna 3.
+#
+# Apoio: 08_for_e_range/exemplos/07_aninhados.py
+</pre></details><details id="exercicio-28_retangulo_de_simbolos"><summary>28 — Retângulo de símbolos</summary><a class="download" href="../pratica/08_for_e_range/exercicios/28_retangulo_de_simbolos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 28 — Retângulo de símbolos
+# Enunciado:
+# Leia altura e largura positivas. Imprima um retângulo de asteriscos usando dois laços, print e
+# end.
+#
+# Dica:
+# Mude de linha somente depois de terminar as colunas da linha atual.
+#
+# Casos para conferir sua implementação:
+# Altura 2 e largura 3: duas linhas, cada uma com três asteriscos.
+#
+# Apoio: 08_for_e_range/exemplos/08_padrao_triangular.py
+</pre></details><details id="exercicio-29_escada_numerada"><summary>29 — Escada numerada</summary><a class="download" href="../pratica/08_for_e_range/exercicios/29_escada_numerada.py" download>Baixar este exercício .py</a><pre class="enunciado"># 29 — Escada numerada
+# Enunciado:
+# Leia altura positiva. Na linha de número i, imprima i ocorrências do próprio número i, separadas
+# por espaços.
+#
+# Dica:
+# O limite do laço interno depende da linha externa.
+#
+# Casos para conferir sua implementação:
+# Altura 3: primeira linha contém 1; segunda, 2 2; terceira, 3 3 3.
+#
+# Apoio: 08_for_e_range/exemplos/08_padrao_triangular.py
+</pre></details><details id="exercicio-30_tabuadas_em_duas_dimensoes"><summary>30 — Tabuadas em duas dimensões</summary><a class="download" href="../pratica/08_for_e_range/exercicios/30_tabuadas_em_duas_dimensoes.py" download>Baixar este exercício .py</a><pre class="enunciado"># 30 — Tabuadas em duas dimensões
+# Enunciado:
+# Leia primeira e última tabuadas inteiras com primeira &lt;= última. Para cada uma, mostre fatores
+# de 1 a 5 e depois uma separação.
+#
+# Dica:
+# A separação pertence ao laço externo e deve ocorrer uma vez por tabuada.
+#
+# Casos para conferir sua implementação:
+# Tabuadas 2 a 3: dez multiplicações e duas separações.
+#
+# Apoio: 08_for_e_range/exemplos/07_aninhados.py
+</pre></details><details id="exercicio-31_prever_a_parada_excluida"><summary>31 — Prever a parada excluída</summary><a class="download" href="../pratica/08_for_e_range/exercicios/31_prever_a_parada_excluida.py" download>Baixar este exercício .py</a><pre class="enunciado"># 31 — Prever a parada excluída
+# Enunciado:
+# Sem executar primeiro, escreva os valores produzidos por range(2, 8, 2) e range(8, 2, -2).
+# Depois confira com dois for.
+#
+# Dica:
+# O mesmo limite fica excluído tanto na direção crescente quanto na decrescente.
+#
+# Casos para conferir sua implementação:
+# Primeiro: 2, 4, 6; segundo: 8, 6, 4.
+#
+# Apoio: 08_for_e_range/exemplos/04_passo_negativo.py
+</pre></details><details id="exercicio-32_investigar_um_passo_incompativel"><summary>32 — Investigar um passo incompatível</summary><a class="download" href="../pratica/08_for_e_range/exercicios/32_investigar_um_passo_incompativel.py" download>Baixar este exercício .py</a><pre class="enunciado"># 32 — Investigar um passo incompatível
+# Enunciado:
+# Uma contagem de 5 até 1 usa range(5, 0) e não imprime nada. Explique a causa e corrija o
+# intervalo.
+#
+# Dica:
+# O passo omitido é positivo, mesmo quando o início é maior que a parada.
+#
+# Casos para conferir sua implementação:
+# Após a correção, a saída tem 5, 4, 3, 2, 1.
+#
+# Apoio: 08_for_e_range/exemplos/04_passo_negativo.py
+</pre></details><details id="exercicio-33_investigar_acumulador_reiniciado"><summary>33 — Investigar acumulador reiniciado</summary><a class="download" href="../pratica/08_for_e_range/exercicios/33_investigar_acumulador_reiniciado.py" download>Baixar este exercício .py</a><pre class="enunciado"># 33 — Investigar acumulador reiniciado
+# Enunciado:
+# Uma soma de 1 até n zera o acumulador dentro do for em cada passagem. Recrie o erro com n=4 e
+# mova a inicialização para o lugar adequado.
+#
+# Dica:
+# O acumulador precisa conservar o resultado das voltas anteriores.
+#
+# Casos para conferir sua implementação:
+# Para n=4, a versão corrigida produz 10; n=0 deve produzir zero.
+#
+# Apoio: 08_for_e_range/exemplos/05_soma_e_produto.py
+</pre></details><details id="exercicio-34_comparar_filtragem_e_passo"><summary>34 — Comparar filtragem e passo</summary><a class="download" href="../pratica/08_for_e_range/exercicios/34_comparar_filtragem_e_passo.py" download>Baixar este exercício .py</a><pre class="enunciado"># 34 — Comparar filtragem e passo
+# Enunciado:
+# Produza os pares de 2 a n de duas formas: percorrendo todos os inteiros e testando paridade;
+# depois, usando passo dois. Conte quantas voltas cada versão executa.
+#
+# Dica:
+# Saídas iguais não exigem a mesma quantidade de repetições.
+#
+# Casos para conferir sua implementação:
+# n=7: ambas mostram 2, 4, 6; a primeira executa sete voltas de 1 a 7, a segunda três.
+#
+# Apoio: 08_for_e_range/exemplos/03_passo.py
+</pre></details><details id="exercicio-35_comparar_for_e_while_no_produto"><summary>35 — Comparar for e while no produto</summary><a class="download" href="../pratica/08_for_e_range/exercicios/35_comparar_for_e_while_no_produto.py" download>Baixar este exercício .py</a><pre class="enunciado"># 35 — Comparar for e while no produto
+# Enunciado:
+# Calcule o produto de 1 até n, para n não negativo, com while e com for. Use produto 1 para n=0 e
+# compare os resultados.
+#
+# Dica:
+# O while precisa de atualização explícita; os dois precisam da mesma identidade inicial.
+#
+# Casos para conferir sua implementação:
+# n=4: ambos 24; n=0: ambos 1.
+#
+# Apoio: 08_for_e_range/exemplos/09_comparar_while_e_for.py
+</pre></details><details id="exercicio-36_contar_fronteiras_de_uma_grade"><summary>36 — Contar fronteiras de uma grade</summary><a class="download" href="../pratica/08_for_e_range/exercicios/36_contar_fronteiras_de_uma_grade.py" download>Baixar este exercício .py</a><pre class="enunciado"># 36 — Contar fronteiras de uma grade
+# Enunciado:
+# Leia altura e largura positivas. Percorra as posições de uma grade e conte as que ficam na
+# primeira ou última linha ou coluna. Cada posição conta só uma vez.
+#
+# Dica:
+# Um único teste com alternativas evita contar um canto duas vezes.
+#
+# Casos para conferir sua implementação:
+# Grade 3 por 4: dez posições na borda; 1 por 4: quatro; 1 por 1: uma.
+#
+# Apoio: 08_for_e_range/exemplos/07_aninhados.py
+</pre></details><details id="exercicio-37_totais_por_loja_sem_guardar_historico"><summary>37 — Totais por loja sem guardar histórico</summary><a class="download" href="../pratica/08_for_e_range/exercicios/37_totais_por_loja_sem_guardar_historico.py" download>Baixar este exercício .py</a><pre class="enunciado"># 37 — Totais por loja sem guardar histórico
+# Enunciado:
+# Leia quantidade positiva de lojas e de dias. Para cada loja, leia uma venda diária não negativa
+# por dia. Mostre o total da loja e, ao final, o total geral.
+#
+# Dica:
+# Reinicie o total da loja dentro do laço externo; mantenha o geral fora dele.
+#
+# Casos para conferir sua implementação:
+# Duas lojas e dois dias, vendas 10, 20, 5, 7: totais 30 e 12; geral 42.
+#
+# Apoio: 08_for_e_range/exemplos/07_aninhados.py
+</pre></details><details id="exercicio-38_contar_execucoes_de_lacos_dependentes"><summary>38 — Contar execuções de laços dependentes</summary><a class="download" href="../pratica/08_for_e_range/exercicios/38_contar_execucoes_de_lacos_dependentes.py" download>Baixar este exercício .py</a><pre class="enunciado"># 38 — Contar execuções de laços dependentes
+# Enunciado:
+# Leia n não negativo. Para cada linha de 1 a n, execute um laço interno de 1 até a linha. Conte
+# as execuções internas sem usar fórmula pronta.
+#
+# Dica:
+# A contagem precisa sobreviver à mudança de linha.
+#
+# Casos para conferir sua implementação:
+# n=4: dez execuções; n=1: uma; n=0: zero.
+#
+# Apoio: 08_for_e_range/exemplos/08_padrao_triangular.py
+</pre></details><details id="exercicio-39_dois_percursos_para_o_mesmo_total"><summary>39 — Dois percursos para o mesmo total</summary><a class="download" href="../pratica/08_for_e_range/exercicios/39_dois_percursos_para_o_mesmo_total.py" download>Baixar este exercício .py</a><pre class="enunciado"># 39 — Dois percursos para o mesmo total
+# Enunciado:
+# Some os inteiros de 1 a n em ordem crescente e depois em ordem decrescente, com dois for. Mostre
+# os dois totais e se são iguais.
+#
+# Dica:
+# Cada percurso precisa do próprio acumulador, e n pode ser zero.
+#
+# Casos para conferir sua implementação:
+# n=5: totais 15 e 15; n=0: ambos zero.
+#
+# Apoio: 08_for_e_range/exemplos/09_comparar_while_e_for.py
+</pre></details><details id="exercicio-40_sintese_de_reposicao_por_loja"><summary>40 — Síntese de reposição por loja</summary><a class="download" href="../pratica/08_for_e_range/exercicios/40_sintese_de_reposicao_por_loja.py" download>Baixar este exercício .py</a><pre class="enunciado"># 40 — Síntese de reposição por loja
+# Enunciado:
+# Leia quantidade positiva de lojas e de posições por loja. Para cada posição, leia saldo não
+# negativo e mínimo positivo. Exiba falta total por loja e da rede, sem armazenar posições.
+#
+# Dica:
+# A falta individual é zero quando o saldo alcança o mínimo; reinicie a soma local para cada loja.
+#
+# Casos para conferir sua implementação:
+# Duas lojas com duas posições: 4/8, 12/10, 6/10, 9/10; faltas por loja 4 e 5, rede 9.
+#
+# Apoio: 08_for_e_range/exemplos/07_aninhados.py
+</pre></details><details id="exercicio-91_rede_91"><summary>Prever a conferência</summary><a class="download" href="../pratica/08_for_e_range/exercicios/91_rede_91.py" download>Baixar este exercício .py</a><pre class="enunciado"># Prever a conferência
+# Enunciado:
+# Preveja o contador de críticos depois de ler saldos 4, 10 e 18 com mínimo 10. Depois repita com 0, 9 e 10.
+#
+# Dica:
+# A repetição lê três valores e a comparação decide a contribuição.
+#
+# Conferência:
+# O primeiro caso tem um crítico; o segundo, dois.
+#
+# Apoio: 08_for_e_range/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-92_rede_92"><summary>Corrigir a quantidade de etiquetas</summary><a class="download" href="../pratica/08_for_e_range/exercicios/92_rede_92.py" download>Baixar este exercício .py</a><pre class="enunciado"># Corrigir a quantidade de etiquetas
+# Enunciado:
+# Uma rotina deve mostrar etiquetas de 1 até n, mas usa range(1, n). Corrija o intervalo e teste n igual a 0, 1 e 3.
+#
+# Dica:
+# A parada do intervalo é excluída.
+#
+# Conferência:
+# Os casos devem produzir zero, uma e três etiquetas.
+#
+# Apoio: 08_for_e_range/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-93_rede_93"><summary>Gôndola desenhada — Lojas Blue</summary><a class="download" href="../pratica/08_for_e_range/exercicios/93_rede_93.py" download>Baixar este exercício .py</a><pre class="enunciado"># Gôndola desenhada — Lojas Blue
+# Enunciado:
+# Leia altura e largura positivas e desenhe um retângulo de # usando laços e print, sem multiplicação de strings.
+#
+# Dica:
+# Um laço controla linhas e outro colunas.
+#
+# Conferência:
+# Altura 2 e largura 3: duas linhas de três símbolos.
+#
+# Apoio: 08_for_e_range/exemplos/90_rede_contexto.py e exemplos básicos do tópico
+</pre></details><details id="exercicio-94_prever"><summary>Comparar o controle dos laços</summary><a class="download" href="../pratica/08_for_e_range/exercicios/94_prever.py" download>Baixar este exercício .py</a><pre class="enunciado"># Comparar o controle dos laços
+# Enunciado:
+# Refaça as duas somas para limites zero, um e cinco. Registre quem avança a variável de controle em cada versão.
+#
+# Dica:
+# O while precisa de atualização explícita; o for recebe o próximo valor de range.
+#
+# Conferência:
+# As duas versões produzem zero, um e quinze.
+#
+# Apoio: 08_for_e_range/exemplos/09_comparar_while_e_for.py
+</pre></details><details id="exercicio-95_investigar"><summary>Escolher o laço adequado</summary><a class="download" href="../pratica/08_for_e_range/exercicios/95_investigar.py" download>Baixar este exercício .py</a><pre class="enunciado"># Escolher o laço adequado
+# Enunciado:
+# Implemente soma de dez valores com for e soma até sentinela zero com while. Explique por que as condições de término são diferentes.
+#
+# Dica:
+# Um problema conhece a quantidade de leituras; o outro conhece o marcador de encerramento.
+#
+# Conferência:
+# A sentinela não entra na contagem; dez leituras válidas sempre executam dez processamentos.
+#
+# Apoio: 08_for_e_range/exemplos/09_comparar_while_e_for.py
+</pre></details></section><section id="avancar"><h2>Quando avançar</h2><p>Escolha início, parada e passo para intervalos crescentes e decrescentes. Preveja quantas vezes um corpo aninhado executará.</p><p>Explique sua solução sem ler o código. Se houver uma divergência, encontre a primeira instrução em que seu raciocínio muda. Depois acrescente um caso próprio e confira novamente.</p></section><nav class="pager" aria-label="Sequência de estudo"><a href="07_while.html">← Repetição com while</a><a href="09_algoritmos_basicos.html">Algoritmos básicos →</a></nav></main><footer class="site-footer">ALP · Cenário didático Lojas Blue · Python 3.10 ou superior</footer></div></div><script src="../assets/lessons.js"></script><script src="../assets/alp.js" defer></script></body></html>

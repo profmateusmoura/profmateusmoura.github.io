@@ -1,0 +1,439 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Algoritmos e Lógica de Programação em Python: Validação e controle de fluxo"><title>Validação e controle de fluxo · ALP</title><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/alp.css"></head><body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><div class="app-frame"><aside class="sidebar" id="sidebar"><a class="brand" href="../index.html"><strong>ALP</strong><small>Algoritmos e Lógica de Programação</small></a><nav class="site-nav" aria-label="Cadernos"><a class="nav-module " href="../cadernos/01_output.html"><span class="nav-index">01</span><span>Saída de dados</span></a><a class="nav-module " href="../cadernos/02_input.html"><span class="nav-index">02</span><span>Entrada de dados</span></a><a class="nav-module " href="../cadernos/03_variaveis_e_tipos.html"><span class="nav-index">03</span><span>Variáveis e tipos</span></a><a class="nav-module " href="../cadernos/04_operadores.html"><span class="nav-index">04</span><span>Operadores</span></a><a class="nav-module " href="../cadernos/05_if_elif_else.html"><span class="nav-index">05</span><span>Decisões com if, elif e else</span></a><a class="nav-module " href="../cadernos/06_match_case.html"><span class="nav-index">06</span><span>Seleção com match/case</span></a><a class="nav-module " href="../cadernos/07_while.html"><span class="nav-index">07</span><span>Repetição com while</span></a><a class="nav-module " href="../cadernos/08_for_e_range.html"><span class="nav-index">08</span><span>Repetição com for e range</span></a><a class="nav-module " href="../cadernos/09_algoritmos_basicos.html"><span class="nav-index">09</span><span>Algoritmos básicos</span></a><a class="nav-module active" href="../cadernos/10_validacao_e_controle_de_fluxo.html"><span class="nav-index">10</span><span>Validação e controle de fluxo</span></a><a class="nav-module " href="../cadernos/11_funcoes.html"><span class="nav-index">11</span><span>Funções</span></a><a class="nav-module " href="../cadernos/12_decomposicao_de_problemas.html"><span class="nav-index">12</span><span>Decomposição de problemas</span></a><a class="nav-module " href="../cadernos/13_teste_de_mesa.html"><span class="nav-index">13</span><span>Teste de mesa</span></a></nav><a class="portal" href="../../../index.html">← Portal de materiais</a></aside><div class="main-area"><header class="topbar"><button id="menu" aria-controls="sidebar" aria-expanded="false">Cadernos</button><a href="../index.html">ALP · Lojas Blue</a><button id="theme" aria-label="Alternar tema claro e escuro">Tema claro/escuro</button></header><main id="conteudo" class="alp-content"><div class="article-header"><p>CADERNO 10 · FUNDAMENTOS</p><h1>Validação e controle de fluxo</h1><p>Validar entradas, encerrar laços e construir menus seguros.</p><p>11 exemplos e 13 exercícios da trilha original.</p><a class="download" href="../arquivos/ALP_10_validacao_e_controle_de_fluxo.zip" download>Baixar exemplos e exercícios deste assunto</a></div><nav class="local-nav" aria-label="Seções"><a href="#conceitos">Entender</a><a href="#acompanhado">Acompanhar</a><a href="#exemplos">Exemplos</a><a href="#exercicios">Exercícios</a><a href="#avancar">Conferir aprendizagem</a></nav><section id="conceitos"><h2>Entenda a ideia</h2><h3>Formato válido não garante domínio válido</h3><p>Converter uma entrada para inteiro responde se o texto pode representar um inteiro. Isso não garante que o número seja permitido: uma quantidade negativa pode ter formato válido e domínio inválido. Trate essas duas perguntas separadamente. Proteja a conversão com try/except ValueError quando a atividade exigir tolerância a textos inválidos; depois confira a faixa aceita.</p><h3>Laços de tentativa precisam de saídas claras</h3><p>Um leitor pode repetir até receber um valor válido ou até atingir um limite de tentativas. Defina como a tentativa é contada e o que acontece ao falhar. break encerra o laço mais próximo; continue abandona o restante da repetição atual e volta ao próximo teste. Posicionar uma atualização depois de continue pode fazer com que ela nunca ocorra.</p><h3>Validação protege a operação e o estado</h3><p>Em uma retirada, recusar uma quantidade não pode reduzir o saldo. Faça a verificação antes de alterar a variável. Se uma regra exige número finito, considere que float também pode aceitar textos como inf e nan; uma aplicação que trabalha com medições válidas precisa verificar essa condição explicitamente. Valide o que o contrato pede e apresente mensagens que expliquem como corrigir a entrada.</p></section><aside class="callout"><strong>Erros para observar</strong><p>Capturar todo erro sem critério; usar uma variável depois de conversão fracassada; pular a atualização com continue em um while; apagar uma flag que registra ocorrência; pedir nova entrada depois da opção sair.</p></aside><section id="acompanhado"><h2>Um exemplo acompanhado</h2><p>Leia o código antes de avançar. Cada passo explica uma mudança ou decisão. A simulação tem uma sequência fixa; os arquivos Python permitem experimentar outras entradas.</p><pre><code>saldo = 10
+retirada = 12
+if retirada &gt; 0 and retirada &lt;= saldo:
+    saldo -= retirada
+else:
+    print(&quot;Retirada inválida&quot;)
+print(saldo)</code></pre><details><summary>Conferir a saída</summary><pre>Retirada inválida
+10</pre></details><div class="trace" data-trace="9"><p data-state role="status"></p><progress value="0" max="4" aria-label="Progresso do exemplo"></progress><div class="actions"><button data-back>Voltar</button><button data-next>Próximo passo</button><button data-reset>Recomeçar</button></div></div><fieldset class="quiz"><legend>O que deve acontecer ao saldo quando a retirada é inválida?</legend><button data-correct="false" data-why="Falhas de validação não devem executar a alteração protegida.">Ficar negativo</button><button data-correct="true" data-why="Falhas de validação não devem executar a alteração protegida.">Permanecer igual</button><button data-correct="false" data-why="Falhas de validação não devem executar a alteração protegida.">Virar zero</button><p data-feedback role="status"></p></fieldset></section><section id="exemplos"><h2>Estude os exemplos do assunto</h2><p>Abra os exemplos em ordem. Os comentários apresentam objetivo, demonstração e cuidados. Use o arquivo baixado para executar Python; o caderno apresenta o código para leitura.</p><details id="exemplo-01_intervalo"><summary>01 — Repetir até obter um valor válido</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/01_intervalo.py" download>Baixar este exemplo .py</a><pre><code># 01 — Repetir até obter um valor válido
+# Objetivo: Validar a faixa depois de converter uma entrada.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Esta primeira versão pressupõe texto numérico; letras ainda causam erro.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   -1
+#   11
+#   8
+# Confira na saída: &#x27;Nota aceita: 8.0&#x27;
+
+nota = float(input(&quot;Nota de 0 a 10: &quot;))
+while not (0 &lt;= nota &lt;= 10):
+    print(&quot;Nota fora do intervalo.&quot;)
+    nota = float(input(&quot;Tente novamente, de 0 a 10: &quot;))
+print(&quot;Nota aceita:&quot;, nota)
+# Ambos os limites são aceitos; o laço repete só para os inválidos.
+</code></pre></details><details id="exemplo-02_conversao_segura"><summary>02 — Conversão segura com try/except</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/02_conversao_segura.py" download>Baixar este exemplo .py</a><pre><code># 02 — Conversão segura com try/except
+# Objetivo: Distinguir formato inválido de valor fora da faixa.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Capturamos somente ValueError da conversão; não usamos except genérico.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   abc
+#   0
+#   3
+# Confira na saída: &#x27;Quantidade aceita: 3&#x27;
+
+valido = False
+while not valido:
+    texto = input(&quot;Quantidade inteira positiva: &quot;)
+    try:
+        quantidade = int(texto)
+    except ValueError:
+        # Letras ou texto como 2.5 não representam um int válido.
+        print(&quot;Digite um número inteiro.&quot;)
+    else:
+        # Este else pertence ao try: só roda se não houve ValueError.
+        if quantidade &gt; 0:
+            valido = True
+        else:
+            print(&quot;O inteiro deve ser positivo.&quot;)
+print(&quot;Quantidade aceita:&quot;, quantidade)
+</code></pre></details><details id="exemplo-03_sentinela_e_vazio"><summary>03 — Sentinela e ausência de dados</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/03_sentinela_e_vazio.py" download>Baixar este exemplo .py</a><pre><code># 03 — Sentinela e ausência de dados
+# Objetivo: Separar encerramento, validação e processamento.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: -1 encerra; outros negativos são recusados; zero é um dado válido.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   -2
+#   0
+#   6
+#   -1
+# Confira na saída: &#x27;Média: 3.0&#x27;
+
+quantidade = 0
+soma = 0.0
+valor = float(input(&quot;Valor não negativo; -1 encerra: &quot;))
+while valor != -1:
+    # float(&quot;inf&quot;) representa infinito positivo, usado como limite aberto.
+    # A comparação exige valor finito e não negativo. Não estamos
+    # estudando operações com infinito; apenas recusando entradas especiais.
+    if 0 &lt;= valor &lt; float(&quot;inf&quot;):
+        soma += valor
+        quantidade += 1
+    else:
+        print(&quot;Valor não finito ou negativo recusado.&quot;)
+    valor = float(input(&quot;Valor não negativo; -1 encerra: &quot;))
+if quantidade == 0:
+    print(&quot;Nenhum dado válido.&quot;)
+else:
+    print(&quot;Média:&quot;, soma / quantidade)
+# Pressupõe conversão numérica válida; foco no protocolo da sentinela.
+</code></pre></details><details id="exemplo-04_flag"><summary>04 — Flag de ocorrência</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/04_flag.py" download>Baixar este exemplo .py</a><pre><code># 04 — Flag de ocorrência
+# Objetivo: Registrar se algo aconteceu em qualquer repetição.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Uma vez verdadeira, a flag não volta a ser falsa neste algoritmo.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   1
+#   -2
+#   3
+#   4
+# Confira na saída: &#x27;Houve pelo menos um negativo.&#x27;
+
+houve_negativo = False
+for ordem in range(1, 5):
+    valor = int(input(f&quot;Inteiro {ordem}: &quot;))
+    if valor &lt; 0:
+        houve_negativo = True
+    # Não coloque else definindo False: isso apagaria o histórico.
+if houve_negativo:
+    print(&quot;Houve pelo menos um negativo.&quot;)
+else:
+    print(&quot;Não houve negativos.&quot;)
+</code></pre></details><details id="exemplo-05_break"><summary>05 — Saída antecipada com break</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/05_break.py" download>Baixar este exemplo .py</a><pre><code># 05 — Saída antecipada com break
+# Objetivo: Encerrar um laço antes do fim previsto.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: break encerra apenas o laço mais interno em que aparece.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   x
+#   ALP
+# Confira na saída: &#x27;Código aceito&#x27;
+
+encontrou = False
+for tentativa in range(1, 4):
+    codigo = input(&quot;Código de demonstração (dica: ALP): &quot;)
+    if codigo == &quot;ALP&quot;:
+        encontrou = True
+        break  # Não pede novas tentativas após acertar.
+    print(&quot;Código incorreto.&quot;)
+if encontrou:
+    print(&quot;Código aceito&quot;)
+else:
+    print(&quot;Tentativas encerradas&quot;)
+# Exemplo de controle de fluxo; não é um sistema real de autenticação.
+</code></pre></details><details id="exemplo-06_continue"><summary>06 — Pular uma iteração com continue</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/06_continue.py" download>Baixar este exemplo .py</a><pre><code># 06 — Pular uma iteração com continue
+# Objetivo: Ignorar entradas sem encerrar o processamento.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: continue salta para a próxima volta do laço.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   -1
+#   2
+#   0
+#   3
+# Confira na saída: &#x27;Soma: 5&#x27;
+
+soma = 0
+aceitos = 0
+for ordem in range(1, 5):
+    valor = int(input(f&quot;Inteiro {ordem}: &quot;))
+    if valor &lt; 0:
+        print(&quot;Negativo ignorado&quot;)
+        continue
+    # Só valores não negativos chegam a estas duas instruções.
+    soma += valor
+    aceitos += 1
+print(&quot;Aceitos:&quot;, aceitos)
+print(&quot;Soma:&quot;, soma)
+</code></pre></details><details id="exemplo-07_menu_repetitivo"><summary>07 — Menu repetitivo</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/07_menu_repetitivo.py" download>Baixar este exemplo .py</a><pre><code># 07 — Menu repetitivo
+# Objetivo: Manter um estado entre escolhas do usuário.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A opção sair altera a flag que controla o laço.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   x
+#   1
+#   2
+#   0
+# Confira na saída: &#x27;Pontos: 1&#x27;
+
+pontos = 0
+executando = True
+while executando:
+    print(&quot;1: adicionar ponto | 2: consultar | 0: sair&quot;)
+    opcao = input(&quot;Opção: &quot;)
+    match opcao:
+        case &quot;1&quot;:
+            pontos += 1
+        case &quot;2&quot;:
+            print(&quot;Pontos:&quot;, pontos)
+        case &quot;0&quot;:
+            executando = False
+        case _:
+            print(&quot;Opção inválida&quot;)
+print(&quot;Menu encerrado&quot;)
+</code></pre></details><details id="exemplo-08_limite_tentativas"><summary>08 — Validação com limite de tentativas</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/08_limite_tentativas.py" download>Baixar este exemplo .py</a><pre><code># 08 — Validação com limite de tentativas
+# Objetivo: Combinar faixa válida e controle de término.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O contador avança em toda tentativa, inclusive as entradas inválidas.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   abc
+#   8
+#   5
+# Confira na saída: &#x27;Aceito: 5&#x27;
+
+tentativas = 0
+aceito = False
+while tentativas &lt; 3 and not aceito:
+    tentativas += 1
+    try:
+        numero = int(input(&quot;Inteiro de 1 a 5: &quot;))
+    except ValueError:
+        print(&quot;Formato inválido&quot;)
+    else:
+        if 1 &lt;= numero &lt;= 5:
+            # Reutilizamos a comparação encadeada ensinada em operadores.
+            aceito = True
+        else:
+            print(&quot;Fora da faixa&quot;)
+if aceito:
+    print(&quot;Aceito:&quot;, numero)
+else:
+    print(&quot;Limite atingido&quot;)
+</code></pre></details><details id="exemplo-09_confirmacao"><summary>09 — Confirmação textual</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/09_confirmacao.py" download>Baixar este exemplo .py</a><pre><code># 09 — Confirmação textual
+# Objetivo: Validar uma escolha sem transformar strings.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Só s e n minúsculos são válidos nesta atividade.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   talvez
+#   n
+# Confira na saída: &#x27;Encerramento confirmado&#x27;
+
+resposta = input(&quot;Continuar? s/n: &quot;)
+while resposta != &quot;s&quot; and resposta != &quot;n&quot;:
+    print(&quot;Use exatamente s ou n.&quot;)
+    resposta = input(&quot;Continuar? s/n: &quot;)
+if resposta == &quot;s&quot;:
+    print(&quot;Continuação confirmada&quot;)
+else:
+    print(&quot;Encerramento confirmado&quot;)
+# Com and, repetimos se a resposta não é nenhuma das duas alternativas.
+</code></pre></details><details id="exemplo-10_integracao"><summary>10 — Resumo de valores com entrada robusta</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/10_integracao.py" download>Baixar este exemplo .py</a><pre><code># 10 — Resumo de valores com entrada robusta
+# Objetivo: Integrar conversão, sentinela e acumuladores.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O laço só encerra ao converter e reconhecer -1.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   abc
+#   -3
+#   0
+#   6
+#   -1
+# Confira na saída: &#x27;Média: 3.0&#x27;
+
+soma = 0
+quantidade = 0
+while True:
+    try:
+        numero = int(input(&quot;Inteiro não negativo; -1 encerra: &quot;))
+    except ValueError:
+        print(&quot;Formato inválido&quot;)
+        continue  # Pede uma nova entrada antes de usar numero.
+    if numero == -1:
+        break
+    if numero &lt; 0:
+        print(&quot;Negativo recusado&quot;)
+        continue
+    soma += numero
+    quantidade += 1
+print(&quot;Quantidade:&quot;, quantidade)
+if quantidade &gt; 0:
+    print(&quot;Média:&quot;, soma / quantidade)
+else:
+    print(&quot;Sem dados para média&quot;)
+</code></pre></details><details id="exemplo-90_rede_contexto"><summary>Retirada com validação — cenário didático Lojas Blue</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exemplos/90_rede_contexto.py" download>Baixar este exemplo .py</a><pre><code># Retirada com validação — cenário didático Lojas Blue
+# Objetivo: Recusar formato, sinal e saldo insuficiente antes de alterar estado.
+# Pré-requisito: tópicos anteriores e exemplos anteriores deste tópico.
+# Estude: preveja o resultado, execute e altere um dado por vez.
+# Confira na saída: &#x27;Saldo final: 15&#x27;
+# Entradas guiadas, uma por solicitação:
+#   abc
+#   0
+#   19
+#   3
+
+saldo = 18
+while True:
+    try:
+        retirada = int(input(&quot;Retirada inteira positiva, até 18: &quot;))
+    except ValueError:
+        print(&quot;Formato inválido&quot;)
+        continue
+    if retirada &lt;= 0 or retirada &gt; saldo:
+        print(&quot;Retirada recusada; saldo preservado&quot;)
+        continue
+    saldo -= retirada
+    break
+print(&quot;Saldo final:&quot;, saldo)
+</code></pre></details></section><section id="exercicios"><h2>Pratique com os enunciados originais</h2><p>Resolva antes de consultar novamente o exemplo. Registre sua previsão e confira os casos indicados. Os arquivos de exercício contêm comentários e não produzem saída até você implementar a solução.</p><details id="exercicio-01_nota_valida"><summary>01 — Nota válida</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/01_nota_valida.py" download>Baixar este exercício .py</a><pre class="enunciado"># 01 — Nota válida
+# Enunciado:
+# Solicite uma nota até obter um número de 0 a 10 inclusive. Recuse também texto não numérico com try/except ValueError.
+#
+# Dica:
+# Separe falha de conversão e falha de faixa.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 10_validacao_e_controle_de_fluxo/exemplos/01_intervalo.py
+# 10_validacao_e_controle_de_fluxo/exemplos/02_conversao_segura.py
+#
+# Casos para conferir sua implementação:
+# abc, -1, 11, 10: só 10 é aceito.
+</pre></details><details id="exercicio-02_quantidade_positiva"><summary>02 — Quantidade positiva</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/02_quantidade_positiva.py" download>Baixar este exercício .py</a><pre class="enunciado"># 02 — Quantidade positiva
+# Enunciado:
+# Solicite até obter um inteiro maior que zero, recusando letras e números fora da faixa.
+#
+# Dica:
+# Uma flag ou um break pode representar o aceite.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 10_validacao_e_controle_de_fluxo/exemplos/02_conversao_segura.py
+#
+# Casos para conferir sua implementação:
+# x, 0, -2, 3: termine aceitando 3.
+</pre></details><details id="exercicio-03_confirmacao_estrita"><summary>03 — Confirmação estrita</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/03_confirmacao_estrita.py" download>Baixar este exercício .py</a><pre class="enunciado"># 03 — Confirmação estrita
+# Enunciado:
+# Solicite repetidamente s ou n minúsculos e só encerre quando um deles for informado.
+#
+# Dica:
+# Uma resposta inválida é diferente de ambas as opções.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 10_validacao_e_controle_de_fluxo/exemplos/09_confirmacao.py
+#
+# Casos para conferir sua implementação:
+# S, talvez, n: encerre apenas em n.
+</pre></details><details id="exercicio-04_sentinela_e_vazio"><summary>04 — Sentinela e vazio</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/04_sentinela_e_vazio.py" download>Baixar este exercício .py</a><pre class="enunciado"># 04 — Sentinela e vazio
+# Enunciado:
+# Leia inteiros não negativos; -1 encerra e demais negativos são recusados. Recuse formato inválido. Mostre média ou Sem dados.
+#
+# Dica:
+# Reconheça a sentinela antes de filtrar negativos.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 10_validacao_e_controle_de_fluxo/exemplos/03_sentinela_e_vazio.py
+# 10_validacao_e_controle_de_fluxo/exemplos/10_integracao.py
+#
+# Casos para conferir sua implementação:
+# Primeira entrada -1: Sem dados; 0, 4, -1: média 2.
+</pre></details><details id="exercicio-05_flag_persistente"><summary>05 — Flag persistente</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/05_flag_persistente.py" download>Baixar este exercício .py</a><pre class="enunciado"># 05 — Flag persistente
+# Enunciado:
+# Leia cinco inteiros e informe se apareceu algum múltiplo de sete. Suponha formato válido neste exercício.
+#
+# Dica:
+# Não desfaça a flag quando uma entrada não satisfizer a condição.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 10_validacao_e_controle_de_fluxo/exemplos/04_flag.py
+#
+# Casos para conferir sua implementação:
+# 7, 1, 2, 3, 4: sim; 1, 2, 3, 4, 5: não; 0 também é múltiplo de sete.
+</pre></details><details id="exercicio-06_tentativas_limitadas"><summary>06 — Tentativas limitadas</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/06_tentativas_limitadas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 06 — Tentativas limitadas
+# Enunciado:
+# Permita até três tentativas de acertar o texto PYTHON. Termine imediatamente ao acertar e informe sucesso ou esgotamento.
+#
+# Dica:
+# O acerto pode encerrar o laço com break.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 10_validacao_e_controle_de_fluxo/exemplos/05_break.py
+#
+# Casos para conferir sua implementação:
+# x, PYTHON: duas leituras; a, b, c: três leituras e esgotamento.
+</pre></details><details id="exercicio-07_ignorar_invalidos_com_continue"><summary>07 — Ignorar inválidos com continue</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/07_ignorar_invalidos_com_continue.py" download>Baixar este exercício .py</a><pre class="enunciado"># 07 — Ignorar inválidos com continue
+# Enunciado:
+# Faça exatamente cinco leituras de texto. Some apenas as que representarem inteiros não negativos; use continue para ignorar as demais. Informe quantos valores foram aceitos.
+#
+# Dica:
+# Uma leitura inválida consome uma das cinco tentativas.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 10_validacao_e_controle_de_fluxo/exemplos/02_conversao_segura.py
+# 10_validacao_e_controle_de_fluxo/exemplos/06_continue.py
+# 10_validacao_e_controle_de_fluxo/exemplos/10_integracao.py
+#
+# Casos para conferir sua implementação:
+# 2, abc, -1, 0, 3: soma 5 e três aceitos.
+</pre></details><details id="exercicio-08_menu_de_contador"><summary>08 — Menu de contador</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/08_menu_de_contador.py" download>Baixar este exercício .py</a><pre class="enunciado"># 08 — Menu de contador
+# Enunciado:
+# Crie menu repetitivo: 1 incrementa um contador, 2 consulta, 3 zera e 0 sai. Rejeite outras opções.
+#
+# Dica:
+# O contador é inicializado antes do laço.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 10_validacao_e_controle_de_fluxo/exemplos/07_menu_repetitivo.py
+#
+# Casos para conferir sua implementação:
+# 1, 1, 2, 3, 2, 0: consultas devem mostrar 2 e 0.
+</pre></details><details id="exercicio-09_faixa_com_limite_de_tentativas"><summary>09 — Faixa com limite de tentativas</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/09_faixa_com_limite_de_tentativas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 09 — Faixa com limite de tentativas
+# Enunciado:
+# Dê até quatro tentativas para informar inteiro de 10 a 20 inclusive. Conte formato inválido como tentativa. Mostre valor aceito ou limite atingido.
+#
+# Dica:
+# O contador deve avançar mesmo quando a conversão falha.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 10_validacao_e_controle_de_fluxo/exemplos/08_limite_tentativas.py
+#
+# Casos para conferir sua implementação:
+# a, 9, 21, 10: aceita na quarta; a, b, c, d: limite atingido.
+</pre></details><details id="exercicio-10_resumo_robusto"><summary>10 — Resumo robusto</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/10_resumo_robusto.py" download>Baixar este exercício .py</a><pre class="enunciado"># 10 — Resumo robusto
+# Enunciado:
+# Leia inteiros positivos até zero. Recuse formato inválido e negativos. Mostre quantidade, soma e maior; sem dados, mostre mensagem e não apresente maior fictício.
+#
+# Dica:
+# O primeiro dado válido inicializa o candidato a maior.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 10_validacao_e_controle_de_fluxo/exemplos/03_sentinela_e_vazio.py
+# 10_validacao_e_controle_de_fluxo/exemplos/10_integracao.py
+#
+# Casos para conferir sua implementação:
+# x, -2, 4, 7, 0: quantidade 2, soma 11, maior 7; 0: sem dados.
+</pre></details><details id="exercicio-91_rede_91"><summary>Prever uma sequência de recusas</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/91_rede_91.py" download>Baixar este exercício .py</a><pre class="enunciado"># Prever uma sequência de recusas
+# Enunciado:
+# Faça teste de mesa da retirada validada com respostas x, 0, 19 e 3. Anote se a conversão ocorreu, se a operação foi aceita e qual é o saldo.
+#
+# Dica:
+# Recusa não é uma retirada parcial.
+#
+# Conferência:
+# Só a última entrada altera o saldo de 18 para 15.
+#
+# Apoio: 10_validacao_e_controle_de_fluxo/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-92_rede_92"><summary>Corrigir a ordem da alteração</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/92_rede_92.py" download>Baixar este exercício .py</a><pre class="enunciado"># Corrigir a ordem da alteração
+# Enunciado:
+# Uma rotina subtrai a retirada antes de verificar se ela cabe no saldo. Reescreva a sequência para converter, validar e alterar nessa ordem.
+#
+# Dica:
+# Nenhum caminho de recusa deve escrever no saldo.
+#
+# Conferência:
+# Saldo 18 com tentativa 19 deve continuar em 18.
+#
+# Apoio: 10_validacao_e_controle_de_fluxo/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-93_rede_93"><summary>Resumo sem vendas — Lojas Blue</summary><a class="download" href="../pratica/10_validacao_e_controle_de_fluxo/exercicios/93_rede_93.py" download>Baixar este exercício .py</a><pre class="enunciado"># Resumo sem vendas — Lojas Blue
+# Enunciado:
+# Leia inteiros não negativos como valores simplificados até -1, recusando letras e outros negativos. Mostre quantidade e média, ou Sem vendas.
+#
+# Dica:
+# Reconheça encerramento antes de processar o dado.
+#
+# Conferência:
+# Primeiro -1: Sem vendas; 0, 10, -1: média 5.
+#
+# Apoio: 10_validacao_e_controle_de_fluxo/exemplos/90_rede_contexto.py e exemplos básicos do tópico
+</pre></details></section><section id="avancar"><h2>Quando avançar</h2><p>Recuse letras e números fora da faixa, permita encerramento previsto e trate a ausência de dados sem resultados fictícios.</p><p>Explique sua solução sem ler o código. Se houver uma divergência, encontre a primeira instrução em que seu raciocínio muda. Depois acrescente um caso próprio e confira novamente.</p></section><nav class="pager" aria-label="Sequência de estudo"><a href="09_algoritmos_basicos.html">← Algoritmos básicos</a><a href="11_funcoes.html">Funções →</a></nav></main><footer class="site-footer">ALP · Cenário didático Lojas Blue · Python 3.10 ou superior</footer></div></div><script src="../assets/lessons.js"></script><script src="../assets/alp.js" defer></script></body></html>

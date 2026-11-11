@@ -1,0 +1,649 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Algoritmos e Lógica de Programação em Python: Decisões com if, elif e else"><title>Decisões com if, elif e else · ALP</title><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/alp.css"></head><body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><div class="app-frame"><aside class="sidebar" id="sidebar"><a class="brand" href="../index.html"><strong>ALP</strong><small>Algoritmos e Lógica de Programação</small></a><nav class="site-nav" aria-label="Cadernos"><a class="nav-module " href="../cadernos/01_output.html"><span class="nav-index">01</span><span>Saída de dados</span></a><a class="nav-module " href="../cadernos/02_input.html"><span class="nav-index">02</span><span>Entrada de dados</span></a><a class="nav-module " href="../cadernos/03_variaveis_e_tipos.html"><span class="nav-index">03</span><span>Variáveis e tipos</span></a><a class="nav-module " href="../cadernos/04_operadores.html"><span class="nav-index">04</span><span>Operadores</span></a><a class="nav-module active" href="../cadernos/05_if_elif_else.html"><span class="nav-index">05</span><span>Decisões com if, elif e else</span></a><a class="nav-module " href="../cadernos/06_match_case.html"><span class="nav-index">06</span><span>Seleção com match/case</span></a><a class="nav-module " href="../cadernos/07_while.html"><span class="nav-index">07</span><span>Repetição com while</span></a><a class="nav-module " href="../cadernos/08_for_e_range.html"><span class="nav-index">08</span><span>Repetição com for e range</span></a><a class="nav-module " href="../cadernos/09_algoritmos_basicos.html"><span class="nav-index">09</span><span>Algoritmos básicos</span></a><a class="nav-module " href="../cadernos/10_validacao_e_controle_de_fluxo.html"><span class="nav-index">10</span><span>Validação e controle de fluxo</span></a><a class="nav-module " href="../cadernos/11_funcoes.html"><span class="nav-index">11</span><span>Funções</span></a><a class="nav-module " href="../cadernos/12_decomposicao_de_problemas.html"><span class="nav-index">12</span><span>Decomposição de problemas</span></a><a class="nav-module " href="../cadernos/13_teste_de_mesa.html"><span class="nav-index">13</span><span>Teste de mesa</span></a></nav><a class="portal" href="../../../index.html">← Portal de materiais</a></aside><div class="main-area"><header class="topbar"><button id="menu" aria-controls="sidebar" aria-expanded="false">Cadernos</button><a href="../index.html">ALP · Lojas Blue</a><button id="theme" aria-label="Alternar tema claro e escuro">Tema claro/escuro</button></header><main id="conteudo" class="alp-content"><div class="article-header"><p>CADERNO 05 · FUNDAMENTOS</p><h1>Decisões com if, elif e else</h1><p>Escolher caminhos com condições simples, compostas e aninhadas.</p><p>7 exemplos e 43 exercícios da trilha original.</p><a class="download" href="../arquivos/ALP_05_if_elif_else.zip" download>Baixar exemplos e exercícios deste assunto</a></div><nav class="local-nav" aria-label="Seções"><a href="#conceitos">Entender</a><a href="#acompanhado">Acompanhar</a><a href="#exemplos">Exemplos</a><a href="#exercicios">Exercícios</a><a href="#avancar">Conferir aprendizagem</a></nav><section id="conceitos"><h2>Entenda a ideia</h2><h3>Condições escolhem caminhos</h3><p>Um aviso de reposição deve aparecer apenas quando há falta. if avalia uma condição e executa seu bloco quando o resultado é verdadeiro. A indentação mostra quais instruções pertencem ao bloco. Uma instrução que volta ao alinhamento externo será executada depois da decisão, independentemente do caminho escolhido.</p><h3>Alternativas exclusivas e testes independentes</h3><p>Uma cadeia if/elif/else escolhe no máximo um bloco: o primeiro cuja condição for verdadeira, ou else se nenhuma for. Dois if separados podem executar dois blocos. Use a cadeia quando as categorias são exclusivas; use testes independentes quando dois alertas podem coexistir. A escolha deve vir da regra do problema, não apenas de uma preferência de escrita.</p><h3>Fronteiras e ordem das regras</h3><p>Ao classificar estoques, escreva os casos de fronteira antes do código. Um saldo zero pode precisar de uma mensagem mais específica que um saldo apenas baixo. Se a condição geral aparecer primeiro, ela pode impedir que a condição específica seja alcançada. Teste um valor abaixo, exatamente no limite e acima dele. Esse pequeno conjunto costuma revelar erros de ordem e de inclusão da igualdade.</p></section><aside class="callout"><strong>Erros para observar</strong><p>Misturar tabulações e espaços; ordenar faixas de modo que um ramo nunca seja alcançado; esquecer o empate; fazer a operação perigosa antes da verificação.</p></aside><section id="acompanhado"><h2>Um exemplo acompanhado</h2><p>Leia o código antes de avançar. Cada passo explica uma mudança ou decisão. A simulação tem uma sequência fixa; os arquivos Python permitem experimentar outras entradas.</p><pre><code>estoque = 0
+if estoque == 0:
+    print(&quot;Sem estoque&quot;)
+elif estoque &lt; 5:
+    print(&quot;Estoque baixo&quot;)
+else:
+    print(&quot;Estoque suficiente&quot;)</code></pre><details><summary>Conferir a saída</summary><pre>Sem estoque</pre></details><div class="trace" data-trace="4"><p data-state role="status"></p><progress value="0" max="3" aria-label="Progresso do exemplo"></progress><div class="actions"><button data-back>Voltar</button><button data-next>Próximo passo</button><button data-reset>Recomeçar</button></div></div><fieldset class="quiz"><legend>Quantos blocos de uma cadeia if/elif/else podem executar?</legend><button data-correct="false" data-why="A cadeia escolhe a primeira alternativa aplicável.">Todos os verdadeiros</button><button data-correct="true" data-why="A cadeia escolhe a primeira alternativa aplicável.">No máximo um</button><button data-correct="false" data-why="A cadeia escolhe a primeira alternativa aplicável.">Sempre dois</button><p data-feedback role="status"></p></fieldset></section><section id="exemplos"><h2>Estude os exemplos do assunto</h2><p>Abra os exemplos em ordem. Os comentários apresentam objetivo, demonstração e cuidados. Use o arquivo baixado para executar Python; o caderno apresenta o código para leitura.</p><details id="exemplo-01_if_simples"><summary>01 — Condição simples</summary><a class="download" href="../pratica/05_if_elif_else/exemplos/01_if_simples.py" download>Baixar este exemplo .py</a><pre><code># 01 — Condição simples
+# Objetivo: Executar um bloco apenas quando necessário.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Os quatro espaços de indentação delimitam o bloco.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   32
+# Confira na saída: &#x27;Dia quente.&#x27;
+
+temperatura = float(input(&quot;Temperatura: &quot;))
+if temperatura &gt; 30:
+    # Esta linha só roda se a condição for verdadeira.
+    print(&quot;Dia quente.&quot;)
+# Sem indentação: esta linha roda em qualquer caso.
+print(&quot;Leitura concluída.&quot;)
+</code></pre></details><details id="exemplo-02_par_ou_impar"><summary>02 — Dois caminhos</summary><a class="download" href="../pratica/05_if_elif_else/exemplos/02_par_ou_impar.py" download>Baixar este exemplo .py</a><pre><code># 02 — Dois caminhos
+# Objetivo: Escolher entre if e else.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Exatamente um dos dois blocos será executado.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   -3
+# Confira na saída: &#x27;Ímpar&#x27;
+
+numero = int(input(&quot;Número inteiro: &quot;))
+# Um inteiro é par quando o resto da divisão por dois é zero.
+if numero % 2 == 0:
+    print(&quot;Par&quot;)
+else:
+    print(&quot;Ímpar&quot;)
+</code></pre></details><details id="exemplo-03_tres_faixas"><summary>03 — Faixas com elif</summary><a class="download" href="../pratica/05_if_elif_else/exemplos/03_tres_faixas.py" download>Baixar este exemplo .py</a><pre><code># 03 — Faixas com elif
+# Objetivo: Ordenar condições mutuamente exclusivas.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A primeira condição verdadeira encerra a cadeia.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   5
+# Confira na saída: &#x27;Recuperação&#x27;
+
+# Considere uma nota válida entre zero e dez.
+nota = float(input(&quot;Nota: &quot;))
+if nota &gt;= 7:
+    print(&quot;Aprovado&quot;)
+elif nota &gt;= 5:
+    # Aqui já sabemos que a nota é menor que sete.
+    print(&quot;Recuperação&quot;)
+else:
+    print(&quot;Reprovado&quot;)
+</code></pre></details><details id="exemplo-04_condicao_composta"><summary>04 — Intervalos e condições compostas</summary><a class="download" href="../pratica/05_if_elif_else/exemplos/04_condicao_composta.py" download>Baixar este exemplo .py</a><pre><code># 04 — Intervalos e condições compostas
+# Objetivo: Testar limites inclusivos.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: and exige que as duas comparações sejam verdadeiras.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   25
+# Confira na saída: &#x27;Dentro da faixa&#x27;
+
+idade = int(input(&quot;Idade: &quot;))
+# Regra fictícia desta atividade: faixa de 16 até 25 inclusive.
+if idade &gt;= 16 and idade &lt;= 25:
+    print(&quot;Dentro da faixa&quot;)
+else:
+    print(&quot;Fora da faixa&quot;)
+# Compare as saídas ao testar 15, 16, 25 e 26.
+</code></pre></details><details id="exemplo-05_decisao_aninhada"><summary>05 — Decisão aninhada</summary><a class="download" href="../pratica/05_if_elif_else/exemplos/05_decisao_aninhada.py" download>Baixar este exemplo .py</a><pre><code># 05 — Decisão aninhada
+# Objetivo: Proteger uma operação com uma condição anterior.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A divisão só ocorre no ramo em que o divisor é diferente de zero.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   8
+#   2
+# Confira na saída: &#x27;Quociente: 4.0&#x27;
+
+numerador = float(input(&quot;Numerador: &quot;))
+divisor = float(input(&quot;Divisor: &quot;))
+if divisor == 0:
+    print(&quot;Não é possível dividir por zero.&quot;)
+else:
+    resultado = numerador / divisor
+    if resultado &gt; 0:
+        print(&quot;Resultado positivo&quot;)
+    else:
+        print(&quot;Resultado zero ou negativo&quot;)
+    print(&quot;Quociente:&quot;, resultado)
+</code></pre></details><details id="exemplo-06_maior_de_tres"><summary>06 — Maior entre três valores</summary><a class="download" href="../pratica/05_if_elif_else/exemplos/06_maior_de_tres.py" download>Baixar este exemplo .py</a><pre><code># 06 — Maior entre três valores
+# Objetivo: Manter um candidato sem coleções.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Os if independentes permitem comparar o candidato duas vezes.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   -8
+#   -2
+#   -5
+# Confira na saída: &#x27;Maior: -2&#x27;
+
+a = int(input(&quot;Primeiro: &quot;))
+b = int(input(&quot;Segundo: &quot;))
+c = int(input(&quot;Terceiro: &quot;))
+# Começamos com um valor real, não com zero arbitrário.
+maior = a
+if b &gt; maior:
+    maior = b
+if c &gt; maior:
+    maior = c
+# Em caso de empate, o valor máximo continua correto.
+print(&quot;Maior:&quot;, maior)
+</code></pre></details><details id="exemplo-90_rede_contexto"><summary>Alerta de estoque — cenário didático Lojas Blue</summary><a class="download" href="../pratica/05_if_elif_else/exemplos/90_rede_contexto.py" download>Baixar este exemplo .py</a><pre><code># Alerta de estoque — cenário didático Lojas Blue
+# Objetivo: Classificar um saldo por comparação com o mínimo.
+# Pré-requisito: tópicos anteriores e exemplos anteriores deste tópico.
+# Estude: preveja o resultado, execute e altere um dado por vez.
+# Confira na saída: &#x27;Sugestão até o mínimo: 4&#x27;
+# Sem entrada interativa.
+
+# Recorte da posição unidade 1, produto 4.
+quantidade = 4
+minimo = 8
+if quantidade &lt; minimo:
+    print(&quot;Estoque crítico&quot;)
+    print(&quot;Sugestão até o mínimo:&quot;, minimo - quantidade)
+else:
+    print(&quot;Sem falta até o mínimo&quot;)
+# Igualdade com o mínimo pertence ao segundo caminho.
+</code></pre></details></section><section id="exercicios"><h2>Pratique com os enunciados originais</h2><p>Resolva antes de consultar novamente o exemplo. Registre sua previsão e confira os casos indicados. Os arquivos de exercício contêm comentários e não produzem saída até você implementar a solução.</p><details id="exercicio-01_sinal_de_alerta"><summary>01 — Sinal de alerta</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/01_sinal_de_alerta.py" download>Baixar este exercício .py</a><pre class="enunciado"># 01 — Sinal de alerta
+# Enunciado:
+# Leia uma medida e exiba Alerta somente quando ela for maior que 100. Exiba Fim em qualquer caso.
+#
+# Dica:
+# O print de Fim fica fora do bloco if.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 05_if_elif_else/exemplos/01_if_simples.py
+#
+# Casos para conferir sua implementação:
+# 101 deve mostrar Alerta e Fim; 100 somente Fim.
+</pre></details><details id="exercicio-02_sinal_do_numero"><summary>02 — Sinal do número</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/02_sinal_do_numero.py" download>Baixar este exercício .py</a><pre class="enunciado"># 02 — Sinal do número
+# Enunciado:
+# Leia um inteiro e classifique como positivo, negativo ou zero.
+#
+# Dica:
+# São três caminhos mutuamente exclusivos.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 05_if_elif_else/exemplos/02_par_ou_impar.py
+# 05_if_elif_else/exemplos/03_tres_faixas.py
+#
+# Casos para conferir sua implementação:
+# Teste -2, 0 e 3.
+</pre></details><details id="exercicio-03_paridade"><summary>03 — Paridade</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/03_paridade.py" download>Baixar este exercício .py</a><pre class="enunciado"># 03 — Paridade
+# Enunciado:
+# Leia um inteiro e informe se é par ou ímpar.
+#
+# Dica:
+# Use resto da divisão por dois.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 05_if_elif_else/exemplos/02_par_ou_impar.py
+#
+# Casos para conferir sua implementação:
+# -4 e 0 são pares; 5 é ímpar.
+</pre></details><details id="exercicio-04_maior_de_dois"><summary>04 — Maior de dois</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/04_maior_de_dois.py" download>Baixar este exercício .py</a><pre class="enunciado"># 04 — Maior de dois
+# Enunciado:
+# Leia dois números e indique o maior; se forem iguais, mostre Valores iguais.
+#
+# Dica:
+# Trate explicitamente o empate.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 05_if_elif_else/exemplos/02_par_ou_impar.py
+# 05_if_elif_else/exemplos/03_tres_faixas.py
+#
+# Casos para conferir sua implementação:
+# 7 e 3: maior 7; 4 e 4: Valores iguais.
+</pre></details><details id="exercicio-05_classificacao_de_nota"><summary>05 — Classificação de nota</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/05_classificacao_de_nota.py" download>Baixar este exercício .py</a><pre class="enunciado"># 05 — Classificação de nota
+# Enunciado:
+# Leia uma nota válida de 0 a 10. Classifique aprovado a partir de 7, recuperação de 5 até abaixo de 7 e reprovado abaixo de 5.
+#
+# Dica:
+# Teste os cortes em ordem decrescente.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 05_if_elif_else/exemplos/03_tres_faixas.py
+#
+# Casos para conferir sua implementação:
+# 4.9: reprovado; 5: recuperação; 7: aprovado.
+</pre></details><details id="exercicio-06_divisao_protegida"><summary>06 — Divisão protegida</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/06_divisao_protegida.py" download>Baixar este exercício .py</a><pre class="enunciado"># 06 — Divisão protegida
+# Enunciado:
+# Leia numerador e divisor e mostre a divisão somente quando o divisor não for zero. Caso contrário, mostre mensagem explicativa.
+#
+# Dica:
+# A divisão precisa estar dentro do ramo seguro.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 05_if_elif_else/exemplos/05_decisao_aninhada.py
+#
+# Casos para conferir sua implementação:
+# 6 e 2: 3; 6 e 0: mensagem sem erro de execução.
+</pre></details><details id="exercicio-07_tarifa_ficticia"><summary>07 — Tarifa fictícia</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/07_tarifa_ficticia.py" download>Baixar este exercício .py</a><pre class="enunciado"># 07 — Tarifa fictícia
+# Enunciado:
+# Leia idade não negativa. A tarifa fictícia é 5 para menores de 12, 6 para pessoas a partir de 60 e 10 nos demais casos.
+#
+# Dica:
+# Verifique os dois extremos antes da faixa central.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 05_if_elif_else/exemplos/03_tres_faixas.py
+# 05_if_elif_else/exemplos/04_condicao_composta.py
+#
+# Casos para conferir sua implementação:
+# 11: 5; 12: 10; 59: 10; 60: 6.
+</pre></details><details id="exercicio-08_triangulo"><summary>08 — Triângulo</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/08_triangulo.py" download>Baixar este exercício .py</a><pre class="enunciado"># 08 — Triângulo
+# Enunciado:
+# Leia três medidas positivas e informe se podem formar um triângulo: cada lado deve ser menor que a soma dos outros dois.
+#
+# Dica:
+# As três desigualdades devem ser satisfeitas.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 05_if_elif_else/exemplos/04_condicao_composta.py
+#
+# Casos para conferir sua implementação:
+# 3, 4, 5: sim; 1, 2, 3: não.
+</pre></details><details id="exercicio-09_menor_de_tres"><summary>09 — Menor de três</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/09_menor_de_tres.py" download>Baixar este exercício .py</a><pre class="enunciado"># 09 — Menor de três
+# Enunciado:
+# Leia três inteiros e mostre o menor usando um candidato e if independentes. Não use min, coleções ou ordenação.
+#
+# Dica:
+# Inicialize o candidato com a primeira entrada.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 05_if_elif_else/exemplos/06_maior_de_tres.py
+#
+# Casos para conferir sua implementação:
+# -3, -8 e -1: -8; 2, 2 e 5: 2.
+</pre></details><details id="exercicio-10_desconto_por_faixa"><summary>10 — Desconto por faixa</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/10_desconto_por_faixa.py" download>Baixar este exercício .py</a><pre class="enunciado"># 10 — Desconto por faixa
+# Enunciado:
+# Leia preço não negativo. Aplique 10% de desconto a partir de 200 e 5% abaixo disso. Mostre desconto e total com duas casas.
+#
+# Dica:
+# O valor 200 pertence à faixa de dez por cento.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 05_if_elif_else/exemplos/02_par_ou_impar.py
+# 05_if_elif_else/exemplos/04_condicao_composta.py
+#
+# Casos para conferir sua implementação:
+# 100: desconto 5.00 e total 95.00; 200: desconto 20.00 e total 180.00.
+</pre></details><details id="exercicio-11_aviso_e_conclusao"><summary>11 — Aviso e conclusão</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/11_aviso_e_conclusao.py" download>Baixar este exercício .py</a><pre class="enunciado"># 11 — Aviso e conclusão
+# Enunciado:
+# Leia uma temperatura e mostre Alerta somente acima de 35. Em qualquer caso, mostre Medição
+# encerrada ao final.
+#
+# Dica:
+# Observe quais mensagens pertencem ao bloco do if.
+#
+# Casos para conferir sua implementação:
+# 35: apenas encerramento; 35.1: alerta e encerramento.
+#
+# Apoio: 05_if_elif_else/exemplos/01_if_simples.py
+</pre></details><details id="exercicio-12_pedido_atendido_por_inteiro"><summary>12 — Pedido atendido por inteiro</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/12_pedido_atendido_por_inteiro.py" download>Baixar este exercício .py</a><pre class="enunciado"># 12 — Pedido atendido por inteiro
+# Enunciado:
+# Leia saldo não negativo e quantidade solicitada positiva. Informe Atendido quando o saldo
+# permitir a retirada completa; caso contrário, informe Insuficiente. Não altere o saldo.
+#
+# Dica:
+# A igualdade permite atender exatamente o pedido.
+#
+# Casos para conferir sua implementação:
+# Saldo 8 e pedido 8: Atendido; saldo 7 e pedido 8: Insuficiente.
+#
+# Apoio: 05_if_elif_else/exemplos/02_par_ou_impar.py
+</pre></details><details id="exercicio-13_maior_com_empate_explicito"><summary>13 — Maior com empate explícito</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/13_maior_com_empate_explicito.py" download>Baixar este exercício .py</a><pre class="enunciado"># 13 — Maior com empate explícito
+# Enunciado:
+# Leia dois inteiros e informe Primeiro maior, Segundo maior ou Empate, usando uma cadeia de
+# decisões.
+#
+# Dica:
+# As três respostas são mutuamente exclusivas.
+#
+# Casos para conferir sua implementação:
+# 4 e 2: Primeiro maior; -3 e -1: Segundo maior; 5 e 5: Empate.
+#
+# Apoio: 05_if_elif_else/exemplos/03_tres_faixas.py
+</pre></details><details id="exercicio-14_frete_pelo_valor_da_compra"><summary>14 — Frete pelo valor da compra</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/14_frete_pelo_valor_da_compra.py" download>Baixar este exercício .py</a><pre class="enunciado"># 14 — Frete pelo valor da compra
+# Enunciado:
+# Leia total não negativo. O frete fictício custa 12 abaixo de 150 e zero a partir de 150. Exiba
+# frete e valor final.
+#
+# Dica:
+# Calcule o frete antes de somá-lo à compra.
+#
+# Casos para conferir sua implementação:
+# Compra 149: frete 12 e final 161; compra 150: frete zero e final 150.
+#
+# Apoio: 05_if_elif_else/exemplos/02_par_ou_impar.py
+</pre></details><details id="exercicio-15_distancia_ate_zero"><summary>15 — Distância até zero</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/15_distancia_ate_zero.py" download>Baixar este exercício .py</a><pre class="enunciado"># 15 — Distância até zero
+# Enunciado:
+# Leia um número e calcule sua distância até zero usando if/else e operadores, sem chamar abs.
+#
+# Dica:
+# Só os valores negativos precisam ter o sinal invertido.
+#
+# Casos para conferir sua implementação:
+# -6 produz 6; 0 produz 0; 2.5 produz 2.5.
+#
+# Apoio: 05_if_elif_else/exemplos/02_par_ou_impar.py
+</pre></details><details id="exercicio-16_disponibilidade_de_duas_exigencias"><summary>16 — Disponibilidade de duas exigências</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/16_disponibilidade_de_duas_exigencias.py" download>Baixar este exercício .py</a><pre class="enunciado"># 16 — Disponibilidade de duas exigências
+# Enunciado:
+# Leia idade não negativa e um texto de autorização, sempre sim ou nao. A participação exige idade
+# de pelo menos 16 e autorização sim.
+#
+# Dica:
+# As duas exigências devem ser verdadeiras ao mesmo tempo.
+#
+# Casos para conferir sua implementação:
+# 16 e sim: permitida; 15 e sim: negada; 20 e nao: negada.
+#
+# Apoio: 05_if_elif_else/exemplos/04_condicao_composta.py
+</pre></details><details id="exercicio-17_campanha_com_duas_alternativas"><summary>17 — Campanha com duas alternativas</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/17_campanha_com_duas_alternativas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 17 — Campanha com duas alternativas
+# Enunciado:
+# Leia valor não negativo da compra e texto de cupom, sempre sim ou nao. Há brinde se a compra
+# chegar a 100 ou se houver cupom.
+#
+# Dica:
+# Basta uma das alternativas, mas o brinde é concedido uma única vez.
+#
+# Casos para conferir sua implementação:
+# 80 e nao: sem brinde; 80 e sim: com brinde; 100 e sim: um brinde.
+#
+# Apoio: 05_if_elif_else/exemplos/04_condicao_composta.py
+</pre></details><details id="exercicio-18_faixa_com_duas_fronteiras"><summary>18 — Faixa com duas fronteiras</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/18_faixa_com_duas_fronteiras.py" download>Baixar este exercício .py</a><pre class="enunciado"># 18 — Faixa com duas fronteiras
+# Enunciado:
+# Leia um inteiro e informe se pertence à faixa de 20 a 40, incluindo as duas pontas.
+#
+# Dica:
+# Compare o comportamento exatamente nos limites e imediatamente fora deles.
+#
+# Casos para conferir sua implementação:
+# 19 e 41 ficam fora; 20 e 40 ficam dentro.
+#
+# Apoio: 05_if_elif_else/exemplos/04_condicao_composta.py
+</pre></details><details id="exercicio-19_faixas_de_pontos_exclusivas"><summary>19 — Faixas de pontos exclusivas</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/19_faixas_de_pontos_exclusivas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 19 — Faixas de pontos exclusivas
+# Enunciado:
+# Leia pontuação inteira não negativa. Classifique como inicial abaixo de 100, intermediária de
+# 100 a 199 e avançada a partir de 200.
+#
+# Dica:
+# Ordene os testes para que a primeira faixa verdadeira seja a escolhida.
+#
+# Casos para conferir sua implementação:
+# 99: inicial; 100 e 199: intermediária; 200: avançada.
+#
+# Apoio: 05_if_elif_else/exemplos/03_tres_faixas.py
+</pre></details><details id="exercicio-20_preco_especial_em_uma_condicao"><summary>20 — Preço especial em uma condição</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/20_preco_especial_em_uma_condicao.py" download>Baixar este exercício .py</a><pre class="enunciado"># 20 — Preço especial em uma condição
+# Enunciado:
+# Leia preço não negativo e quantidade positiva. Para dez ou mais unidades, reduza o preço
+# unitário em 8%; nos demais casos mantenha-o. Exiba o total.
+#
+# Dica:
+# Diferencie preço unitário de total da compra.
+#
+# Casos para conferir sua implementação:
+# Preço 20 e quantidade 9: 180.00; quantidade 10: 184.00.
+#
+# Apoio: 05_if_elif_else/exemplos/02_par_ou_impar.py
+</pre></details><details id="exercicio-21_saldo_apos_uma_retirada"><summary>21 — Saldo após uma retirada</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/21_saldo_apos_uma_retirada.py" download>Baixar este exercício .py</a><pre class="enunciado"># 21 — Saldo após uma retirada
+# Enunciado:
+# Leia saldo não negativo e retirada positiva. Quando houver saldo suficiente, calcule e mostre o
+# novo saldo; quando não houver, mostre Recusada e o saldo original.
+#
+# Dica:
+# Mude o saldo somente no caminho autorizado.
+#
+# Casos para conferir sua implementação:
+# Saldo 10 e retirada 3: saldo 7; retirada 10: saldo 0; retirada 11: recusada e saldo 10.
+#
+# Apoio: 05_if_elif_else/exemplos/05_decisao_aninhada.py
+</pre></details><details id="exercicio-22_classificacao_em_torno_do_minimo"><summary>22 — Classificação em torno do mínimo</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/22_classificacao_em_torno_do_minimo.py" download>Baixar este exercício .py</a><pre class="enunciado"># 22 — Classificação em torno do mínimo
+# Enunciado:
+# Leia saldo não negativo e mínimo positivo. Exiba Abaixo, No mínimo ou Acima. No primeiro caso,
+# mostre também quanto falta.
+#
+# Dica:
+# A igualdade merece um caminho próprio.
+#
+# Casos para conferir sua implementação:
+# Saldo 4 e mínimo 8: Abaixo, falta 4; 8 e 8: No mínimo; 9 e 8: Acima.
+#
+# Apoio: 05_if_elif_else/exemplos/03_tres_faixas.py
+</pre></details><details id="exercicio-23_dois_alertas_independentes"><summary>23 — Dois alertas independentes</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/23_dois_alertas_independentes.py" download>Baixar este exercício .py</a><pre class="enunciado"># 23 — Dois alertas independentes
+# Enunciado:
+# Leia saldo e dias restantes de validade, ambos não negativos. Mostre alerta de estoque se saldo
+# for menor que 5 e alerta de validade se restarem no máximo 7 dias. Os dois podem aparecer.
+#
+# Dica:
+# Decida se uma cadeia com elif permitiria emitir os dois avisos.
+#
+# Casos para conferir sua implementação:
+# Saldo 3 e dias 5: dois alertas; 8 e 5: só validade; 8 e 10: nenhum.
+#
+# Apoio: 05_if_elif_else/exemplos/06_maior_de_tres.py
+</pre></details><details id="exercicio-24_uma_categoria_com_prioridade"><summary>24 — Uma categoria com prioridade</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/24_uma_categoria_com_prioridade.py" download>Baixar este exercício .py</a><pre class="enunciado"># 24 — Uma categoria com prioridade
+# Enunciado:
+# Leia os mesmos dois dados do exercício anterior. Produza uma única categoria: Urgente se ambos
+# os alertas ocorrerem; Estoque se apenas o saldo for baixo; Validade se apenas o prazo for curto;
+# Normal caso contrário.
+#
+# Dica:
+# Teste a combinação antes dos casos isolados.
+#
+# Casos para conferir sua implementação:
+# 3 e 5: Urgente; 3 e 10: Estoque; 8 e 5: Validade; 8 e 10: Normal.
+#
+# Apoio: 05_if_elif_else/exemplos/03_tres_faixas.py
+</pre></details><details id="exercicio-25_taxa_por_tipo_de_entrega"><summary>25 — Taxa por tipo de entrega</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/25_taxa_por_tipo_de_entrega.py" download>Baixar este exercício .py</a><pre class="enunciado"># 25 — Taxa por tipo de entrega
+# Enunciado:
+# Leia total não negativo e tipo exatamente retirada, comum ou expressa. A taxa é zero, 8 ou 15,
+# respectivamente. Exiba total com a taxa, usando if/elif/else.
+#
+# Dica:
+# Cada modalidade determina um único valor de taxa.
+#
+# Casos para conferir sua implementação:
+# Total 50: finais 50, 58 e 65, conforme a modalidade.
+#
+# Apoio: 05_if_elif_else/exemplos/03_tres_faixas.py
+</pre></details><details id="exercicio-26_menor_preco_com_preferencia"><summary>26 — Menor preço com preferência</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/26_menor_preco_com_preferencia.py" download>Baixar este exercício .py</a><pre class="enunciado"># 26 — Menor preço com preferência
+# Enunciado:
+# Leia três preços positivos das lojas A, B e C. Mostre o menor preço e a loja escolhida. Em
+# empate, prefira A, depois B, depois C.
+#
+# Dica:
+# Comece com A como candidata e só substitua por preço estritamente menor.
+#
+# Casos para conferir sua implementação:
+# 10, 8, 8: loja B e preço 8; 7, 7, 9: loja A e preço 7.
+#
+# Apoio: 05_if_elif_else/exemplos/06_maior_de_tres.py
+</pre></details><details id="exercicio-27_maior_valor_e_numero_de_ocorrencias"><summary>27 — Maior valor e número de ocorrências</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/27_maior_valor_e_numero_de_ocorrencias.py" download>Baixar este exercício .py</a><pre class="enunciado"># 27 — Maior valor e número de ocorrências
+# Enunciado:
+# Leia três inteiros. Descubra o maior e conte em quantas das três entradas ele aparece, usando
+# variáveis escalares.
+#
+# Dica:
+# Depois de obter o maior, compare cada entrada com ele de forma independente.
+#
+# Casos para conferir sua implementação:
+# 2, 7, 7: maior 7 aparece 2 vezes; -4, -4, -4: aparece 3 vezes.
+#
+# Apoio: 05_if_elif_else/exemplos/06_maior_de_tres.py
+</pre></details><details id="exercicio-28_quadrante_de_um_ponto"><summary>28 — Quadrante de um ponto</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/28_quadrante_de_um_ponto.py" download>Baixar este exercício .py</a><pre class="enunciado"># 28 — Quadrante de um ponto
+# Enunciado:
+# Leia x e y numéricos. Identifique origem, eixo horizontal, eixo vertical ou quadrante: 1 para
+# positivos, 2 para x negativo e y positivo, 3 para negativos, 4 para x positivo e y negativo.
+#
+# Dica:
+# Resolva origem e eixos antes das combinações de sinais.
+#
+# Casos para conferir sua implementação:
+# 0,0: origem; 0,-2: eixo vertical; -3,4: quadrante 2; 5,-1: quadrante 4.
+#
+# Apoio: 05_if_elif_else/exemplos/05_decisao_aninhada.py
+</pre></details><details id="exercicio-29_divisibilidade_combinada"><summary>29 — Divisibilidade combinada</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/29_divisibilidade_combinada.py" download>Baixar este exercício .py</a><pre class="enunciado"># 29 — Divisibilidade combinada
+# Enunciado:
+# Leia um inteiro. Informe se é divisível por 3 e por 5, somente por 3, somente por 5 ou por
+# nenhum.
+#
+# Dica:
+# Verifique primeiro o caso que atende às duas condições.
+#
+# Casos para conferir sua implementação:
+# 15: ambos; 9: só 3; 10: só 5; 7: nenhum; 0: ambos.
+#
+# Apoio: 05_if_elif_else/exemplos/03_tres_faixas.py
+</pre></details><details id="exercicio-30_preco_progressivo_por_quantidade"><summary>30 — Preço progressivo por quantidade</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/30_preco_progressivo_por_quantidade.py" download>Baixar este exercício .py</a><pre class="enunciado"># 30 — Preço progressivo por quantidade
+# Enunciado:
+# Leia quantidade inteira de 1 a 20. As primeiras cinco unidades custam 10 cada; apenas as
+# excedentes custam 8 cada. Calcule o total.
+#
+# Dica:
+# A faixa mais barata vale somente para o excesso, não para todas as unidades.
+#
+# Casos para conferir sua implementação:
+# 5 unidades: 50; 6: 58; 10: 90.
+#
+# Apoio: 05_if_elif_else/exemplos/05_decisao_aninhada.py
+</pre></details><details id="exercicio-31_prever_ifs_e_cadeia_elif"><summary>31 — Prever ifs e cadeia elif</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/31_prever_ifs_e_cadeia_elif.py" download>Baixar este exercício .py</a><pre class="enunciado"># 31 — Prever ifs e cadeia elif
+# Enunciado:
+# Considere duas verificações: pontos &gt;= 100 imprime A e pontos &gt;= 50 imprime B. Preveja a saída
+# para 120, 75 e 20 usando dois if independentes e depois usando if seguido de elif. Justifique a
+# diferença.
+#
+# Dica:
+# Cada if independente inicia uma decisão; elif continua a decisão anterior.
+#
+# Casos para conferir sua implementação:
+# 120: dois if mostram A e B, a cadeia mostra só A; 75: B nas duas; 20: nenhuma mensagem.
+#
+# Apoio: 05_if_elif_else/exemplos/06_maior_de_tres.py
+</pre></details><details id="exercicio-32_investigar_a_ordem_das_faixas"><summary>32 — Investigar a ordem das faixas</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/32_investigar_a_ordem_das_faixas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 32 — Investigar a ordem das faixas
+# Enunciado:
+# Uma classificação testa primeiro pontos &gt;= 50 para faixa média e só depois pontos &gt;= 100 para
+# faixa alta. Explique o resultado para 120 e reescreva a decisão para priorizar a faixa alta.
+#
+# Dica:
+# Um elif só é considerado quando o if anterior é falso.
+#
+# Casos para conferir sua implementação:
+# 120 deve chegar à faixa alta; 50 à média; 49 à baixa.
+#
+# Apoio: 05_if_elif_else/exemplos/03_tres_faixas.py
+</pre></details><details id="exercicio-33_investigar_a_indentacao"><summary>33 — Investigar a indentação</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/33_investigar_a_indentacao.py" download>Baixar este exercício .py</a><pre class="enunciado"># 33 — Investigar a indentação
+# Enunciado:
+# Um programa deveria mostrar Bônus somente se pontos &gt;= 80, mas a mensagem está fora do bloco.
+# Recrie a situação, observe-a e ajuste a indentação. Mantenha uma mensagem Fim fora da decisão.
+#
+# Dica:
+# A posição do texto no arquivo não substitui a indentação do bloco.
+#
+# Casos para conferir sua implementação:
+# 79: somente Fim; 80: Bônus seguido de Fim.
+#
+# Apoio: 05_if_elif_else/exemplos/01_if_simples.py
+</pre></details><details id="exercicio-34_comparar_condicao_composta_e_aninhada"><summary>34 — Comparar condição composta e aninhada</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/34_comparar_condicao_composta_e_aninhada.py" download>Baixar este exercício .py</a><pre class="enunciado"># 34 — Comparar condição composta e aninhada
+# Enunciado:
+# Implemente a mesma regra de acesso de duas formas: idade &gt;= 18 e autorização sim. Primeiro use
+# and; depois use um if dentro de outro. As saídas devem ser iguais.
+#
+# Dica:
+# No aninhamento, também é preciso tratar a recusa causada pela primeira exigência.
+#
+# Casos para conferir sua implementação:
+# Confira as quatro combinações: idade 17 ou 18, autorização sim ou nao.
+#
+# Apoio: 05_if_elif_else/exemplos/05_decisao_aninhada.py
+</pre></details><details id="exercicio-35_comparar_limites_inclusivos"><summary>35 — Comparar limites inclusivos</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/35_comparar_limites_inclusivos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 35 — Comparar limites inclusivos
+# Enunciado:
+# Faça duas versões que classificam saldo como baixo: uma com saldo &lt; 10 e outra com saldo &lt;= 10.
+# Teste 9, 10 e 11 e explique qual representa abaixo do mínimo.
+#
+# Dica:
+# O valor da fronteira revela a diferença entre as regras.
+#
+# Casos para conferir sua implementação:
+# As versões só divergem em 10; abaixo do mínimo usa a comparação estrita.
+#
+# Apoio: 05_if_elif_else/exemplos/04_condicao_composta.py
+</pre></details><details id="exercicio-36_compra_com_dois_criterios_de_promocao"><summary>36 — Compra com dois critérios de promoção</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/36_compra_com_dois_criterios_de_promocao.py" download>Baixar este exercício .py</a><pre class="enunciado"># 36 — Compra com dois critérios de promoção
+# Enunciado:
+# Leia total não negativo e quantidade positiva. Conceda 15% se total &gt;= 300 e quantidade &gt;= 5; 5%
+# se apenas uma exigência for atendida; zero se nenhuma for. Mostre percentual e total final.
+#
+# Dica:
+# O caso que satisfaz os dois critérios deve ser distinguido antes do caso com pelo menos um.
+#
+# Casos para conferir sua implementação:
+# 300 e 5: 15%, final 255; 300 e 2: 5%, final 285; 100 e 2: zero, final 100.
+#
+# Apoio: 05_if_elif_else/exemplos/03_tres_faixas.py
+</pre></details><details id="exercicio-37_transferencia_entre_duas_lojas"><summary>37 — Transferência entre duas lojas</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/37_transferencia_entre_duas_lojas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 37 — Transferência entre duas lojas
+# Enunciado:
+# Leia origem e destino com saldos não negativos e uma transferência positiva. Transfira tudo
+# apenas se a origem puder fornecer. Mostre os dois saldos finais.
+#
+# Dica:
+# Na recusa nenhum saldo deve mudar; na aprovação a soma dos dois saldos se conserva.
+#
+# Casos para conferir sua implementação:
+# Origem 12, destino 3, transferência 5: 7 e 8; transferência 13: 12 e 3.
+#
+# Apoio: 05_if_elif_else/exemplos/05_decisao_aninhada.py
+</pre></details><details id="exercicio-38_caixa_com_pagamento_suficiente"><summary>38 — Caixa com pagamento suficiente</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/38_caixa_com_pagamento_suficiente.py" download>Baixar este exercício .py</a><pre class="enunciado"># 38 — Caixa com pagamento suficiente
+# Enunciado:
+# Leia compra positiva e pagamento não negativo. Se pagamento cobrir a compra, mostre troco; caso
+# contrário, mostre o valor faltante. Finalize com uma mensagem comum aos dois caminhos.
+#
+# Dica:
+# Compare primeiro e faça a subtração na ordem correspondente à mensagem.
+#
+# Casos para conferir sua implementação:
+# Compra 24.9, pagamento 30: troco 5.10; pagamento 20: falta 4.90; pagamento 24.9: troco zero.
+#
+# Apoio: 05_if_elif_else/exemplos/02_par_ou_impar.py
+</pre></details><details id="exercicio-39_retirada_com_duas_restricoes"><summary>39 — Retirada com duas restrições</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/39_retirada_com_duas_restricoes.py" download>Baixar este exercício .py</a><pre class="enunciado"># 39 — Retirada com duas restrições
+# Enunciado:
+# Leia saldo não negativo, limite positivo por atendimento e pedido positivo. Recuse primeiro se o
+# pedido exceder o limite, depois se faltar saldo. Nos demais casos, apresente o novo saldo.
+#
+# Dica:
+# Quando as duas restrições falham, a prioridade da mensagem é a do limite.
+#
+# Casos para conferir sua implementação:
+# Saldo 4, limite 5, pedido 6: excesso de limite; pedido 5: saldo insuficiente; pedido 4: saldo
+# zero.
+#
+# Apoio: 05_if_elif_else/exemplos/03_tres_faixas.py
+</pre></details><details id="exercicio-40_sintese_de_reposicao_e_urgencia"><summary>40 — Síntese de reposição e urgência</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/40_sintese_de_reposicao_e_urgencia.py" download>Baixar este exercício .py</a><pre class="enunciado"># 40 — Síntese de reposição e urgência
+# Enunciado:
+# Leia saldo não negativo, mínimo positivo e dias de entrega não negativos. Calcule falta até o
+# mínimo. Sem falta, classifique Regular; com falta e entrega acima de 3 dias, Urgente; nas demais
+# faltas, Repor. Exiba classificação e falta.
+#
+# Dica:
+# Determine a existência de falta antes de usar o prazo para decidir urgência.
+#
+# Casos para conferir sua implementação:
+# Saldo 4, mínimo 8, dias 4: Urgente e 4; dias 3: Repor e 4; saldo 8: Regular e zero.
+#
+# Apoio: 05_if_elif_else/exemplos/05_decisao_aninhada.py
+</pre></details><details id="exercicio-91_rede_91"><summary>Prever o limite da falta</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/91_rede_91.py" download>Baixar este exercício .py</a><pre class="enunciado"># Prever o limite da falta
+# Enunciado:
+# Preveja a classificação do estoque para saldo 7, 8 e 9 com mínimo 8. Anote a condição escolhida e a falta, quando existir.
+#
+# Dica:
+# Igualdade com o mínimo pertence ao caso regular.
+#
+# Conferência:
+# Somente saldo 7 é crítico, com falta um.
+#
+# Apoio: 05_if_elif_else/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-92_rede_92"><summary>Corrigir a regra de reposição</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/92_rede_92.py" download>Baixar este exercício .py</a><pre class="enunciado"># Corrigir a regra de reposição
+# Enunciado:
+# Um programa usa saldo &lt;= minimo para sinalizar falta e contabiliza uma posição com saldo 8 e mínimo 8 como crítica. Corrija a condição e confira os dois lados do limite.
+#
+# Dica:
+# Estoque crítico exige falta estritamente positiva.
+#
+# Conferência:
+# Saldos 7, 8 e 9 devem produzir crítico, regular e regular.
+#
+# Apoio: 05_if_elif_else/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-93_rede_93"><summary>Faixa promocional — Lojas Blue</summary><a class="download" href="../pratica/05_if_elif_else/exercicios/93_rede_93.py" download>Baixar este exercício .py</a><pre class="enunciado"># Faixa promocional — Lojas Blue
+# Enunciado:
+# Para total não negativo, aplique 5% abaixo de 100 e 10% a partir de 100. Mostre o total final.
+#
+# Dica:
+# O valor 100 pertence à segunda faixa.
+#
+# Conferência:
+# 80: 76.00; 100: 90.00.
+#
+# Apoio: 05_if_elif_else/exemplos/90_rede_contexto.py e exemplos básicos do tópico
+</pre></details></section><section id="avancar"><h2>Quando avançar</h2><p>Resolva uma classificação com limites inclusivos e proteja uma divisão. Explique quando usar uma cadeia e quando usar if independentes.</p><p>Explique sua solução sem ler o código. Se houver uma divergência, encontre a primeira instrução em que seu raciocínio muda. Depois acrescente um caso próprio e confira novamente.</p></section><nav class="pager" aria-label="Sequência de estudo"><a href="04_operadores.html">← Operadores</a><a href="06_match_case.html">Seleção com match/case →</a></nav></main><footer class="site-footer">ALP · Cenário didático Lojas Blue · Python 3.10 ou superior</footer></div></div><script src="../assets/lessons.js"></script><script src="../assets/alp.js" defer></script></body></html>

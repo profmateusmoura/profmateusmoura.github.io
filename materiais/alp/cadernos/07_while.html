@@ -1,0 +1,681 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Algoritmos e Lógica de Programação em Python: Repetição com while"><title>Repetição com while · ALP</title><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/alp.css"></head><body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><div class="app-frame"><aside class="sidebar" id="sidebar"><a class="brand" href="../index.html"><strong>ALP</strong><small>Algoritmos e Lógica de Programação</small></a><nav class="site-nav" aria-label="Cadernos"><a class="nav-module " href="../cadernos/01_output.html"><span class="nav-index">01</span><span>Saída de dados</span></a><a class="nav-module " href="../cadernos/02_input.html"><span class="nav-index">02</span><span>Entrada de dados</span></a><a class="nav-module " href="../cadernos/03_variaveis_e_tipos.html"><span class="nav-index">03</span><span>Variáveis e tipos</span></a><a class="nav-module " href="../cadernos/04_operadores.html"><span class="nav-index">04</span><span>Operadores</span></a><a class="nav-module " href="../cadernos/05_if_elif_else.html"><span class="nav-index">05</span><span>Decisões com if, elif e else</span></a><a class="nav-module " href="../cadernos/06_match_case.html"><span class="nav-index">06</span><span>Seleção com match/case</span></a><a class="nav-module active" href="../cadernos/07_while.html"><span class="nav-index">07</span><span>Repetição com while</span></a><a class="nav-module " href="../cadernos/08_for_e_range.html"><span class="nav-index">08</span><span>Repetição com for e range</span></a><a class="nav-module " href="../cadernos/09_algoritmos_basicos.html"><span class="nav-index">09</span><span>Algoritmos básicos</span></a><a class="nav-module " href="../cadernos/10_validacao_e_controle_de_fluxo.html"><span class="nav-index">10</span><span>Validação e controle de fluxo</span></a><a class="nav-module " href="../cadernos/11_funcoes.html"><span class="nav-index">11</span><span>Funções</span></a><a class="nav-module " href="../cadernos/12_decomposicao_de_problemas.html"><span class="nav-index">12</span><span>Decomposição de problemas</span></a><a class="nav-module " href="../cadernos/13_teste_de_mesa.html"><span class="nav-index">13</span><span>Teste de mesa</span></a></nav><a class="portal" href="../../../index.html">← Portal de materiais</a></aside><div class="main-area"><header class="topbar"><button id="menu" aria-controls="sidebar" aria-expanded="false">Cadernos</button><a href="../index.html">ALP · Lojas Blue</a><button id="theme" aria-label="Alternar tema claro e escuro">Tema claro/escuro</button></header><main id="conteudo" class="alp-content"><div class="article-header"><p>CADERNO 07 · FUNDAMENTOS</p><h1>Repetição com while</h1><p>Controlar repetições por contagem, condição e sentinela.</p><p>9 exemplos e 43 exercícios da trilha original.</p><a class="download" href="../arquivos/ALP_07_while.zip" download>Baixar exemplos e exercícios deste assunto</a></div><nav class="local-nav" aria-label="Seções"><a href="#conceitos">Entender</a><a href="#acompanhado">Acompanhar</a><a href="#exemplos">Exemplos</a><a href="#exercicios">Exercícios</a><a href="#avancar">Conferir aprendizagem</a></nav><section id="conceitos"><h2>Entenda a ideia</h2><h3>Repetir enquanto uma condição vale</h3><p>while testa a condição antes de executar o corpo. Se ela já for falsa na primeira avaliação, o corpo não executa nenhuma vez. Para compreender um laço, localize três partes: estado inicial, condição de continuidade e atualização. Sem uma atualização que aproxime a condição do encerramento, a repetição pode continuar indefinidamente.</p><h3>Contar e acumular são papéis distintos</h3><p>Um contador costuma avançar de uma unidade por evento; um acumulador reúne valores, como quantidades vendidas. Inicialize cada variável de acordo com seu papel: uma soma começa em zero, mas um produto começa em um. Não reinicialize o acumulador dentro do laço se ele deve conservar o resultado das repetições anteriores.</p><h3>Sentinela é um sinal, não um dado comum</h3><p>Uma leitura pode continuar até que o usuário informe um valor especial. Se zero encerra a leitura de vendas, ele não deve ser incluído na soma nem na contagem de vendas. Considere a sentinela como primeira entrada: o programa ainda precisa terminar corretamente, e não pode dividir por uma contagem zero ao calcular média. Antes de implementar, descreva quando ler, testar, processar e ler novamente.</p></section><aside class="callout"><strong>Erros para observar</strong><p>Esquecer a atualização ou a nova leitura; usar o mesmo nome para contador e soma; incluir a sentinela nos dados; dividir por uma quantidade que pode ser zero.</p></aside><section id="acompanhado"><h2>Um exemplo acompanhado</h2><p>Leia o código antes de avançar. Cada passo explica uma mudança ou decisão. A simulação tem uma sequência fixa; os arquivos Python permitem experimentar outras entradas.</p><pre><code>contador = 1
+while contador &lt;= 3:
+    print(contador)
+    contador += 1</code></pre><details><summary>Conferir a saída</summary><pre>1
+2
+3</pre></details><div class="trace" data-trace="6"><p data-state role="status"></p><progress value="0" max="5" aria-label="Progresso do exemplo"></progress><div class="actions"><button data-back>Voltar</button><button data-next>Próximo passo</button><button data-reset>Recomeçar</button></div></div><fieldset class="quiz"><legend>Qual valor encerra esse laço?</legend><button data-correct="false" data-why="O valor 3 ainda entra no corpo; 4 torna a condição falsa.">3</button><button data-correct="true" data-why="O valor 3 ainda entra no corpo; 4 torna a condição falsa.">4</button><button data-correct="false" data-why="O valor 3 ainda entra no corpo; 4 torna a condição falsa.">0</button><p data-feedback role="status"></p></fieldset></section><section id="exemplos"><h2>Estude os exemplos do assunto</h2><p>Abra os exemplos em ordem. Os comentários apresentam objetivo, demonstração e cuidados. Use o arquivo baixado para executar Python; o caderno apresenta o código para leitura.</p><details id="exemplo-01_contador"><summary>01 — Contador crescente</summary><a class="download" href="../pratica/07_while/exemplos/01_contador.py" download>Baixar este exemplo .py</a><pre><code># 01 — Contador crescente
+# Objetivo: Identificar início, condição e atualização.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Sem a atualização, a condição continuaria verdadeira indefinidamente.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Ao terminar: 6&#x27;
+
+contador = 1  # Estado inicial: primeiro valor a mostrar.
+while contador &lt;= 5:
+    print(contador)
+    # Atualizamos depois de mostrar o valor atual.
+    contador += 1
+# Ao sair, o contador vale seis, pois a condição já falhou.
+print(&quot;Ao terminar:&quot;, contador)
+</code></pre></details><details id="exemplo-02_decrescente"><summary>02 — Contagem decrescente</summary><a class="download" href="../pratica/07_while/exemplos/02_decrescente.py" download>Baixar este exemplo .py</a><pre><code># 02 — Contagem decrescente
+# Objetivo: Aproximar o estado de uma condição de término.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O passo negativo combina com a comparação &gt;=.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Fim da contagem&#x27;
+
+restante = 5
+while restante &gt;= 1:
+    print(&quot;Faltam:&quot;, restante)
+    restante -= 1
+print(&quot;Fim da contagem&quot;)
+# Experimente iniciar com zero: o corpo não será executado.
+</code></pre></details><details id="exemplo-03_acumulador"><summary>03 — Contador e acumulador</summary><a class="download" href="../pratica/07_while/exemplos/03_acumulador.py" download>Baixar este exemplo .py</a><pre><code># 03 — Contador e acumulador
+# Objetivo: Somar os inteiros de um até um limite.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O contador controla a repetição; o acumulador guarda a soma parcial.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   4
+# Confira na saída: &#x27;Soma final: 10&#x27;
+
+limite = int(input(&quot;Limite inteiro não negativo: &quot;))
+atual = 1
+soma = 0  # Zero é o elemento neutro da soma.
+while atual &lt;= limite:
+    soma += atual
+    print(&quot;Até&quot;, atual, &quot;a soma é&quot;, soma)
+    atual += 1
+print(&quot;Soma final:&quot;, soma)
+# Limite zero produz soma zero sem executar o corpo.
+</code></pre></details><details id="exemplo-04_quantidade_de_leituras"><summary>04 — Quantidade definida de leituras</summary><a class="download" href="../pratica/07_while/exemplos/04_quantidade_de_leituras.py" download>Baixar este exemplo .py</a><pre><code># 04 — Quantidade definida de leituras
+# Objetivo: Processar dados sem armazenar uma coleção.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O valor lido é usado imediatamente e pode ser substituído na próxima volta.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   3
+#   2
+#   4
+#   6
+# Confira na saída: &#x27;Média: 4.0&#x27;
+
+quantidade = int(input(&quot;Quantidade de valores, maior que zero: &quot;))
+contador = 0
+soma = 0.0
+while contador &lt; quantidade:
+    valor = float(input(&quot;Valor: &quot;))
+    soma += valor
+    contador += 1
+# A quantidade positiva é uma precondição deste exemplo.
+print(&quot;Média:&quot;, soma / quantidade)
+</code></pre></details><details id="exemplo-05_sentinela"><summary>05 — Leitura com sentinela</summary><a class="download" href="../pratica/07_while/exemplos/05_sentinela.py" download>Baixar este exemplo .py</a><pre><code># 05 — Leitura com sentinela
+# Objetivo: Encerrar por um valor especial que não entra na soma.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A primeira leitura ocorre antes do teste; as demais ficam no fim do corpo.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   4
+#   -1
+#   0
+# Confira na saída: &#x27;Total: 3&#x27;
+
+total = 0
+numero = int(input(&quot;Inteiro para somar; zero encerra: &quot;))
+while numero != 0:
+    total += numero
+    # Esta nova leitura permite chegar à sentinela.
+    numero = int(input(&quot;Inteiro para somar; zero encerra: &quot;))
+print(&quot;Total:&quot;, total)
+# Se a primeira entrada for zero, não processamos nenhum valor.
+</code></pre></details><details id="exemplo-06_ocorrencias"><summary>06 — Contagem de ocorrências</summary><a class="download" href="../pratica/07_while/exemplos/06_ocorrencias.py" download>Baixar este exemplo .py</a><pre><code># 06 — Contagem de ocorrências
+# Objetivo: Contar somente valores que atendem a uma condição.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O número de leituras e o número de positivos são contagens diferentes.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   2
+#   0
+#   -3
+#   7
+# Confira na saída: &#x27;Positivos: 2&#x27;
+
+lidos = 0
+positivos = 0
+while lidos &lt; 4:
+    valor = int(input(&quot;Digite um inteiro: &quot;))
+    if valor &gt; 0:
+        positivos += 1
+    lidos += 1  # Toda entrada conta como uma leitura.
+print(&quot;Positivos:&quot;, positivos)
+# Zero não é positivo nem negativo.
+</code></pre></details><details id="exemplo-07_crescimento"><summary>07 — Repetir até atingir uma meta</summary><a class="download" href="../pratica/07_while/exemplos/07_crescimento.py" download>Baixar este exemplo .py</a><pre><code># 07 — Repetir até atingir uma meta
+# Objetivo: Usar uma condição de parada ligada ao problema.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A meta é fixa e o avanço positivo garante o término.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Dias necessários: 4&#x27;
+
+distancia = 0
+dias = 0
+meta = 20
+while distancia &lt; meta:
+    distancia += 6  # Avanço diário fictício, sempre positivo.
+    dias += 1
+    print(f&quot;Dia {dias}: {distancia} km acumulados&quot;)
+# A distância pode ultrapassar a meta no último passo.
+print(&quot;Dias necessários:&quot;, dias)
+</code></pre></details><details id="exemplo-08_zero_iteracoes"><summary>08 — Laço que pode não executar</summary><a class="download" href="../pratica/07_while/exemplos/08_zero_iteracoes.py" download>Baixar este exemplo .py</a><pre><code># 08 — Laço que pode não executar
+# Objetivo: Distinguir teste de condição e execução do corpo.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: while testa antes da primeira repetição.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   2
+# Confira na saída: &#x27;Retiradas de 3: 0&#x27;
+
+saldo = int(input(&quot;Saldo inteiro não negativo: &quot;))
+retiradas = 0
+while saldo &gt;= 3:
+    saldo -= 3
+    retiradas += 1
+print(&quot;Retiradas de 3:&quot;, retiradas)
+print(&quot;Saldo restante:&quot;, saldo)
+# Com saldo dois, a condição é falsa já na primeira avaliação.
+</code></pre></details><details id="exemplo-90_rede_contexto"><summary>Fechamento parcial do caixa — cenário didático Lojas Blue</summary><a class="download" href="../pratica/07_while/exemplos/90_rede_contexto.py" download>Baixar este exemplo .py</a><pre><code># Fechamento parcial do caixa — cenário didático Lojas Blue
+# Objetivo: Acumular vendas uma por vez com sentinela.
+# Pré-requisito: tópicos anteriores e exemplos anteriores deste tópico.
+# Estude: preveja o resultado, execute e altere um dado por vez.
+# Confira na saída: &#x27;Total do caixa: 74.70&#x27;
+# Entradas guiadas, uma por solicitação:
+#   24.9
+#   49.8
+#   0
+
+total = 0.0
+quantidade = 0
+valor = float(input(&quot;Valor de venda positivo; zero encerra: &quot;))
+# Neste tópico considere entradas válidas: valores positivos ou zero.
+while valor != 0:
+    total += valor
+    quantidade += 1
+    valor = float(input(&quot;Valor de venda positivo; zero encerra: &quot;))
+print(&quot;Vendas:&quot;, quantidade)
+print(f&quot;Total do caixa: {total:.2f}&quot;)
+# Não guardamos as vendas: apenas quantidade e total.
+</code></pre></details></section><section id="exercicios"><h2>Pratique com os enunciados originais</h2><p>Resolva antes de consultar novamente o exemplo. Registre sua previsão e confira os casos indicados. Os arquivos de exercício contêm comentários e não produzem saída até você implementar a solução.</p><details id="exercicio-01_contagem_crescente"><summary>01 — Contagem crescente</summary><a class="download" href="../pratica/07_while/exercicios/01_contagem_crescente.py" download>Baixar este exercício .py</a><pre class="enunciado"># 01 — Contagem crescente
+# Enunciado:
+# Leia limite inteiro não negativo e mostre de 1 até ele usando while.
+#
+# Dica:
+# Identifique início, condição e incremento.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 07_while/exemplos/01_contador.py
+#
+# Casos para conferir sua implementação:
+# 3: mostre 1, 2, 3; 0: nenhum número.
+</pre></details><details id="exercicio-02_contagem_regressiva"><summary>02 — Contagem regressiva</summary><a class="download" href="../pratica/07_while/exercicios/02_contagem_regressiva.py" download>Baixar este exercício .py</a><pre class="enunciado"># 02 — Contagem regressiva
+# Enunciado:
+# Leia inteiro não negativo e conte dele até zero inclusive.
+#
+# Dica:
+# O passo deve diminuir o estado.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 07_while/exemplos/02_decrescente.py
+#
+# Casos para conferir sua implementação:
+# 2: mostre 2, 1, 0; 0: mostre apenas 0.
+</pre></details><details id="exercicio-03_pares_ate_um_limite"><summary>03 — Pares até um limite</summary><a class="download" href="../pratica/07_while/exercicios/03_pares_ate_um_limite.py" download>Baixar este exercício .py</a><pre class="enunciado"># 03 — Pares até um limite
+# Enunciado:
+# Leia limite não negativo e mostre os pares de 2 até ele usando while.
+#
+# Dica:
+# Um passo de dois evita testar a paridade em toda volta.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 07_while/exemplos/01_contador.py
+# 07_while/exemplos/02_decrescente.py
+#
+# Casos para conferir sua implementação:
+# 7: 2, 4, 6; 1: nenhum par.
+</pre></details><details id="exercicio-04_soma_acumulada"><summary>04 — Soma acumulada</summary><a class="download" href="../pratica/07_while/exercicios/04_soma_acumulada.py" download>Baixar este exercício .py</a><pre class="enunciado"># 04 — Soma acumulada
+# Enunciado:
+# Leia inteiro não negativo n e some de 1 até n com while.
+#
+# Dica:
+# Contador e soma cumprem papéis diferentes.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 07_while/exemplos/03_acumulador.py
+#
+# Casos para conferir sua implementação:
+# 4: 10; 0: 0.
+</pre></details><details id="exercicio-05_produto_acumulado"><summary>05 — Produto acumulado</summary><a class="download" href="../pratica/07_while/exercicios/05_produto_acumulado.py" download>Baixar este exercício .py</a><pre class="enunciado"># 05 — Produto acumulado
+# Enunciado:
+# Leia inteiro não negativo n e calcule o produto de 1 até n com while.
+#
+# Dica:
+# Escolha o elemento neutro da multiplicação como início.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 07_while/exemplos/03_acumulador.py
+#
+# Casos para conferir sua implementação:
+# 4: 24; 0: 1.
+</pre></details><details id="exercicio-06_media_de_leituras"><summary>06 — Média de leituras</summary><a class="download" href="../pratica/07_while/exercicios/06_media_de_leituras.py" download>Baixar este exercício .py</a><pre class="enunciado"># 06 — Média de leituras
+# Enunciado:
+# Leia uma quantidade positiva e depois essa quantidade de números. Calcule a média com while, sem guardar histórico.
+#
+# Dica:
+# Consuma cada valor assim que for lido.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 07_while/exemplos/04_quantidade_de_leituras.py
+#
+# Casos para conferir sua implementação:
+# Quantidade 3 e valores 2, 4, 9: média 5.
+</pre></details><details id="exercicio-07_sentinela_de_soma"><summary>07 — Sentinela de soma</summary><a class="download" href="../pratica/07_while/exercicios/07_sentinela_de_soma.py" download>Baixar este exercício .py</a><pre class="enunciado"># 07 — Sentinela de soma
+# Enunciado:
+# Leia inteiros até zero. Some somente os valores anteriores ao zero.
+#
+# Dica:
+# Garanta uma nova leitura a cada repetição.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 07_while/exemplos/05_sentinela.py
+#
+# Casos para conferir sua implementação:
+# 3, -1, 0: soma 2; primeira entrada 0: soma 0.
+</pre></details><details id="exercicio-08_contagem_de_negativos"><summary>08 — Contagem de negativos</summary><a class="download" href="../pratica/07_while/exercicios/08_contagem_de_negativos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 08 — Contagem de negativos
+# Enunciado:
+# Leia quantidade não negativa de inteiros e informe quantos foram negativos. Use while.
+#
+# Dica:
+# A contagem total sempre avança; a filtrada só em alguns casos.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 07_while/exemplos/06_ocorrencias.py
+#
+# Casos para conferir sua implementação:
+# Quantidade 4 e valores -1, 0, -2, 3: dois negativos.
+</pre></details><details id="exercicio-09_meta_por_passos"><summary>09 — Meta por passos</summary><a class="download" href="../pratica/07_while/exercicios/09_meta_por_passos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 09 — Meta por passos
+# Enunciado:
+# Leia meta positiva e avanço positivo inteiros. Parta de zero e conte quantos passos são necessários para alcançar ou ultrapassar a meta.
+#
+# Dica:
+# Processe o avanço antes de reavaliar a meta.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 07_while/exemplos/07_crescimento.py
+#
+# Casos para conferir sua implementação:
+# Meta 10 e avanço 3: quatro passos; 10 e 5: dois.
+</pre></details><details id="exercicio-10_retiradas_fixas"><summary>10 — Retiradas fixas</summary><a class="download" href="../pratica/07_while/exercicios/10_retiradas_fixas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 10 — Retiradas fixas
+# Enunciado:
+# Leia saldo inteiro não negativo e tamanho positivo de retirada. Simule retiradas enquanto houver saldo suficiente. Mostre quantidade e restante.
+#
+# Dica:
+# O saldo é o estado que aproxima o laço do término.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 07_while/exemplos/08_zero_iteracoes.py
+#
+# Casos para conferir sua implementação:
+# Saldo 14 e retirada 4: três retiradas e restante 2; saldo 0: nenhuma.
+</pre></details><details id="exercicio-11_contagem_com_limite_zero"><summary>11 — Contagem com limite zero</summary><a class="download" href="../pratica/07_while/exercicios/11_contagem_com_limite_zero.py" download>Baixar este exercício .py</a><pre class="enunciado"># 11 — Contagem com limite zero
+# Enunciado:
+# Leia limite inteiro não negativo e mostre de 1 até ele com while. Depois mostre quantas vezes o
+# corpo executou.
+#
+# Dica:
+# Separe a quantidade de execuções do próximo número a testar.
+#
+# Casos para conferir sua implementação:
+# Limite 0: nenhuma linha numérica e zero execuções; limite 3: 1, 2, 3 e três execuções.
+#
+# Apoio: 07_while/exemplos/01_contador.py
+</pre></details><details id="exercicio-12_intervalo_a_partir_de_outro_inicio"><summary>12 — Intervalo a partir de outro início</summary><a class="download" href="../pratica/07_while/exercicios/12_intervalo_a_partir_de_outro_inicio.py" download>Baixar este exercício .py</a><pre class="enunciado"># 12 — Intervalo a partir de outro início
+# Enunciado:
+# Leia início e fim inteiros com início &lt;= fim. Mostre todos os inteiros do intervalo inclusivo e
+# a quantidade exibida.
+#
+# Dica:
+# O valor inicial do contador não precisa ser um.
+#
+# Casos para conferir sua implementação:
+# De -2 a 2: cinco valores; de 4 a 4: um valor.
+#
+# Apoio: 07_while/exemplos/01_contador.py
+</pre></details><details id="exercicio-13_contagem_regressiva_com_zero"><summary>13 — Contagem regressiva com zero</summary><a class="download" href="../pratica/07_while/exercicios/13_contagem_regressiva_com_zero.py" download>Baixar este exercício .py</a><pre class="enunciado"># 13 — Contagem regressiva com zero
+# Enunciado:
+# Leia n não negativo. Exiba de n até zero, incluindo zero, e uma mensagem Fim após o laço.
+#
+# Dica:
+# A condição precisa permitir a última exibição antes de se tornar falsa.
+#
+# Casos para conferir sua implementação:
+# n=2: 2, 1, 0 e Fim; n=0: 0 e Fim.
+#
+# Apoio: 07_while/exemplos/02_decrescente.py
+</pre></details><details id="exercicio-14_saltos_a_partir_de_um_valor"><summary>14 — Saltos a partir de um valor</summary><a class="download" href="../pratica/07_while/exercicios/14_saltos_a_partir_de_um_valor.py" download>Baixar este exercício .py</a><pre class="enunciado"># 14 — Saltos a partir de um valor
+# Enunciado:
+# Leia início, fim e passo inteiros, com início &lt;= fim e passo positivo. Mostre os valores obtidos
+# somando o passo sem ultrapassar fim.
+#
+# Dica:
+# O último valor exibido não precisa ser igual ao limite.
+#
+# Casos para conferir sua implementação:
+# Início 2, fim 11 e passo 4: 2, 6, 10; fim 2: apenas 2.
+#
+# Apoio: 07_while/exemplos/01_contador.py
+</pre></details><details id="exercicio-15_soma_dos_pares_de_um_intervalo"><summary>15 — Soma dos pares de um intervalo</summary><a class="download" href="../pratica/07_while/exercicios/15_soma_dos_pares_de_um_intervalo.py" download>Baixar este exercício .py</a><pre class="enunciado"># 15 — Soma dos pares de um intervalo
+# Enunciado:
+# Leia n não negativo e some apenas os pares de 1 até n usando while.
+#
+# Dica:
+# Atualize o controle do laço mesmo quando o valor não entrar na soma.
+#
+# Casos para conferir sua implementação:
+# n=5: soma 6; n=6: soma 12; n=0: soma zero.
+#
+# Apoio: 07_while/exemplos/03_acumulador.py
+</pre></details><details id="exercicio-16_soma_e_quantidade_separadas"><summary>16 — Soma e quantidade separadas</summary><a class="download" href="../pratica/07_while/exercicios/16_soma_e_quantidade_separadas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 16 — Soma e quantidade separadas
+# Enunciado:
+# Leia n não negativo e, em seguida, exatamente n inteiros. Mostre soma e quantidade de valores
+# positivos.
+#
+# Dica:
+# O contador de leituras avança para toda entrada, o de positivos só quando necessário.
+#
+# Casos para conferir sua implementação:
+# n=4 e entradas -2, 0, 3, 5: soma 6 e dois positivos; n=0: ambos zero.
+#
+# Apoio: 07_while/exemplos/06_ocorrencias.py
+</pre></details><details id="exercicio-17_duas_contagens_de_sinais"><summary>17 — Duas contagens de sinais</summary><a class="download" href="../pratica/07_while/exercicios/17_duas_contagens_de_sinais.py" download>Baixar este exercício .py</a><pre class="enunciado"># 17 — Duas contagens de sinais
+# Enunciado:
+# Leia n não negativo e processe n inteiros. Conte negativos, zeros e positivos separadamente.
+#
+# Dica:
+# Cada entrada pertence a exatamente uma categoria.
+#
+# Casos para conferir sua implementação:
+# -3, 0, 5, 0, 8: um negativo, dois zeros, dois positivos; n=0: três zeros nas contagens.
+#
+# Apoio: 07_while/exemplos/06_ocorrencias.py
+</pre></details><details id="exercicio-18_media_com_quantidade_possivelmente_vazia"><summary>18 — Média com quantidade possivelmente vazia</summary><a class="download" href="../pratica/07_while/exercicios/18_media_com_quantidade_possivelmente_vazia.py" download>Baixar este exercício .py</a><pre class="enunciado"># 18 — Média com quantidade possivelmente vazia
+# Enunciado:
+# Leia n não negativo e depois n números. Mostre a média se n &gt; 0; quando n for zero, mostre Sem
+# leituras.
+#
+# Dica:
+# A decisão de calcular a média acontece depois do laço.
+#
+# Casos para conferir sua implementação:
+# n=3 e valores 2, 4, 9: média 5; n=0: Sem leituras.
+#
+# Apoio: 07_while/exemplos/04_quantidade_de_leituras.py
+</pre></details><details id="exercicio-19_produto_de_valores_informados"><summary>19 — Produto de valores informados</summary><a class="download" href="../pratica/07_while/exercicios/19_produto_de_valores_informados.py" download>Baixar este exercício .py</a><pre class="enunciado"># 19 — Produto de valores informados
+# Enunciado:
+# Leia n não negativo e multiplique os n números seguintes. Para n=0, adote produto 1.
+#
+# Dica:
+# Escolha a identidade da multiplicação como estado inicial.
+#
+# Casos para conferir sua implementação:
+# n=3 e valores 2, -3, 4: -24; com qualquer valor zero: produto zero.
+#
+# Apoio: 07_while/exemplos/04_quantidade_de_leituras.py
+</pre></details><details id="exercicio-20_ocorrencias_de_um_alvo"><summary>20 — Ocorrências de um alvo</summary><a class="download" href="../pratica/07_while/exercicios/20_ocorrencias_de_um_alvo.py" download>Baixar este exercício .py</a><pre class="enunciado"># 20 — Ocorrências de um alvo
+# Enunciado:
+# Leia alvo inteiro e n não negativo. Processe n inteiros e conte quantos são iguais ao alvo.
+#
+# Dica:
+# O alvo é fixo; o valor de cada leitura é substituído na próxima volta.
+#
+# Casos para conferir sua implementação:
+# Alvo 4 e valores 4, 1, 4, 0: duas ocorrências; n=0: zero.
+#
+# Apoio: 07_while/exemplos/06_ocorrencias.py
+</pre></details><details id="exercicio-21_sentinela_diferente_de_zero"><summary>21 — Sentinela diferente de zero</summary><a class="download" href="../pratica/07_while/exercicios/21_sentinela_diferente_de_zero.py" download>Baixar este exercício .py</a><pre class="enunciado"># 21 — Sentinela diferente de zero
+# Enunciado:
+# Leia inteiros não negativos até receber -1. Mostre quantidade e soma dos valores processados; -1
+# não entra nos resultados.
+#
+# Dica:
+# Zero agora é um dado válido e deve contar como leitura.
+#
+# Casos para conferir sua implementação:
+# 0, 3, 7, -1: quantidade 3 e soma 10; -1 na primeira leitura: ambos zero.
+#
+# Apoio: 07_while/exemplos/05_sentinela.py
+</pre></details><details id="exercicio-22_media_de_vendas_ate_encerrar"><summary>22 — Média de vendas até encerrar</summary><a class="download" href="../pratica/07_while/exercicios/22_media_de_vendas_ate_encerrar.py" download>Baixar este exercício .py</a><pre class="enunciado"># 22 — Média de vendas até encerrar
+# Enunciado:
+# Leia vendas positivas até zero. Mostre quantidade, total e média; se zero vier primeiro, informe
+# Sem vendas.
+#
+# Dica:
+# Exclua a sentinela e proteja a média quando a quantidade for zero.
+#
+# Casos para conferir sua implementação:
+# 10, 20, 0: duas vendas, total 30 e média 15; 0: Sem vendas.
+#
+# Apoio: 07_while/exemplos/05_sentinela.py
+</pre></details><details id="exercicio-23_duas_categorias_ate_a_sentinela"><summary>23 — Duas categorias até a sentinela</summary><a class="download" href="../pratica/07_while/exercicios/23_duas_categorias_ate_a_sentinela.py" download>Baixar este exercício .py</a><pre class="enunciado"># 23 — Duas categorias até a sentinela
+# Enunciado:
+# Leia códigos 1 ou 2 até código 0. Conte cada categoria e mostre o total de registros. Considere
+# apenas esses códigos válidos.
+#
+# Dica:
+# A leitura que atualiza o código deve ocorrer em toda volta.
+#
+# Casos para conferir sua implementação:
+# 1, 2, 1, 0: categoria 1 tem 2, categoria 2 tem 1 e total 3.
+#
+# Apoio: 07_while/exemplos/05_sentinela.py
+</pre></details><details id="exercicio-24_meta_com_avanco_configuravel"><summary>24 — Meta com avanço configurável</summary><a class="download" href="../pratica/07_while/exercicios/24_meta_com_avanco_configuravel.py" download>Baixar este exercício .py</a><pre class="enunciado"># 24 — Meta com avanço configurável
+# Enunciado:
+# Leia meta não negativa e avanço positivo. Partindo de zero, acumule o avanço até atingir ou
+# ultrapassar a meta. Mostre passos e total final.
+#
+# Dica:
+# O avanço positivo garante aproximação da condição de término.
+#
+# Casos para conferir sua implementação:
+# Meta 20 e avanço 6: quatro passos e total 24; meta zero: zero passos.
+#
+# Apoio: 07_while/exemplos/07_crescimento.py
+</pre></details><details id="exercicio-25_caixas_completas_e_sobra"><summary>25 — Caixas completas e sobra</summary><a class="download" href="../pratica/07_while/exercicios/25_caixas_completas_e_sobra.py" download>Baixar este exercício .py</a><pre class="enunciado"># 25 — Caixas completas e sobra
+# Enunciado:
+# Leia quantidade não negativa de unidades e capacidade positiva de uma caixa. Use subtrações
+# repetidas para contar caixas completas e sobra.
+#
+# Dica:
+# Continue apenas enquanto houver unidades suficientes para outra caixa completa.
+#
+# Casos para conferir sua implementação:
+# 17 unidades e capacidade 5: três caixas e sobra 2; 4 e 5: zero caixas e sobra 4.
+#
+# Apoio: 07_while/exemplos/08_zero_iteracoes.py
+</pre></details><details id="exercicio-26_contagem_de_estoque_critico"><summary>26 — Contagem de estoque crítico</summary><a class="download" href="../pratica/07_while/exercicios/26_contagem_de_estoque_critico.py" download>Baixar este exercício .py</a><pre class="enunciado"># 26 — Contagem de estoque crítico
+# Enunciado:
+# Leia n não negativo, mínimo positivo e n saldos não negativos, um por vez. Conte saldos abaixo,
+# iguais e acima do mínimo.
+#
+# Dica:
+# As três contagens devem somar n no final.
+#
+# Casos para conferir sua implementação:
+# Mínimo 10 e saldos 4, 10, 18, 6: dois abaixo, um igual e um acima.
+#
+# Apoio: 07_while/exemplos/06_ocorrencias.py
+</pre></details><details id="exercicio-27_total_de_falta_nas_posicoes"><summary>27 — Total de falta nas posições</summary><a class="download" href="../pratica/07_while/exercicios/27_total_de_falta_nas_posicoes.py" download>Baixar este exercício .py</a><pre class="enunciado"># 27 — Total de falta nas posições
+# Enunciado:
+# Leia n não negativo e mínimo positivo. Para cada um dos n saldos não negativos, acumule somente
+# a falta até o mínimo.
+#
+# Dica:
+# Uma posição acima do mínimo contribui com zero, nunca com falta negativa.
+#
+# Casos para conferir sua implementação:
+# Mínimo 10 e saldos 4, 10, 18, 6: falta total 10; n=0: zero.
+#
+# Apoio: 07_while/exemplos/04_quantidade_de_leituras.py
+</pre></details><details id="exercicio-28_maior_leitura_desde_a_primeira"><summary>28 — Maior leitura desde a primeira</summary><a class="download" href="../pratica/07_while/exercicios/28_maior_leitura_desde_a_primeira.py" download>Baixar este exercício .py</a><pre class="enunciado"># 28 — Maior leitura desde a primeira
+# Enunciado:
+# Leia n positivo e n números. Mostre o maior sem guardar uma coleção.
+#
+# Dica:
+# Use a primeira leitura como candidato; faltam n-1 leituras depois dela.
+#
+# Casos para conferir sua implementação:
+# n=3 com -8, -2, -5: maior -2; n=1 com -7: maior -7.
+#
+# Apoio: 07_while/exemplos/04_quantidade_de_leituras.py
+</pre></details><details id="exercicio-29_menor_venda_do_atendimento"><summary>29 — Menor venda do atendimento</summary><a class="download" href="../pratica/07_while/exercicios/29_menor_venda_do_atendimento.py" download>Baixar este exercício .py</a><pre class="enunciado"># 29 — Menor venda do atendimento
+# Enunciado:
+# Leia n positivo e n valores positivos de venda. Mostre o menor valor.
+#
+# Dica:
+# Começar o menor em zero impediria encontrar uma venda positiva menor que ele.
+#
+# Casos para conferir sua implementação:
+# Vendas 24.9, 7.9 e 12: menor 7.9; uma venda de 50: menor 50.
+#
+# Apoio: 07_while/exemplos/04_quantidade_de_leituras.py
+</pre></details><details id="exercicio-30_sequencia_de_pagamentos_para_uma_meta"><summary>30 — Sequência de pagamentos para uma meta</summary><a class="download" href="../pratica/07_while/exercicios/30_sequencia_de_pagamentos_para_uma_meta.py" download>Baixar este exercício .py</a><pre class="enunciado"># 30 — Sequência de pagamentos para uma meta
+# Enunciado:
+# Leia valor positivo a pagar e depois pagamentos positivos, um por vez, até que a soma alcance
+# esse valor. Mostre quantidade de pagamentos e excedente.
+#
+# Dica:
+# O valor acumulado deve mudar em cada passagem, e o excedente pode ser zero.
+#
+# Casos para conferir sua implementação:
+# Valor 50, pagamentos 20, 15, 20: três pagamentos e excedente 5; pagamento único 50: excedente
+# zero.
+#
+# Apoio: 07_while/exemplos/07_crescimento.py
+</pre></details><details id="exercicio-31_prever_teste_antes_do_corpo"><summary>31 — Prever teste antes do corpo</summary><a class="download" href="../pratica/07_while/exercicios/31_prever_teste_antes_do_corpo.py" download>Baixar este exercício .py</a><pre class="enunciado"># 31 — Prever teste antes do corpo
+# Enunciado:
+# Considere restante iniciando em 0 e um while com condição restante &gt; 0 que imprime o valor e
+# depois subtrai 1. Preveja a saída. Repita o raciocínio começando em 2.
+#
+# Dica:
+# A condição é verificada antes de executar qualquer instrução do corpo.
+#
+# Casos para conferir sua implementação:
+# Com 0, nenhuma impressão interna; com 2, aparecem 2 e 1.
+#
+# Apoio: 07_while/exemplos/08_zero_iteracoes.py
+</pre></details><details id="exercicio-32_investigar_atualizacao_esquecida"><summary>32 — Investigar atualização esquecida</summary><a class="download" href="../pratica/07_while/exercicios/32_investigar_atualizacao_esquecida.py" download>Baixar este exercício .py</a><pre class="enunciado"># 32 — Investigar atualização esquecida
+# Enunciado:
+# Reconstitua no papel um contador iniciado em 1, testado com &lt;= 3, mas sem atualização no corpo.
+# Explique por que não termina e escreva uma versão corrigida.
+#
+# Dica:
+# Procure qual variável influencia a condição e onde ela deveria mudar.
+#
+# Casos para conferir sua implementação:
+# A versão corrigida mostra 1, 2 e 3 uma vez cada e encerra.
+#
+# Apoio: 07_while/exemplos/01_contador.py
+</pre></details><details id="exercicio-33_investigar_sentinela_somada"><summary>33 — Investigar sentinela somada</summary><a class="download" href="../pratica/07_while/exercicios/33_investigar_sentinela_somada.py" download>Baixar este exercício .py</a><pre class="enunciado"># 33 — Investigar sentinela somada
+# Enunciado:
+# Um programa soma uma leitura antes de verificar se ela é -1, usado para encerrar. Reorganize
+# leitura, condição e acumulação para excluir a sentinela.
+#
+# Dica:
+# A sentinela controla a repetição e não pertence aos dados somados.
+#
+# Casos para conferir sua implementação:
+# 5, 2, -1 devem produzir 7 e duas leituras processadas; -1 sozinho produz zero.
+#
+# Apoio: 07_while/exemplos/05_sentinela.py
+</pre></details><details id="exercicio-34_investigar_contador_condicionado"><summary>34 — Investigar contador condicionado</summary><a class="download" href="../pratica/07_while/exercicios/34_investigar_contador_condicionado.py" download>Baixar este exercício .py</a><pre class="enunciado"># 34 — Investigar contador condicionado
+# Enunciado:
+# Um laço deve ler quatro inteiros, mas incrementa o contador de leituras somente quando o valor é
+# positivo. Explique o problema e corrija a posição dessa atualização.
+#
+# Dica:
+# Conte tentativas de leitura separadamente dos resultados positivos.
+#
+# Casos para conferir sua implementação:
+# Com -1, 0, 2 e -3, encerra após a quarta leitura e conta um positivo.
+#
+# Apoio: 07_while/exemplos/06_ocorrencias.py
+</pre></details><details id="exercicio-35_comparar_antes_e_depois_de_atualizar"><summary>35 — Comparar antes e depois de atualizar</summary><a class="download" href="../pratica/07_while/exercicios/35_comparar_antes_e_depois_de_atualizar.py" download>Baixar este exercício .py</a><pre class="enunciado"># 35 — Comparar antes e depois de atualizar
+# Enunciado:
+# Escreva duas contagens de 1 a 3: uma começa em 1 e imprime antes de incrementar; a outra começa
+# em 0 e incrementa antes de imprimir. Ajuste as condições e explique por que as saídas coincidem.
+#
+# Dica:
+# Estado inicial, teste e posição da atualização precisam ser pensados em conjunto.
+#
+# Casos para conferir sua implementação:
+# As duas versões exibem 1, 2 e 3; nenhuma exibe 0 ou 4.
+#
+# Apoio: 07_while/exemplos/01_contador.py
+</pre></details><details id="exercicio-36_percentual_sem_armazenamento"><summary>36 — Percentual sem armazenamento</summary><a class="download" href="../pratica/07_while/exercicios/36_percentual_sem_armazenamento.py" download>Baixar este exercício .py</a><pre class="enunciado"># 36 — Percentual sem armazenamento
+# Enunciado:
+# Leia n positivo e n saldos não negativos. Com mínimo fixo 10, mostre quantidade e percentual de
+# posições críticas.
+#
+# Dica:
+# Conte saldos menores que dez e calcule o percentual ao final.
+#
+# Casos para conferir sua implementação:
+# Saldos 4, 10, 18 e 6: duas posições e 50%; só saldo 10: zero por cento.
+#
+# Apoio: 07_while/exemplos/06_ocorrencias.py
+</pre></details><details id="exercicio-37_maior_e_quantidade_de_empates"><summary>37 — Maior e quantidade de empates</summary><a class="download" href="../pratica/07_while/exercicios/37_maior_e_quantidade_de_empates.py" download>Baixar este exercício .py</a><pre class="enunciado"># 37 — Maior e quantidade de empates
+# Enunciado:
+# Leia n positivo e n inteiros. Mostre o maior e quantas vezes ocorreu. Quando surgir um novo
+# maior, reinicie sua quantidade em um.
+#
+# Dica:
+# Uma igualdade acrescenta ocorrência; um novo recorde substitui o candidato e sua contagem.
+#
+# Casos para conferir sua implementação:
+# 3, 5, 5, 4, 5: maior 5 e três ocorrências; -2, -2: duas ocorrências.
+#
+# Apoio: 07_while/exemplos/04_quantidade_de_leituras.py
+</pre></details><details id="exercicio-38_saldo_apos_vendas_sucessivas"><summary>38 — Saldo após vendas sucessivas</summary><a class="download" href="../pratica/07_while/exercicios/38_saldo_apos_vendas_sucessivas.py" download>Baixar este exercício .py</a><pre class="enunciado"># 38 — Saldo após vendas sucessivas
+# Enunciado:
+# Leia saldo inicial não negativo e quantidade n não negativa de vendas. Leia n retiradas
+# positivas, cada uma não maior que o saldo disponível naquele instante. Mostre o saldo após cada
+# venda e o final.
+#
+# Dica:
+# Cada retirada usa o saldo atualizado pela anterior.
+#
+# Casos para conferir sua implementação:
+# Saldo 12, retiradas 3, 4 e 5: saldos 9, 5 e 0; n=0 mantém 12.
+#
+# Apoio: 07_while/exemplos/04_quantidade_de_leituras.py
+</pre></details><details id="exercicio-39_fechamento_com_dois_acumuladores"><summary>39 — Fechamento com dois acumuladores</summary><a class="download" href="../pratica/07_while/exercicios/39_fechamento_com_dois_acumuladores.py" download>Baixar este exercício .py</a><pre class="enunciado"># 39 — Fechamento com dois acumuladores
+# Enunciado:
+# Leia quantidades positivas vendidas até zero. Para cada quantidade, leia preço unitário
+# positivo. Mostre número de vendas, unidades vendidas e faturamento. Ao ler zero, não solicite
+# preço.
+#
+# Dica:
+# Quantidade de vendas e soma das unidades medem coisas diferentes.
+#
+# Casos para conferir sua implementação:
+# Quantidade 2, preço 10; quantidade 3, preço 4; zero: duas vendas, cinco unidades, faturamento
+# 32.
+#
+# Apoio: 07_while/exemplos/05_sentinela.py
+</pre></details><details id="exercicio-40_sintese_de_conferencia_de_estoque"><summary>40 — Síntese de conferência de estoque</summary><a class="download" href="../pratica/07_while/exercicios/40_sintese_de_conferencia_de_estoque.py" download>Baixar este exercício .py</a><pre class="enunciado"># 40 — Síntese de conferência de estoque
+# Enunciado:
+# Leia n não negativo. Para cada posição, leia saldo não negativo e mínimo positivo. Exiba
+# quantidade de posições críticas, falta total e maior falta individual. Para n=0, mostre três
+# zeros.
+#
+# Dica:
+# A falta calculada em cada volta alimenta um contador, uma soma e um candidato a maior.
+#
+# Casos para conferir sua implementação:
+# Pares saldo/mínimo 4/8, 18/10 e 6/10: duas críticas, falta total 8 e maior falta 4.
+#
+# Apoio: 07_while/exemplos/04_quantidade_de_leituras.py
+</pre></details><details id="exercicio-91_rede_91"><summary>Prever um fechamento sem vendas</summary><a class="download" href="../pratica/07_while/exercicios/91_rede_91.py" download>Baixar este exercício .py</a><pre class="enunciado"># Prever um fechamento sem vendas
+# Enunciado:
+# Faça teste de mesa do exemplo de caixa primeiro com entrada 0 e depois com 24.9, 49.8, 0. Registre quantidade e total após cada leitura.
+#
+# Dica:
+# O marcador de término não representa venda.
+#
+# Conferência:
+# Primeiro caso: zero vendas; segundo: duas vendas e 74.70.
+#
+# Apoio: 07_while/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-92_rede_92"><summary>Corrigir a contagem da sentinela</summary><a class="download" href="../pratica/07_while/exercicios/92_rede_92.py" download>Baixar este exercício .py</a><pre class="enunciado"># Corrigir a contagem da sentinela
+# Enunciado:
+# Um fechamento incrementa quantidade antes de conferir se a entrada é zero. Reorganize o processamento para contar apenas vendas positivas. Considere entradas válidas.
+#
+# Dica:
+# A condição de término decide se o dado será processado.
+#
+# Conferência:
+# Entrada inicial zero deve deixar quantidade e total em zero.
+#
+# Apoio: 07_while/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-93_rede_93"><summary>Separação por lotes — Lojas Blue</summary><a class="download" href="../pratica/07_while/exercicios/93_rede_93.py" download>Baixar este exercício .py</a><pre class="enunciado"># Separação por lotes — Lojas Blue
+# Enunciado:
+# Leia quantidade não negativa de unidades a separar. Simule retirar uma por vez até zerar e conte as retiradas.
+#
+# Dica:
+# O estado deve aproximar-se de zero.
+#
+# Conferência:
+# Quantidade 4: quatro retiradas; 0: nenhuma.
+#
+# Apoio: 07_while/exemplos/90_rede_contexto.py e exemplos básicos do tópico
+</pre></details></section><section id="avancar"><h2>Quando avançar</h2><p>Explique por que seu laço termina e resolva uma leitura por sentinela sem armazenar histórico.</p><p>Explique sua solução sem ler o código. Se houver uma divergência, encontre a primeira instrução em que seu raciocínio muda. Depois acrescente um caso próprio e confira novamente.</p></section><nav class="pager" aria-label="Sequência de estudo"><a href="06_match_case.html">← Seleção com match/case</a><a href="08_for_e_range.html">Repetição com for e range →</a></nav></main><footer class="site-footer">ALP · Cenário didático Lojas Blue · Python 3.10 ou superior</footer></div></div><script src="../assets/lessons.js"></script><script src="../assets/alp.js" defer></script></body></html>
