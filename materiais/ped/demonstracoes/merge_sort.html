@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lojas Rede - Merge Sort</title>
+    
+    <style>600;800&display=swap');
+        
+        :root {
+            /* Modo Claro (Inspirado no MkDocs Material / Modern UI) */
+            --bg-color: #ffffff;
+            --card-bg: #f8fafc;
+            --text-color: #475569;
+            --title-color: #0f172a;
+            --accent-color: #0284c7; /* Azul Padrão */
+            --border-color: #e2e8f0;
+            --canvas-bg: #f1f5f9;
+            
+            /* Cores dos Algoritmos */
+            --bar-default: #3b82f6;
+            --bar-active: #ef4444;
+            --bar-sorted: #22c55e;
+            --bar-temp: #f59e0b;
+            --bar-empty: #cbd5e1;
+            --text-canvas: #1e293b;
+            --text-canvas-light: #64748b;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Modo Escuro */
+                --bg-color: #0f172a;
+                --card-bg: #1e293b;
+                --text-color: #94a3b8;
+                --title-color: #f8fafc;
+                --accent-color: #38bdf8;
+                --border-color: #334155;
+                --canvas-bg: #0b1120;
+                
+                /* Cores dos Algoritmos */
+                --bar-default: #3b82f6;
+                --bar-active: #f43f5e;
+                --bar-sorted: #22c55e;
+                --bar-temp: #eab308;
+                --bar-empty: #475569;
+                --text-canvas: #f8fafc;
+                --text-canvas-light: #94a3b8;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        
+        body { 
+            margin: 0; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            font-family: 'Inter', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            transition: background 0.3s, color 0.3s; 
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: var(--title-color);
+            margin: 0 0 5px 0;
+            font-weight: 800;
+        }
+        
+        .header p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .container { 
+            background-color: var(--card-bg); 
+            padding: 20px; 
+            border-radius: 16px; 
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 380px; 
+        }
+
+        canvas { 
+            width: 340px; 
+            height: 520px; 
+            border-radius: 8px; 
+            background-color: var(--canvas-bg);
+            border: 1px solid var(--border-color);
+        }
+
+        .controls { 
+            margin-top: 15px; 
+            width: 100%;
+        }
+
+        button { 
+            width: 100%;
+            background-color: var(--accent-color); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            font-size: 16px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        
+        button:hover { opacity: 0.9; }
+        button:active { transform: scale(0.98); }
+    </style>
+
+<link rel="stylesheet" href="../assets/animacao.css"></head>
+<body>
+    <div class="header">
+        <h1>Merge Sort</h1>
+        <p>Estruturas de Dados • Lojas Rede</p>
+    </div>
+    <div class="container">
+        <canvas role="img" aria-label="Merge Sort: representação animada; consulte a explicação textual no caderno" id="animCanvas" width="720" height="1100"></canvas>
+        <div class="controls"><button type="button" id="play">Iniciar animação</button><button type="button" onclick="reiniciar(); window.pedRedraw()">Reiniciar</button><label>Velocidade<select id="speed"><option value="15">Lenta</option><option value="30" selected>Normal</option><option value="60">Rápida</option></select></label></div><p class="explanation">Esta versão intercala blocos de tamanho crescente usando uma área temporária.</p><p id="animation-status" role="status">Animação pausada. Use Iniciar para acompanhar.</p>
+    </div>
+<script src="../assets/animacao.js"></script><script>
+const canvas = document.getElementById('animCanvas');
+const ctx = canvas.getContext('2d');
+function isDarkMode() { return document.documentElement.dataset.theme === 'dark'; }
+function getVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+const precosOriginais = [24.9, 129.9, 39.9, 149.9, 29.9, 42.9, 18.9, 69.9, 34.9, 59.9];
+let array = [...precosOriginais];
+let tempArray = new Array(array.length).fill(null);
+let currSize = 1, leftStart = 0, animState = "MERGING";
+let i = 0, j = 0, k = 0, mid = 0, rightEnd = 0, timer = 0;
+
+function initMerge() {
+    mid = Math.min(leftStart + currSize - 1, array.length - 1);
+    rightEnd = Math.min(leftStart + 2 * currSize - 1, array.length - 1);
+    i = leftStart; j = mid + 1; k = leftStart;
+}
+initMerge();
+
+function desenharBarra(val, x, yBase, maxVal, cor) {
+    if (val === null) return;
+    let altura = (val / maxVal) * 350;
+    ctx.fillStyle = cor; ctx.beginPath(); ctx.roundRect(x, yBase - altura, 45, altura, 6); ctx.fill();
+    ctx.fillStyle = getVar('--text-canvas'); ctx.font = "bold 13px Inter"; ctx.textAlign = "center";
+    ctx.fillText(`R$${val}`, x + 22.5, yBase - altura - 8);
+}
+
+function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = getVar('--text-canvas'); ctx.font = "bold 30px Inter"; ctx.textAlign = "center";
+    ctx.fillText("Merge Sort O(n log n)", canvas.width / 2, 70);
+
+    let maxVal = Math.max(...precosOriginais);
+    let xInicial = 40, espacamento = 12, larguraBarra = 45;
+
+    ctx.fillStyle = getVar('--card-bg'); ctx.strokeStyle = getVar('--border-color'); ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.roundRect(20, 120, 680, 430, 15); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.roundRect(20, 580, 680, 430, 15); ctx.fill(); ctx.stroke();
+    
+    ctx.fillStyle = getVar('--text-canvas'); ctx.font = "bold 18px Inter"; ctx.textAlign = "left";
+    ctx.fillText("Vetor Principal", 40, 150);
+    ctx.fillText("Vetor Auxiliar (Memória Temp)", 40, 610);
+
+    for (let idx = 0; idx < array.length; idx++) {
+        let x = xInicial + idx * (larguraBarra + espacamento);
+        let cor = getVar('--bar-default');
+        if (currSize < array.length && idx >= leftStart && idx <= rightEnd) cor = getVar('--accent-color');
+        if (currSize >= array.length) cor = getVar('--bar-sorted');
+        desenharBarra(array[idx], x, 530, maxVal, cor);
+    }
+
+    for (let idx = 0; idx < tempArray.length; idx++) {
+        let x = xInicial + idx * (larguraBarra + espacamento);
+        desenharBarra(tempArray[idx], x, 990, maxVal, getVar('--bar-temp'));
+    }
+    
+    if (!window.pedIsPaused()) timer++;
+    if (!window.pedIsPaused() && timer % 15 === 0 && currSize < array.length) {
+        if (animState === "MERGING") {
+            if (i <= mid && j <= rightEnd) {
+                if (array[i] <= array[j]) { tempArray[k++] = array[i]; array[i++] = null; } 
+                else { tempArray[k++] = array[j]; array[j++] = null; }
+            } else if (i <= mid) { tempArray[k++] = array[i]; array[i++] = null; } 
+            else if (j <= rightEnd) { tempArray[k++] = array[j]; array[j++] = null; } 
+            else { animState = "COPYING"; k = leftStart; }
+        } else if (animState === "COPYING") {
+            if (k <= rightEnd) {
+                array[k] = tempArray[k]; tempArray[k] = null; k++;
+            } else {
+                leftStart += 2 * currSize;
+                if (leftStart >= array.length - 1) { currSize *= 2; leftStart = 0; }
+                animState = "MERGING"; initMerge();
+            }
+        }
+    }
+    window.pedSchedule(loop);
+}
+function reiniciar() { array = [...precosOriginais]; tempArray.fill(null); currSize = 1; leftStart = 0; animState = "MERGING"; initMerge(); timer = 0; }
+loop();
+
+</script>
+</body>
+</html>

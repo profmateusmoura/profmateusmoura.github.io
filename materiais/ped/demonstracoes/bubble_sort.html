@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lojas Rede - Bubble Sort</title>
+    
+    <style>600;800&display=swap');
+        
+        :root {
+            /* Modo Claro (Inspirado no MkDocs Material / Modern UI) */
+            --bg-color: #ffffff;
+            --card-bg: #f8fafc;
+            --text-color: #475569;
+            --title-color: #0f172a;
+            --accent-color: #0284c7; /* Azul Padrão */
+            --border-color: #e2e8f0;
+            --canvas-bg: #f1f5f9;
+            
+            /* Cores dos Algoritmos */
+            --bar-default: #3b82f6;
+            --bar-active: #ef4444;
+            --bar-sorted: #22c55e;
+            --bar-temp: #f59e0b;
+            --bar-empty: #cbd5e1;
+            --text-canvas: #1e293b;
+            --text-canvas-light: #64748b;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Modo Escuro */
+                --bg-color: #0f172a;
+                --card-bg: #1e293b;
+                --text-color: #94a3b8;
+                --title-color: #f8fafc;
+                --accent-color: #38bdf8;
+                --border-color: #334155;
+                --canvas-bg: #0b1120;
+                
+                /* Cores dos Algoritmos */
+                --bar-default: #3b82f6;
+                --bar-active: #f43f5e;
+                --bar-sorted: #22c55e;
+                --bar-temp: #eab308;
+                --bar-empty: #475569;
+                --text-canvas: #f8fafc;
+                --text-canvas-light: #94a3b8;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        
+        body { 
+            margin: 0; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            font-family: 'Inter', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            transition: background 0.3s, color 0.3s; 
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: var(--title-color);
+            margin: 0 0 5px 0;
+            font-weight: 800;
+        }
+        
+        .header p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .container { 
+            background-color: var(--card-bg); 
+            padding: 20px; 
+            border-radius: 16px; 
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 380px; 
+        }
+
+        canvas { 
+            width: 340px; 
+            height: 520px; 
+            border-radius: 8px; 
+            background-color: var(--canvas-bg);
+            border: 1px solid var(--border-color);
+        }
+
+        .controls { 
+            margin-top: 15px; 
+            width: 100%;
+        }
+
+        button { 
+            width: 100%;
+            background-color: var(--accent-color); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            font-size: 16px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        
+        button:hover { opacity: 0.9; }
+        button:active { transform: scale(0.98); }
+    </style>
+
+<link rel="stylesheet" href="../assets/animacao.css"></head>
+<body>
+    <div class="header">
+        <h1>Bubble Sort</h1>
+        <p>Estruturas de Dados • Lojas Rede</p>
+    </div>
+    <div class="container">
+        <canvas role="img" aria-label="Bubble Sort: representação animada; consulte a explicação textual no caderno" id="animCanvas" width="720" height="1100"></canvas>
+        <div class="controls"><button type="button" id="play">Iniciar animação</button><button type="button" onclick="reiniciar(); window.pedRedraw()">Reiniciar</button><label>Velocidade<select id="speed"><option value="15">Lenta</option><option value="30" selected>Normal</option><option value="60">Rápida</option></select></label></div><p class="explanation">Acompanhe a comparação de vizinhos e a variável temporária durante a troca.</p><p id="animation-status" role="status">Animação pausada. Use Iniciar para acompanhar.</p>
+    </div>
+<script src="../assets/animacao.js"></script><script>
+const canvas = document.getElementById('animCanvas');
+const ctx = canvas.getContext('2d');
+function isDarkMode() { return document.documentElement.dataset.theme === 'dark'; }
+function getVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+const precosOriginais = [24.9, 129.9, 39.9, 149.9, 29.9, 42.9, 18.9, 69.9, 34.9, 59.9];
+let array = [...precosOriginais];
+let i = 0, j = 0, timer = 0;
+let tempVal = null, swapState = 0; // 0: compare, 1: toTemp, 2: shift, 3: fromTemp
+
+function desenharBarra(val, x, largura, yBase, alturaMax, maxVal, cor) {
+    if (val === null) {
+        ctx.strokeStyle = getVar('--bar-empty'); ctx.setLineDash([6, 6]); ctx.lineWidth = 2;
+        ctx.strokeRect(x, yBase - alturaMax, largura, alturaMax); ctx.setLineDash([]);
+    } else {
+        let altura = (val / maxVal) * alturaMax;
+        ctx.fillStyle = cor; ctx.beginPath(); ctx.roundRect(x, yBase - altura, largura, altura, 6); ctx.fill();
+        ctx.fillStyle = getVar('--text-canvas'); ctx.font = "bold 15px Inter"; ctx.textAlign = "center";
+        ctx.fillText(`R$${val}`, x + largura / 2, yBase - altura - 10);
+    }
+}
+
+function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = getVar('--text-canvas'); ctx.font = "bold 30px Inter"; ctx.textAlign = "center";
+    ctx.fillText("Bubble Sort O(n²)", canvas.width / 2, 70);
+    
+    // Caixa Temp
+    ctx.fillStyle = getVar('--card-bg'); ctx.strokeStyle = getVar('--border-color'); ctx.lineWidth=2;
+    ctx.beginPath(); ctx.roundRect(500, 120, 180, 80, 10); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = getVar('--text-canvas-light'); ctx.font = "16px Inter"; ctx.textAlign = "center";
+    ctx.fillText("Var Temporária", 590, 145);
+    
+    if (tempVal !== null) {
+        ctx.fillStyle = getVar('--bar-active'); ctx.font = "bold 24px Inter";
+        ctx.fillText(`R$${tempVal}`, 590, 180);
+    } else {
+        ctx.fillStyle = getVar('--bar-empty'); ctx.font = "italic 18px Inter";
+        ctx.fillText("[ Vazio ]", 590, 180);
+    }
+
+    let maxVal = Math.max(...precosOriginais);
+    let larguraBarra = 52, espacamento = 14, xInicial = 30, alturaMaxima = 550, yBase = 950;
+
+    for (let k = 0; k < array.length; k++) {
+        let val = array[k];
+        let x = xInicial + k * (larguraBarra + espacamento);
+        let cor = (k >= array.length - i) ? getVar('--bar-sorted') : 
+                  ((k === j || k === j + 1) ? getVar('--bar-active') : getVar('--bar-default'));
+        desenharBarra(val, x, larguraBarra, yBase, alturaMaxima, maxVal, cor);
+    }
+
+    if (!window.pedIsPaused()) timer++;
+    if (!window.pedIsPaused() && timer % 15 === 0 && i < array.length - 1) {
+        if (swapState === 0) {
+            if (array[j] !== null && array[j+1] !== null && array[j] > array[j + 1]) {
+                tempVal = array[j]; array[j] = null; swapState = 1;
+            } else {
+                j++; if (j >= array.length - i - 1) { j = 0; i++; }
+            }
+        } else if (swapState === 1) {
+            array[j] = array[j+1]; array[j+1] = null; swapState = 2;
+        } else if (swapState === 2) {
+            array[j+1] = tempVal; tempVal = null; swapState = 0;
+            j++; if (j >= array.length - i - 1) { j = 0; i++; }
+        }
+    }
+    window.pedSchedule(loop);
+}
+function reiniciar() { array = [...precosOriginais]; i = 0; j = 0; swapState = 0; tempVal = null; timer = 0; }
+loop();
+
+</script>
+</body>
+</html>
