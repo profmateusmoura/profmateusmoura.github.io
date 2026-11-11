@@ -15,9 +15,9 @@
  if(input){let entries=null;const results=document.getElementById('search-results');const normalize=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   input.addEventListener('input',async()=>{const query=normalize(input.value.trim());results.replaceChildren();if(query.length<2)return;
    try{entries=entries||await fetch('assets/search-index.json').then(r=>{if(!r.ok)throw Error();return r.json();});if(query!==normalize(input.value.trim()))return;
-    const hits=entries.filter(e=>normalize(e.title+' '+e.text).includes(query)).slice(0,25);if(!hits.length)results.textContent='Nenhuma atividade encontrada.';
+    const hits=entries.filter(e=>normalize(e.title+' '+e.text).includes(query)).slice(0,25);if(!hits.length)results.textContent='Nenhuma explicação encontrada.';
     hits.forEach(hit=>{const a=document.createElement('a');a.href=hit.url;a.textContent=hit.title;results.append(a);});
-   }catch(e){results.textContent='A busca está indisponível aqui. Use os cadernos abaixo para encontrar as atividades.';}
+   }catch(e){results.textContent='A busca está indisponível aqui. Use os cadernos abaixo para encontrar os conceitos.';}
   });
  }
  // Reveal a linked activity when arriving from search.
