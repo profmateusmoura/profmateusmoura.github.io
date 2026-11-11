@@ -10,4 +10,4 @@ Site educacional independente, incorporado ao Portal de Estudos.
 
 Para publicar: mantenha a pasta inteira em `materiais/ped/`.
 
-Prática: `pratica/` contém 24 pastas com exemplos e exercícios. O pacote `arquivos/PED_Praticas_Python.zip` reúne 72 arquivos Python e dois guias. As simulações guiadas dos cadernos usam `assets/pratica-data.js`, `assets/pratica.js` e `assets/pratica.css`; não executam Python no navegador.
+Prática: `pratica/` contém 24 pastas com exemplos e exercícios. O pacote `arquivos/PED_Praticas_Python.zip` reúne 72 arquivos Python e três guias. As simulações guiadas dos cadernos usam `assets/pratica-data.js`, `assets/pratica.js` e `assets/pratica.css`; não executam Python no navegador.
