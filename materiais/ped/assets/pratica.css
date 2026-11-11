@@ -1,0 +1,9 @@
+.ped-practice{margin:2rem 0;padding:clamp(.8rem,3vw,1.4rem);border:1px solid var(--border,currentColor);border-radius:1rem;background:var(--bg,Canvas);color:var(--ink,CanvasText)}
+.ped-practice [hidden]{display:none!important}.ped-practice h3{margin-top:0}
+.ped-practice pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:.8rem;border:1px solid var(--border,currentColor);border-radius:.5rem}
+.ped-state,.ped-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0}
+.ped-cell{padding:.7rem;border:1px solid currentColor;border-radius:.5rem;overflow-wrap:anywhere;max-width:100%}
+.ped-practice label{display:grid;gap:.4rem;margin:1rem 0}.ped-practice input{width:7rem}
+.ped-practice button,.ped-practice input{font:inherit;min-height:2.75rem;max-width:100%;padding:.4rem .7rem;border:1px solid currentColor;border-radius:.5rem;background:Canvas;color:CanvasText}
+.ped-practice button:enabled{cursor:pointer}.ped-practice button:disabled{opacity:.5}.ped-practice :focus-visible{outline:3px solid Highlight;outline-offset:3px}
+.ped-practice [data-feedback]{min-height:1.5em;font-weight:600}.ped-practice a{overflow-wrap:anywhere}
