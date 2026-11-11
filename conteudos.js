@@ -9,8 +9,8 @@ window.CATALOGO_MATERIAIS = [
     subtitulo: 'Algoritmos e Lógica de Programação',
     descricao: 'Os primeiros passos em Python: variáveis, operações, decisões, repetições e funções.',
     categoria: 'Fundamentos', nivel: 'Iniciante',
-    detalhes: 'Material em preparação', destaque: 'ALP',
-    caminho: 'materiais/alp/index.html', cor: 'azul', disponivel: false,
+    detalhes: '13 cadernos · 117 exemplos · 301 exercícios', destaque: 'ALP',
+    caminho: 'materiais/alp/index.html', cor: 'azul', disponivel: true,
     temas: ['Algoritmos', 'Python', 'Variáveis', 'Condições', 'Repetição', 'Funções']
   },
   {

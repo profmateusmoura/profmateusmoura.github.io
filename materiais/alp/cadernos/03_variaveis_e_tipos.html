@@ -1,0 +1,298 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Algoritmos e Lógica de Programação em Python: Variáveis e tipos"><title>Variáveis e tipos · ALP</title><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/alp.css"></head><body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><div class="app-frame"><aside class="sidebar" id="sidebar"><a class="brand" href="../index.html"><strong>ALP</strong><small>Algoritmos e Lógica de Programação</small></a><nav class="site-nav" aria-label="Cadernos"><a class="nav-module " href="../cadernos/01_output.html"><span class="nav-index">01</span><span>Saída de dados</span></a><a class="nav-module " href="../cadernos/02_input.html"><span class="nav-index">02</span><span>Entrada de dados</span></a><a class="nav-module active" href="../cadernos/03_variaveis_e_tipos.html"><span class="nav-index">03</span><span>Variáveis e tipos</span></a><a class="nav-module " href="../cadernos/04_operadores.html"><span class="nav-index">04</span><span>Operadores</span></a><a class="nav-module " href="../cadernos/05_if_elif_else.html"><span class="nav-index">05</span><span>Decisões com if, elif e else</span></a><a class="nav-module " href="../cadernos/06_match_case.html"><span class="nav-index">06</span><span>Seleção com match/case</span></a><a class="nav-module " href="../cadernos/07_while.html"><span class="nav-index">07</span><span>Repetição com while</span></a><a class="nav-module " href="../cadernos/08_for_e_range.html"><span class="nav-index">08</span><span>Repetição com for e range</span></a><a class="nav-module " href="../cadernos/09_algoritmos_basicos.html"><span class="nav-index">09</span><span>Algoritmos básicos</span></a><a class="nav-module " href="../cadernos/10_validacao_e_controle_de_fluxo.html"><span class="nav-index">10</span><span>Validação e controle de fluxo</span></a><a class="nav-module " href="../cadernos/11_funcoes.html"><span class="nav-index">11</span><span>Funções</span></a><a class="nav-module " href="../cadernos/12_decomposicao_de_problemas.html"><span class="nav-index">12</span><span>Decomposição de problemas</span></a><a class="nav-module " href="../cadernos/13_teste_de_mesa.html"><span class="nav-index">13</span><span>Teste de mesa</span></a></nav><a class="portal" href="../../../index.html">← Portal de materiais</a></aside><div class="main-area"><header class="topbar"><button id="menu" aria-controls="sidebar" aria-expanded="false">Cadernos</button><a href="../index.html">ALP · Lojas Blue</a><button id="theme" aria-label="Alternar tema claro e escuro">Tema claro/escuro</button></header><main id="conteudo" class="alp-content"><div class="article-header"><p>CADERNO 03 · FUNDAMENTOS</p><h1>Variáveis e tipos</h1><p>Distinguir int, float, str e bool e acompanhar atribuições.</p><p>8 exemplos e 13 exercícios da trilha original.</p><a class="download" href="../arquivos/ALP_03_variaveis_e_tipos.zip" download>Baixar exemplos e exercícios deste assunto</a></div><nav class="local-nav" aria-label="Seções"><a href="#conceitos">Entender</a><a href="#acompanhado">Acompanhar</a><a href="#exemplos">Exemplos</a><a href="#exercicios">Exercícios</a><a href="#avancar">Conferir aprendizagem</a></nav><section id="conceitos"><h2>Entenda a ideia</h2><h3>Atribuir é dar um nome a um valor</h3><p>Para reutilizar uma informação, associamos um nome a um valor. Em estoque = 18, o lado direito é avaliado e seu valor é associado ao nome estoque. O sinal = representa atribuição. Uma nova atribuição ao mesmo nome substitui sua associação anterior; ela não altera automaticamente outros nomes que receberam o valor antes.</p><h3>O tipo determina o significado da informação</h3><p>int representa inteiros; float representa números com parte fracionária; str representa texto; bool representa True ou False. O texto &quot;18&quot; e o inteiro 18 parecem iguais ao serem exibidos, mas têm tipos diferentes. input sempre fornece texto. int e float fazem conversões quando esse texto tem um formato aceito. Neste tópico, use entradas válidas; o tratamento de erros será estudado posteriormente.</p><h3>Valor armazenado e apresentação são diferentes</h3><p>Uma formatação como :.2f controla quantas casas decimais aparecem na saída. Ela não transforma a variável original em uma quantidade monetária exata. Use ponto para digitar números decimais em float. Escolha nomes que expliquem o papel de cada informação e acompanhe as atribuições em um rascunho antes de executar. Os cálculos e comparações entram no próximo caderno.</p></section><aside class="callout"><strong>Erros para observar</strong><p>Ler = como igualdade matemática; usar nomes sem significado; presumir que int arredonda; confundir o texto False com o valor booleano False.</p></aside><section id="acompanhado"><h2>Um exemplo acompanhado</h2><p>Leia o código antes de avançar. Cada passo explica uma mudança ou decisão. A simulação tem uma sequência fixa; os arquivos Python permitem experimentar outras entradas.</p><pre><code>estoque = 18
+copia = estoque
+estoque = 10
+print(estoque)
+print(copia)</code></pre><details><summary>Conferir a saída</summary><pre>10
+18</pre></details><div class="trace" data-trace="2"><p data-state role="status"></p><progress value="0" max="4" aria-label="Progresso do exemplo"></progress><div class="actions"><button data-back>Voltar</button><button data-next>Próximo passo</button><button data-reset>Recomeçar</button></div></div><fieldset class="quiz"><legend>Após estoque = 10, quanto vale copia?</legend><button data-correct="false" data-why="A atribuição de inteiros feita antes não cria uma atualização automática entre os nomes.">10</button><button data-correct="true" data-why="A atribuição de inteiros feita antes não cria uma atualização automática entre os nomes.">18</button><button data-correct="false" data-why="A atribuição de inteiros feita antes não cria uma atualização automática entre os nomes.">Não existe mais</button><p data-feedback role="status"></p></fieldset></section><section id="exemplos"><h2>Estude os exemplos do assunto</h2><p>Abra os exemplos em ordem. Os comentários apresentam objetivo, demonstração e cuidados. Use o arquivo baixado para executar Python; o caderno apresenta o código para leitura.</p><details id="exemplo-01_tipos_escalares"><summary>01 — Quatro tipos escalares</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exemplos/01_tipos_escalares.py" download>Baixar este exemplo .py</a><pre><code># 01 — Quatro tipos escalares
+# Objetivo: Identificar tipos sem coleções.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: type informa o tipo do valor atualmente associado ao nome.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &quot;&lt;class &#x27;bool&#x27;&gt;&quot;
+
+# = associa o valor da direita ao nome da esquerda: é atribuição.
+# Neste tópico apenas guardamos, copiamos e exibimos valores, sem contas.
+# int: contagem inteira; float: valor com parte fracionária.
+quantidade = 4
+temperatura = 23.5
+# str: texto simples; bool: verdadeiro ou falso.
+curso = &quot;ALP&quot;
+ativo = True
+print(quantidade, type(quantidade))
+print(temperatura, type(temperatura))
+print(curso, type(curso))
+print(ativo, type(ativo))
+</code></pre></details><details id="exemplo-02_reatribuicao"><summary>02 — Atribuição e reatribuição</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exemplos/02_reatribuicao.py" download>Baixar este exemplo .py</a><pre><code># 02 — Atribuição e reatribuição
+# Objetivo: Acompanhar mudanças de estado.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Uma nova atribuição substitui o valor associado ao nome.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Saldo final: 105&#x27;
+
+saldo = 100
+print(&quot;Saldo inicial:&quot;, saldo)
+# Atribuímos outro valor diretamente, sem calcular com o anterior.
+saldo = 120
+print(&quot;Após reatribuição:&quot;, saldo)
+saldo = 105
+print(&quot;Saldo final:&quot;, saldo)
+</code></pre></details><details id="exemplo-03_nomes_e_copia"><summary>03 — Nomes e cópia de valores</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exemplos/03_nomes_e_copia.py" download>Baixar este exemplo .py</a><pre><code># 03 — Nomes e cópia de valores
+# Objetivo: Distinguir nomes que recebem valores iguais.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Alterar original não recalcula automaticamente copia.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Cópia: 8&#x27;
+
+# Prefira nomes descritivos em snake_case.
+valor_original = 8
+valor_copiado = valor_original
+valor_original = 12
+print(&quot;Original:&quot;, valor_original)
+print(&quot;Cópia:&quot;, valor_copiado)
+# A atribuição copiou o valor existente naquele instante.
+</code></pre></details><details id="exemplo-04_conversoes"><summary>04 — Conversões explícitas</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exemplos/04_conversoes.py" download>Baixar este exemplo .py</a><pre><code># 04 — Conversões explícitas
+# Objetivo: Distinguir conversão e arredondamento.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: int descarta a parte fracionária em direção a zero.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Outro valor convertido: 8&#x27;
+
+texto = &quot;42&quot;
+inteiro = int(texto)
+decimal = float(inteiro)
+representacao = str(decimal)
+print(inteiro, type(inteiro))
+print(decimal, type(decimal))
+print(representacao, type(representacao))
+# Isto não é arredondar para o inteiro mais próximo.
+print(&quot;Parte inteira:&quot;, int(7.9))
+print(&quot;Outro valor convertido:&quot;, int(8.2))
+# As conversões aqui não envolvem contas ou comparações.
+</code></pre></details><details id="exemplo-05_troca_escalar"><summary>05 — Troca com variável auxiliar</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exemplos/05_troca_escalar.py" download>Baixar este exemplo .py</a><pre><code># 05 — Troca com variável auxiliar
+# Objetivo: Preservar um valor durante uma troca.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A variável auxiliar evita perder o primeiro valor.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Segundo: 10&#x27;
+
+primeiro = 10
+segundo = 20
+# Não usamos a forma de troca por tupla neste curso.
+auxiliar = primeiro
+primeiro = segundo
+segundo = auxiliar
+print(&quot;Primeiro:&quot;, primeiro)
+print(&quot;Segundo:&quot;, segundo)
+</code></pre></details><details id="exemplo-06_formatacao"><summary>06 — Apresentação de variáveis</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exemplos/06_formatacao.py" download>Baixar este exemplo .py</a><pre><code># 06 — Apresentação de variáveis
+# Objetivo: Usar f-strings e casas decimais.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Formatar a saída não muda o valor armazenado.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;Medida armazenada: 1.23456&#x27;
+
+produto = &quot;Caneta&quot;
+preco = 3.5
+# f antes das aspas permite inserir valores entre chaves.
+# :.2f pede duas casas decimais na apresentação.
+print(f&quot;{produto}: R$ {preco:.2f}&quot;)
+medida = 1.23456
+print(f&quot;Medida apresentada: {medida:.2f}&quot;)
+print(&quot;Medida armazenada:&quot;, medida)
+# float aproxima alguns decimais; este curso usa contas didáticas.
+</code></pre></details><details id="exemplo-07_leitura_numerica"><summary>07 — Guardar uma entrada convertida</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exemplos/07_leitura_numerica.py" download>Baixar este exemplo .py</a><pre><code># 07 — Guardar uma entrada convertida
+# Objetivo: Ler números depois de conhecer variáveis e tipos.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A conversão altera o tipo; nenhuma conta é feita neste exemplo.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   18
+#   1.75
+# Confira na saída: &#x27;Altura informada: 1.75&#x27;
+
+# input é avaliado primeiro; int converte; = guarda o resultado.
+idade = int(input(&quot;Idade inteira: &quot;))
+# Use ponto para digitar a parte decimal.
+altura = float(input(&quot;Altura em metros: &quot;))
+print(&quot;Idade informada:&quot;, idade)
+print(&quot;Tipo da idade:&quot;, type(idade))
+print(&quot;Altura informada:&quot;, altura)
+print(&quot;Tipo da altura:&quot;, type(altura))
+# Suponha digitação numérica válida. Não vamos validar a entrada aqui.
+</code></pre></details><details id="exemplo-90_rede_contexto"><summary>Ficha escalar de produto — cenário didático Lojas Blue</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exemplos/90_rede_contexto.py" download>Baixar este exemplo .py</a><pre><code># Ficha escalar de produto — cenário didático Lojas Blue
+# Objetivo: Guardar dados de um produto sem realizar cálculos.
+# Pré-requisito: tópicos anteriores e exemplos anteriores deste tópico.
+# Estude: preveja o resultado, execute e altere um dado por vez.
+# Confira na saída: &#x27;Preço informado: 24.90&#x27;
+# Sem entrada interativa.
+
+# Recorte do produto 1; cada nome guarda um único valor.
+produto_id = 1
+nome = &quot;Shampoo Nutritivo 350 ml&quot;
+preco = 24.9
+disponivel = True
+print(&quot;Produto:&quot;, produto_id, nome)
+print(f&quot;Preço informado: {preco:.2f}&quot;)
+print(&quot;Disponível:&quot;, disponivel)
+# A apresentação com duas casas não calcula desconto ou total.
+</code></pre></details></section><section id="exercicios"><h2>Pratique com os enunciados originais</h2><p>Resolva antes de consultar novamente o exemplo. Registre sua previsão e confira os casos indicados. Os arquivos de exercício contêm comentários e não produzem saída até você implementar a solução.</p><details id="exercicio-01_identificar_tipos"><summary>01 — Identificar tipos</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/01_identificar_tipos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 01 — Identificar tipos
+# Enunciado:
+# Crie quatro variáveis com valores int, float, str e bool e mostre cada valor acompanhado de type.
+#
+# Dica:
+# True e False não levam aspas.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 03_variaveis_e_tipos/exemplos/01_tipos_escalares.py
+#
+# Casos para conferir sua implementação:
+# O valor 2.0 deve ter tipo float; o texto 2 deve ter tipo str.
+</pre></details><details id="exercicio-02_numero_ou_texto"><summary>02 — Número ou texto</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/02_numero_ou_texto.py" download>Baixar este exercício .py</a><pre class="enunciado"># 02 — Número ou texto
+# Enunciado:
+# Guarde 30 como inteiro em uma variável e como texto em outra. Mostre os dois tipos.
+#
+# Dica:
+# Aparência parecida no terminal não significa mesmo tipo.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 03_variaveis_e_tipos/exemplos/01_tipos_escalares.py
+#
+# Casos para conferir sua implementação:
+# Os tipos devem ser int e str, respectivamente.
+</pre></details><details id="exercicio-03_reatribuir_estoque"><summary>03 — Reatribuir estoque</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/03_reatribuir_estoque.py" download>Baixar este exercício .py</a><pre class="enunciado"># 03 — Reatribuir estoque
+# Enunciado:
+# Atribua 12 a estoque e exiba. Depois atribua diretamente 17 e exiba. Por fim, atribua diretamente 13 e exiba. Não faça cálculos.
+#
+# Dica:
+# Uma nova atribuição substitui o valor anterior associado ao mesmo nome.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 03_variaveis_e_tipos/exemplos/02_reatribuicao.py
+#
+# Casos para conferir sua implementação:
+# Os três estados devem ser 12, 17 e 13.
+</pre></details><details id="exercicio-04_copia_independente"><summary>04 — Cópia independente</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/04_copia_independente.py" download>Baixar este exercício .py</a><pre class="enunciado"># 04 — Cópia independente
+# Enunciado:
+# Defina original como 7, copie esse valor para copia e depois atribua 11 a original. Exiba ambas.
+#
+# Dica:
+# A atribuição não cria uma fórmula que se atualiza sozinha.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 03_variaveis_e_tipos/exemplos/03_nomes_e_copia.py
+#
+# Casos para conferir sua implementação:
+# original deve valer 11 e copia deve continuar valendo 7.
+</pre></details><details id="exercicio-05_conversao_explicita"><summary>05 — Conversão explícita</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/05_conversao_explicita.py" download>Baixar este exercício .py</a><pre class="enunciado"># 05 — Conversão explícita
+# Enunciado:
+# Guarde o texto 18, converta-o para int, converta esse inteiro para float e exiba os tipos em cada etapa.
+#
+# Dica:
+# Use uma variável por etapa para observar a mudança.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 03_variaveis_e_tipos/exemplos/04_conversoes.py
+#
+# Casos para conferir sua implementação:
+# O último valor deve ser 18.0 com tipo float.
+</pre></details><details id="exercicio-06_truncamento"><summary>06 — Truncamento</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/06_truncamento.py" download>Baixar este exercício .py</a><pre class="enunciado"># 06 — Truncamento
+# Enunciado:
+# Converta 8.9 e 8.2 para int e exiba os resultados. Explique em comentários por que isso não é arredondar para o inteiro mais próximo.
+#
+# Dica:
+# Observe o que acontece à parte fracionária dos dois valores positivos.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 03_variaveis_e_tipos/exemplos/04_conversoes.py
+#
+# Casos para conferir sua implementação:
+# Os dois resultados devem ser 8.
+</pre></details><details id="exercicio-07_troca_de_valores"><summary>07 — Troca de valores</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/07_troca_de_valores.py" download>Baixar este exercício .py</a><pre class="enunciado"># 07 — Troca de valores
+# Enunciado:
+# Leia dois inteiros e troque seus valores usando uma variável auxiliar. Não use atribuição múltipla ou tupla.
+#
+# Dica:
+# Preserve um valor antes de sobrescrevê-lo.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 03_variaveis_e_tipos/exemplos/05_troca_escalar.py
+# 03_variaveis_e_tipos/exemplos/07_leitura_numerica.py
+#
+# Casos para conferir sua implementação:
+# Entradas 4 e 9 devem terminar como 9 e 4.
+</pre></details><details id="exercicio-08_preco_formatado"><summary>08 — Preço formatado</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/08_preco_formatado.py" download>Baixar este exercício .py</a><pre class="enunciado"># 08 — Preço formatado
+# Enunciado:
+# Guarde nome de produto e preço decimal. Exiba nome e preço com duas casas decimais usando f-string.
+#
+# Dica:
+# A especificação :.2f controla a apresentação.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 03_variaveis_e_tipos/exemplos/06_formatacao.py
+#
+# Casos para conferir sua implementação:
+# Para Borracha e 2.5, a linha deve incluir Borracha e 2.50.
+</pre></details><details id="exercicio-09_valor_e_apresentacao"><summary>09 — Valor e apresentação</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/09_valor_e_apresentacao.py" download>Baixar este exercício .py</a><pre class="enunciado"># 09 — Valor e apresentação
+# Enunciado:
+# Guarde 3.14159, mostre com duas casas e depois mostre novamente sem formatação.
+#
+# Dica:
+# Formatar a saída não altera a variável.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 03_variaveis_e_tipos/exemplos/06_formatacao.py
+#
+# Casos para conferir sua implementação:
+# A primeira apresentação deve ser 3.14; a segunda, 3.14159.
+</pre></details><details id="exercicio-10_estado_booleano"><summary>10 — Estado booleano</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/10_estado_booleano.py" download>Baixar este exercício .py</a><pre class="enunciado"># 10 — Estado booleano
+# Enunciado:
+# Crie a variável concluido com False, mostre valor e tipo, atribua True e mostre novamente.
+#
+# Dica:
+# Não escreva os estados como textos.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 03_variaveis_e_tipos/exemplos/01_tipos_escalares.py
+# 03_variaveis_e_tipos/exemplos/02_reatribuicao.py
+#
+# Casos para conferir sua implementação:
+# O tipo deve ser bool nas duas etapas.
+</pre></details><details id="exercicio-91_rede_91"><summary>Prever a cópia de um cadastro</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/91_rede_91.py" download>Baixar este exercício .py</a><pre class="enunciado"># Prever a cópia de um cadastro
+# Enunciado:
+# Considere nome = &quot;Shampoo&quot;, anterior = nome e depois nome = &quot;Shampoo promocional&quot;. Preveja os valores de nome e anterior e explique a atribuição.
+#
+# Dica:
+# Registre o valor associado a cada nome após cada linha.
+#
+# Conferência:
+# anterior permanece com Shampoo.
+#
+# Apoio: 03_variaveis_e_tipos/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-92_rede_92"><summary>Comparar número e apresentação</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/92_rede_92.py" download>Baixar este exercício .py</a><pre class="enunciado"># Comparar número e apresentação
+# Enunciado:
+# Guarde preco = 24.9. Mostre o valor com duas casas e depois mostre valor e tipo sem formatação. Explique o que mudou.
+#
+# Dica:
+# A f-string controla a saída.
+#
+# Conferência:
+# A apresentação é 24.90; o valor continua float.
+#
+# Apoio: 03_variaveis_e_tipos/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-93_rede_93"><summary>Alteração cadastral — Lojas Blue</summary><a class="download" href="../pratica/03_variaveis_e_tipos/exercicios/93_rede_93.py" download>Baixar este exercício .py</a><pre class="enunciado"># Alteração cadastral — Lojas Blue
+# Enunciado:
+# Guarde a cidade Sete Lagoas, copie para cidade_anterior e atribua Contagem à primeira variável. Mostre ambas.
+#
+# Dica:
+# Uma cópia não acompanha novas atribuições.
+#
+# Conferência:
+# Cidade atual Contagem; anterior Sete Lagoas.
+#
+# Apoio: 03_variaveis_e_tipos/exemplos/90_rede_contexto.py e exemplos básicos do tópico
+</pre></details></section><section id="avancar"><h2>Quando avançar</h2><p>Acompanhe uma troca com auxiliar e explique por que uma cópia não acompanha futuras reatribuições. Diferencie valor armazenado e apresentação com casas decimais.</p><p>Explique sua solução sem ler o código. Se houver uma divergência, encontre a primeira instrução em que seu raciocínio muda. Depois acrescente um caso próprio e confira novamente.</p></section><nav class="pager" aria-label="Sequência de estudo"><a href="02_input.html">← Entrada de dados</a><a href="04_operadores.html">Operadores →</a></nav></main><footer class="site-footer">ALP · Cenário didático Lojas Blue · Python 3.10 ou superior</footer></div></div><script src="../assets/lessons.js"></script><script src="../assets/alp.js" defer></script></body></html>

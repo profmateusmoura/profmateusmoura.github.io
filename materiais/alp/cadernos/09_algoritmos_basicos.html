@@ -1,0 +1,562 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Algoritmos e Lógica de Programação em Python: Algoritmos básicos"><title>Algoritmos básicos · ALP</title><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/alp.css"></head><body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><div class="app-frame"><aside class="sidebar" id="sidebar"><a class="brand" href="../index.html"><strong>ALP</strong><small>Algoritmos e Lógica de Programação</small></a><nav class="site-nav" aria-label="Cadernos"><a class="nav-module " href="../cadernos/01_output.html"><span class="nav-index">01</span><span>Saída de dados</span></a><a class="nav-module " href="../cadernos/02_input.html"><span class="nav-index">02</span><span>Entrada de dados</span></a><a class="nav-module " href="../cadernos/03_variaveis_e_tipos.html"><span class="nav-index">03</span><span>Variáveis e tipos</span></a><a class="nav-module " href="../cadernos/04_operadores.html"><span class="nav-index">04</span><span>Operadores</span></a><a class="nav-module " href="../cadernos/05_if_elif_else.html"><span class="nav-index">05</span><span>Decisões com if, elif e else</span></a><a class="nav-module " href="../cadernos/06_match_case.html"><span class="nav-index">06</span><span>Seleção com match/case</span></a><a class="nav-module " href="../cadernos/07_while.html"><span class="nav-index">07</span><span>Repetição com while</span></a><a class="nav-module " href="../cadernos/08_for_e_range.html"><span class="nav-index">08</span><span>Repetição com for e range</span></a><a class="nav-module active" href="../cadernos/09_algoritmos_basicos.html"><span class="nav-index">09</span><span>Algoritmos básicos</span></a><a class="nav-module " href="../cadernos/10_validacao_e_controle_de_fluxo.html"><span class="nav-index">10</span><span>Validação e controle de fluxo</span></a><a class="nav-module " href="../cadernos/11_funcoes.html"><span class="nav-index">11</span><span>Funções</span></a><a class="nav-module " href="../cadernos/12_decomposicao_de_problemas.html"><span class="nav-index">12</span><span>Decomposição de problemas</span></a><a class="nav-module " href="../cadernos/13_teste_de_mesa.html"><span class="nav-index">13</span><span>Teste de mesa</span></a></nav><a class="portal" href="../../../index.html">← Portal de materiais</a></aside><div class="main-area"><header class="topbar"><button id="menu" aria-controls="sidebar" aria-expanded="false">Cadernos</button><a href="../index.html">ALP · Lojas Blue</a><button id="theme" aria-label="Alternar tema claro e escuro">Tema claro/escuro</button></header><main id="conteudo" class="alp-content"><div class="article-header"><p>CADERNO 09 · FUNDAMENTOS</p><h1>Algoritmos básicos</h1><p>Construir algoritmos numéricos usando somente variáveis escalares.</p><p>17 exemplos e 19 exercícios da trilha original.</p><a class="download" href="../arquivos/ALP_09_algoritmos_basicos.zip" download>Baixar exemplos e exercícios deste assunto</a></div><nav class="local-nav" aria-label="Seções"><a href="#conceitos">Entender</a><a href="#acompanhado">Acompanhar</a><a href="#exemplos">Exemplos</a><a href="#exercicios">Exercícios</a><a href="#avancar">Conferir aprendizagem</a></nav><section id="conceitos"><h2>Entenda a ideia</h2><h3>Combinar mecanismos para resolver um problema</h3><p>Conhecer a sintaxe de um laço não basta para calcular uma média ou identificar um número primo. Comece pelo contrato: quais entradas são aceitas, qual resultado é desejado e quais variáveis são necessárias. Na média de leituras, mantenha soma e quantidade; em extremos, acompanhe menor e maior. Inicializar o maior com zero só é adequado quando o domínio garante que isso não invalida o resultado.</p><h3>Enxergar uma propriedade que permanece válida</h3><p>Depois de processar cada leitura, a soma deve representar exatamente os valores já recebidos. Essa frase é uma propriedade de acompanhamento. Para contar divisores, o contador deve representar quantos candidatos já testados dividiram o número sem resto. Escrever essa propriedade ajuda a decidir onde inicializar, atualizar e apresentar o resultado.</p><h3>Aprender famílias de estratégias</h3><p>Os exemplos deste caderno exploram divisores, primalidade, fatorial, Fibonacci, MDC, MMC, algarismos e padrões. Não memorize uma receita única. Observe como o resto da divisão testa divisibilidade, como // remove o último algarismo de um inteiro não negativo e como variáveis auxiliares preservam um valor antes de uma atualização. Respeite o domínio declarado em cada problema: zero, negativos e entrada vazia podem exigir regras próprias.</p></section><aside class="callout"><strong>Erros para observar</strong><p>Começar maior ou menor em zero arbitrário; iniciar produto em zero; classificar um como primo; perder um estado no Fibonacci; esquecer que zero possui um dígito; tentar preservar zeros à esquerda em um inteiro.</p></aside><section id="acompanhado"><h2>Um exemplo acompanhado</h2><p>Leia o código antes de avançar. Cada passo explica uma mudança ou decisão. A simulação tem uma sequência fixa; os arquivos Python permitem experimentar outras entradas.</p><pre><code>numero = 123
+soma = 0
+while numero &gt; 0:
+    soma += numero % 10
+    numero //= 10
+print(soma)</code></pre><details><summary>Conferir a saída</summary><pre>6</pre></details><div class="trace" data-trace="8"><p data-state role="status"></p><progress value="0" max="4" aria-label="Progresso do exemplo"></progress><div class="actions"><button data-back>Voltar</button><button data-next>Próximo passo</button><button data-reset>Recomeçar</button></div></div><fieldset class="quiz"><legend>Qual operação remove o último algarismo de um inteiro positivo?</legend><button data-correct="false" data-why="A divisão inteira por 10 remove a unidade; o resto identifica o algarismo removido.">numero % 10</button><button data-correct="true" data-why="A divisão inteira por 10 remove a unidade; o resto identifica o algarismo removido.">numero // 10</button><button data-correct="false" data-why="A divisão inteira por 10 remove a unidade; o resto identifica o algarismo removido.">numero * 10</button><p data-feedback role="status"></p></fieldset></section><section id="exemplos"><h2>Estude os exemplos do assunto</h2><p>Abra os exemplos em ordem. Os comentários apresentam objetivo, demonstração e cuidados. Use o arquivo baixado para executar Python; o caderno apresenta o código para leitura.</p><details id="exemplo-01_soma_media"><summary>01 — Soma e média de entradas</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/01_soma_media.py" download>Baixar este exemplo .py</a><pre><code># 01 — Soma e média de entradas
+# Objetivo: Resumir valores à medida que chegam.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Nenhum histórico é necessário quando só queremos soma e média.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   3
+#   4
+#   6
+#   8
+# Confira na saída: &#x27;Média: 6.00&#x27;
+
+quantidade = int(input(&quot;Quantidade positiva de valores: &quot;))
+soma = 0.0
+for ordem in range(1, quantidade + 1):
+    valor = float(input(f&quot;Valor {ordem}: &quot;))
+    soma += valor
+# A quantidade positiva evita divisão por zero.
+media = soma / quantidade
+print(f&quot;Soma: {soma:.2f}&quot;)
+print(f&quot;Média: {media:.2f}&quot;)
+</code></pre></details><details id="exemplo-02_extremos"><summary>02 — Maior e menor de várias entradas</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/02_extremos.py" download>Baixar este exemplo .py</a><pre><code># 02 — Maior e menor de várias entradas
+# Objetivo: Inicializar extremos com um dado real.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O primeiro valor inicia os dois candidatos, inclusive quando todos são negativos.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   3
+#   -5
+#   -9
+#   -2
+# Confira na saída: &#x27;Menor: -9.0&#x27;
+
+quantidade = int(input(&quot;Quantidade positiva: &quot;))
+primeiro = float(input(&quot;Valor 1: &quot;))
+maior = primeiro
+menor = primeiro
+# O primeiro já foi processado; começamos a contagem em dois.
+for ordem in range(2, quantidade + 1):
+    valor = float(input(f&quot;Valor {ordem}: &quot;))
+    if valor &gt; maior:
+        maior = valor
+    if valor &lt; menor:
+        menor = valor
+print(&quot;Maior:&quot;, maior)
+print(&quot;Menor:&quot;, menor)
+</code></pre></details><details id="exemplo-03_ocorrencias_percentual"><summary>03 — Ocorrências e percentual</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/03_ocorrencias_percentual.py" download>Baixar este exemplo .py</a><pre><code># 03 — Ocorrências e percentual
+# Objetivo: Relacionar uma parte ao total de entradas.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O denominador é a quantidade total, e não o contador filtrado.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   4
+#   7
+#   6
+#   9
+#   5
+# Confira na saída: &#x27;Percentual: 50.0%&#x27;
+
+quantidade = int(input(&quot;Quantidade positiva de notas: &quot;))
+aprovados = 0
+for ordem in range(1, quantidade + 1):
+    nota = float(input(f&quot;Nota {ordem}, entre 0 e 10: &quot;))
+    if nota &gt;= 7:
+        aprovados += 1
+percentual = aprovados * 100 / quantidade
+print(&quot;Aprovados:&quot;, aprovados)
+print(f&quot;Percentual: {percentual:.1f}%&quot;)
+</code></pre></details><details id="exemplo-04_divisores"><summary>04 — Divisores de um inteiro</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/04_divisores.py" download>Baixar este exemplo .py</a><pre><code># 04 — Divisores de um inteiro
+# Objetivo: Usar resto para testar divisibilidade.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Só testamos divisores de um até o próprio número positivo.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   6
+# Confira na saída: &#x27;Quantidade de divisores: 4&#x27;
+
+numero = int(input(&quot;Inteiro positivo: &quot;))
+quantidade = 0
+for candidato in range(1, numero + 1):
+    if numero % candidato == 0:
+        print(&quot;Divisor:&quot;, candidato)
+        quantidade += 1
+# Um é divisor de todo inteiro positivo.
+print(&quot;Quantidade de divisores:&quot;, quantidade)
+</code></pre></details><details id="exemplo-05_primo"><summary>05 — Número primo</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/05_primo.py" download>Baixar este exemplo .py</a><pre><code># 05 — Número primo
+# Objetivo: Relacionar primalidade à quantidade de divisores.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Inteiros menores que dois não são primos.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   1
+# Confira na saída: &#x27;Não primo&#x27;
+
+numero = int(input(&quot;Inteiro: &quot;))
+divisores = 0
+# Versão direta e didática; otimizações ficam para outro momento.
+for candidato in range(1, numero + 1):
+    if numero % candidato == 0:
+        divisores += 1
+if numero &gt;= 2 and divisores == 2:
+    print(&quot;Primo&quot;)
+else:
+    print(&quot;Não primo&quot;)
+</code></pre></details><details id="exemplo-06_fatorial"><summary>06 — Fatorial</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/06_fatorial.py" download>Baixar este exemplo .py</a><pre><code># 06 — Fatorial
+# Objetivo: Acumular um produto e tratar zero naturalmente.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O produto vazio permanece um: por isso 0! resulta em 1.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   5
+# Confira na saída: &#x27;5! = 120&#x27;
+
+numero = int(input(&quot;Inteiro não negativo: &quot;))
+fatorial = 1
+for fator in range(2, numero + 1):
+    fatorial *= fator
+print(f&quot;{numero}! = {fatorial}&quot;)
+# Negativos estão fora da precondição; validação aparece no tópico 10.
+</code></pre></details><details id="exemplo-07_fibonacci"><summary>07 — Fibonacci sem coleções</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/07_fibonacci.py" download>Baixar este exemplo .py</a><pre><code># 07 — Fibonacci sem coleções
+# Objetivo: Atualizar dois estados preservando o valor anterior.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A sequência adotada começa em 0 e 1.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   7
+# Confira na saída: &#x27;8\n&#x27;
+
+quantidade = int(input(&quot;Quantidade não negativa de termos: &quot;))
+anterior = 0
+atual = 1
+for ordem in range(quantidade):
+    print(anterior)
+    # Calcule antes de sobrescrever os valores necessários.
+    proximo = anterior + atual
+    anterior = atual
+    atual = proximo
+# Quantidade zero não imprime termos; um imprime apenas zero.
+</code></pre></details><details id="exemplo-08_mdc"><summary>08 — MDC pelo algoritmo de Euclides</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/08_mdc.py" download>Baixar este exemplo .py</a><pre><code># 08 — MDC pelo algoritmo de Euclides
+# Objetivo: Reduzir um problema usando restos sucessivos.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: MDC(a, b) é igual a MDC(b, a % b), enquanto b não for zero.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   48
+#   18
+# Confira na saída: &#x27;MDC de 48 e 18: 6&#x27;
+
+a = int(input(&quot;Primeiro inteiro positivo: &quot;))
+b = int(input(&quot;Segundo inteiro positivo: &quot;))
+# Trabalhamos com cópias para preservar as entradas na apresentação.
+x = a
+y = b
+while y != 0:
+    resto = x % y
+    x = y
+    y = resto
+# O último divisor não nulo é o MDC.
+print(f&quot;MDC de {a} e {b}: {x}&quot;)
+</code></pre></details><details id="exemplo-09_mmc"><summary>09 — MMC a partir do MDC</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/09_mmc.py" download>Baixar este exemplo .py</a><pre><code># 09 — MMC a partir do MDC
+# Objetivo: Reutilizar uma ideia algorítmica sem funções ainda.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Para positivos, MMC(a,b) = (a // MDC(a,b)) * b.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   12
+#   18
+# Confira na saída: &#x27;MMC: 36&#x27;
+
+a = int(input(&quot;Primeiro inteiro positivo: &quot;))
+b = int(input(&quot;Segundo inteiro positivo: &quot;))
+x = a
+y = b
+while y != 0:
+    resto = x % y
+    x = y
+    y = resto
+mdc = x
+# A divisão inteira é exata porque mdc divide a.
+mmc = (a // mdc) * b
+print(&quot;MMC:&quot;, mmc)
+</code></pre></details><details id="exemplo-10_soma_algarismos"><summary>10 — Soma dos algarismos</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/10_soma_algarismos.py" download>Baixar este exemplo .py</a><pre><code># 10 — Soma dos algarismos
+# Objetivo: Extrair dígitos usando aritmética.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: % 10 extrai o último dígito; // 10 remove esse dígito.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   204
+# Confira na saída: &#x27;Soma dos algarismos: 6&#x27;
+
+numero = int(input(&quot;Inteiro não negativo: &quot;))
+restante = numero
+soma = 0
+while restante &gt; 0:
+    algarismo = restante % 10
+    soma += algarismo
+    restante //= 10
+print(&quot;Soma dos algarismos:&quot;, soma)
+# Para zero, não há voltas e a soma correta permanece zero.
+# Não convertemos o número em string para percorrer seus caracteres.
+</code></pre></details><details id="exemplo-11_inversao"><summary>11 — Inversão numérica</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/11_inversao.py" download>Baixar este exemplo .py</a><pre><code># 11 — Inversão numérica
+# Objetivo: Reconstruir um inteiro com dígitos em ordem inversa.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Multiplicar por dez abre espaço para o próximo algarismo.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   120
+# Confira na saída: &#x27;Invertido: 21&#x27;
+
+numero = int(input(&quot;Inteiro não negativo: &quot;))
+restante = numero
+invertido = 0
+while restante &gt; 0:
+    algarismo = restante % 10
+    invertido = invertido * 10 + algarismo
+    restante //= 10
+print(&quot;Invertido:&quot;, invertido)
+# Zeros à esquerda não são preservados em um inteiro: 120 vira 21.
+</code></pre></details><details id="exemplo-12_contagem_digitos"><summary>12 — Contagem de dígitos</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/12_contagem_digitos.py" download>Baixar este exemplo .py</a><pre><code># 12 — Contagem de dígitos
+# Objetivo: Considerar explicitamente o caso zero.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O número zero possui um dígito, embora não entre no laço.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   0
+# Confira na saída: &#x27;Dígitos: 1&#x27;
+
+numero = int(input(&quot;Inteiro não negativo: &quot;))
+restante = numero
+if numero == 0:
+    quantidade = 1
+else:
+    quantidade = 0
+while restante &gt; 0:
+    quantidade += 1
+    restante //= 10
+print(&quot;Dígitos:&quot;, quantidade)
+</code></pre></details><details id="exemplo-13_progressao"><summary>13 — Progressão aritmética</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/13_progressao.py" download>Baixar este exemplo .py</a><pre><code># 13 — Progressão aritmética
+# Objetivo: Gerar termos a partir de um estado e um passo.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A razão pode ser positiva, zero ou negativa.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   10
+#   -3
+#   4
+# Confira na saída: &#x27;Termo 4: 1&#x27;
+
+termo = int(input(&quot;Primeiro termo: &quot;))
+razao = int(input(&quot;Razão: &quot;))
+quantidade = int(input(&quot;Quantidade não negativa: &quot;))
+for ordem in range(1, quantidade + 1):
+    print(f&quot;Termo {ordem}: {termo}&quot;)
+    termo += razao
+# Não precisamos guardar os termos anteriores para produzir o seguinte.
+</code></pre></details><details id="exemplo-14_soma_seletiva"><summary>14 — Média somente dos positivos</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/14_soma_seletiva.py" download>Baixar este exemplo .py</a><pre><code># 14 — Média somente dos positivos
+# Objetivo: Manter soma e contagem do mesmo grupo.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: A média só existe se ao menos um valor foi selecionado.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   -2
+#   0
+#   2
+#   4
+#   -1
+# Confira na saída: &#x27;Média positiva: 3.0&#x27;
+
+soma = 0.0
+positivos = 0
+for ordem in range(1, 6):
+    valor = float(input(f&quot;Valor {ordem}: &quot;))
+    if valor &gt; 0:
+        soma += valor
+        positivos += 1
+if positivos &gt; 0:
+    print(&quot;Média positiva:&quot;, soma / positivos)
+else:
+    print(&quot;Nenhum positivo; média não calculada.&quot;)
+</code></pre></details><details id="exemplo-15_tabela_numerica"><summary>15 — Tabela numérica</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/15_tabela_numerica.py" download>Baixar este exemplo .py</a><pre><code># 15 — Tabela numérica
+# Objetivo: Gerar resultados derivados de um intervalo.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: Cada linha é calculada e exibida imediatamente.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: este exemplo não solicita entrada.
+# Confira na saída: &#x27;5 | 25 | 125&#x27;
+
+print(&quot;n | quadrado | cubo&quot;)
+for numero in range(1, 6):
+    quadrado = numero ** 2
+    cubo = numero ** 3
+    print(f&quot;{numero} | {quadrado} | {cubo}&quot;)
+# É uma tabela visual no terminal, sem estrutura tabular na memória.
+</code></pre></details><details id="exemplo-16_padrao_retangular"><summary>16 — Retângulo de símbolos</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/16_padrao_retangular.py" download>Baixar este exemplo .py</a><pre><code># 16 — Retângulo de símbolos
+# Objetivo: Traduzir altura e largura em dois laços.
+# Pré-requisitos: exemplos anteriores deste tópico e tópicos anteriores.
+# Observe: O produto altura * largura prevê a quantidade de símbolos.
+# Como estudar: preveja a saída, execute e altere um valor por vez.
+# Execução guiada: digite uma entrada por solicitação, nesta ordem:
+#   2
+#   3
+# Confira na saída: &#x27;###\n###&#x27;
+
+altura = int(input(&quot;Altura positiva: &quot;))
+largura = int(input(&quot;Largura positiva: &quot;))
+for linha in range(altura):
+    for coluna in range(largura):
+        print(&quot;#&quot;, end=&quot;&quot;)
+    print()  # Uma quebra por linha, depois de todas as colunas.
+# Teste largura um e altura um para observar os limites.
+</code></pre></details><details id="exemplo-90_rede_contexto"><summary>Extremos de vendas sem histórico — cenário didático Lojas Blue</summary><a class="download" href="../pratica/09_algoritmos_basicos/exemplos/90_rede_contexto.py" download>Baixar este exemplo .py</a><pre><code># Extremos de vendas sem histórico — cenário didático Lojas Blue
+# Objetivo: Calcular o maior valor sem listas ou funções próprias.
+# Pré-requisito: tópicos anteriores e exemplos anteriores deste tópico.
+# Estude: preveja o resultado, execute e altere um dado por vez.
+# Confira na saída: &#x27;Maior venda: 129.90&#x27;
+# Entradas guiadas, uma por solicitação:
+#   3
+#   24.9
+#   129.9
+#   18.9
+
+quantidade = int(input(&quot;Quantidade positiva de vendas: &quot;))
+maior = float(input(&quot;Primeira venda não negativa: &quot;))
+for ordem in range(2, quantidade + 1):
+    valor = float(input(f&quot;Venda {ordem}, não negativa: &quot;))
+    if valor &gt; maior:
+        maior = valor
+print(f&quot;Maior venda: {maior:.2f}&quot;)
+# O primeiro dado inicializa o candidato; não há max ou coleção.
+</code></pre></details></section><section id="exercicios"><h2>Pratique com os enunciados originais</h2><p>Resolva antes de consultar novamente o exemplo. Registre sua previsão e confira os casos indicados. Os arquivos de exercício contêm comentários e não produzem saída até você implementar a solução.</p><details id="exercicio-01_resumo_de_medicoes"><summary>01 — Resumo de medições</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/01_resumo_de_medicoes.py" download>Baixar este exercício .py</a><pre class="enunciado"># 01 — Resumo de medições
+# Enunciado:
+# Leia quantidade positiva e essa quantidade de medições numéricas. Mostre soma e média.
+#
+# Dica:
+# Acumule sem guardar as medições anteriores.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/01_soma_media.py
+#
+# Casos para conferir sua implementação:
+# 3 medições 1, 4, 7: soma 12 e média 4.
+</pre></details><details id="exercicio-02_extremos_negativos"><summary>02 — Extremos negativos</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/02_extremos_negativos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 02 — Extremos negativos
+# Enunciado:
+# Leia quantidade positiva de inteiros e mostre maior e menor. Não use min, max ou coleções.
+#
+# Dica:
+# Inicialize os candidatos com a primeira entrada real.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/02_extremos.py
+#
+# Casos para conferir sua implementação:
+# -8, -3, -10: maior -3 e menor -10; um único valor deve ser ambos.
+</pre></details><details id="exercicio-03_percentual_de_pares"><summary>03 — Percentual de pares</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/03_percentual_de_pares.py" download>Baixar este exercício .py</a><pre class="enunciado"># 03 — Percentual de pares
+# Enunciado:
+# Leia quantidade positiva de inteiros e mostre quantidade e percentual de pares.
+#
+# Dica:
+# O percentual usa o total de entradas como denominador.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/03_ocorrencias_percentual.py
+#
+# Casos para conferir sua implementação:
+# 1, 2, 4, 5: dois pares e 50%; zero também é par.
+</pre></details><details id="exercicio-04_divisores_e_soma"><summary>04 — Divisores e soma</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/04_divisores_e_soma.py" download>Baixar este exercício .py</a><pre class="enunciado"># 04 — Divisores e soma
+# Enunciado:
+# Leia inteiro positivo e mostre seus divisores positivos e a soma deles.
+#
+# Dica:
+# Um divisor deixa resto zero.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/04_divisores.py
+#
+# Casos para conferir sua implementação:
+# 6: divisores 1, 2, 3, 6 e soma 12; 1: soma 1.
+</pre></details><details id="exercicio-05_primalidade"><summary>05 — Primalidade</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/05_primalidade.py" download>Baixar este exercício .py</a><pre class="enunciado"># 05 — Primalidade
+# Enunciado:
+# Leia um inteiro e determine se é primo. Não use bibliotecas de primalidade.
+#
+# Dica:
+# Menores que dois precisam ser classificados como não primos.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/04_divisores.py
+# 09_algoritmos_basicos/exemplos/05_primo.py
+#
+# Casos para conferir sua implementação:
+# -2, 0 e 1: não primos; 2 e 13: primos; 9: não primo.
+</pre></details><details id="exercicio-06_fatorial_iterativo"><summary>06 — Fatorial iterativo</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/06_fatorial_iterativo.py" download>Baixar este exercício .py</a><pre class="enunciado"># 06 — Fatorial iterativo
+# Enunciado:
+# Leia inteiro não negativo e calcule seu fatorial sem recursão.
+#
+# Dica:
+# O produto inicial precisa funcionar também para zero.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/06_fatorial.py
+#
+# Casos para conferir sua implementação:
+# 0: 1; 1: 1; 6: 720.
+</pre></details><details id="exercicio-07_termos_de_fibonacci"><summary>07 — Termos de Fibonacci</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/07_termos_de_fibonacci.py" download>Baixar este exercício .py</a><pre class="enunciado"># 07 — Termos de Fibonacci
+# Enunciado:
+# Leia quantidade não negativa e mostre essa quantidade de termos da sequência iniciada em 0 e 1. Não use troca por tupla.
+#
+# Dica:
+# Uma variável temporária preserva o próximo termo.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/07_fibonacci.py
+#
+# Casos para conferir sua implementação:
+# Quantidade 6: 0, 1, 1, 2, 3, 5; quantidade 0: nenhum termo.
+</pre></details><details id="exercicio-08_mdc_de_positivos"><summary>08 — MDC de positivos</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/08_mdc_de_positivos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 08 — MDC de positivos
+# Enunciado:
+# Leia dois inteiros positivos e calcule o MDC por restos sucessivos.
+#
+# Dica:
+# A repetição termina quando o segundo estado vira zero.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/08_mdc.py
+#
+# Casos para conferir sua implementação:
+# 48 e 18: 6; 7 e 5: 1; 9 e 9: 9.
+</pre></details><details id="exercicio-09_mmc_de_positivos"><summary>09 — MMC de positivos</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/09_mmc_de_positivos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 09 — MMC de positivos
+# Enunciado:
+# Leia dois inteiros positivos e calcule o MMC usando seu MDC.
+#
+# Dica:
+# Faça a divisão inteira antes da multiplicação final.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/08_mdc.py
+# 09_algoritmos_basicos/exemplos/09_mmc.py
+#
+# Casos para conferir sua implementação:
+# 12 e 18: 36; 5 e 7: 35.
+</pre></details><details id="exercicio-10_soma_de_algarismos"><summary>10 — Soma de algarismos</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/10_soma_de_algarismos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 10 — Soma de algarismos
+# Enunciado:
+# Leia inteiro não negativo e some seus algarismos sem converter para str.
+#
+# Dica:
+# Extraia e remova o último dígito com operações inteiras.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/10_soma_algarismos.py
+#
+# Casos para conferir sua implementação:
+# 5032: 10; 0: 0; 1000: 1.
+</pre></details><details id="exercicio-11_inversao_numerica"><summary>11 — Inversão numérica</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/11_inversao_numerica.py" download>Baixar este exercício .py</a><pre class="enunciado"># 11 — Inversão numérica
+# Enunciado:
+# Leia inteiro não negativo e construa seu inverso aritmético. Não preserve zeros à esquerda.
+#
+# Dica:
+# Cada novo dígito deve entrar à direita do resultado parcial.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/11_inversao.py
+#
+# Casos para conferir sua implementação:
+# 120: 21; 707: 707; 0: 0.
+</pre></details><details id="exercicio-12_quantidade_de_digitos"><summary>12 — Quantidade de dígitos</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/12_quantidade_de_digitos.py" download>Baixar este exercício .py</a><pre class="enunciado"># 12 — Quantidade de dígitos
+# Enunciado:
+# Leia inteiro não negativo e conte seus dígitos sem usar texto.
+#
+# Dica:
+# O zero precisa de atenção especial.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/12_contagem_digitos.py
+#
+# Casos para conferir sua implementação:
+# 0: um dígito; 9: um; 100: três.
+</pre></details><details id="exercicio-13_progressao_aritmetica"><summary>13 — Progressão aritmética</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/13_progressao_aritmetica.py" download>Baixar este exercício .py</a><pre class="enunciado"># 13 — Progressão aritmética
+# Enunciado:
+# Leia primeiro termo, razão inteira e quantidade não negativa. Mostre os termos e a soma deles.
+#
+# Dica:
+# Atualize o termo depois de acumulá-lo.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/13_progressao.py
+#
+# Casos para conferir sua implementação:
+# Início 2, razão 3, quantidade 4: termos 2, 5, 8, 11 e soma 26.
+</pre></details><details id="exercicio-14_media_dos_selecionados"><summary>14 — Média dos selecionados</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/14_media_dos_selecionados.py" download>Baixar este exercício .py</a><pre class="enunciado"># 14 — Média dos selecionados
+# Enunciado:
+# Leia seis números e calcule a média apenas dos negativos. Caso não haja negativos, exiba mensagem em vez de dividir por zero.
+#
+# Dica:
+# Soma e contagem devem selecionar o mesmo grupo.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/14_soma_seletiva.py
+#
+# Casos para conferir sua implementação:
+# -2, -4, 0, 1, 3, 5: média -3; seis zeros: sem negativos.
+</pre></details><details id="exercicio-15_palindromo_numerico"><summary>15 — Palíndromo numérico</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/15_palindromo_numerico.py" download>Baixar este exercício .py</a><pre class="enunciado"># 15 — Palíndromo numérico
+# Enunciado:
+# Leia inteiro não negativo e diga se é igual ao seu inverso aritmético. Não use strings.
+#
+# Dica:
+# Preserve a entrada enquanto constrói o inverso.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/11_inversao.py
+#
+# Casos para conferir sua implementação:
+# 121 e 0: sim; 120: não.
+</pre></details><details id="exercicio-16_numero_perfeito"><summary>16 — Número perfeito</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/16_numero_perfeito.py" download>Baixar este exercício .py</a><pre class="enunciado"># 16 — Número perfeito
+# Enunciado:
+# Leia inteiro positivo e verifique se é igual à soma dos seus divisores positivos menores que ele.
+#
+# Dica:
+# O próprio número fica fora da soma.
+#
+# Exemplos de apoio (leia antes de resolver):
+# 09_algoritmos_basicos/exemplos/04_divisores.py
+#
+# Casos para conferir sua implementação:
+# 6 e 28: perfeitos; 1 e 12: não perfeitos.
+</pre></details><details id="exercicio-91_rede_91"><summary>Prever o candidato a maior</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/91_rede_91.py" download>Baixar este exercício .py</a><pre class="enunciado"># Prever o candidato a maior
+# Enunciado:
+# Com vendas 24.9, 129.9 e 18.9, registre o candidato a maior depois de cada leitura. Depois repita com uma única venda zero.
+#
+# Dica:
+# O candidato começa com o primeiro valor real.
+#
+# Conferência:
+# O maior do primeiro caso é 129.90; do segundo, zero.
+#
+# Apoio: 09_algoritmos_basicos/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-92_rede_92"><summary>Completar o resumo de vendas</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/92_rede_92.py" download>Baixar este exercício .py</a><pre class="enunciado"># Completar o resumo de vendas
+# Enunciado:
+# Planeje em comentários como adaptar o exemplo de maior venda para também obter a menor e a soma. Em seguida implemente o programa.
+#
+# Dica:
+# Cada resultado precisa de seu próprio estado; a primeira venda inicializa os extremos.
+#
+# Conferência:
+# 24.9, 129.9 e 18.9: menor 18.90, maior 129.90 e soma 173.70.
+#
+# Apoio: 09_algoritmos_basicos/exemplos/90_rede_contexto.py
+</pre></details><details id="exercicio-93_rede_93"><summary>Soma dos dígitos do código — Lojas Blue</summary><a class="download" href="../pratica/09_algoritmos_basicos/exercicios/93_rede_93.py" download>Baixar este exercício .py</a><pre class="enunciado"># Soma dos dígitos do código — Lojas Blue
+# Enunciado:
+# Leia código inteiro não negativo e calcule soma de algarismos sem convertê-lo para texto.
+#
+# Dica:
+# Extraia e remova o último algarismo por aritmética.
+#
+# Conferência:
+# Código 1004: soma 5; código 0: soma 0.
+#
+# Apoio: 09_algoritmos_basicos/exemplos/90_rede_contexto.py e exemplos básicos do tópico
+</pre></details></section><section id="avancar"><h2>Quando avançar</h2><p>Implemente um algoritmo numérico a partir do enunciado, justifique a inicialização e confirme pelo menos um caso de fronteira.</p><p>Explique sua solução sem ler o código. Se houver uma divergência, encontre a primeira instrução em que seu raciocínio muda. Depois acrescente um caso próprio e confira novamente.</p></section><nav class="pager" aria-label="Sequência de estudo"><a href="08_for_e_range.html">← Repetição com for e range</a><a href="10_validacao_e_controle_de_fluxo.html">Validação e controle de fluxo →</a></nav></main><footer class="site-footer">ALP · Cenário didático Lojas Blue · Python 3.10 ou superior</footer></div></div><script src="../assets/lessons.js"></script><script src="../assets/alp.js" defer></script></body></html>
