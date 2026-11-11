@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lojas Rede - Busca Binária</title>
+    
+    <style>600;800&display=swap');
+        
+        :root {
+            /* Modo Claro (Inspirado no MkDocs Material / Modern UI) */
+            --bg-color: #ffffff;
+            --card-bg: #f8fafc;
+            --text-color: #475569;
+            --title-color: #0f172a;
+            --accent-color: #0284c7; /* Azul Padrão */
+            --border-color: #e2e8f0;
+            --canvas-bg: #f1f5f9;
+            
+            /* Cores dos Algoritmos */
+            --bar-default: #3b82f6;
+            --bar-active: #ef4444;
+            --bar-sorted: #22c55e;
+            --bar-temp: #f59e0b;
+            --bar-empty: #cbd5e1;
+            --text-canvas: #1e293b;
+            --text-canvas-light: #64748b;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Modo Escuro */
+                --bg-color: #0f172a;
+                --card-bg: #1e293b;
+                --text-color: #94a3b8;
+                --title-color: #f8fafc;
+                --accent-color: #38bdf8;
+                --border-color: #334155;
+                --canvas-bg: #0b1120;
+                
+                /* Cores dos Algoritmos */
+                --bar-default: #3b82f6;
+                --bar-active: #f43f5e;
+                --bar-sorted: #22c55e;
+                --bar-temp: #eab308;
+                --bar-empty: #475569;
+                --text-canvas: #f8fafc;
+                --text-canvas-light: #94a3b8;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        
+        body { 
+            margin: 0; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            font-family: 'Inter', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            transition: background 0.3s, color 0.3s; 
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: var(--title-color);
+            margin: 0 0 5px 0;
+            font-weight: 800;
+        }
+        
+        .header p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .container { 
+            background-color: var(--card-bg); 
+            padding: 20px; 
+            border-radius: 16px; 
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 380px; 
+        }
+
+        canvas { 
+            width: 340px; 
+            height: 520px; 
+            border-radius: 8px; 
+            background-color: var(--canvas-bg);
+            border: 1px solid var(--border-color);
+        }
+
+        .controls { 
+            margin-top: 15px; 
+            width: 100%;
+        }
+
+        button { 
+            width: 100%;
+            background-color: var(--accent-color); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            font-size: 16px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        
+        button:hover { opacity: 0.9; }
+        button:active { transform: scale(0.98); }
+    </style>
+
+<link rel="stylesheet" href="../assets/animacao.css"></head>
+<body>
+    <div class="header">
+        <h1>Busca Binária</h1>
+        <p>Estruturas de Dados • Lojas Rede</p>
+    </div>
+    <div class="container">
+        <canvas role="img" aria-label="Busca binária: representação animada; consulte a explicação textual no caderno" id="animCanvas" width="720" height="1100"></canvas>
+        <div class="controls"><button type="button" id="play">Iniciar animação</button><button type="button" onclick="reiniciar(); window.pedRedraw()">Reiniciar</button><label>Velocidade<select id="speed"><option value="15">Lenta</option><option value="30" selected>Normal</option><option value="60">Rápida</option></select></label></div><p class="explanation">Observe como o intervalo diminui. A lista precisa estar ordenada.</p><p id="animation-status" role="status">Animação pausada. Use Iniciar para acompanhar.</p>
+    </div>
+<script src="../assets/animacao.js"></script><script>
+const canvas = document.getElementById('animCanvas');
+const ctx = canvas.getContext('2d');
+function isDarkMode() { return document.documentElement.dataset.theme === 'dark'; }
+function getVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+const produtos = [
+    { id: 1, nome: "Shampoo 350ml" }, { id: 2, nome: "Condicionador" }, { id: 3, nome: "Máscara Capilar" },
+    { id: 4, nome: "Perfume Floral" }, { id: 5, nome: "Perfume Masc." }, { id: 6, nome: "Batom Cremoso" },
+    { id: 7, nome: "Máscara Cílios" }, { id: 8, nome: "Sabonete Líq." }, { id: 9, nome: "Desodorante" },
+    { id: 10, nome: "Protetor FPS60" }, { id: 11, nome: "Hidratante" }, { id: 12, nome: "Água Micelar" }
+].sort((a,b) => a.id - b.id);
+const alvo = 10;
+let inicio = 0, fim = produtos.length - 1, meio = Math.floor((inicio + fim)/2), timer = 0, achou = false;
+
+function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = getVar('--text-canvas'); ctx.font = "bold 30px Inter"; ctx.textAlign = "center";
+    ctx.fillText("Busca Binária O(log n)", canvas.width / 2, 70);
+    ctx.fillStyle = getVar('--text-canvas-light'); ctx.font = "18px Inter";
+    ctx.fillText(`Procurando: Protetor (ID ${alvo})`, canvas.width / 2, 110);
+
+    let y = 160;
+    for (let i = 0; i < produtos.length; i++) {
+        let p = produtos[i];
+        let cor = getVar('--card-bg');
+        let corTexto = getVar('--text-canvas');
+        let stroke = getVar('--border-color');
+        
+        if (i >= inicio && i <= fim) {
+            cor = getVar('--bg-color'); 
+            stroke = getVar('--bar-default');
+        }
+        if (i === meio) {
+            cor = (p.id === alvo && achou) ? getVar('--bar-sorted') : getVar('--bar-temp');
+            corTexto = "#ffffff"; stroke = cor;
+        }
+        
+        ctx.fillStyle = cor; ctx.strokeStyle = stroke; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.roundRect(40, y, 640, 60, 10); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = corTexto; ctx.font = "bold 22px Inter"; ctx.textAlign = "left";
+        ctx.fillText(`ID ${p.id}: ${p.nome}`, 70, y + 38);
+        y += 72;
+    }
+    if (!window.pedIsPaused()) timer++;
+    if (!window.pedIsPaused() && timer % 40 === 0 && !achou && inicio <= fim) {
+        meio = Math.floor((inicio + fim) / 2);
+        if (produtos[meio].id === alvo) { achou = true; }
+        else if (produtos[meio].id < alvo) { inicio = meio + 1; }
+        else { fim = meio - 1; }
+    }
+    window.pedSchedule(loop);
+}
+function reiniciar() { inicio = 0; fim = produtos.length - 1; meio = Math.floor((inicio + fim)/2); timer = 0; achou = false; }
+loop();
+
+</script>
+</body>
+</html>

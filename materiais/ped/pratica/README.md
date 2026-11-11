@@ -1,35 +1,32 @@
-# PED — Prática de Estruturas de Dados em Python
+# PED — Prática intensiva
 
-24 exemplos completos e 48 exercícios sem solução, em 24 temas.
-Organização alinhada ao pacote ALP: cada tema possui `exemplos/` e `exercicios/`.
+**85 exemplos completos e 182 exercícios sem solução**, agrupados em 12 assuntos.
+Listas ficam em uma única pasta, assim como buscas e ordenação. Cada assunto reúne exemplos progressivos e exercícios numerados, seguindo a organização de ALP.
 
 ## Comece aqui
 
-1. Extraia o ZIP e abra `ORDEM_DE_ESTUDO.md` para consultar o índice completo.
-2. Estude os temas na ordem numérica. Preveja a saída antes de executar cada exemplo.
-3. Resolva a fixação e depois a investigação. Todos os enunciados estão nos comentários dos próprios arquivos `.py`.
-4. Exercícios contêm somente comentários: executar um exercício ainda não resolvido não produz saída. Escreva sua solução abaixo do enunciado.
+1. Extraia o ZIP e consulte [ORDEM_DE_ESTUDO.md](ORDEM_DE_ESTUDO.md).
+2. Leia um exemplo, preveja a saída e execute. Resolva os dois exercícios associados: implementação e teste de mesa.
+3. Trabalhe em sessões de quatro a seis exercícios. Retome o exemplo se não conseguir explicar um resultado.
+4. Consulte [ATIVIDADES_POR_TIPO.md](ATIVIDADES_POR_TIPO.md) para escolher a modalidade.
+
+Os exercícios contêm somente comentários com enunciado, dica e critérios de conferência; execute depois de escrever sua solução. Não há gabaritos dos exercícios. O guia docente contém saídas dos exemplos.
 
 ## Execução
 
-Use Python 3.10 ou superior e um editor com UTF-8. Não há bibliotecas externas nem acesso à internet. Na pasta do pacote, execute:
+Use Python 3.10 ou superior, UTF-8 e nenhuma biblioteca externa. Os exemplos são independentes, não pedem entrada e usam dados didáticos autocontidos. Execute um arquivo por vez, como `python 01_listas/exemplos/01_alterar_sem_aumentar.py`. No Windows, pode usar `py -3` no lugar de `python`.
 
-```text
-python 01_listas_atualizacao/exemplos/01_demonstracao.py
-```
+## Assuntos
 
-No Windows, também pode usar `py -3` no lugar de `python`.
-Os dados são pequenos, didáticos e autocontidos. Não dependem do banco JSON da disciplina.
-
-## Organização de cada tema
-
-```text
-01_listas_atualizacao/
-    exemplos/
-        01_demonstracao.py
-    exercicios/
-        01_fixacao.py
-        02_investigacao.py
-```
-
-Os exercícios trazem enunciado, dica, exemplo de apoio e casos de conferência ou critérios de entrega. Não incluem soluções. O `GUIA_DOCENTE.md` apresenta orientação de aula e saídas dos exemplos, sem resolver os exercícios.
+- Listas: 15 exemplos e 31 exercícios.
+- Tuplas: 6 exemplos e 13 exercícios.
+- Dicionários: 6 exemplos e 13 exercícios.
+- Conjuntos: 6 exemplos e 13 exercícios.
+- Estruturas combinadas e JSON: 6 exemplos e 13 exercícios.
+- Buscas: 6 exemplos e 13 exercícios.
+- Ordenação: 8 exemplos e 17 exercícios.
+- Pilhas e filas: 8 exemplos e 17 exercícios.
+- Encadeamento e hash: 6 exemplos e 13 exercícios.
+- Complexidade e recursão: 6 exemplos e 13 exercícios.
+- Árvores: 6 exemplos e 13 exercícios.
+- Grafos: 6 exemplos e 13 exercícios.
