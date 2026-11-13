@@ -1,0 +1,25 @@
+<!--
+  02_destacar_estoque_baixo_classlist — Implementar: aplicar classe .alerta quando o estoque for menor que 5
+  Tipo: Implementar e estruturar
+  Tópico: 09 — Primeiros passos com JavaScript no navegador e o DOM
+
+  Enunciado:
+  Leia Number(card.dataset.estoque). Se for menor que 5, adicione a classe 'alerta' ao elemento #card-estoque usando classList.add('alerta').
+
+  Critério de conferência no navegador / DevTools:
+  Para data-estoque="3", o cartão deve receber a classe .alerta.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Alerta de Estoque</title>
+  <style>.alerta { background: #fef3c7; border: 2px solid #d97706; padding: 1rem; }</style>
+</head>
+<body>
+  <div id="card-estoque" data-estoque="3">Sabonete Líquido (3 un.)</div>
+  <script>
+    // Verifique dataset.estoque e aplique classList.add('alerta')
+  </script>
+</body>
+</html>

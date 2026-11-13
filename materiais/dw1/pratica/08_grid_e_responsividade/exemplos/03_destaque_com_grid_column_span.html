@@ -1,0 +1,30 @@
+<!--
+  DW1 · 08 — Layout em grade com CSS Grid e responsividade (Media Queries)
+  Exemplo: Banner promocional ocupando duas colunas da grade (grid-column: span 2)
+  Objetivo do tópico: Construir grades bidimensionais com CSS Grid (fr, minmax, auto-fit) e adaptar layouts para celular e desktop com Media Queries (@media).
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grid Span · Lojas Blue</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; padding: 1.5rem; }
+    .mosaico { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .item { background: #ffffff; border: 1px solid #aebfb5; padding: 1rem; border-radius: 8px; }
+    .destaque-duplo { grid-column: span 2; background: #dff2e9; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <section class="mosaico">
+    <div class="item destaque-duplo">Oferta Principal: Leve 3 Pague 2 em Sabonetes</div>
+    <div class="item">Cupom 10% OFF</div>
+    <div class="item">Perfumaria</div>
+    <div class="item">Cabelos</div>
+    <div class="item">Dermocosméticos</div>
+  </section>
+</body>
+</html>

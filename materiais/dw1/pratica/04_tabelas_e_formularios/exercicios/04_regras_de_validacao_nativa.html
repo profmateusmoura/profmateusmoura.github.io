@@ -1,0 +1,29 @@
+<!--
+  04_regras_de_validacao_nativa — Implementar: restrições required, type="email" e min/max
+  Tipo: Implementar e estruturar
+  Tópico: 04 — Tabelas de dados e formulários de entrada
+
+  Enunciado:
+  Configure os inputs do formulário abaixo para que o e-mail seja obrigatório e validado por formato, e a nota de atendimento aceite apenas inteiros de 0 a 10.
+
+  Critério de conferência no navegador / DevTools:
+  O navegador deve impedir o envio caso o e-mail seja inválido ou a nota esteja fora de 0..10.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Implementar: restrições required, type="email" e min/max · DW1</title>
+</head>
+<body>
+  <h1>Avaliação de Atendimento</h1>
+  <form action="#">
+    <label for="cli-email">E-mail:</label>
+    <input id="cli-email" name="email">
+    <label for="cli-nota">Nota (0 a 10):</label>
+    <input id="cli-nota" name="nota">
+    <button type="submit">Enviar</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderno 09 — Primeiros passos com JavaScript no navegador e o DOM · DW1</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/pygments.css">
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="../../shared/navigation.css">
+  <link rel="stylesheet" href="../assets/pratica.css">
+  <link rel="stylesheet" href="../assets/dw1.css">
+</head>
+<body data-root="../" data-course="dw1" data-doc-id="09_javascript_e_dom">
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
+        <strong>Cadernos de DW1</strong>
+        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
+      </a>
+
+      <div class="progress-card">
+        <div class="progress-top">
+          <strong>Progresso de leitura</strong>
+          <span data-progress-label>0/12 cadernos</span>
+        </div>
+        <div class="progress-bar"><span data-progress-bar></span></div>
+      </div>
+
+      <nav class="nav-sections" aria-label="Navegação do material">
+        <div class="nav-group">
+          <p class="nav-group-title">Visão geral</p>
+          <a href="../index.html">Início e Trilha</a>
+          <a href="../pratica/index.html">Catálogo Prático e ZIPs</a>
+          <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
+        </div>
+        <div class="nav-group">
+  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
+  <a class="doc-link" data-visited="01_web_e_documento_html" href="../cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
+  <a class="doc-link" data-visited="02_texto_e_semantica" href="../cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
+  <a class="doc-link" data-visited="03_estrutura_links_e_midia" href="../cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
+  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="../cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
+  <a class="doc-link" data-visited="05_css_seletores_e_cascata" href="../cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
+  <a class="doc-link" data-visited="06_box_model_e_unidades" href="../cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
+  <a class="doc-link" data-visited="07_layout_flexbox" href="../cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
+  <a class="doc-link" data-visited="08_grid_e_responsividade" href="../cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
+  <a class="doc-link active" data-visited="09_javascript_e_dom" href="../cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
+  <a class="doc-link" data-visited="10_eventos_e_interacao" href="../cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
+  <a class="doc-link" data-visited="11_elementos_dinamicos_e_storage" href="../cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
+  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="../cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
+</div>
+      </nav>
+    </aside>
+    <div class="main-panel">
+      <div class="content-wrap">
+        <div class="topbar">
+          <div class="breadcrumbs">
+            <a href="../../../index.html">Portal</a>
+            <span>/</span>
+            <a href="../index.html">DW1</a><span>/</span><span>Caderno 09</span>
+          </div>
+          <div class="topbar-actions">
+            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
+            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
+            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
+          </div>
+        </div>
+
+        <article class="doc-article">
+          <header class="doc-header">
+            <span class="eyebrow">Fase 3 — Interatividade, DOM e Projeto Integrado · Caderno 09 de 12</span>
+            <h1>09. Primeiros passos com JavaScript no navegador e o DOM</h1>
+            <p class="lead">Conecte o JavaScript ao documento HTML, selecione elementos com querySelector e querySelectorAll, atualize textos com segurança (textContent), leia atributos data-* e alterne classes CSS (classList).</p>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <button class="PillButton" type="button" data-read-toggle>Marcar como concluído</button>
+              <a class="PillButton" href="../arquivos/DW1_09_javascript_e_dom.zip" download>Baixar pacote deste tópico (.zip)</a>
+              <a class="PillButton" href="../pratica/index.html#topico-09">Ver arquivos no catálogo</a>
+            </div>
+          </header>
+
+          <nav class="toc-inline" aria-label="Sumário deste caderno">
+            <strong>Neste caderno interativo:</strong>
+            <ol>
+              <li><a href="#cap-1">1. Dando Vida à Página: O JavaScript encontra a Árvore DOM</a></li>
+              <li><a href="#cap-2">2. querySelector, textContent, dataset e classList</a></li>
+              <li><a href="#cap-3">3. Simulador Visual Ao Vivo: Inspetor de DOM, dataset e classList</a></li>
+              <li><a href="#cap-4">4. Execução Passo a Passo e Teste de Mesa Web</a></li>
+              <li><a href="#cap-5">5. Laboratório de Desafios e Síntese de Referência</a></li>
+              <li><a href="#cap-6">6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</a></li>
+            </ol>
+          </nav>
+
+          <div class="callout note">
+            <strong>Objetivos de aprendizagem</strong>
+            <ul>
+              <li>Compreender como o JavaScript interage com a árvore DOM (Document Object Model) no navegador.</li>
+<li>Selecionar elementos únicos e coleções usando document.querySelector() e document.querySelectorAll().</li>
+<li>Ler e alterar textos com segurança usando textContent (e entender a diferença para innerHTML).</li>
+<li>Manipular estados visuais via classList (add, remove, toggle) e ler metadados HTML com dataset (data-*).</li>
+            </ul>
+          </div>
+
+          <section id="cap-1">
+            <h2>1. Dando Vida à Página: O JavaScript encontra a Árvore DOM</h2>
+            <p>Até agora, nossa vitrine da <strong>Lojas Blue</strong> possui estrutura semântica (HTML5) e layout responsivo elegante (CSS3), mas ainda é estática. Para aplicar um cupom de desconto, destacar um produto selecionado, alternar o tema visual ou somar itens da sacola, entramos na terceira camada da Web: o <strong>JavaScript no navegador</strong>.</p>
+<p>Quando o navegador carrega o HTML, ele expõe um objeto global chamado <code>document</code>. Esse objeto é a porta de entrada para a árvore <strong>DOM (Document Object Model)</strong>: cada tag HTML se transforma em um objeto JavaScript vivo que podemos localizar, ler e modificar instantaneamente sem recarregar a página.</p>
+            <div class="callout important">
+              <strong>Separação de responsabilidades: JS muda classes, CSS define o visual!</strong>
+              <p>Em vez de escrever 8 linhas de <code>elemento.style.backgroundColor = ...</code> no JavaScript, crie uma classe <code>.em-oferta</code> no seu CSS e use apenas <code>elemento.classList.toggle('em-oferta')</code> no JavaScript. Seu código fica limpo, fácil de manter e fiel à arquitetura Web.</p>
+            </div>
+          </section>
+
+          <section id="cap-2">
+            <h2>2. querySelector, textContent, dataset e classList</h2>
+            <p>Veja como o JavaScript localiza elementos usando os mesmos seletores do CSS, lê atributos <code>data-*</code> do HTML e atualiza a interface:</p>
+            <div class="code-shell">
+  <div class="code-header">
+    <span>JAVASCRIPT · Cenário Vitrine Lojas Blue</span>
+    <button class="copy-code" type="button">Copiar</button>
+  </div>
+  <div class="highlight"><pre><code>// HTML: &lt;article id=&quot;card-1&quot; class=&quot;card&quot; data-preco=&quot;250&quot; data-categoria=&quot;Periféricos&quot;&gt;
+//         &lt;h3 class=&quot;titulo&quot;&gt;Teclado Mecânico&lt;/h3&gt;
+//         &lt;p class=&quot;preco&quot;&gt;R$ 250,00&lt;/p&gt;
+//       &lt;/article&gt;
+
+// 1. Selecionar elementos no DOM usando seletores CSS
+const card = document.querySelector(&quot;#card-1&quot;);
+const precoEl = card.querySelector(&quot;.preco&quot;);
+
+// 2. Ler dados embutidos no HTML via atributos data-* (dataset)
+const precoBase = Number(card.dataset.preco); // 250
+const categoria = card.dataset.categoria;     // &quot;Periféricos&quot;
+
+// 3. Calcular 10% de desconto no PIX e atualizar o texto com segurança
+const precoPix = precoBase * 0.90;
+precoEl.textContent = `R$ ${precoPix.toFixed(2).replace(&quot;.&quot;, &quot;,&quot;)} no PIX`;
+
+// 4. Alternar classe CSS de destaque no card
+card.classList.add(&quot;destaque-pix&quot;);</code></pre></div>
+</div>
+
+            <h3>Tabela Comparativa e Referência Técnica</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>API do DOM</th><th>Exemplo de Uso</th><th>Para que serve</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>document.querySelector(seletor)</code></td><td><code>document.querySelector('#preco-total')</code></td><td>Retorna o primeiro elemento que casa com o seletor CSS (ou <code>null</code>)</td></tr>
+<tr><td><code>document.querySelectorAll(seletor)</code></td><td><code>document.querySelectorAll('.card')</code></td><td>Retorna uma lista (NodeList) com todos os elementos correspondentes (iterável com <code>forEach</code>)</td></tr>
+<tr><td><code>elemento.textContent</code></td><td><code>aviso.textContent = 'Estoque OK'</code></td><td>Lê ou altera apenas o texto puro do elemento (seguro contra injeção de HTML/XSS)</td></tr>
+<tr><td><code>elemento.classList</code></td><td><code>card.classList.toggle('ativo')</code></td><td>Adiciona (<code>add</code>), remove (<code>remove</code>), alterna (<code>toggle</code>) ou verifica (<code>contains</code>) classes CSS</td></tr>
+<tr><td><code>elemento.dataset</code></td><td><code>card.dataset.precoBase</code></td><td>Acessa atributos personalizados <code>data-preco-base</code> declarados na tag HTML</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-3">
+            <h2>3. Simulador Visual Ao Vivo: Inspetor de DOM, dataset e classList</h2>
+            <p>Digite um novo título para o produto e alterne os botões de classe no simulador abaixo para observar os comandos JavaScript sendo executados sobre o nó do DOM:</p>
+
+            <!-- Simulador Visual Ao Vivo (.dw1-playground) -->
+            <div class="dw1-playground" data-dw1-playground="09"></div>
+
+            <div class="callout warning">
+              <strong>Segurança Web: textContent vs. innerHTML</strong>
+              <p>Nunca use <code>innerHTML</code> para exibir textos digitados pelo usuário (como um termo de busca ou nome de cliente), pois se alguém digitar tags <code>&lt;script&gt;</code> ou <code>&lt;img onerror=...&gt;</code>, o navegador executará código malicioso (ataque XSS). Use sempre <code>textContent</code> para textos!</p>
+            </div>
+          </section>
+
+          <section id="cap-4">
+            <h2>4. Execução Passo a Passo e Teste de Mesa Web</h2>
+            <p>Use os botões <strong>Próximo passo</strong>, <strong>Passo anterior</strong> e <strong>Executar tudo</strong> nos simuladores abaixo para inspecionar como o navegador processa cada linha e altera seu estado interno:</p>
+
+            <div class="ped-practice" data-practice-id="09-a"></div>
+            <div class="ped-practice" data-practice-id="09-b"></div>
+          </section>
+
+          <section id="cap-5">
+            <h2>5. Laboratório de Desafios e Síntese de Referência</h2>
+            <p>Resolva as <strong>3 rodadas interativas</strong> abaixo para validar seu domínio sobre os conceitos deste caderno antes de partir para o editor de código:</p>
+
+            <div class="lr-lab" data-dw1-lab="09"></div>
+
+            <h3>Quadro-Síntese de Revisão Rápida</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Conceito-Chave</th>
+                    <th>Regra Prática para a Vitrine Lojas Blue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Onde colocar a tag <code>&lt;script&gt;</code></strong></td><td>No final do <code>&lt;body&gt;</code> (antes de <code>&lt;/body&gt;</code>) ou no <code>&lt;head&gt;</code> com o atributo <code>defer</code>, garantindo que o HTML já exista quando o JS rodar.</td></tr>
+<tr><td><strong><code>const</code> vs. <code>let</code></strong></td><td>Use <code>const</code> por padrão para referências de elementos DOM e valores fixos; use <code>let</code> apenas para variáveis que serão reatribuídas (como contadores).</td></tr>
+<tr><td><strong>Template Literals</strong></td><td>Use crases (<code>`R$ ${valor}`</code>) para interpolar variáveis dentro de textos com clareza.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-6">
+            <h2>6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</h2>
+            <p>Todos os arquivos abaixo são páginas <code>.html</code> autocontidas (com preview visual imediato no navegador e código comentado). Você pode abri-los diretamente clicando nos links ou baixar o pacote <code>.zip</code> para resolver no VS Code:</p>
+
+            <div class="hero-actions" style="margin:1rem 0;">
+              <a class="PillButton" href="../arquivos/DW1_09_javascript_e_dom.zip" download>Baixar DW1_09_javascript_e_dom.zip (10 arquivos .html)</a>
+              <a class="PillButton" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo do Curso (.zip)</a>
+            </div>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">4 Exemplos Comentados de Estudo (abrir no navegador)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/09_javascript_e_dom/exemplos/01_selecionar_e_alterar_textcontent.html" target="_blank" rel="noopener"><code>01_selecionar_e_alterar_textcontent.html</code></a> — <strong>Selecionar elementos com querySelector e atualizar o texto com textContent</strong></li>
+<li><a href="../pratica/09_javascript_e_dom/exemplos/02_manipular_classes_com_classlist.html" target="_blank" rel="noopener"><code>02_manipular_classes_com_classlist.html</code></a> — <strong>Alternar estado visual de componentes usando classList (add, remove, toggle)</strong></li>
+<li><a href="../pratica/09_javascript_e_dom/exemplos/03_percorrer_elementos_queryselectorall.html" target="_blank" rel="noopener"><code>03_percorrer_elementos_queryselectorall.html</code></a> — <strong>Percorrer vários elementos com querySelectorAll e forEach</strong></li>
+<li><a href="../pratica/09_javascript_e_dom/exemplos/04_atributos_e_dataset.html" target="_blank" rel="noopener"><code>04_atributos_e_dataset.html</code></a> — <strong>Leitura e atualização de atributos HTML (setAttribute, hidden, disabled e dataset)</strong></li>
+              </ul>
+            </details>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">6 Exercícios Práticos Graduais (4 Implementar + 1 Teste de Mesa + 1 Debug)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/09_javascript_e_dom/exercicios/01_atualizar_painel_via_dom.html" target="_blank" rel="noopener"><code>01_atualizar_painel_via_dom.html</code></a> — <strong>Implementar: selecionar elementos pelo ID e atualizar textContent</strong>: No bloco &lt;script&gt;, selecione #nome-produto e #preco-produto com document.querySelector e atualize seus textos para &#x27;Sérum Facial Blue&#x27; e &#x27;R$ 44,90&#x27;.</li>
+<li><a href="../pratica/09_javascript_e_dom/exercicios/02_destacar_estoque_baixo_classlist.html" target="_blank" rel="noopener"><code>02_destacar_estoque_baixo_classlist.html</code></a> — <strong>Implementar: aplicar classe .alerta quando o estoque for menor que 5</strong>: Leia Number(card.dataset.estoque). Se for menor que 5, adicione a classe &#x27;alerta&#x27; ao elemento #card-estoque usando classList.add(&#x27;alerta&#x27;).</li>
+<li><a href="../pratica/09_javascript_e_dom/exercicios/03_somar_estoque_queryselectorall.html" target="_blank" rel="noopener"><code>03_somar_estoque_queryselectorall.html</code></a> — <strong>Implementar: somar quantidades de todos os itens .item-estoque</strong>: Use document.querySelectorAll(&#x27;.item-estoque&#x27;) para somar os valores de data-qtd de todas as linhas e exiba o total em #total-unidades.</li>
+<li><a href="../pratica/09_javascript_e_dom/exercicios/04_desabilitar_botao_sem_estoque.html" target="_blank" rel="noopener"><code>04_desabilitar_botao_sem_estoque.html</code></a> — <strong>Implementar: desabilitar botão e exibir aviso quando esgotado</strong>: Se a constante saldo for 0, mude botao.disabled para true e altere botao.textContent para &#x27;Indisponível&#x27;.</li>
+<li><a href="../pratica/09_javascript_e_dom/exercicios/05_teste_de_mesa_textcontent_vs_innerhtml.html" target="_blank" rel="noopener"><code>05_teste_de_mesa_textcontent_vs_innerhtml.html</code></a> — <strong>Teste de mesa Web: diferença entre textContent e innerHTML</strong>: Se atribuirmos el.textContent = &#x27;&lt;strong&gt;Oferta&lt;/strong&gt;&#x27;, o que aparece na tela? E por que textContent é mais seguro ao exibir dados digitados pelo usuário? Responda em #resposta.</li>
+<li><a href="../pratica/09_javascript_e_dom/exercicios/06_investigar_seletor_sem_hashtag_e_script_no_topo.html" target="_blank" rel="noopener"><code>06_investigar_seletor_sem_hashtag_e_script_no_topo.html</code></a> — <strong>Investigar e corrigir: querySelector(&#x27;aviso&#x27;) sem # ou .</strong>: O script abaixo chamou document.querySelector(&#x27;aviso&#x27;) procurando uma tag &lt;aviso&gt; inexistente em vez do ID &#x27;#aviso&#x27;. Corrija o seletor para &#x27;#aviso&#x27;.</li>
+              </ul>
+            </details>
+          </section>
+
+          <footer class="doc-footer">
+            <div class="pager">
+              <a class="PagerButton" href="08_grid_e_responsividade.html">← Anterior: 08. Layout em grade com CSS Grid e responsividade (Media Queries)</a>
+              <a class="PagerButton" href="10_eventos_e_interacao.html">Próximo: 10. Eventos, leitura de campos e atualização dinâmica da interface →</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-dialog" data-search-dialog hidden>
+    <div class="search-panel">
+      <div class="search-Header">
+        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
+        <button class="PillButton" type="button" data-search-close>Fechar</button>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="../../shared/site.js"></script>
+  <script src="../../shared/navigation.js"></script>
+  <script src="../assets/pratica-data.js"></script>
+  <script src="../assets/pratica.js"></script>
+  <script src="../assets/dw1-labs.js"></script>
+</body>
+</html>

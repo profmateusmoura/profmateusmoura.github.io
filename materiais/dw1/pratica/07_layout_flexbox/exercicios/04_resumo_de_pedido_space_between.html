@@ -1,0 +1,29 @@
+<!--
+  04_resumo_de_pedido_space_between — Implementar: linhas de cupom fiscal com rótulo à esquerda e valor à direita
+  Tipo: Implementar e estruturar
+  Tópico: 07 — Layout moderno com Flexbox
+
+  Enunciado:
+  Use display: flex e justify-content: space-between na classe .linha-cupom para afastar o nome do item e seu preço em lados opostos do cupom.
+
+  Critério de conferência no navegador / DevTools:
+  Cada .linha-cupom deve mostrar o nome à esquerda e o valor alinhado à direita.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Cupom Flexbox</title>
+  <style>
+    .cupom { max-width: 340px; border: 1px solid #ccc; padding: 1rem; }
+    /* Configure .linha-cupom */
+  </style>
+</head>
+<body>
+  <section class="cupom">
+    <p class="linha-cupom"><span>Shampoo Neutro</span><strong>R$ 24,90</strong></p>
+    <p class="linha-cupom"><span>Frete</span><strong>Grátis</strong></p>
+    <p class="linha-cupom"><span>Total</span><strong>R$ 24,90</strong></p>
+  </section>
+</body>
+</html>

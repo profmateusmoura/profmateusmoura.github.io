@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderno 08 — Layout em grade com CSS Grid e responsividade (Media Queries) · DW1</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/pygments.css">
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="../../shared/navigation.css">
+  <link rel="stylesheet" href="../assets/pratica.css">
+  <link rel="stylesheet" href="../assets/dw1.css">
+</head>
+<body data-root="../" data-course="dw1" data-doc-id="08_grid_e_responsividade">
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
+        <strong>Cadernos de DW1</strong>
+        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
+      </a>
+
+      <div class="progress-card">
+        <div class="progress-top">
+          <strong>Progresso de leitura</strong>
+          <span data-progress-label>0/12 cadernos</span>
+        </div>
+        <div class="progress-bar"><span data-progress-bar></span></div>
+      </div>
+
+      <nav class="nav-sections" aria-label="Navegação do material">
+        <div class="nav-group">
+          <p class="nav-group-title">Visão geral</p>
+          <a href="../index.html">Início e Trilha</a>
+          <a href="../pratica/index.html">Catálogo Prático e ZIPs</a>
+          <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
+        </div>
+        <div class="nav-group">
+  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
+  <a class="doc-link" data-visited="01_web_e_documento_html" href="../cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
+  <a class="doc-link" data-visited="02_texto_e_semantica" href="../cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
+  <a class="doc-link" data-visited="03_estrutura_links_e_midia" href="../cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
+  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="../cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
+  <a class="doc-link" data-visited="05_css_seletores_e_cascata" href="../cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
+  <a class="doc-link" data-visited="06_box_model_e_unidades" href="../cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
+  <a class="doc-link" data-visited="07_layout_flexbox" href="../cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
+  <a class="doc-link active" data-visited="08_grid_e_responsividade" href="../cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
+  <a class="doc-link" data-visited="09_javascript_e_dom" href="../cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
+  <a class="doc-link" data-visited="10_eventos_e_interacao" href="../cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
+  <a class="doc-link" data-visited="11_elementos_dinamicos_e_storage" href="../cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
+  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="../cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
+</div>
+      </nav>
+    </aside>
+    <div class="main-panel">
+      <div class="content-wrap">
+        <div class="topbar">
+          <div class="breadcrumbs">
+            <a href="../../../index.html">Portal</a>
+            <span>/</span>
+            <a href="../index.html">DW1</a><span>/</span><span>Caderno 08</span>
+          </div>
+          <div class="topbar-actions">
+            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
+            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
+            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
+          </div>
+        </div>
+
+        <article class="doc-article">
+          <header class="doc-header">
+            <span class="eyebrow">Fase 2 — Estilização e Layout com CSS3 · Caderno 08 de 12</span>
+            <h1>08. Layout em grade com CSS Grid e responsividade (Media Queries)</h1>
+            <p class="lead">Construa grades bidimensionais de produtos com CSS Grid (fr, repeat, minmax, auto-fit, grid-column: span 2) e adapte a interface para celulares, tablets e desktops com Media Queries.</p>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <button class="PillButton" type="button" data-read-toggle>Marcar como concluído</button>
+              <a class="PillButton" href="../arquivos/DW1_08_grid_e_responsividade.zip" download>Baixar pacote deste tópico (.zip)</a>
+              <a class="PillButton" href="../pratica/index.html#topico-08">Ver arquivos no catálogo</a>
+            </div>
+          </header>
+
+          <nav class="toc-inline" aria-label="Sumário deste caderno">
+            <strong>Neste caderno interativo:</strong>
+            <ol>
+              <li><a href="#cap-1">1. Grades Bidimensionais e Design Responsivo Multi-Tela</a></li>
+              <li><a href="#cap-2">2. CSS Grid (fr, minmax, span) e Media Queries (@media)</a></li>
+              <li><a href="#cap-3">3. Simulador Visual Ao Vivo: Grade CSS Grid e Viewport Responsivo</a></li>
+              <li><a href="#cap-4">4. Execução Passo a Passo e Teste de Mesa Web</a></li>
+              <li><a href="#cap-5">5. Laboratório de Desafios e Síntese de Referência</a></li>
+              <li><a href="#cap-6">6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</a></li>
+            </ol>
+          </nav>
+
+          <div class="callout note">
+            <strong>Objetivos de aprendizagem</strong>
+            <ul>
+              <li>Dominar o modelo bidimensional CSS Grid (linhas e colunas simultâneas) e a unidade fracionária fr.</li>
+<li>Criar grades de vitrine auto-responsivas com repeat(auto-fit, minmax(220px, 1fr)).</li>
+<li>Expandir banners e destaques por múltiplas colunas ou linhas usando grid-column: span 2.</li>
+<li>Implementar design responsivo Mobile-First com @media queries e imagens fluidas (max-width: 100%).</li>
+            </ul>
+          </div>
+
+          <section id="cap-1">
+            <h2>1. Grades Bidimensionais e Design Responsivo Multi-Tela</h2>
+            <p>Enquanto o Flexbox brilha ao alinhar elementos em uma única direção (como o topo da loja ou o interior de um card), a vitrine principal de produtos da <strong>Lojas Blue</strong> precisa controlar <strong>colunas e linhas simultaneamente</strong> com larguras rigorosamente alinhadas. Esse é o território do <strong>CSS Grid Layout</strong>.</p>
+<p>Além disso, mais de 65% dos acessos a lojas virtuais vêm de smartphones. Com a combinação de <strong>CSS Grid fluido</strong> e <strong>Media Queries (<code>@media</code>)</strong>, o mesmo código HTML se adapta de 1 coluna no celular para 2 colunas no tablet e 4 colunas no monitor widescreen sem barra de rolagem horizontal.</p>
+            <div class="callout tip">
+              <strong>A linha mágica do CSS Grid moderno</strong>
+              <p>A declaração <code>grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));</code> instrui o navegador a criar automaticamente quantas colunas de no mínimo <code>220px</code> couberem na tela e a dividir o espaço restante em partes iguais (<code>1fr</code>)!</p>
+            </div>
+          </section>
+
+          <section id="cap-2">
+            <h2>2. CSS Grid (fr, minmax, span) e Media Queries (@media)</h2>
+            <p>Veja como estruturamos a grade de produtos da Lojas Blue com suporte a card em destaque e adaptação responsiva para telas menores:</p>
+            <div class="code-shell">
+  <div class="code-header">
+    <span>CSS · Cenário Vitrine Lojas Blue</span>
+    <button class="copy-code" type="button">Copiar</button>
+  </div>
+  <div class="highlight"><pre><code>/* 1. Grade de produtos auto-responsiva */
+.grade-vitrine {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+/* 2. Card promocional ocupando 2 colunas no desktop */
+.card-destaque {
+  grid-column: span 2;
+}
+
+/* 3. Imagens fluidas que nunca estouram o card */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 4. Media Query para telas até 640px (Smartphones) */
+@media (max-width: 640px) {
+  .card-destaque {
+    grid-column: span 1; /* volta a ocupar 1 coluna no celular */
+  }
+}</code></pre></div>
+</div>
+
+            <h3>Tabela Comparativa e Referência Técnica</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Recurso CSS Grid / Responsivo</th><th>Sintaxe de Exemplo</th><th>Função no Layout</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Unidade <code>fr</code> (Fração)</td><td><code>grid-template-columns: 260px 1fr</code></td><td>Fixa a sidebar em 260px e entrega 100% do espaço livre restante à coluna principal</td></tr>
+<tr><td><code>repeat()</code> + <code>minmax()</code></td><td><code>repeat(auto-fit, minmax(220px, 1fr))</code></td><td>Gera colunas elásticas que quebram sozinhas conforme a largura da tela</td></tr>
+<tr><td>Expansão de Célula</td><td><code>grid-column: span 2</code></td><td>Faz um item abranger 2 faixas de coluna consecutivas na grade</td></tr>
+<tr><td>Media Query Mobile-First</td><td><code>@media (min-width: 768px) { ... }</code></td><td>Aplica regras adicionais apenas quando a tela atinge pelo menos 768px</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-3">
+            <h2>3. Simulador Visual Ao Vivo: Grade CSS Grid e Viewport Responsivo</h2>
+            <p>Arraste o controle de largura da viewport no simulador abaixo e ative o destaque <code>span 2</code> para ver a grade se adaptar entre Desktop, Tablet e Mobile:</p>
+
+            <!-- Simulador Visual Ao Vivo (.dw1-playground) -->
+            <div class="dw1-playground" data-dw1-playground="08"></div>
+
+            <div class="callout warning">
+              <strong>Cuidado com grid-column: span 2 em telas estreitas</strong>
+              <p>Se você definir <code>grid-column: span 2</code> em um card e não voltar para <code>span 1</code> em telas pequenas (mobile), a grade será forçada a manter 2 colunas espremidas no celular. Sempre revise o comportamento em viewports de 360px!</p>
+            </div>
+          </section>
+
+          <section id="cap-4">
+            <h2>4. Execução Passo a Passo e Teste de Mesa Web</h2>
+            <p>Use os botões <strong>Próximo passo</strong>, <strong>Passo anterior</strong> e <strong>Executar tudo</strong> nos simuladores abaixo para inspecionar como o navegador processa cada linha e altera seu estado interno:</p>
+
+            <div class="ped-practice" data-practice-id="08-a"></div>
+            <div class="ped-practice" data-practice-id="08-b"></div>
+          </section>
+
+          <section id="cap-5">
+            <h2>5. Laboratório de Desafios e Síntese de Referência</h2>
+            <p>Resolva as <strong>3 rodadas interativas</strong> abaixo para validar seu domínio sobre os conceitos deste caderno antes de partir para o editor de código:</p>
+
+            <div class="lr-lab" data-dw1-lab="08"></div>
+
+            <h3>Quadro-Síntese de Revisão Rápida</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Conceito-Chave</th>
+                    <th>Regra Prática para a Vitrine Lojas Blue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Flexbox vs. CSS Grid</strong></td><td>Use <strong>CSS Grid</strong> para a arquitetura macro da página e grades de cards (2D); use <strong>Flexbox</strong> para alinhar o conteúdo interno de cada card e barras de navegação (1D).</td></tr>
+<tr><td><strong>Imagens Responsivas</strong></td><td><code>max-width: 100%; height: auto;</code> impede que imagens grandes criem rolagem horizontal no celular.</td></tr>
+<tr><td><strong>Tipografia Fluida</strong></td><td><code>clamp(1.5rem, 3vw, 2.25rem)</code> escala o título suavemente entre um tamanho mínimo (1.5rem) e máximo (2.25rem).</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-6">
+            <h2>6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</h2>
+            <p>Todos os arquivos abaixo são páginas <code>.html</code> autocontidas (com preview visual imediato no navegador e código comentado). Você pode abri-los diretamente clicando nos links ou baixar o pacote <code>.zip</code> para resolver no VS Code:</p>
+
+            <div class="hero-actions" style="margin:1rem 0;">
+              <a class="PillButton" href="../arquivos/DW1_08_grid_e_responsividade.zip" download>Baixar DW1_08_grid_e_responsividade.zip (10 arquivos .html)</a>
+              <a class="PillButton" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo do Curso (.zip)</a>
+            </div>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">4 Exemplos Comentados de Estudo (abrir no navegador)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/08_grid_e_responsividade/exemplos/01_grade_de_produtos_auto_fit.html" target="_blank" rel="noopener"><code>01_grade_de_produtos_auto_fit.html</code></a> — <strong>Grade responsiva automática com repeat(auto-fit, minmax(220px, 1fr))</strong></li>
+<li><a href="../pratica/08_grid_e_responsividade/exemplos/02_layout_duas_colunas_sidebar_e_main.html" target="_blank" rel="noopener"><code>02_layout_duas_colunas_sidebar_e_main.html</code></a> — <strong>Layout de página com barra lateral de filtros (240px) e vitrine elástica (1fr)</strong></li>
+<li><a href="../pratica/08_grid_e_responsividade/exemplos/03_destaque_com_grid_column_span.html" target="_blank" rel="noopener"><code>03_destaque_com_grid_column_span.html</code></a> — <strong>Banner promocional ocupando duas colunas da grade (grid-column: span 2)</strong></li>
+<li><a href="../pratica/08_grid_e_responsividade/exemplos/04_mobile_first_com_media_queries.html" target="_blank" rel="noopener"><code>04_mobile_first_com_media_queries.html</code></a> — <strong>Abordagem Mobile-First: 1 coluna no celular e expansão progressiva com @media (min-width)</strong></li>
+              </ul>
+            </details>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">6 Exercícios Práticos Graduais (4 Implementar + 1 Teste de Mesa + 1 Debug)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/08_grid_e_responsividade/exercicios/01_grade_tres_colunas_fr.html" target="_blank" rel="noopener"><code>01_grade_tres_colunas_fr.html</code></a> — <strong>Implementar: grade de 3 colunas iguais com display: grid e 1fr</strong>: Configure .grade-setores com display: grid, 3 colunas de mesma fração (repeat(3, 1fr)) e gap de 1rem.</li>
+<li><a href="../pratica/08_grid_e_responsividade/exercicios/02_grade_fluida_minmax.html" target="_blank" rel="noopener"><code>02_grade_fluida_minmax.html</code></a> — <strong>Implementar: vitrine responsiva sem media query usando auto-fit e minmax</strong>: Use grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) e gap: 1rem na classe .catalogo.</li>
+<li><a href="../pratica/08_grid_e_responsividade/exercicios/03_media_query_empilhar_no_celular.html" target="_blank" rel="noopener"><code>03_media_query_empilhar_no_celular.html</code></a> — <strong>Implementar: empilhar sidebar e conteúdo em telas menores que 680px</strong>: Dado o layout de duas colunas (220px 1fr), escreva um bloco @media (max-width: 680px) que mude grid-template-columns de .pagina para 1fr.</li>
+<li><a href="../pratica/08_grid_e_responsividade/exercicios/04_card_destaque_span_2.html" target="_blank" rel="noopener"><code>04_card_destaque_span_2.html</code></a> — <strong>Implementar: fazer o cartão principal ocupar 2 colunas na grade</strong>: Aplique grid-column: span 2 na classe .banner-principal para que ele ocupe duas colunas da grade .vitrine.</li>
+<li><a href="../pratica/08_grid_e_responsividade/exercicios/05_teste_de_mesa_calculo_fr.html" target="_blank" rel="noopener"><code>05_teste_de_mesa_calculo_fr.html</code></a> — <strong>Teste de mesa Web: distribuição de espaço com a unidade fr</strong>: Um container Grid tem 900px de largura disponível (já descontando o gap) e define grid-template-columns: 1fr 2fr. Quantos pixels de largura terá a 1ª coluna e quantos terá a 2ª coluna? Responda em #resposta.</li>
+<li><a href="../pratica/08_grid_e_responsividade/exercicios/06_investigar_pagina_sem_meta_viewport.html" target="_blank" rel="noopener"><code>06_investigar_pagina_sem_meta_viewport.html</code></a> — <strong>Investigar e corrigir: Media Query ignorada no celular por falta de meta viewport e colunas fixas</strong>: Adicione a tag &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; no &lt;head&gt; e troque grid-template-columns: 400px 400px 400px por repeat(auto-fit, minmax(220px, 1fr)).</li>
+              </ul>
+            </details>
+          </section>
+
+          <footer class="doc-footer">
+            <div class="pager">
+              <a class="PagerButton" href="07_layout_flexbox.html">← Anterior: 07. Layout moderno com Flexbox</a>
+              <a class="PagerButton" href="09_javascript_e_dom.html">Próximo: 09. Primeiros passos com JavaScript no navegador e o DOM →</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-dialog" data-search-dialog hidden>
+    <div class="search-panel">
+      <div class="search-Header">
+        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
+        <button class="PillButton" type="button" data-search-close>Fechar</button>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="../../shared/site.js"></script>
+  <script src="../../shared/navigation.js"></script>
+  <script src="../assets/pratica-data.js"></script>
+  <script src="../assets/pratica.js"></script>
+  <script src="../assets/dw1-labs.js"></script>
+</body>
+</html>

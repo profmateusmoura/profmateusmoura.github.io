@@ -1,0 +1,35 @@
+<!--
+  DW1 · 11 — Criando elementos dinamicamente e persistência local (localStorage)
+  Exemplo: Salvar e recuperar preferência de filial ou sacola com localStorage
+  Objetivo do tópico: Criar e inserir elementos no DOM com createElement/append, filtrar listas de produtos na tela e persistir dados no navegador com localStorage e JSON.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>localStorage · Lojas Blue</title>
+</head>
+<body>
+  <h1>Filial Preferida</h1>
+  <select id="seletor-filial">
+    <option value="Centro">BH — Centro</option>
+    <option value="Savassi">BH — Savassi</option>
+    <option value="Contagem">Contagem</option>
+  </select>
+  <p id="mensagem"></p>
+  <script>
+    const seletor = document.querySelector('#seletor-filial');
+    const msg = document.querySelector('#mensagem');
+    const chave = 'lojas-blue-filial';
+    const salva = localStorage.getItem(chave);
+    if (salva) seletor.value = salva;
+    msg.textContent = `Atendimento configurado para: ${seletor.value}`;
+    seletor.addEventListener('change', () => {
+      localStorage.setItem(chave, seletor.value);
+      msg.textContent = `Atendimento salvo para: ${seletor.value}`;
+    });
+  </script>
+</body>
+</html>

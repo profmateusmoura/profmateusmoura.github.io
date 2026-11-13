@@ -1,0 +1,27 @@
+<!--
+  01_botao_reservar_unidade — Implementar: diminuir estoque ao clicar em 'Reservar 1 unidade'
+  Tipo: Implementar e estruturar
+  Tópico: 10 — Eventos, leitura de campos e atualização dinâmica da interface
+
+  Enunciado:
+  Adicione um ouvinte 'click' em #btn-reservar que diminua a variável estoque em 1 (enquanto estoque > 0) e atualize #visor-estoque.
+
+  Critério de conferência no navegador / DevTools:
+  Quando estoque chegar a 0, não deve ficar negativo.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Implementar: diminuir estoque ao clicar em 'Reservar 1 unidade' · DW1</title>
+</head>
+<body>
+  <p>Estoque disponível: <strong id="visor-estoque">3</strong></p>
+  <button type="button" id="btn-reservar">Reservar 1 unidade</button>
+  <script>
+    let estoque = 3;
+    // Implemente o addEventListener('click', ...) aqui
+  </script>
+</body>
+</html>

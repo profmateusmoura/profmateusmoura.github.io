@@ -1,0 +1,24 @@
+<!--
+  06_investigar_pagina_sem_meta_viewport — Investigar e corrigir: Media Query ignorada no celular por falta de meta viewport e colunas fixas
+  Tipo: Investigar e corrigir (debug)
+  Tópico: 08 — Layout em grade com CSS Grid e responsividade (Media Queries)
+
+  Enunciado:
+  Adicione a tag <meta name="viewport" content="width=device-width, initial-scale=1"> no <head> e troque grid-template-columns: 400px 400px 400px por repeat(auto-fit, minmax(220px, 1fr)).
+
+  Critério de conferência no navegador / DevTools:
+  A página não pode ter 1200px fixos nem faltar a meta viewport.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Corrigir Responsividade</title>
+  <style>
+    .grade { display: grid; grid-template-columns: 400px 400px 400px; gap: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="grade"><div>Card 1</div><div>Card 2</div><div>Card 3</div></div>
+</body>
+</html>

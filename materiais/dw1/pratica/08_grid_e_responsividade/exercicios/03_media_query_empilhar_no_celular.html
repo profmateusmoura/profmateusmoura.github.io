@@ -1,0 +1,26 @@
+<!--
+  03_media_query_empilhar_no_celular — Implementar: empilhar sidebar e conteúdo em telas menores que 680px
+  Tipo: Implementar e estruturar
+  Tópico: 08 — Layout em grade com CSS Grid e responsividade (Media Queries)
+
+  Enunciado:
+  Dado o layout de duas colunas (220px 1fr), escreva um bloco @media (max-width: 680px) que mude grid-template-columns de .pagina para 1fr.
+
+  Critério de conferência no navegador / DevTools:
+  Abaixo de 680px de largura, o menu lateral e o conteúdo principal devem ficar em uma única coluna.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Media Query</title>
+  <style>
+    .pagina { display: grid; grid-template-columns: 220px 1fr; gap: 1rem; }
+    /* Adicione a @media (max-width: 680px) abaixo */
+  </style>
+</head>
+<body>
+  <div class="pagina"><aside>Filtros</aside><main>Vitrine</main></div>
+</body>
+</html>

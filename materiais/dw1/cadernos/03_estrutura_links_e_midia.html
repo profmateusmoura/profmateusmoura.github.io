@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderno 03 — Marcos semânticos de página, links e imagens · DW1</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/pygments.css">
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="../../shared/navigation.css">
+  <link rel="stylesheet" href="../assets/pratica.css">
+  <link rel="stylesheet" href="../assets/dw1.css">
+</head>
+<body data-root="../" data-course="dw1" data-doc-id="03_estrutura_links_e_midia">
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
+        <strong>Cadernos de DW1</strong>
+        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
+      </a>
+
+      <div class="progress-card">
+        <div class="progress-top">
+          <strong>Progresso de leitura</strong>
+          <span data-progress-label>0/12 cadernos</span>
+        </div>
+        <div class="progress-bar"><span data-progress-bar></span></div>
+      </div>
+
+      <nav class="nav-sections" aria-label="Navegação do material">
+        <div class="nav-group">
+          <p class="nav-group-title">Visão geral</p>
+          <a href="../index.html">Início e Trilha</a>
+          <a href="../pratica/index.html">Catálogo Prático e ZIPs</a>
+          <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
+        </div>
+        <div class="nav-group">
+  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
+  <a class="doc-link" data-visited="01_web_e_documento_html" href="../cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
+  <a class="doc-link" data-visited="02_texto_e_semantica" href="../cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
+  <a class="doc-link active" data-visited="03_estrutura_links_e_midia" href="../cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
+  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="../cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
+  <a class="doc-link" data-visited="05_css_seletores_e_cascata" href="../cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
+  <a class="doc-link" data-visited="06_box_model_e_unidades" href="../cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
+  <a class="doc-link" data-visited="07_layout_flexbox" href="../cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
+  <a class="doc-link" data-visited="08_grid_e_responsividade" href="../cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
+  <a class="doc-link" data-visited="09_javascript_e_dom" href="../cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
+  <a class="doc-link" data-visited="10_eventos_e_interacao" href="../cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
+  <a class="doc-link" data-visited="11_elementos_dinamicos_e_storage" href="../cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
+  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="../cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
+</div>
+      </nav>
+    </aside>
+    <div class="main-panel">
+      <div class="content-wrap">
+        <div class="topbar">
+          <div class="breadcrumbs">
+            <a href="../../../index.html">Portal</a>
+            <span>/</span>
+            <a href="../index.html">DW1</a><span>/</span><span>Caderno 03</span>
+          </div>
+          <div class="topbar-actions">
+            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
+            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
+            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
+          </div>
+        </div>
+
+        <article class="doc-article">
+          <header class="doc-header">
+            <span class="eyebrow">Fase 1 — Estrutura Semântica com HTML5 · Caderno 03 de 12</span>
+            <h1>03. Marcos semânticos de página, links e imagens</h1>
+            <p class="lead">Organize a arquitetura macro da página com header, nav, main, section, article, aside e footer, crie hiperlinks seguros e insira imagens acessíveis com figure e figcaption.</p>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <button class="PillButton" type="button" data-read-toggle>Marcar como concluído</button>
+              <a class="PillButton" href="../arquivos/DW1_03_estrutura_links_e_midia.zip" download>Baixar pacote deste tópico (.zip)</a>
+              <a class="PillButton" href="../pratica/index.html#topico-03">Ver arquivos no catálogo</a>
+            </div>
+          </header>
+
+          <nav class="toc-inline" aria-label="Sumário deste caderno">
+            <strong>Neste caderno interativo:</strong>
+            <ol>
+              <li><a href="#cap-1">1. Arquitetura Macro da Página: superando a &#x27;sopa de &lt;div&gt;&#x27;</a></li>
+              <li><a href="#cap-2">2. Landmarks, Hiperlinks (&lt;a&gt;) e Mídia Acessível (&lt;img&gt;, &lt;figure&gt;)</a></li>
+              <li><a href="#cap-3">3. Simulador Visual Ao Vivo: Mapa de Landmarks HTML5</a></li>
+              <li><a href="#cap-4">4. Execução Passo a Passo e Teste de Mesa Web</a></li>
+              <li><a href="#cap-5">5. Laboratório de Desafios e Síntese de Referência</a></li>
+              <li><a href="#cap-6">6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</a></li>
+            </ol>
+          </nav>
+
+          <div class="callout note">
+            <strong>Objetivos de aprendizagem</strong>
+            <ul>
+              <li>Substituir a &#x27;sopa de divs&#x27; por marcos semânticos de página (Landmarks HTML5).</li>
+<li>Distinguir quando usar &lt;section&gt;, &lt;article&gt;, &lt;aside&gt; e quando a &lt;div&gt; continua sendo a escolha certa.</li>
+<li>Criar links internos (#ancora), links relativos entre páginas e links externos seguros (rel=&quot;noopener noreferrer&quot;).</li>
+<li>Inserir imagens com atributos src, alt, width, height e agrupá-las com &lt;figure&gt; e &lt;figcaption&gt;.</li>
+            </ul>
+          </div>
+
+          <section id="cap-1">
+            <h2>1. Arquitetura Macro da Página: superando a &#x27;sopa de &lt;div&gt;&#x27;</h2>
+            <p>Antes do HTML5, páginas inteiras eram montadas apenas com <code>&lt;div id="topo"&gt;</code>, <code>&lt;div id="menu"&gt;</code> e <code>&lt;div id="conteudo"&gt;</code>. Para o navegador e para tecnologias assistivas, todas essas caixas eram genéricas e indistinguíveis.</p>
+<p>Com as tags de seção do HTML5 — chamadas de <strong>Landmarks (Marcos de Página)</strong> — cada região da vitrine da <strong>Lojas Blue</strong> declara explicitamente seu papel estrutural: cabeçalho (<code>&lt;header&gt;</code>), navegação (<code>&lt;nav&gt;</code>), conteúdo principal único (<code>&lt;main&gt;</code>), seções temáticas (<code>&lt;section&gt;</code>), cards independentes (<code>&lt;article&gt;</code>), barra complementar (<code>&lt;aside&gt;</code>) e rodapé (<code>&lt;footer&gt;</code>).</p>
+            <div class="callout tip">
+              <strong>Quando usar <article>, <section> ou <div>?</strong>
+              <p>Use <code>&lt;article&gt;</code> quando o bloco faz sentido sozinho se for copiado para outro lugar (como um card de produto ou post de blog). Use <code>&lt;section&gt;</code> para agrupar um tema da página que possui um título (<code>&lt;h2&gt;</code>). E use <code>&lt;div&gt;</code> quando precisar apenas de um container puramente visual para aplicar CSS (Flexbox/Grid) sem significado semântico próprio.</p>
+            </div>
+          </section>
+
+          <section id="cap-2">
+            <h2>2. Landmarks, Hiperlinks (&lt;a&gt;) e Mídia Acessível (&lt;img&gt;, &lt;figure&gt;)</h2>
+            <p>Veja como uma página completa da Lojas Blue integra regiões semânticas, navegação por âncoras e figuras com legenda:</p>
+            <div class="code-shell">
+  <div class="code-header">
+    <span>HTML · Cenário Vitrine Lojas Blue</span>
+    <button class="copy-code" type="button">Copiar</button>
+  </div>
+  <div class="highlight"><pre><code>&lt;header&gt;
+  &lt;h1&gt;Lojas Blue&lt;/h1&gt;
+  &lt;nav aria-label=&quot;Menu principal&quot;&gt;
+    &lt;a href=&quot;#lancamentos&quot;&gt;Lançamentos&lt;/a&gt;
+    &lt;a href=&quot;suporte.html&quot;&gt;Suporte&lt;/a&gt;
+    &lt;a href=&quot;https://correios.com.br&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Rastreio Externo&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;section id=&quot;lancamentos&quot;&gt;
+    &lt;h2&gt;Lançamentos da Semana&lt;/h2&gt;
+    &lt;article&gt;
+      &lt;h3&gt;Cadeira Ergonômica Blue Mesh&lt;/h3&gt;
+      &lt;figure&gt;
+        &lt;img src=&quot;cadeira-mesh.svg&quot;
+             alt=&quot;Cadeira ergonômica preta com encosto em tela respirável e apoio lombar&quot;
+             width=&quot;320&quot; height=&quot;220&quot;&gt;
+        &lt;figcaption&gt;Figura 1 — Ajuste de altura a gás e braços 3D.&lt;/figcaption&gt;
+      &lt;/figure&gt;
+    &lt;/article&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+
+&lt;aside aria-label=&quot;Vantagens da loja&quot;&gt;
+  &lt;h2&gt;Compra Garantida&lt;/h2&gt;
+  &lt;p&gt;Troca fácil em até 30 dias.&lt;/p&gt;
+&lt;/aside&gt;
+
+&lt;footer&gt;
+  &lt;p&gt;&amp;copy; 2026 Lojas Blue — Todos os direitos reservados.&lt;/p&gt;
+&lt;/footer&gt;</code></pre></div>
+</div>
+
+            <h3>Tabela Comparativa e Referência Técnica</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Recurso / Tag</th><th>Boas Práticas Essenciais</th><th>Por que é indispensável</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>&lt;a href="#id"&gt;</code></td><td>Aponta para um elemento com <code>id="id"</code> na mesma página</td><td>Permite navegação rápida por seções sem recarregar o documento</td></tr>
+<tr><td><code>target="_blank"</code></td><td>Sempre acompanhar de <code>rel="noopener noreferrer"</code></td><td>Impede que a aba externa controle a janela original via JS e protege privacidade</td></tr>
+<tr><td>Atributo <code>alt</code> em <code>&lt;img&gt;</code></td><td>Descrever a imagem se for informativa; usar <code>alt=""</code> se for decorativa</td><td>Garante acessibilidade para leitores de tela e exibe fallback caso a imagem falhe</td></tr>
+<tr><td><code>width</code> e <code>height</code></td><td>Informar as dimensões intrínsecas na tag <code>&lt;img&gt;</code></td><td>Reserva o espaço na tela antes do carregamento, evitando saltos de layout (CLS)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-3">
+            <h2>3. Simulador Visual Ao Vivo: Mapa de Landmarks HTML5</h2>
+            <p>Clique nas diferentes regiões da página no simulador abaixo para inspecionar qual tag semântica e qual papel de acessibilidade (ARIA Landmark) governa cada parte do layout:</p>
+
+            <!-- Simulador Visual Ao Vivo (.dw1-playground) -->
+            <div class="dw1-playground" data-dw1-playground="03"></div>
+
+            <div class="callout warning">
+              <strong>Textos de link vagos prejudicam a acessibilidade</strong>
+              <p>Evite criar links com o texto genérico 'Clique aqui' ou 'Saiba mais'. Prefira textos descritivos que façam sentido fora de contexto, como <code>&lt;a href=&quot;#garantia&quot;&gt;Consultar política de garantia de 12 meses&lt;/a&gt;</code>.</p>
+            </div>
+          </section>
+
+          <section id="cap-4">
+            <h2>4. Execução Passo a Passo e Teste de Mesa Web</h2>
+            <p>Use os botões <strong>Próximo passo</strong>, <strong>Passo anterior</strong> e <strong>Executar tudo</strong> nos simuladores abaixo para inspecionar como o navegador processa cada linha e altera seu estado interno:</p>
+
+            <div class="ped-practice" data-practice-id="03-a"></div>
+            <div class="ped-practice" data-practice-id="03-b"></div>
+          </section>
+
+          <section id="cap-5">
+            <h2>5. Laboratório de Desafios e Síntese de Referência</h2>
+            <p>Resolva as <strong>3 rodadas interativas</strong> abaixo para validar seu domínio sobre os conceitos deste caderno antes de partir para o editor de código:</p>
+
+            <div class="lr-lab" data-dw1-lab="03"></div>
+
+            <h3>Quadro-Síntese de Revisão Rápida</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Conceito-Chave</th>
+                    <th>Regra Prática para a Vitrine Lojas Blue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Unicidade do <code>&lt;main&gt;</code></strong></td><td>Deve existir apenas um <code>&lt;main&gt;</code> visível por documento, contendo o conteúdo central da página.</td></tr>
+<tr><td><strong>Três tipos de <code>href</code></strong></td><td>Interno (<code>#ofertas</code>), relativo ao projeto (<code>pratica/catalogo.html</code>) e absoluto externo (<code>https://...</code>).</td></tr>
+<tr><td><strong><code>&lt;figure&gt;</code> + <code>&lt;figcaption&gt;</code></strong></td><td>Associa semanticamente uma imagem, diagrama ou trecho de código à sua legenda explicativa.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-6">
+            <h2>6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</h2>
+            <p>Todos os arquivos abaixo são páginas <code>.html</code> autocontidas (com preview visual imediato no navegador e código comentado). Você pode abri-los diretamente clicando nos links ou baixar o pacote <code>.zip</code> para resolver no VS Code:</p>
+
+            <div class="hero-actions" style="margin:1rem 0;">
+              <a class="PillButton" href="../arquivos/DW1_03_estrutura_links_e_midia.zip" download>Baixar DW1_03_estrutura_links_e_midia.zip (10 arquivos .html)</a>
+              <a class="PillButton" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo do Curso (.zip)</a>
+            </div>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">4 Exemplos Comentados de Estudo (abrir no navegador)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/03_estrutura_links_e_midia/exemplos/01_regioes_semanticas.html" target="_blank" rel="noopener"><code>01_regioes_semanticas.html</code></a> — <strong>Layout semântico completo (header, nav, main, section, article, aside, footer)</strong></li>
+<li><a href="../pratica/03_estrutura_links_e_midia/exemplos/02_links_ancoras_e_caminhos.html" target="_blank" rel="noopener"><code>02_links_ancoras_e_caminhos.html</code></a> — <strong>Links internos por âncora (#id), caminhos relativos e links externos seguros</strong></li>
+<li><a href="../pratica/03_estrutura_links_e_midia/exemplos/03_imagens_alt_e_figure.html" target="_blank" rel="noopener"><code>03_imagens_alt_e_figure.html</code></a> — <strong>Imagens acessíveis com atributo alt, figure e figcaption</strong></li>
+<li><a href="../pratica/03_estrutura_links_e_midia/exemplos/04_card_de_produto_semantico.html" target="_blank" rel="noopener"><code>04_card_de_produto_semantico.html</code></a> — <strong>Artigo independente (article) para cartão de produto reutilizável</strong></li>
+              </ul>
+            </details>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">6 Exercícios Práticos Graduais (4 Implementar + 1 Teste de Mesa + 1 Debug)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/03_estrutura_links_e_midia/exercicios/01_estruturar_landmarks.html" target="_blank" rel="noopener"><code>01_estruturar_landmarks.html</code></a> — <strong>Implementar: organizar página com header, nav, main, section e footer</strong>: Envolva o título e o menu em &lt;header&gt; (com &lt;nav&gt;), o conteúdo principal em &lt;main&gt; (com duas &lt;section&gt;) e o rodapé institucional em &lt;footer&gt;.</li>
+<li><a href="../pratica/03_estrutura_links_e_midia/exercicios/02_menu_de_ancoras.html" target="_blank" rel="noopener"><code>02_menu_de_ancoras.html</code></a> — <strong>Implementar: menu de navegação interna por âncoras (#id)</strong>: Crie um &lt;nav&gt; com três links (&lt;a href=&quot;#...&quot;&gt;) que levem às seções id=&quot;cremes&quot;, id=&quot;sabonetes&quot; e id=&quot;contato&quot; na mesma página.</li>
+<li><a href="../pratica/03_estrutura_links_e_midia/exercicios/03_figure_acessivel.html" target="_blank" rel="noopener"><code>03_figure_acessivel.html</code></a> — <strong>Implementar: imagem de produto com alt descritivo e legenda</strong>: Construa um bloco &lt;figure&gt; contendo uma tag &lt;img&gt; (com width, height e atributo alt claro descrevendo o produto) e um &lt;figcaption&gt; informando o preço promocional.</li>
+<li><a href="../pratica/03_estrutura_links_e_midia/exercicios/04_articles_de_produtos.html" target="_blank" rel="noopener"><code>04_articles_de_produtos.html</code></a> — <strong>Implementar: vitrine com três cartões &lt;article&gt;</strong>: Dentro de uma &lt;section id=&quot;vitrine&quot;&gt;, crie três elementos &lt;article&gt;, cada um representando um produto da Lojas Blue com título &lt;h3&gt;, descrição &lt;p&gt; e link de detalhes.</li>
+<li><a href="../pratica/03_estrutura_links_e_midia/exercicios/05_teste_de_mesa_caminhos_relativos.html" target="_blank" rel="noopener"><code>05_teste_de_mesa_caminhos_relativos.html</code></a> — <strong>Teste de mesa Web: resolver caminhos relativos de links</strong>: Se um arquivo está em &#x27;materiais/dw1/cadernos/03.html&#x27;, qual href relativo leva para &#x27;materiais/dw1/index.html&#x27; e qual leva para &#x27;materiais/dw1/arquivos/pacote.zip&#x27;? Anote em #resposta.</li>
+<li><a href="../pratica/03_estrutura_links_e_midia/exercicios/06_investigar_div_soup_e_links_vagos.html" target="_blank" rel="noopener"><code>06_investigar_div_soup_e_links_vagos.html</code></a> — <strong>Investigar e corrigir: trocar excesso de &lt;div&gt; genéricas e links &#x27;clique aqui&#x27;</strong>: Substitua as tags &lt;div&gt; genéricas por &lt;header&gt;, &lt;main&gt; e &lt;footer&gt;, adicione alt na imagem e troque o texto vago &#x27;clique aqui&#x27; do link por um texto descritivo (&#x27;Ver política de trocas da Lojas Blue&#x27;).</li>
+              </ul>
+            </details>
+          </section>
+
+          <footer class="doc-footer">
+            <div class="pager">
+              <a class="PagerButton" href="02_texto_e_semantica.html">← Anterior: 02. Estrutura de texto e semântica de conteúdo</a>
+              <a class="PagerButton" href="04_tabelas_e_formularios.html">Próximo: 04. Tabelas de dados e formulários de entrada →</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-dialog" data-search-dialog hidden>
+    <div class="search-panel">
+      <div class="search-Header">
+        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
+        <button class="PillButton" type="button" data-search-close>Fechar</button>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="../../shared/site.js"></script>
+  <script src="../../shared/navigation.js"></script>
+  <script src="../assets/pratica-data.js"></script>
+  <script src="../assets/pratica.js"></script>
+  <script src="../assets/dw1-labs.js"></script>
+</body>
+</html>

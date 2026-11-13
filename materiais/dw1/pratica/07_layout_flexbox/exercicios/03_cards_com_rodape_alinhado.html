@@ -1,0 +1,28 @@
+<!--
+  03_cards_com_rodape_alinhado — Implementar: manter o preço e botão sempre na base do cartão
+  Tipo: Implementar e estruturar
+  Tópico: 07 — Layout moderno com Flexbox
+
+  Enunciado:
+  Use display: flex e flex-direction: column em .produto e aplique margin-top: auto em .rodape-produto para alinhar a base de todos os cartões.
+
+  Critério de conferência no navegador / DevTools:
+  Mesmo com textos de tamanhos diferentes, os rodapés dos cartões devem terminar alinhados na mesma altura.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Cards Alinhados</title>
+  <style>
+    .grade { display: flex; gap: 1rem; }
+    /* Configure .produto e .rodape-produto */
+  </style>
+</head>
+<body>
+  <div class="grade">
+    <article class="produto"><h3>Batom Matte</h3><p>Alta fixação.</p><div class="rodape-produto">R$ 19,90</div></article>
+    <article class="produto"><h3>Paleta de Sombras Blue</h3><p>12 cores cintilantes e foscas com estojo e espelho.</p><div class="rodape-produto">R$ 69,90</div></article>
+  </div>
+</body>
+</html>

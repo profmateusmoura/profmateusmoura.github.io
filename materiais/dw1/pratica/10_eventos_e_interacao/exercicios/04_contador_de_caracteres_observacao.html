@@ -1,0 +1,27 @@
+<!--
+  04_contador_de_caracteres_observacao — Implementar: contador de caracteres em tempo real no textarea
+  Tipo: Implementar e estruturar
+  Tópico: 10 — Eventos, leitura de campos e atualização dinâmica da interface
+
+  Enunciado:
+  Use o evento 'input' no <textarea id="obs"> para exibir em #contagem a quantidade de caracteres digitados (obs.value.length).
+
+  Critério de conferência no navegador / DevTools:
+  Ao digitar 'Entrega manhã', #contagem deve atualizar imediatamente para 13.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Implementar: contador de caracteres em tempo real no textarea · DW1</title>
+</head>
+<body>
+  <label for="obs">Observação da entrega:</label><br>
+  <textarea id="obs" maxlength="120"></textarea>
+  <p>Caracteres: <span id="contagem">0</span>/120</p>
+  <script>
+    // Atualize #contagem a cada evento 'input' em #obs
+  </script>
+</body>
+</html>

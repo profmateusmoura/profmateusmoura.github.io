@@ -1,0 +1,33 @@
+<!--
+  DW1 · 05 — Introdução ao CSS: seletores, cascata e tipografia
+  Exemplo: Paleta de cores consistente e contraste usando variáveis CSS (:root)
+  Objetivo do tópico: Aplicar regras CSS por seletores de elemento, classe e ID, compreender cascata, herança e especificidade e definir cores e fontes com variáveis CSS.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Variáveis CSS · Lojas Blue</title>
+  <style>
+    :root {
+      --fundo: #f7f8f5;
+      --papel: #ffffff;
+      --texto: #183128;
+      --verde-blue: #1c6550;
+      --menta: #dff2e9;
+    }
+    body { background: var(--fundo); color: var(--texto); font-family: system-ui, sans-serif; padding: 1.5rem; }
+    .painel { background: var(--papel); border-left: 4px solid var(--verde-blue); padding: 1rem; }
+    .selo { background: var(--menta); color: var(--verde-blue); padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <span class="selo">LOJAS BLUE</span>
+    <h1>Identidade Visual Unificada</h1>
+    <p>Alterar --verde-blue em :root atualiza todos os componentes da página.</p>
+  </div>
+</body>
+</html>

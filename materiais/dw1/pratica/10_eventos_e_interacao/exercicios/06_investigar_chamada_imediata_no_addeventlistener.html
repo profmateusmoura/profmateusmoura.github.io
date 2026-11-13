@@ -1,0 +1,29 @@
+<!--
+  06_investigar_chamada_imediata_no_addeventlistener — Investigar e corrigir: função executada imediatamente no addEventListener
+  Tipo: Investigar e corrigir (debug)
+  Tópico: 10 — Eventos, leitura de campos e atualização dinâmica da interface
+
+  Enunciado:
+  O código abaixo escreveu addEventListener('click', limpar()) com parênteses, executando a função na abertura da página em vez de aguardar o clique. Passe a referência limpar (sem parênteses).
+
+  Critério de conferência no navegador / DevTools:
+  O texto só deve mudar quando o usuário clicar no botão.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Investigar e corrigir: função executada imediatamente no addEventListener · DW1</title>
+</head>
+<body>
+  <p id="painel">Sacola com 3 produtos</p>
+  <button type="button" id="btn-limpar">Esvaziar</button>
+  <script>
+    function limpar() {
+      document.querySelector('#painel').textContent = 'Sacola vazia';
+    }
+    document.querySelector('#btn-limpar').addEventListener('click', limpar());
+  </script>
+</body>
+</html>

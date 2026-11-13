@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desenvolvimento Web I (DW1) — Vitrine Digital Lojas Blue</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/pygments.css">
+  <link rel="stylesheet" href="../shared/style.css">
+  <link rel="stylesheet" href="../shared/navigation.css">
+  <link rel="stylesheet" href="assets/pratica.css">
+  <link rel="stylesheet" href="assets/dw1.css">
+</head>
+<body data-root="./" data-course="dw1">
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="./index.html">
+        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
+        <strong>Cadernos de DW1</strong>
+        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
+      </a>
+
+      <div class="progress-card">
+        <div class="progress-top">
+          <strong>Progresso de leitura</strong>
+          <span data-progress-label>0/12 cadernos</span>
+        </div>
+        <div class="progress-bar"><span data-progress-bar></span></div>
+      </div>
+
+      <nav class="nav-sections" aria-label="Navegação do material">
+        <div class="nav-group">
+          <p class="nav-group-title">Visão geral</p>
+          <a class="active" href="./index.html">Início e Trilha</a>
+          <a href="./pratica/index.html">Catálogo Prático e ZIPs</a>
+          <a href="./arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
+        </div>
+        <div class="nav-group">
+  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
+  <a class="doc-link" data-visited="01_web_e_documento_html" href="./cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
+  <a class="doc-link" data-visited="02_texto_e_semantica" href="./cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
+  <a class="doc-link" data-visited="03_estrutura_links_e_midia" href="./cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
+  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="./cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
+  <a class="doc-link" data-visited="05_css_seletores_e_cascata" href="./cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
+  <a class="doc-link" data-visited="06_box_model_e_unidades" href="./cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
+  <a class="doc-link" data-visited="07_layout_flexbox" href="./cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
+  <a class="doc-link" data-visited="08_grid_e_responsividade" href="./cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
+  <a class="doc-link" data-visited="09_javascript_e_dom" href="./cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
+  <a class="doc-link" data-visited="10_eventos_e_interacao" href="./cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
+  <a class="doc-link" data-visited="11_elementos_dinamicos_e_storage" href="./cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
+  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="./cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
+</div>
+      </nav>
+    </aside>
+    <div class="main-panel">
+      <div class="content-wrap">
+        <div class="topbar">
+          <div class="breadcrumbs">
+            <a href="./../../index.html">Portal</a>
+            <span>/</span>
+            <span>Desenvolvimento Web I (DW1)</span>
+          </div>
+          <div class="topbar-actions">
+            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
+            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
+            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
+          </div>
+        </div>
+
+        <article class="doc-article">
+          <header class="hero-panel">
+            <span class="eyebrow">Curso Completo e Interativo · HTML5 + CSS3 + JavaScript DOM</span>
+            <h1>Desenvolvimento Web I — Vitrine Digital Lojas Blue</h1>
+            <p class="lead">
+              Aprenda a construir páginas e aplicações Web modernas do zero, evoluindo passo a passo a
+              <strong>Vitrine Interativa Lojas Blue</strong>. Cada caderno combina fundamentação rigorosa,
+              <strong>simuladores visuais ao vivo</strong>, testes de mesa passo a passo, desafios interativos
+              e <strong>120 arquivos <code>.html</code> práticos</strong> prontos para abrir no navegador e no VS Code.
+            </p>
+            <div class="hero-actions">
+              <a class="PillButton" href="cadernos/01_web_e_documento_html.html">Começar pelo Caderno 01 →</a>
+              <a class="PillButton" href="arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (DW1_Lojas_Blue.zip)</a>
+              <a class="PillButton" href="pratica/index.html">Catálogo de Exemplos e Exercícios</a>
+            </div>
+          </header>
+
+          <section style="margin-top:1.75rem;">
+            <div class="card-grid">
+              <div class="course-card">
+                <span class="card-num">12 Cadernos Interativos</span>
+                <h3>Trilha em 3 Fases Progressivas</h3>
+                <p>4 cadernos de HTML5 Semântico, 4 de CSS3 Moderno (Box Model, Flexbox, Grid e Media Queries) e 4 de JavaScript, DOM, Eventos, <code>localStorage</code> e Projeto Integrado.</p>
+              </div>
+              <div class="course-card">
+                <span class="card-num">Simulação Visual Ao Vivo</span>
+                <h3>Playgrounds + Testes de Mesa</h3>
+                <p>12 simuladores visuais ao vivo (inspecione Box Model, eixos Flexbox, colunas Grid, especificidade CSS e árvore DOM), 24 execuções passo a passo e 36 desafios guiados.</p>
+              </div>
+              <div class="course-card">
+                <span class="card-num">120 Arquivos .html Práticos</span>
+                <h3>48 Exemplos + 72 Exercícios</h3>
+                <p>Em cada tópico: 4 exemplos comentados e 6 atividades graduais (4 de implementação, 1 teste de mesa Web e 1 caça aos bugs/debug), disponíveis em ZIP único ou por assunto.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="phase-section" style="margin-top:2.2rem;">
+            <h2>Fase 1 — Estrutura Semântica com HTML5</h2>
+            <p>Construa a fundação semântica e acessível da Vitrine Lojas Blue: protocolo HTTP, árvore DOM, hierarquia de textos, listas, marcos de página (landmarks), links, figuras, tabelas de dados e formulários com validação nativa.</p>
+            <div class="card-grid">
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 01</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/01_web_e_documento_html.html">01. Como a Web funciona e o primeiro documento HTML</a></h3>
+                <p>Entenda o ciclo cliente-servidor HTTP, o papel complementar de HTML, CSS e JavaScript, a árvore DOM e a anatomia mínima obrigatória de um documento HTML5 válido.</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/01_web_e_documento_html.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_01_web_e_documento_html.zip" download>ZIP (01)</a>
+                </div>
+              </article>
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 02</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/02_texto_e_semantica.html">02. Estrutura de texto e semântica de conteúdo</a></h3>
+                <p>Domine a hierarquia de títulos (h1 a h6), parágrafos, ênfase semântica (strong, em, mark, code) e os três tipos de listas do HTML5 (ul, ol e dl).</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/02_texto_e_semantica.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_02_texto_e_semantica.zip" download>ZIP (02)</a>
+                </div>
+              </article>
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 03</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/03_estrutura_links_e_midia.html">03. Marcos semânticos de página, links e imagens</a></h3>
+                <p>Organize a arquitetura macro da página com header, nav, main, section, article, aside e footer, crie hiperlinks seguros e insira imagens acessíveis com figure e figcaption.</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/03_estrutura_links_e_midia.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_03_estrutura_links_e_midia.zip" download>ZIP (03)</a>
+                </div>
+              </article>
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 04</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/04_tabelas_e_formularios.html">04. Tabelas de dados e formulários de entrada</a></h3>
+                <p>Estruture tabelas de dados acessíveis com caption, thead, tbody, tfoot e scope, e construa formulários interativos com label, inputs semânticos e validação nativa HTML5.</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/04_tabelas_e_formularios.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_04_tabelas_e_formularios.zip" download>ZIP (04)</a>
+                </div>
+              </article>
+            </div>
+          </section>
+          <section class="phase-section" style="margin-top:2.2rem;">
+            <h2>Fase 2 — Estilização e Layout com CSS3</h2>
+            <p>Transforme o HTML semântico em uma interface moderna e responsiva: seletores, especificidade na cascata, variáveis CSS (:root), Box Model com border-box, posicionamento de badges, alinhamento unidimensional com Flexbox e grades bidimensionais com CSS Grid + Media Queries.</p>
+            <div class="card-grid">
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 05</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/05_css_seletores_e_cascata.html">05. Introdução ao CSS: seletores, cascata e tipografia</a></h3>
+                <p>Compreenda a sintaxe de regras CSS, seletores de tag, classe, ID e atributo, pseudo-classes de estado (:hover, :focus-visible), a matemática da especificidade e variáveis CSS (:root).</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/05_css_seletores_e_cascata.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_05_css_seletores_e_cascata.zip" download>ZIP (05)</a>
+                </div>
+              </article>
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 06</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/06_box_model_e_unidades.html">06. Modelo de Caixa (Box Model), dimensões e posicionamento</a></h3>
+                <p>Domine as 4 camadas do Box Model (content, padding, border, margin), o reset universal box-sizing: border-box, unidades relativas (rem, em, %, vw/vh) e posicionamento (relative, absolute, sticky).</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/06_box_model_e_unidades.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_06_box_model_e_unidades.zip" download>ZIP (06)</a>
+                </div>
+              </article>
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 07</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/07_layout_flexbox.html">07. Layout moderno com Flexbox</a></h3>
+                <p>Domine o modelo unidimensional Flexbox: Flex Container vs. Flex Items, eixos principal e transversal, justify-content, align-items, gap, flex-wrap e alinhamento de cards.</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/07_layout_flexbox.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_07_layout_flexbox.zip" download>ZIP (07)</a>
+                </div>
+              </article>
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 08</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/08_grid_e_responsividade.html">08. Layout em grade com CSS Grid e responsividade (Media Queries)</a></h3>
+                <p>Construa grades bidimensionais de produtos com CSS Grid (fr, repeat, minmax, auto-fit, grid-column: span 2) e adapte a interface para celulares, tablets e desktops com Media Queries.</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/08_grid_e_responsividade.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_08_grid_e_responsividade.zip" download>ZIP (08)</a>
+                </div>
+              </article>
+            </div>
+          </section>
+          <section class="phase-section" style="margin-top:2.2rem;">
+            <h2>Fase 3 — Interatividade, DOM e Projeto Integrado</h2>
+            <p>Dê vida à aplicação com JavaScript no navegador: seleção e manipulação segura do DOM, eventos em tempo real (click, input, submit + preventDefault), criação dinâmica de elementos, persistência no localStorage e o Projeto Integrado Vitrine Lojas Blue.</p>
+            <div class="card-grid">
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 09</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/09_javascript_e_dom.html">09. Primeiros passos com JavaScript no navegador e o DOM</a></h3>
+                <p>Conecte o JavaScript ao documento HTML, selecione elementos com querySelector e querySelectorAll, atualize textos com segurança (textContent), leia atributos data-* e alterne classes CSS (classList).</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/09_javascript_e_dom.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_09_javascript_e_dom.zip" download>ZIP (09)</a>
+                </div>
+              </article>
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 10</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/10_eventos_e_interacao.html">10. Eventos, leitura de campos e atualização dinâmica da interface</a></h3>
+                <p>Domine a programação orientada a eventos com addEventListener, trate cliques, digitação em tempo real (input) e envio de formulários (submit + event.preventDefault()), convertendo entradas com segurança.</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/10_eventos_e_interacao.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_10_eventos_e_interacao.zip" download>ZIP (10)</a>
+                </div>
+              </article>
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 11</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/11_elementos_dinamicos_e_storage.html">11. Criando elementos dinamicamente e persistência local (localStorage)</a></h3>
+                <p>Gere cards e listas a partir de arrays de objetos com createElement e appendChild, filtre e ordene dados com filter/sort e salve o estado no navegador usando localStorage e JSON.</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/11_elementos_dinamicos_e_storage.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_11_elementos_dinamicos_e_storage.zip" download>ZIP (11)</a>
+                </div>
+              </article>
+              <article class="course-card">
+                <div class="card-top">
+                  <span class="card-num">Caderno 12</span>
+                  <span class="card-meta">1 simulador ao vivo · 2 traces · 10 práticas</span>
+                </div>
+                <h3><a href="cadernos/12_projeto_vitrine_blue.html">12. Projeto Integrado: Vitrine Interativa Lojas Blue</a></h3>
+                <p>Integre HTML5 semântico, CSS3 moderno (Variáveis, Flexbox e Grid) e JavaScript (DOM, Eventos e localStorage) para construir a aplicação completa da Vitrine Interativa Lojas Blue.</p>
+                <div class="card-links">
+                  <a class="PillButton" href="cadernos/12_projeto_vitrine_blue.html">Estudar caderno</a>
+                  <a class="PillButton" href="arquivos/DW1_12_projeto_vitrine_blue.zip" download>ZIP (12)</a>
+                </div>
+              </article>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-dialog" data-search-dialog hidden>
+    <div class="search-panel">
+      <div class="search-Header">
+        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
+        <button class="PillButton" type="button" data-search-close>Fechar</button>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="../shared/site.js"></script>
+  <script src="../shared/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!--
+  02_aplicar_cupom_no_fechamento — Implementar: aplicar 10% de desconto na sacola com o cupom BLUE10
+  Tipo: Implementar e estruturar
+  Tópico: 12 — Projeto Integrado: Vitrine Interativa Lojas Blue
+
+  Enunciado:
+  Quando o formulário #form-cupom for enviado com 'BLUE10', reduza o total exibido de R$ 100,00 para R$ 90,00 em #valor-final.
+
+  Critério de conferência no navegador / DevTools:
+  Use event.preventDefault() e valide o código ignorando espaços extras.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Implementar: aplicar 10% de desconto na sacola com o cupom BLUE10 · DW1</title>
+</head>
+<body>
+  <p>Subtotal: R$ 100,00</p>
+  <form id="form-cupom"><input id="codigo"><button type="submit">Aplicar</button></form>
+  <p id="valor-final">Total a pagar: R$ 100,00</p>
+  <script>
+    // Implemente a regra do cupom BLUE10 aqui
+  </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!--
+  DW1 · 11 — Criando elementos dinamicamente e persistência local (localStorage)
+  Exemplo: Filtrar produtos da vitrine ao vivo conforme o usuário digita ou escolhe o setor
+  Objetivo do tópico: Criar e inserir elementos no DOM com createElement/append, filtrar listas de produtos na tela e persistir dados no navegador com localStorage e JSON.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Filtro ao Vivo · Lojas Blue</title>
+</head>
+<body>
+  <h1>Buscar Produto na Filial</h1>
+  <input type="search" id="busca" placeholder="Digite parte do nome...">
+  <ul id="lista">
+    <li>Shampoo Neutro</li>
+    <li>Sabonete Líquido</li>
+    <li>Protetor Solar</li>
+    <li>Creme Hidratante</li>
+  </ul>
+  <script>
+    const campo = document.querySelector('#busca');
+    const itens = document.querySelectorAll('#lista li');
+    campo.addEventListener('input', () => {
+      const termo = campo.value.trim().toLowerCase();
+      itens.forEach(li => {
+        li.hidden = !li.textContent.toLowerCase().includes(termo);
+      });
+    });
+  </script>
+</body>
+</html>

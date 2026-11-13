@@ -1,0 +1,29 @@
+<!--
+  DW1 · 01 — Como a Web funciona e o primeiro documento HTML
+  Exemplo: As três camadas da Web em ação: estrutura (HTML), estilo (CSS) e comportamento (JS)
+  Objetivo do tópico: Compreender o ciclo cliente-servidor (HTTP/URL), os papéis de HTML, CSS e JS e estruturar um documento HTML5 válido.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Três Camadas · Lojas Blue</title>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 1.5rem; }
+    .aviso { padding: 1rem; border: 2px solid #1c6550; border-radius: 8px; background: #dff2e9; }
+  </style>
+</head>
+<body>
+  <h1>Painel do Caixa</h1>
+  <p class="aviso" id="status">Status do caixa: Aberto</p>
+  <button type="button" id="alternar">Alternar status</button>
+  <script>
+    const statusEl = document.getElementById('status');
+    document.getElementById('alternar').addEventListener('click', () => {
+      statusEl.textContent = 'Status do caixa: Em conferência de estoque';
+    });
+  </script>
+</body>
+</html>

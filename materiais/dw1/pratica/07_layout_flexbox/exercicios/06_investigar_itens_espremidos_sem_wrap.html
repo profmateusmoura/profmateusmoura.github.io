@@ -1,0 +1,28 @@
+<!--
+  06_investigar_itens_espremidos_sem_wrap — Investigar e corrigir: cartões espremidos em uma única linha sem flex-wrap
+  Tipo: Investigar e corrigir (debug)
+  Tópico: 07 — Layout moderno com Flexbox
+
+  Enunciado:
+  A vitrine abaixo tem 6 cartões com min-width: 200px, mas está sem flex-wrap e estoura a tela. Adicione flex-wrap: wrap e gap: 1rem ao container .vitrine.
+
+  Critério de conferência no navegador / DevTools:
+  Os cartões devem quebrar em múltiplas linhas sem gerar rolagem horizontal.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Corrigir Wrap</title>
+  <style>
+    .vitrine { display: flex; }
+    .item { min-width: 200px; border: 1px solid #1c6550; padding: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="vitrine">
+    <div class="item">Item 1</div><div class="item">Item 2</div><div class="item">Item 3</div>
+    <div class="item">Item 4</div><div class="item">Item 5</div><div class="item">Item 6</div>
+  </div>
+</body>
+</html>

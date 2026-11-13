@@ -1,0 +1,24 @@
+<!--
+  06_investigar_baixo_contraste_e_important — Investigar e corrigir: remover !important desnecessário e corrigir contraste ilegível
+  Tipo: Investigar e corrigir (debug)
+  Tópico: 05 — Introdução ao CSS: seletores, cascata e tipografia
+
+  Enunciado:
+  O CSS abaixo usou texto cinza-claro (#d0d5d2) sobre fundo branco (#ffffff) e espalhou !important. Remova os !important ajustando os seletores e aplique cor de alto contraste (#183128).
+
+  Critério de conferência no navegador / DevTools:
+  O texto deve ser perfeitamente legível e sem nenhum !important.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Corrigir Contraste</title>
+  <style>
+    p { color: #d0d5d2 !important; background: #ffffff; }
+  </style>
+</head>
+<body>
+  <p class="importante">Aviso de conferência de caixa Lojas Blue.</p>
+</body>
+</html>

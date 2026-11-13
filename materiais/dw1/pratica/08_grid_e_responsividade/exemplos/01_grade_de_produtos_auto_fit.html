@@ -1,0 +1,33 @@
+<!--
+  DW1 · 08 — Layout em grade com CSS Grid e responsividade (Media Queries)
+  Exemplo: Grade responsiva automática com repeat(auto-fit, minmax(220px, 1fr))
+  Objetivo do tópico: Construir grades bidimensionais com CSS Grid (fr, minmax, auto-fit) e adaptar layouts para celular e desktop com Media Queries (@media).
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSS Grid Responsivo · Lojas Blue</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; padding: 1.5rem; background: #f7f8f5; }
+    .grade-produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .card { background: #ffffff; border: 1px solid #dee6e0; padding: 1rem; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Catálogo em Grade Automática</h1>
+  <section class="grade-produtos">
+    <article class="card"><h2>Shampoo</h2><p>R$ 24,90</p></article>
+    <article class="card"><h2>Condicionador</h2><p>R$ 26,90</p></article>
+    <article class="card"><h2>Sabonete</h2><p>R$ 8,50</p></article>
+    <article class="card"><h2>Protetor Solar</h2><p>R$ 59,90</p></article>
+  </section>
+</body>
+</html>

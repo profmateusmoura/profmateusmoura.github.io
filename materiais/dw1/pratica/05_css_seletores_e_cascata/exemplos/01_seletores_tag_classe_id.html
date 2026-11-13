@@ -1,0 +1,25 @@
+<!--
+  DW1 · 05 — Introdução ao CSS: seletores, cascata e tipografia
+  Exemplo: Seletores de elemento (p), classe (.destaque) e ID (#cabecalho)
+  Objetivo do tópico: Aplicar regras CSS por seletores de elemento, classe e ID, compreender cascata, herança e especificidade e definir cores e fontes com variáveis CSS.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seletores CSS · Lojas Blue</title>
+  <style>
+    body { font-family: system-ui, sans-serif; color: #183128; background: #f7f8f5; padding: 1.5rem; }
+    #titulo-loja { color: #133e34; border-bottom: 2px solid #1c6550; }
+    .card-produto { background: #ffffff; border: 1px solid #dee6e0; padding: 1rem; margin: 0.75rem 0; border-radius: 8px; }
+    .promocao { border-left: 4px solid #1c6550; background: #dff2e9; }
+  </style>
+</head>
+<body>
+  <h1 id="titulo-loja">Vitrine Lojas Blue</h1>
+  <article class="card-produto"><h2>Sabonete Líquido</h2><p>R$ 14,90</p></article>
+  <article class="card-produto promocao"><h2>Shampoo Neutro (Oferta)</h2><p>R$ 19,90</p></article>
+</body>
+</html>

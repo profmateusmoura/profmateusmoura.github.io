@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderno 10 — Eventos, leitura de campos e atualização dinâmica da interface · DW1</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/pygments.css">
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="../../shared/navigation.css">
+  <link rel="stylesheet" href="../assets/pratica.css">
+  <link rel="stylesheet" href="../assets/dw1.css">
+</head>
+<body data-root="../" data-course="dw1" data-doc-id="10_eventos_e_interacao">
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
+        <strong>Cadernos de DW1</strong>
+        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
+      </a>
+
+      <div class="progress-card">
+        <div class="progress-top">
+          <strong>Progresso de leitura</strong>
+          <span data-progress-label>0/12 cadernos</span>
+        </div>
+        <div class="progress-bar"><span data-progress-bar></span></div>
+      </div>
+
+      <nav class="nav-sections" aria-label="Navegação do material">
+        <div class="nav-group">
+          <p class="nav-group-title">Visão geral</p>
+          <a href="../index.html">Início e Trilha</a>
+          <a href="../pratica/index.html">Catálogo Prático e ZIPs</a>
+          <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
+        </div>
+        <div class="nav-group">
+  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
+  <a class="doc-link" data-visited="01_web_e_documento_html" href="../cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
+  <a class="doc-link" data-visited="02_texto_e_semantica" href="../cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
+  <a class="doc-link" data-visited="03_estrutura_links_e_midia" href="../cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
+  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="../cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
+  <a class="doc-link" data-visited="05_css_seletores_e_cascata" href="../cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
+  <a class="doc-link" data-visited="06_box_model_e_unidades" href="../cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
+  <a class="doc-link" data-visited="07_layout_flexbox" href="../cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
+  <a class="doc-link" data-visited="08_grid_e_responsividade" href="../cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
+  <a class="doc-link" data-visited="09_javascript_e_dom" href="../cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
+  <a class="doc-link active" data-visited="10_eventos_e_interacao" href="../cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
+  <a class="doc-link" data-visited="11_elementos_dinamicos_e_storage" href="../cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
+  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="../cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
+</div>
+      </nav>
+    </aside>
+    <div class="main-panel">
+      <div class="content-wrap">
+        <div class="topbar">
+          <div class="breadcrumbs">
+            <a href="../../../index.html">Portal</a>
+            <span>/</span>
+            <a href="../index.html">DW1</a><span>/</span><span>Caderno 10</span>
+          </div>
+          <div class="topbar-actions">
+            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
+            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
+            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
+          </div>
+        </div>
+
+        <article class="doc-article">
+          <header class="doc-header">
+            <span class="eyebrow">Fase 3 — Interatividade, DOM e Projeto Integrado · Caderno 10 de 12</span>
+            <h1>10. Eventos, leitura de campos e atualização dinâmica da interface</h1>
+            <p class="lead">Domine a programação orientada a eventos com addEventListener, trate cliques, digitação em tempo real (input) e envio de formulários (submit + event.preventDefault()), convertendo entradas com segurança.</p>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <button class="PillButton" type="button" data-read-toggle>Marcar como concluído</button>
+              <a class="PillButton" href="../arquivos/DW1_10_eventos_e_interacao.zip" download>Baixar pacote deste tópico (.zip)</a>
+              <a class="PillButton" href="../pratica/index.html#topico-10">Ver arquivos no catálogo</a>
+            </div>
+          </header>
+
+          <nav class="toc-inline" aria-label="Sumário deste caderno">
+            <strong>Neste caderno interativo:</strong>
+            <ol>
+              <li><a href="#cap-1">1. Programação Orientada a Eventos na Interface Web</a></li>
+              <li><a href="#cap-2">2. addEventListener, Leitura de .value e preventDefault()</a></li>
+              <li><a href="#cap-3">3. Simulador Visual Ao Vivo: Monitor de Eventos e Subtotal</a></li>
+              <li><a href="#cap-4">4. Execução Passo a Passo e Teste de Mesa Web</a></li>
+              <li><a href="#cap-5">5. Laboratório de Desafios e Síntese de Referência</a></li>
+              <li><a href="#cap-6">6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</a></li>
+            </ol>
+          </nav>
+
+          <div class="callout note">
+            <strong>Objetivos de aprendizagem</strong>
+            <ul>
+              <li>Registrar ouvintes de eventos com addEventListener(&#x27;click&#x27; | &#x27;input&#x27; | &#x27;change&#x27; | &#x27;submit&#x27;, callback).</li>
+<li>Inspecionar o objeto event (event.target, event.currentTarget) e bloquear recarregamentos com event.preventDefault().</li>
+<li>Ler o valor de campos de formulário (.value), converter strings para números com Number() e validar entradas.</li>
+<li>Atualizar contadores, calculadoras de subtotal e mensagens de feedback em tempo real na interface.</li>
+            </ul>
+          </div>
+
+          <section id="cap-1">
+            <h2>1. Programação Orientada a Eventos na Interface Web</h2>
+            <p>Diferente de um script de linha de comando que roda do início ao fim e termina, uma página Web funciona de forma <strong>orientada a eventos (Event-Driven)</strong>. O navegador permanece aguardando ações da pessoa usuária: um clique no botão '+ Adicionar', uma tecla digitada na busca ou o envio de um formulário de cupom.</p>
+<p>Com o método <code>elemento.addEventListener(tipoDoEvento, funcaoOuvinte)</code>, conectamos funções JavaScript que reagem instantaneamente a cada interação na <strong>Vitrine Lojas Blue</strong>.</p>
+            <div class="callout important">
+              <strong>Por que event.preventDefault() é obrigatório em formulários JS?</strong>
+              <p>Por padrão histórico do HTML, quando um usuário clica em um botão <code>type="submit"</code> ou aperta <code>Enter</code> dentro de um <code>&lt;form&gt;</code>, o navegador tenta enviar os dados para outra URL e <strong>recarrega a página inteira</strong>, apagando tudo que o JavaScript calculou! Chamar <code>event.preventDefault()</code> na primeira linha do ouvinte de <code>submit</code> cancela esse recarregamento.</p>
+            </div>
+          </section>
+
+          <section id="cap-2">
+            <h2>2. addEventListener, Leitura de .value e preventDefault()</h2>
+            <p>Veja como combinamos o evento <code>input</code> (para recálculo em tempo real) e o evento <code>submit</code> (para validação de cupom sem recarregar a página):</p>
+            <div class="code-shell">
+  <div class="code-header">
+    <span>JAVASCRIPT · Cenário Vitrine Lojas Blue</span>
+    <button class="copy-code" type="button">Copiar</button>
+  </div>
+  <div class="highlight"><pre><code>const campoQtd = document.querySelector(&quot;#qtd-item&quot;);
+const saidaSubtotal = document.querySelector(&quot;#valor-subtotal&quot;);
+const formCupom = document.querySelector(&quot;#form-cupom&quot;);
+const campoCupom = document.querySelector(&quot;#input-cupom&quot;);
+const msgFeedback = document.querySelector(&quot;#msg-cupom&quot;);
+
+const PRECO_UNITARIO = 140;
+
+// 1. Recalcular imediatamente a cada alteração no input numérico
+campoQtd.addEventListener(&quot;input&quot;, (event) =&gt; {
+  // Atenção: .value é sempre String! Convertemos com Number()
+  const quantidade = Math.max(1, Number(event.target.value) || 1);
+  const total = quantidade * PRECO_UNITARIO;
+  saidaSubtotal.textContent = `R$ ${total.toFixed(2).replace(&quot;.&quot;, &quot;,&quot;)}`;
+});
+
+// 2. Validar formulário sem recarregar a página
+formCupom.addEventListener(&quot;submit&quot;, (event) =&gt; {
+  event.preventDefault(); // Impede o reload da página!
+
+  const codigo = campoCupom.value.trim().toUpperCase();
+  if (codigo === &quot;BLUE10&quot;) {
+    msgFeedback.textContent = &quot;Cupom BLUE10 aplicado: 10% de desconto!&quot;;
+    msgFeedback.className = &quot;feedback sucesso&quot;;
+  } else {
+    msgFeedback.textContent = &quot;Cupom inválido ou expirado.&quot;;
+    msgFeedback.className = &quot;feedback erro&quot;;
+  }
+});</code></pre></div>
+</div>
+
+            <h3>Tabela Comparativa e Referência Técnica</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Evento do DOM</th><th>Quando dispara</th><th>Uso clássico na Vitrine Lojas Blue</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>click</code></td><td>Ao clicar com o mouse ou acionar com Enter/Espaço no teclado</td><td>Botões '+ Adicionar à sacola', alternar tema, abrir/fechar detalhes</td></tr>
+<tr><td><code>input</code></td><td>Imediatamente a cada caractere digitado, apagado ou número alterado</td><td>Busca instantânea de produtos, calculadora de quantidade em tempo real</td></tr>
+<tr><td><code>change</code></td><td>Quando o usuário altera o valor e confirma (ex.: escolhe opção no <code>&lt;select&gt;</code>)</td><td>Seletor de ordenação ('Menor preço', 'Mais vendidos') ou escolha de frete</td></tr>
+<tr><td><code>submit</code></td><td>No elemento <code>&lt;form&gt;</code> ao clicar no botão submit ou pressionar Enter</td><td>Validação de checkout e aplicação de cupom com <code>event.preventDefault()</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-3">
+            <h2>3. Simulador Visual Ao Vivo: Monitor de Eventos e Subtotal</h2>
+            <p>Altere a quantidade no campo numérico e teste o envio do cupom <code>BLUE10</code> no simulador abaixo para acompanhar o disparo de cada evento:</p>
+
+            <!-- Simulador Visual Ao Vivo (.dw1-playground) -->
+            <div class="dw1-playground" data-dw1-playground="10"></div>
+
+            <div class="callout warning">
+              <strong>A armadilha da concatenação: '2' + 1 = '21'</strong>
+              <p>Qualquer valor lido de <code>input.value</code> chega ao JavaScript como <strong>texto (String)</strong>, mesmo que o campo seja <code>type="number"</code>! Se você somar <code>campoQtd.value + 1</code> sem converter com <code>Number(campoQtd.value)</code>, o número <code>'2'</code> virará <code>'21'</code> em vez de <code>3</code>.</p>
+            </div>
+          </section>
+
+          <section id="cap-4">
+            <h2>4. Execução Passo a Passo e Teste de Mesa Web</h2>
+            <p>Use os botões <strong>Próximo passo</strong>, <strong>Passo anterior</strong> e <strong>Executar tudo</strong> nos simuladores abaixo para inspecionar como o navegador processa cada linha e altera seu estado interno:</p>
+
+            <div class="ped-practice" data-practice-id="10-a"></div>
+            <div class="ped-practice" data-practice-id="10-b"></div>
+          </section>
+
+          <section id="cap-5">
+            <h2>5. Laboratório de Desafios e Síntese de Referência</h2>
+            <p>Resolva as <strong>3 rodadas interativas</strong> abaixo para validar seu domínio sobre os conceitos deste caderno antes de partir para o editor de código:</p>
+
+            <div class="lr-lab" data-dw1-lab="10"></div>
+
+            <h3>Quadro-Síntese de Revisão Rápida</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Conceito-Chave</th>
+                    <th>Regra Prática para a Vitrine Lojas Blue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Evite <code>onclick="..."</code> no HTML</strong></td><td>Mantenha o HTML limpo e concentre todos os ouvintes no JavaScript usando <code>addEventListener</code>.</td></tr>
+<tr><td><strong>Higienização de texto</strong></td><td>Sempre use <code>.trim()</code> ao ler campos de texto para remover espaços em branco acidentais no início ou no fim.</td></tr>
+<tr><td><strong>Acessibilidade no formulário</strong></td><td>Ouvir o evento <code>submit</code> no <code>&lt;form&gt;</code> (em vez de apenas <code>click</code> no botão) garante que o envio funcione também quando o usuário pressiona a tecla <code>Enter</code>.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-6">
+            <h2>6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</h2>
+            <p>Todos os arquivos abaixo são páginas <code>.html</code> autocontidas (com preview visual imediato no navegador e código comentado). Você pode abri-los diretamente clicando nos links ou baixar o pacote <code>.zip</code> para resolver no VS Code:</p>
+
+            <div class="hero-actions" style="margin:1rem 0;">
+              <a class="PillButton" href="../arquivos/DW1_10_eventos_e_interacao.zip" download>Baixar DW1_10_eventos_e_interacao.zip (10 arquivos .html)</a>
+              <a class="PillButton" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo do Curso (.zip)</a>
+            </div>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">4 Exemplos Comentados de Estudo (abrir no navegador)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/10_eventos_e_interacao/exemplos/01_evento_click_contador_sacola.html" target="_blank" rel="noopener"><code>01_evento_click_contador_sacola.html</code></a> — <strong>Reagir ao clique de botão (addEventListener &#x27;click&#x27;) atualizando o estado na tela</strong></li>
+<li><a href="../pratica/10_eventos_e_interacao/exemplos/02_evento_input_calculo_em_tempo_real.html" target="_blank" rel="noopener"><code>02_evento_input_calculo_em_tempo_real.html</code></a> — <strong>Simulador de subtotal em tempo real com o evento &#x27;input&#x27;</strong></li>
+<li><a href="../pratica/10_eventos_e_interacao/exemplos/03_submit_e_preventdefault.html" target="_blank" rel="noopener"><code>03_submit_e_preventdefault.html</code></a> — <strong>Interceptar envio de formulário com submit + event.preventDefault() e validar dados</strong></li>
+<li><a href="../pratica/10_eventos_e_interacao/exemplos/04_alternar_detalhes_acessivel.html" target="_blank" rel="noopener"><code>04_alternar_detalhes_acessivel.html</code></a> — <strong>Mostrar/ocultar detalhes de produto atualizando hidden e aria-expanded</strong></li>
+              </ul>
+            </details>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">6 Exercícios Práticos Graduais (4 Implementar + 1 Teste de Mesa + 1 Debug)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/10_eventos_e_interacao/exercicios/01_botao_reservar_unidade.html" target="_blank" rel="noopener"><code>01_botao_reservar_unidade.html</code></a> — <strong>Implementar: diminuir estoque ao clicar em &#x27;Reservar 1 unidade&#x27;</strong>: Adicione um ouvinte &#x27;click&#x27; em #btn-reservar que diminua a variável estoque em 1 (enquanto estoque &gt; 0) e atualize #visor-estoque.</li>
+<li><a href="../pratica/10_eventos_e_interacao/exercicios/02_calculadora_frete_input.html" target="_blank" rel="noopener"><code>02_calculadora_frete_input.html</code></a> — <strong>Implementar: calcular frete ao alterar o valor do pedido</strong>: Ouça o evento &#x27;input&#x27; ou &#x27;click&#x27;: se Number(campoValor.value) &gt;= 100, mostre &#x27;Frete Grátis&#x27; em #status-frete; caso contrário, mostre &#x27;Frete: R$ 15,00&#x27;.</li>
+<li><a href="../pratica/10_eventos_e_interacao/exercicios/03_formulario_validado_com_preventdefault.html" target="_blank" rel="noopener"><code>03_formulario_validado_com_preventdefault.html</code></a> — <strong>Implementar: validar quantidade no submit sem recarregar a página</strong>: No evento &#x27;submit&#x27; de #form-reposicao, chame event.preventDefault(), leia Number(qtd.value) e mostre em #msg se o pedido é válido (entre 1 e 50) ou inválido.</li>
+<li><a href="../pratica/10_eventos_e_interacao/exercicios/04_contador_de_caracteres_observacao.html" target="_blank" rel="noopener"><code>04_contador_de_caracteres_observacao.html</code></a> — <strong>Implementar: contador de caracteres em tempo real no textarea</strong>: Use o evento &#x27;input&#x27; no &lt;textarea id=&quot;obs&quot;&gt; para exibir em #contagem a quantidade de caracteres digitados (obs.value.length).</li>
+<li><a href="../pratica/10_eventos_e_interacao/exercicios/05_teste_de_mesa_soma_de_input_string.html" target="_blank" rel="noopener"><code>05_teste_de_mesa_soma_de_input_string.html</code></a> — <strong>Teste de mesa Web: por que &#x27;10&#x27; + &#x27;5&#x27; resulta em &#x27;105&#x27; no JavaScript?</strong>: Se um &lt;input type=&quot;number&quot;&gt; tem valor 10 e fazemos campo.value + 5 sem converter com Number(), qual é o resultado e por quê? Anote em #resposta.</li>
+<li><a href="../pratica/10_eventos_e_interacao/exercicios/06_investigar_chamada_imediata_no_addeventlistener.html" target="_blank" rel="noopener"><code>06_investigar_chamada_imediata_no_addeventlistener.html</code></a> — <strong>Investigar e corrigir: função executada imediatamente no addEventListener</strong>: O código abaixo escreveu addEventListener(&#x27;click&#x27;, limpar()) com parênteses, executando a função na abertura da página em vez de aguardar o clique. Passe a referência limpar (sem parênteses).</li>
+              </ul>
+            </details>
+          </section>
+
+          <footer class="doc-footer">
+            <div class="pager">
+              <a class="PagerButton" href="09_javascript_e_dom.html">← Anterior: 09. Primeiros passos com JavaScript no navegador e o DOM</a>
+              <a class="PagerButton" href="11_elementos_dinamicos_e_storage.html">Próximo: 11. Criando elementos dinamicamente e persistência local (localStorage) →</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-dialog" data-search-dialog hidden>
+    <div class="search-panel">
+      <div class="search-Header">
+        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
+        <button class="PillButton" type="button" data-search-close>Fechar</button>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="../../shared/site.js"></script>
+  <script src="../../shared/navigation.js"></script>
+  <script src="../assets/pratica-data.js"></script>
+  <script src="../assets/pratica.js"></script>
+  <script src="../assets/dw1-labs.js"></script>
+</body>
+</html>

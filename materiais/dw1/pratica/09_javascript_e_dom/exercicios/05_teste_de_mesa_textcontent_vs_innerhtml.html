@@ -1,0 +1,22 @@
+<!--
+  05_teste_de_mesa_textcontent_vs_innerhtml — Teste de mesa Web: diferença entre textContent e innerHTML
+  Tipo: Teste de mesa Web (inspecionar e prever)
+  Tópico: 09 — Primeiros passos com JavaScript no navegador e o DOM
+
+  Enunciado:
+  Se atribuirmos el.textContent = '<strong>Oferta</strong>', o que aparece na tela? E por que textContent é mais seguro ao exibir dados digitados pelo usuário? Responda em #resposta.
+
+  Critério de conferência no navegador / DevTools:
+  textContent exibe os caracteres literais '<strong>Oferta</strong>' sem interpretá-los como HTML, evitando injeção de scripts (XSS).
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teste de mesa Web: diferença entre textContent e innerHTML · DW1</title>
+</head>
+<body>
+  <p id="resposta">O que aparece = ? | Por que é mais seguro = ?</p>
+</body>
+</html>

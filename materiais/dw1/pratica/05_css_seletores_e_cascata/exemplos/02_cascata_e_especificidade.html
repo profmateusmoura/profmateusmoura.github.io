@@ -1,0 +1,24 @@
+<!--
+  DW1 · 05 — Introdução ao CSS: seletores, cascata e tipografia
+  Exemplo: Como a cascata e a especificidade decidem qual cor vence
+  Objetivo do tópico: Aplicar regras CSS por seletores de elemento, classe e ID, compreender cascata, herança e especificidade e definir cores e fontes com variáveis CSS.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cascata e Especificidade · Lojas Blue</title>
+  <style>
+    p { color: #596b62; }                 /* Especificidade (0, 0, 1) */
+    .alerta { color: #b45309; }           /* Especificidade (0, 1, 0) — vence a tag p */
+    #urgente { color: #b91c1c; }          /* Especificidade (1, 0, 0) — vence classe e tag */
+  </style>
+</head>
+<body>
+  <p>Parágrafo comum (herda a regra de p).</p>
+  <p class="alerta">Parágrafo com classe .alerta (classe vence tag).</p>
+  <p class="alerta" id="urgente">Parágrafo com classe .alerta e id #urgente (ID vence classe).</p>
+</body>
+</html>

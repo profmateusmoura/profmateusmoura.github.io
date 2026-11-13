@@ -1,0 +1,28 @@
+<!--
+  DW1 · 04 — Tabelas de dados e formulários de entrada
+  Exemplo: Validação nativa do navegador (required, min, max, minlength, type)
+  Objetivo do tópico: Construir tabelas acessíveis (caption, thead, tbody, tfoot, th scope) e formulários estruturados com label, input, select, textarea e validação nativa.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Validação Nativa · Lojas Blue</title>
+</head>
+<body>
+  <h1>Solicitação de Reposição de Lote</h1>
+  <form action="#">
+    <p>
+      <label for="sku">Código SKU (mínimo 4 caracteres):</label><br>
+      <input type="text" id="sku" name="sku" minlength="4" required>
+    </p>
+    <p>
+      <label for="lotes">Quantidade de caixas (1 a 50):</label><br>
+      <input type="number" id="lotes" name="lotes" min="1" max="50" required>
+    </p>
+    <button type="submit">Validar e Enviar</button>
+  </form>
+</body>
+</html>

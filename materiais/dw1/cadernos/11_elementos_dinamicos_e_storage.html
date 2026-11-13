@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderno 11 — Criando elementos dinamicamente e persistência local (localStorage) · DW1</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/pygments.css">
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="../../shared/navigation.css">
+  <link rel="stylesheet" href="../assets/pratica.css">
+  <link rel="stylesheet" href="../assets/dw1.css">
+</head>
+<body data-root="../" data-course="dw1" data-doc-id="11_elementos_dinamicos_e_storage">
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
+        <strong>Cadernos de DW1</strong>
+        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
+      </a>
+
+      <div class="progress-card">
+        <div class="progress-top">
+          <strong>Progresso de leitura</strong>
+          <span data-progress-label>0/12 cadernos</span>
+        </div>
+        <div class="progress-bar"><span data-progress-bar></span></div>
+      </div>
+
+      <nav class="nav-sections" aria-label="Navegação do material">
+        <div class="nav-group">
+          <p class="nav-group-title">Visão geral</p>
+          <a href="../index.html">Início e Trilha</a>
+          <a href="../pratica/index.html">Catálogo Prático e ZIPs</a>
+          <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
+        </div>
+        <div class="nav-group">
+  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
+  <a class="doc-link" data-visited="01_web_e_documento_html" href="../cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
+  <a class="doc-link" data-visited="02_texto_e_semantica" href="../cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
+  <a class="doc-link" data-visited="03_estrutura_links_e_midia" href="../cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
+  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="../cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
+  <a class="doc-link" data-visited="05_css_seletores_e_cascata" href="../cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
+  <a class="doc-link" data-visited="06_box_model_e_unidades" href="../cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
+  <a class="doc-link" data-visited="07_layout_flexbox" href="../cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
+  <a class="doc-link" data-visited="08_grid_e_responsividade" href="../cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
+  <a class="doc-link" data-visited="09_javascript_e_dom" href="../cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
+  <a class="doc-link" data-visited="10_eventos_e_interacao" href="../cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
+  <a class="doc-link active" data-visited="11_elementos_dinamicos_e_storage" href="../cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
+  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="../cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
+</div>
+      </nav>
+    </aside>
+    <div class="main-panel">
+      <div class="content-wrap">
+        <div class="topbar">
+          <div class="breadcrumbs">
+            <a href="../../../index.html">Portal</a>
+            <span>/</span>
+            <a href="../index.html">DW1</a><span>/</span><span>Caderno 11</span>
+          </div>
+          <div class="topbar-actions">
+            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
+            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
+            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
+          </div>
+        </div>
+
+        <article class="doc-article">
+          <header class="doc-header">
+            <span class="eyebrow">Fase 3 — Interatividade, DOM e Projeto Integrado · Caderno 11 de 12</span>
+            <h1>11. Criando elementos dinamicamente e persistência local (localStorage)</h1>
+            <p class="lead">Gere cards e listas a partir de arrays de objetos com createElement e appendChild, filtre e ordene dados com filter/sort e salve o estado no navegador usando localStorage e JSON.</p>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <button class="PillButton" type="button" data-read-toggle>Marcar como concluído</button>
+              <a class="PillButton" href="../arquivos/DW1_11_elementos_dinamicos_e_storage.zip" download>Baixar pacote deste tópico (.zip)</a>
+              <a class="PillButton" href="../pratica/index.html#topico-11">Ver arquivos no catálogo</a>
+            </div>
+          </header>
+
+          <nav class="toc-inline" aria-label="Sumário deste caderno">
+            <strong>Neste caderno interativo:</strong>
+            <ol>
+              <li><a href="#cap-1">1. Interfaces Dirigidas por Dados (Data-Driven UI) e Persistência</a></li>
+              <li><a href="#cap-2">2. createElement, appendChild, filter() e localStorage JSON</a></li>
+              <li><a href="#cap-3">3. Simulador Visual Ao Vivo: Construtor DOM + Inspetor JSON</a></li>
+              <li><a href="#cap-4">4. Execução Passo a Passo e Teste de Mesa Web</a></li>
+              <li><a href="#cap-5">5. Laboratório de Desafios e Síntese de Referência</a></li>
+              <li><a href="#cap-6">6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</a></li>
+            </ol>
+          </nav>
+
+          <div class="callout note">
+            <strong>Objetivos de aprendizagem</strong>
+            <ul>
+              <li>Modelar o catálogo e a sacola de compras como arrays de objetos JavaScript.</li>
+<li>Criar e inserir nós no DOM dinamicamente com document.createElement(), textContent e appendChild().</li>
+<li>Filtrar produtos em tempo real combinando Array.prototype.filter() e includes().</li>
+<li>Persistir dados no navegador entre recarregamentos de página com localStorage, JSON.stringify() e JSON.parse().</li>
+            </ul>
+          </div>
+
+          <section id="cap-1">
+            <h2>1. Interfaces Dirigidas por Dados (Data-Driven UI) e Persistência</h2>
+            <p>Em uma loja real com dezenas ou centenas de produtos, nós não copiamos e colamos 100 blocos <code>&lt;article&gt;</code> manualmente no HTML. Em vez disso, os produtos vivem em uma <strong>estrutura de dados (um Array de Objetos)</strong>, e uma função JavaScript percorre esse array gerando os elementos do DOM dinamicamente.</p>
+<p>E o que acontece quando a cliente adiciona 3 produtos na sacola da <strong>Lojas Blue</strong> e atualiza a página (<code>F5</code>)? Se os dados estiverem apenas em uma variável na memória RAM, tudo se perde! Para que a sacola e as preferências sobrevivam ao fechamento da aba, usamos a Web Storage API (<code>localStorage</code>) combinada com serialização <strong>JSON</strong>.</p>
+            <div class="callout tip">
+              <strong>A regra do localStorage: tudo lá dentro é String!</strong>
+              <p>O <code>localStorage</code> só sabe guardar pares de chave e valor em formato de <strong>texto</strong>. Por isso, sempre convertemos nossos arrays/objetos para texto antes de salvar usando <code>JSON.stringify(dados)</code> e fazemos o caminho inverso ao ler usando <code>JSON.parse(textoSalvo)</code>.</p>
+            </div>
+          </section>
+
+          <section id="cap-2">
+            <h2>2. createElement, appendChild, filter() e localStorage JSON</h2>
+            <p>Observe o ciclo completo de ler uma lista salva no <code>localStorage</code>, renderizar os elementos no DOM com segurança e persistir novas adições:</p>
+            <div class="code-shell">
+  <div class="code-header">
+    <span>JAVASCRIPT · Cenário Vitrine Lojas Blue</span>
+    <button class="copy-code" type="button">Copiar</button>
+  </div>
+  <div class="highlight"><pre><code>const CHAVE_STORAGE = &quot;lojas_blue_favoritos&quot;;
+const listaUl = document.querySelector(&quot;#lista-favoritos&quot;);
+
+// 1. Recuperar estado salvo no navegador (ou iniciar array vazio)
+let favoritos = JSON.parse(localStorage.getItem(CHAVE_STORAGE) || &quot;[]&quot;);
+
+function salvarEstado() {
+  localStorage.setItem(CHAVE_STORAGE, JSON.stringify(favoritos));
+}
+
+// 2. Renderizar a interface a partir do array de dados
+function renderizarFavoritos() {
+  listaUl.innerHTML = &quot;&quot;; // Limpa antes de redesenhar para não duplicar!
+
+  favoritos.forEach((produto) =&gt; {
+    const li = document.createElement(&quot;li&quot;);
+    li.className = &quot;item-favorito&quot;;
+    li.textContent = `${produto.nome} — R$ ${produto.preco.toFixed(2)}`;
+    listaUl.appendChild(li);
+  });
+}
+
+// 3. Adicionar novo item, salvar e re-renderizar
+function adicionarFavorito(nome, preco) {
+  favoritos.push({ id: Date.now(), nome, preco });
+  salvarEstado();
+  renderizarFavoritos();
+}</code></pre></div>
+</div>
+
+            <h3>Tabela Comparativa e Referência Técnica</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Método / API</th><th>Sintaxe Principal</th><th>Papel na Aplicação</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>document.createElement(tag)</code></td><td><code>const card = document.createElement('article')</code></td><td>Cria um novo elemento HTML em memória pronto para ser configurado</td></tr>
+<tr><td><code>pai.appendChild(filho)</code></td><td><code>grade.appendChild(card)</code></td><td>Insere o nó criado como último filho dentro do container pai no DOM</td></tr>
+<tr><td><code>array.filter(fn)</code></td><td><code>catalogo.filter(p => p.preco <= 200)</code></td><td>Retorna um novo array contendo apenas os itens que passam no teste lógico</td></tr>
+<tr><td><code>JSON.stringify</code> / <code>JSON.parse</code></td><td><code>JSON.stringify(sacola)</code></td><td>Converte objetos JS para string JSON (para salvar) e reconstrói o objeto (ao ler)</td></tr>
+<tr><td><code>localStorage</code></td><td><code>setItem(k, v)</code> / <code>getItem(k)</code></td><td>Armazena dados persistentemente no navegador do usuário por domínio</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-3">
+            <h2>3. Simulador Visual Ao Vivo: Construtor DOM + Inspetor JSON</h2>
+            <p>Adicione e remova produtos no simulador abaixo e observe como cada mudança reconstrói os elementos <code>&lt;li&gt;</code> no DOM e atualiza a string JSON persistida:</p>
+
+            <!-- Simulador Visual Ao Vivo (.dw1-playground) -->
+            <div class="dw1-playground" data-dw1-playground="11"></div>
+
+            <div class="callout warning">
+              <strong>O erro '[object Object]' no localStorage</strong>
+              <p>Se você fizer <code>localStorage.setItem('sacola', meuArray)</code> esquecendo o <code>JSON.stringify()</code>, o JavaScript converterá o objeto de forma ingênua para a string literal <code>"[object Object]"</code>, destruindo os dados e gerando erro de sintaxe quando o <code>JSON.parse()</code> tentar ler!</p>
+            </div>
+          </section>
+
+          <section id="cap-4">
+            <h2>4. Execução Passo a Passo e Teste de Mesa Web</h2>
+            <p>Use os botões <strong>Próximo passo</strong>, <strong>Passo anterior</strong> e <strong>Executar tudo</strong> nos simuladores abaixo para inspecionar como o navegador processa cada linha e altera seu estado interno:</p>
+
+            <div class="ped-practice" data-practice-id="11-a"></div>
+            <div class="ped-practice" data-practice-id="11-b"></div>
+          </section>
+
+          <section id="cap-5">
+            <h2>5. Laboratório de Desafios e Síntese de Referência</h2>
+            <p>Resolva as <strong>3 rodadas interativas</strong> abaixo para validar seu domínio sobre os conceitos deste caderno antes de partir para o editor de código:</p>
+
+            <div class="lr-lab" data-dw1-lab="11"></div>
+
+            <h3>Quadro-Síntese de Revisão Rápida</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Conceito-Chave</th>
+                    <th>Regra Prática para a Vitrine Lojas Blue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Sempre limpe o container antes de re-renderizar</strong></td><td>Chamar <code>container.innerHTML = ''</code> no início da função <code>renderizar()</code> evita que os itens antigos fiquem duplicados a cada atualização.</td></tr>
+<tr><td><strong>Estado vazio amigável (Empty State)</strong></td><td>Se o array filtrado tiver <code>length === 0</code>, exiba uma mensagem clara ('Nenhum produto encontrado para esta busca') em vez de deixar a tela em branco.</td></tr>
+<tr><td><strong>Fallback seguro na leitura</strong></td><td>Usar <code>JSON.parse(localStorage.getItem(chave) || '[]')</code> garante que no primeiro acesso do usuário (quando a chave ainda é <code>null</code>) o código receba um array vazio válido.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-6">
+            <h2>6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</h2>
+            <p>Todos os arquivos abaixo são páginas <code>.html</code> autocontidas (com preview visual imediato no navegador e código comentado). Você pode abri-los diretamente clicando nos links ou baixar o pacote <code>.zip</code> para resolver no VS Code:</p>
+
+            <div class="hero-actions" style="margin:1rem 0;">
+              <a class="PillButton" href="../arquivos/DW1_11_elementos_dinamicos_e_storage.zip" download>Baixar DW1_11_elementos_dinamicos_e_storage.zip (10 arquivos .html)</a>
+              <a class="PillButton" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo do Curso (.zip)</a>
+            </div>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">4 Exemplos Comentados de Estudo (abrir no navegador)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/11_elementos_dinamicos_e_storage/exemplos/01_criar_item_lista_createelement.html" target="_blank" rel="noopener"><code>01_criar_item_lista_createelement.html</code></a> — <strong>Adicionar novos itens à lista de conferência usando document.createElement(&#x27;li&#x27;) e append</strong></li>
+<li><a href="../pratica/11_elementos_dinamicos_e_storage/exemplos/02_renderizar_vitrine_a_partir_de_dados.html" target="_blank" rel="noopener"><code>02_renderizar_vitrine_a_partir_de_dados.html</code></a> — <strong>Renderizar cartões de produtos a partir de uma lista de objetos JavaScript</strong></li>
+<li><a href="../pratica/11_elementos_dinamicos_e_storage/exemplos/03_filtro_de_busca_instantaneo.html" target="_blank" rel="noopener"><code>03_filtro_de_busca_instantaneo.html</code></a> — <strong>Filtrar produtos da vitrine ao vivo conforme o usuário digita ou escolhe o setor</strong></li>
+<li><a href="../pratica/11_elementos_dinamicos_e_storage/exemplos/04_persistencia_com_localstorage.html" target="_blank" rel="noopener"><code>04_persistencia_com_localstorage.html</code></a> — <strong>Salvar e recuperar preferência de filial ou sacola com localStorage</strong></li>
+              </ul>
+            </details>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">6 Exercícios Práticos Graduais (4 Implementar + 1 Teste de Mesa + 1 Debug)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/11_elementos_dinamicos_e_storage/exercicios/01_adicionar_etiqueta_createelement.html" target="_blank" rel="noopener"><code>01_adicionar_etiqueta_createelement.html</code></a> — <strong>Implementar: criar elemento &lt;li&gt; com createElement e inserir na lista</strong>: Ao clicar em #btn-add, crie um novo elemento &lt;li&gt; com o texto de #campo-item e adicione-o em #lista-etiquetas usando append().</li>
+<li><a href="../pratica/11_elementos_dinamicos_e_storage/exercicios/02_filtrar_por_setor_select.html" target="_blank" rel="noopener"><code>02_filtrar_por_setor_select.html</code></a> — <strong>Implementar: ocultar cartões que não pertencem ao setor selecionado</strong>: Ouça o evento &#x27;change&#x27; de #filtro-setor. Para cada cartão .produto, mostre-o (card.hidden = false) se o filtro for &#x27;todos&#x27; ou se card.dataset.setor === filtro.value; caso contrário, oculte-o (card.hidden = true).</li>
+<li><a href="../pratica/11_elementos_dinamicos_e_storage/exercicios/03_remover_item_da_sacola.html" target="_blank" rel="noopener"><code>03_remover_item_da_sacola.html</code></a> — <strong>Implementar: criar item com botão interno &#x27;Remover&#x27; que exclui o próprio &lt;li&gt;</strong>: Para cada item criado em #sacola, crie também um &lt;button&gt; &#x27;Remover&#x27; que, ao ser clicado, chame li.remove().</li>
+<li><a href="../pratica/11_elementos_dinamicos_e_storage/exercicios/04_salvar_rascunho_localstorage.html" target="_blank" rel="noopener"><code>04_salvar_rascunho_localstorage.html</code></a> — <strong>Implementar: persistir observação do caixa no localStorage</strong>: Ao carregar a página, recupere localStorage.getItem(&#x27;rascunho-caixa&#x27;) e preencha #anotacao. A cada evento &#x27;input&#x27;, salve o novo valor no localStorage.</li>
+<li><a href="../pratica/11_elementos_dinamicos_e_storage/exercicios/05_teste_de_mesa_json_localstorage.html" target="_blank" rel="noopener"><code>05_teste_de_mesa_json_localstorage.html</code></a> — <strong>Teste de mesa Web: por que usar JSON.stringify e JSON.parse no localStorage?</strong>: O que acontece se tentarmos salvar um array ou objeto diretamente com localStorage.setItem(&#x27;sacola&#x27;, [{nome: &#x27;Shampoo&#x27;}]) sem JSON.stringify? Responda em #resposta.</li>
+<li><a href="../pratica/11_elementos_dinamicos_e_storage/exercicios/06_investigar_lista_duplicada_a_cada_render.html" target="_blank" rel="noopener"><code>06_investigar_lista_duplicada_a_cada_render.html</code></a> — <strong>Investigar e corrigir: vitrine duplicando itens por não limpar o container antes de re-renderizar</strong>: A função renderizar() abaixo adiciona os produtos em #grade sem limpar o conteúdo anterior (grade.replaceChildren()), duplicando os itens a cada clique. Corrija adicionando grade.replaceChildren() no início da função.</li>
+              </ul>
+            </details>
+          </section>
+
+          <footer class="doc-footer">
+            <div class="pager">
+              <a class="PagerButton" href="10_eventos_e_interacao.html">← Anterior: 10. Eventos, leitura de campos e atualização dinâmica da interface</a>
+              <a class="PagerButton" href="12_projeto_vitrine_blue.html">Próximo: 12. Projeto Integrado: Vitrine Interativa Lojas Blue →</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-dialog" data-search-dialog hidden>
+    <div class="search-panel">
+      <div class="search-Header">
+        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
+        <button class="PillButton" type="button" data-search-close>Fechar</button>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="../../shared/site.js"></script>
+  <script src="../../shared/navigation.js"></script>
+  <script src="../assets/pratica-data.js"></script>
+  <script src="../assets/pratica.js"></script>
+  <script src="../assets/dw1-labs.js"></script>
+</body>
+</html>

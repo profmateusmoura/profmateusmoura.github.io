@@ -1,0 +1,26 @@
+<!--
+  06_investigar_seletor_sem_hashtag_e_script_no_topo — Investigar e corrigir: querySelector('aviso') sem # ou .
+  Tipo: Investigar e corrigir (debug)
+  Tópico: 09 — Primeiros passos com JavaScript no navegador e o DOM
+
+  Enunciado:
+  O script abaixo chamou document.querySelector('aviso') procurando uma tag <aviso> inexistente em vez do ID '#aviso'. Corrija o seletor para '#aviso'.
+
+  Critério de conferência no navegador / DevTools:
+  querySelector usa sintaxe de seletor CSS: '#id' para ID e '.classe' para classe.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Investigar e corrigir: querySelector('aviso') sem # ou . · DW1</title>
+</head>
+<body>
+  <p id="aviso">Aguardando atualização...</p>
+  <script>
+    const el = document.querySelector('aviso');
+    el.textContent = 'Painel atualizado com sucesso!';
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!--
+  04_card_destaque_span_2 — Implementar: fazer o cartão principal ocupar 2 colunas na grade
+  Tipo: Implementar e estruturar
+  Tópico: 08 — Layout em grade com CSS Grid e responsividade (Media Queries)
+
+  Enunciado:
+  Aplique grid-column: span 2 na classe .banner-principal para que ele ocupe duas colunas da grade .vitrine.
+
+  Critério de conferência no navegador / DevTools:
+  O primeiro bloco deve ocupar a largura de duas colunas.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Grid Span</title>
+  <style>
+    .vitrine { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    /* Configure .banner-principal */
+  </style>
+</head>
+<body>
+  <div class="vitrine">
+    <div class="banner-principal">Super Oferta Lojas Blue</div>
+    <div>Item A</div><div>Item B</div><div>Item C</div><div>Item D</div>
+  </div>
+</body>
+</html>

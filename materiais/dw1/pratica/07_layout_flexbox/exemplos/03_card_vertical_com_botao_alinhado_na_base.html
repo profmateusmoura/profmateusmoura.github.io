@@ -1,0 +1,35 @@
+<!--
+  DW1 · 07 — Layout moderno com Flexbox
+  Exemplo: Cartões de mesma altura com botão empurrado para o rodapé (flex-direction: column e margin-top: auto)
+  Objetivo do tópico: Alinhar e distribuir componentes em uma dimensão usando display: flex, flex-direction, justify-content, align-items, gap e flex-wrap.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alinhamento Vertical no Card · Lojas Blue</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; padding: 1.5rem; background: #f7f8f5; }
+    .linha { display: flex; gap: 1rem; align-items: stretch; }
+    .card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border: 1px solid #dee6e0;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .card button { margin-top: auto; padding: 0.5rem; background: #1c6550; color: #fff; border: 0; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div class="linha">
+    <article class="card"><h2>Sabonete</h2><p>Descrição curta.</p><button>Comprar</button></article>
+    <article class="card"><h2>Kit Completo de Perfumaria</h2><p>Descrição muito mais longa com vários detalhes sobre os três produtos inclusos no pacote promocional.</p><button>Comprar</button></article>
+  </div>
+</body>
+</html>

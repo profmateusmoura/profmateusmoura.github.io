@@ -1,0 +1,46 @@
+<!--
+  DW1 · 12 — Projeto Integrado: Vitrine Interativa Lojas Blue
+  Exemplo: Etapa 3 do Projeto: sacola de compras com cálculo de subtotal e meta de frete grátis
+  Objetivo do tópico: Integrar HTML5 semântico, CSS responsivo (variáveis, Box Model, Flexbox e Grid) e JavaScript (DOM, eventos, filtros, sacola e localStorage) em uma aplicação completa.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Etapa 3 · Sacola e Frete Lojas Blue</title>
+</head>
+<body>
+  <h1>Sacola Lojas Blue</h1>
+  <button type="button" data-nome="Shampoo" data-preco="25">+ Shampoo (R$ 25)</button>
+  <button type="button" data-nome="Protetor" data-preco="60">+ Protetor (R$ 60)</button>
+  <ul id="itens"></ul>
+  <p id="resumo">Subtotal: R$ 0,00 (Faltam R$ 100,00 para frete grátis)</p>
+  <script>
+    const sacola = [];
+    const lista = document.querySelector('#itens');
+    const resumo = document.querySelector('#resumo');
+    function atualizar() {
+      lista.replaceChildren();
+      let total = 0;
+      sacola.forEach(item => {
+        total += item.preco;
+        const li = document.createElement('li');
+        li.textContent = `${item.nome} — R$ ${item.preco.toFixed(2)}`;
+        lista.append(li);
+      });
+      const falta = Math.max(0, 100 - total);
+      resumo.textContent = falta === 0
+        ? `Subtotal: R$ ${total.toFixed(2)} · Parabéns, você ganhou Frete Grátis!`
+        : `Subtotal: R$ ${total.toFixed(2)} (Faltam R$ ${falta.toFixed(2)} para frete grátis)`;
+    }
+    document.querySelectorAll('button[data-nome]').forEach(b => {
+      b.addEventListener('click', () => {
+        sacola.push({ nome: b.dataset.nome, preco: Number(b.dataset.preco) });
+        atualizar();
+      });
+    });
+  </script>
+</body>
+</html>

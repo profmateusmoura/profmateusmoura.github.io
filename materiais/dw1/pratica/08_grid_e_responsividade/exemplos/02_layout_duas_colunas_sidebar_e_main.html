@@ -1,0 +1,33 @@
+<!--
+  DW1 · 08 — Layout em grade com CSS Grid e responsividade (Media Queries)
+  Exemplo: Layout de página com barra lateral de filtros (240px) e vitrine elástica (1fr)
+  Objetivo do tópico: Construir grades bidimensionais com CSS Grid (fr, minmax, auto-fit) e adaptar layouts para celular e desktop com Media Queries (@media).
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Layout com Sidebar · Lojas Blue</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; margin: 0; padding: 1.5rem; background: #f7f8f5; }
+    .layout-loja {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 1.5rem;
+    }
+    aside, main { background: #ffffff; border: 1px solid #dee6e0; padding: 1rem; border-radius: 10px; }
+    @media (max-width: 700px) {
+      .layout-loja { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout-loja">
+    <aside><h2>Filtros</h2><p>Setor, faixa de preço e disponibilidade.</p></aside>
+    <main><h1>Produtos Encontrados (18)</h1><p>Redimensione a janela abaixo de 700px para ver o layout empilhar em 1 coluna.</p></main>
+  </div>
+</body>
+</html>

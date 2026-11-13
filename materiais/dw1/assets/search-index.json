@@ -1,0 +1,199 @@
+[
+  {
+    "title": "Início — Desenvolvimento Web I (Vitrine Digital Lojas Blue)",
+    "section": "Visão Geral",
+    "url": "index.html",
+    "excerpt": "Trilha completa de Desenvolvimento Web I com 12 cadernos interativos, simuladores visuais ao vivo, HTML5, CSS3, Flexbox, Grid, JavaScript DOM e 120 práticas.",
+    "keywords": [
+      "dw1",
+      "html5",
+      "css3",
+      "javascript",
+      "dom",
+      "lojas blue",
+      "vitrine"
+    ]
+  },
+  {
+    "title": "Catálogo Prático — 48 Exemplos e 72 Exercícios (.zip)",
+    "section": "Prática",
+    "url": "pratica/index.html",
+    "excerpt": "Download do pacote completo DW1_Lojas_Blue.zip, 12 pacotes por tópico e acesso direto aos 48 exemplos e 72 exercícios.",
+    "keywords": [
+      "zip",
+      "exemplos",
+      "exercicios",
+      "pratica",
+      "debug",
+      "teste de mesa"
+    ]
+  },
+  {
+    "title": "Caderno 01 — Como a Web funciona e o primeiro documento HTML",
+    "section": "Fase 1 — Estrutura Semântica com HTML5",
+    "url": "cadernos/01_web_e_documento_html.html",
+    "excerpt": "Entenda o ciclo cliente-servidor HTTP, o papel complementar de HTML, CSS e JavaScript, a árvore DOM e a anatomia mínima obrigatória de um documento HTML5 válido.",
+    "keywords": [
+      "01_web_e_documento_html",
+      "fase 1 — estrutura semântica com html5",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 02 — Estrutura de texto e semântica de conteúdo",
+    "section": "Fase 1 — Estrutura Semântica com HTML5",
+    "url": "cadernos/02_texto_e_semantica.html",
+    "excerpt": "Domine a hierarquia de títulos (h1 a h6), parágrafos, ênfase semântica (strong, em, mark, code) e os três tipos de listas do HTML5 (ul, ol e dl).",
+    "keywords": [
+      "02_texto_e_semantica",
+      "fase 1 — estrutura semântica com html5",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 03 — Marcos semânticos de página, links e imagens",
+    "section": "Fase 1 — Estrutura Semântica com HTML5",
+    "url": "cadernos/03_estrutura_links_e_midia.html",
+    "excerpt": "Organize a arquitetura macro da página com header, nav, main, section, article, aside e footer, crie hiperlinks seguros e insira imagens acessíveis com figure e figcaption.",
+    "keywords": [
+      "03_estrutura_links_e_midia",
+      "fase 1 — estrutura semântica com html5",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 04 — Tabelas de dados e formulários de entrada",
+    "section": "Fase 1 — Estrutura Semântica com HTML5",
+    "url": "cadernos/04_tabelas_e_formularios.html",
+    "excerpt": "Estruture tabelas de dados acessíveis com caption, thead, tbody, tfoot e scope, e construa formulários interativos com label, inputs semânticos e validação nativa HTML5.",
+    "keywords": [
+      "04_tabelas_e_formularios",
+      "fase 1 — estrutura semântica com html5",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 05 — Introdução ao CSS: seletores, cascata e tipografia",
+    "section": "Fase 2 — Estilização e Layout com CSS3",
+    "url": "cadernos/05_css_seletores_e_cascata.html",
+    "excerpt": "Compreenda a sintaxe de regras CSS, seletores de tag, classe, ID e atributo, pseudo-classes de estado (:hover, :focus-visible), a matemática da especificidade e variáveis CSS (:root).",
+    "keywords": [
+      "05_css_seletores_e_cascata",
+      "fase 2 — estilização e layout com css3",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 06 — Modelo de Caixa (Box Model), dimensões e posicionamento",
+    "section": "Fase 2 — Estilização e Layout com CSS3",
+    "url": "cadernos/06_box_model_e_unidades.html",
+    "excerpt": "Domine as 4 camadas do Box Model (content, padding, border, margin), o reset universal box-sizing: border-box, unidades relativas (rem, em, %, vw/vh) e posicionamento (relative, absolute, sticky).",
+    "keywords": [
+      "06_box_model_e_unidades",
+      "fase 2 — estilização e layout com css3",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 07 — Layout moderno com Flexbox",
+    "section": "Fase 2 — Estilização e Layout com CSS3",
+    "url": "cadernos/07_layout_flexbox.html",
+    "excerpt": "Domine o modelo unidimensional Flexbox: Flex Container vs. Flex Items, eixos principal e transversal, justify-content, align-items, gap, flex-wrap e alinhamento de cards.",
+    "keywords": [
+      "07_layout_flexbox",
+      "fase 2 — estilização e layout com css3",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 08 — Layout em grade com CSS Grid e responsividade (Media Queries)",
+    "section": "Fase 2 — Estilização e Layout com CSS3",
+    "url": "cadernos/08_grid_e_responsividade.html",
+    "excerpt": "Construa grades bidimensionais de produtos com CSS Grid (fr, repeat, minmax, auto-fit, grid-column: span 2) e adapte a interface para celulares, tablets e desktops com Media Queries.",
+    "keywords": [
+      "08_grid_e_responsividade",
+      "fase 2 — estilização e layout com css3",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 09 — Primeiros passos com JavaScript no navegador e o DOM",
+    "section": "Fase 3 — Interatividade, DOM e Projeto Integrado",
+    "url": "cadernos/09_javascript_e_dom.html",
+    "excerpt": "Conecte o JavaScript ao documento HTML, selecione elementos com querySelector e querySelectorAll, atualize textos com segurança (textContent), leia atributos data-* e alterne classes CSS (classList).",
+    "keywords": [
+      "09_javascript_e_dom",
+      "fase 3 — interatividade, dom e projeto integrado",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 10 — Eventos, leitura de campos e atualização dinâmica da interface",
+    "section": "Fase 3 — Interatividade, DOM e Projeto Integrado",
+    "url": "cadernos/10_eventos_e_interacao.html",
+    "excerpt": "Domine a programação orientada a eventos com addEventListener, trate cliques, digitação em tempo real (input) e envio de formulários (submit + event.preventDefault()), convertendo entradas com segurança.",
+    "keywords": [
+      "10_eventos_e_interacao",
+      "fase 3 — interatividade, dom e projeto integrado",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 11 — Criando elementos dinamicamente e persistência local (localStorage)",
+    "section": "Fase 3 — Interatividade, DOM e Projeto Integrado",
+    "url": "cadernos/11_elementos_dinamicos_e_storage.html",
+    "excerpt": "Gere cards e listas a partir de arrays de objetos com createElement e appendChild, filtre e ordene dados com filter/sort e salve o estado no navegador usando localStorage e JSON.",
+    "keywords": [
+      "11_elementos_dinamicos_e_storage",
+      "fase 3 — interatividade, dom e projeto integrado",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  },
+  {
+    "title": "Caderno 12 — Projeto Integrado: Vitrine Interativa Lojas Blue",
+    "section": "Fase 3 — Interatividade, DOM e Projeto Integrado",
+    "url": "cadernos/12_projeto_vitrine_blue.html",
+    "excerpt": "Integre HTML5 semântico, CSS3 moderno (Variáveis, Flexbox e Grid) e JavaScript (DOM, Eventos e localStorage) para construir a aplicação completa da Vitrine Interativa Lojas Blue.",
+    "keywords": [
+      "12_projeto_vitrine_blue",
+      "fase 3 — interatividade, dom e projeto integrado",
+      "html",
+      "css",
+      "javascript",
+      "simulador"
+    ]
+  }
+]
