@@ -1,0 +1,27 @@
+<!--
+  DW1 · 05 — Introdução ao CSS: seletores, cascata e tipografia
+  Exemplo: Tipografia legível: font-family, font-size, line-height e largura de linha (ch)
+  Objetivo do tópico: Aplicar regras CSS por seletores de elemento, classe e ID, compreender cascata, herança e especificidade e definir cores e fontes com variáveis CSS.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tipografia · Lojas Blue</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.65; color: #183128; padding: 1.5rem; }
+    article { max-width: 65ch; }
+    h1 { font-size: 2rem; line-height: 1.15; letter-spacing: -0.03em; }
+    .subtitulo { color: #596b62; font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>Guia de Cuidados com a Pele</h1>
+    <p class="subtitulo">Recomendações da equipe de dermocosméticos da Lojas Blue.</p>
+    <p>Limitar a largura do texto a cerca de 65 caracteres por linha (65ch) e manter line-height em torno de 1.6 torna a leitura confortável em monitores grandes.</p>
+  </article>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!--
+  03_formulario_validado_com_preventdefault — Implementar: validar quantidade no submit sem recarregar a página
+  Tipo: Implementar e estruturar
+  Tópico: 10 — Eventos, leitura de campos e atualização dinâmica da interface
+
+  Enunciado:
+  No evento 'submit' de #form-reposicao, chame event.preventDefault(), leia Number(qtd.value) e mostre em #msg se o pedido é válido (entre 1 e 50) ou inválido.
+
+  Critério de conferência no navegador / DevTools:
+  A página não deve recarregar ao enviar o formulário.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Implementar: validar quantidade no submit sem recarregar a página · DW1</title>
+</head>
+<body>
+  <form id="form-reposicao">
+    <input type="number" id="qtd-lote" value="0">
+    <button type="submit">Solicitar</button>
+  </form>
+  <p id="msg"></p>
+  <script>
+    // Implemente o submit com event.preventDefault() aqui
+  </script>
+</body>
+</html>

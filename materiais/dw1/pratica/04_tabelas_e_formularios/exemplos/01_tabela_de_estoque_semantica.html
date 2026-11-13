@@ -1,0 +1,49 @@
+<!--
+  DW1 · 04 — Tabelas de dados e formulários de entrada
+  Exemplo: Tabela de estoque com caption, thead, tbody, tfoot e th scope
+  Objetivo do tópico: Construir tabelas acessíveis (caption, thead, tbody, tfoot, th scope) e formulários estruturados com label, input, select, textarea e validação nativa.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tabela de Estoque · Lojas Blue</title>
+</head>
+<body>
+  <h1>Relatório de Estoque por Filial</h1>
+  <table border="1">
+    <caption>Posição de estoque — Setor de Perfumaria</caption>
+    <thead>
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Produto</th>
+        <th scope="col">Unidades</th>
+        <th scope="col">Preço Unitário</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>101</td>
+        <td>Shampoo Neutro</td>
+        <td>18</td>
+        <td>R$ 24,90</td>
+      </tr>
+      <tr>
+        <td>102</td>
+        <td>Sabonete Vegetal</td>
+        <td>32</td>
+        <td>R$ 8,50</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th scope="row" colspan="2">Total de unidades</th>
+        <td>50</td>
+        <td>—</td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+</html>

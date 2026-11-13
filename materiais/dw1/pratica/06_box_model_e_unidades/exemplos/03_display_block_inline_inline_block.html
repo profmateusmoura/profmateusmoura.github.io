@@ -1,0 +1,32 @@
+<!--
+  DW1 · 06 — Modelo de Caixa (Box Model), dimensões e posicionamento
+  Exemplo: Diferença prática entre display: block, inline e inline-block
+  Objetivo do tópico: Dominar content, padding, border, margin, box-sizing: border-box, unidades relativas (rem, %, vw/vh), modos de display e estados :hover/:focus-visible.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modos de Display · Lojas Blue</title>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 1.5rem; }
+    .selo-inline-block {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      margin-right: 0.5rem;
+      background: #133e34;
+      color: #ffffff;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <span class="selo-inline-block">Frete Grátis</span>
+    <span class="selo-inline-block">Retirada em 2h</span>
+    <span class="selo-inline-block">Desconto PIX</span>
+  </div>
+</body>
+</html>

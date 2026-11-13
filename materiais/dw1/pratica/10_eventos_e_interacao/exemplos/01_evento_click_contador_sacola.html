@@ -1,0 +1,32 @@
+<!--
+  DW1 · 10 — Eventos, leitura de campos e atualização dinâmica da interface
+  Exemplo: Reagir ao clique de botão (addEventListener 'click') atualizando o estado na tela
+  Objetivo do tópico: Reagir a ações do usuário com addEventListener (click, input, submit), usar event.preventDefault(), ler e converter .value de campos e validar formulários na interface.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evento Click · Lojas Blue</title>
+</head>
+<body>
+  <h1>Sacola Rápida</h1>
+  <p>Itens na sacola: <strong id="contador">0</strong></p>
+  <button type="button" id="adicionar">+ Adicionar item</button>
+  <button type="button" id="zerar">Limpar sacola</button>
+  <script>
+    let quantidade = 0;
+    const visor = document.querySelector('#contador');
+    document.querySelector('#adicionar').addEventListener('click', () => {
+      quantidade += 1;
+      visor.textContent = String(quantidade);
+    });
+    document.querySelector('#zerar').addEventListener('click', () => {
+      quantidade = 0;
+      visor.textContent = '0';
+    });
+  </script>
+</body>
+</html>

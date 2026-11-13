@@ -1,0 +1,29 @@
+<!--
+  DW1 · 10 — Eventos, leitura de campos e atualização dinâmica da interface
+  Exemplo: Simulador de subtotal em tempo real com o evento 'input'
+  Objetivo do tópico: Reagir a ações do usuário com addEventListener (click, input, submit), usar event.preventDefault(), ler e converter .value de campos e validar formulários na interface.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evento Input em Tempo Real · Lojas Blue</title>
+</head>
+<body>
+  <h1>Simulador de Compra — Shampoo Blue (R$ 25,00)</h1>
+  <label for="qtd">Quantidade:</label>
+  <input type="number" id="qtd" min="1" value="1">
+  <p id="resultado">Subtotal: R$ 25,00</p>
+  <script>
+    const campoQtd = document.querySelector('#qtd');
+    const resultado = document.querySelector('#resultado');
+    const precoUnitario = 25;
+    campoQtd.addEventListener('input', () => {
+      const n = Math.max(0, Number(campoQtd.value));
+      resultado.textContent = `Subtotal: R$ ${(n * precoUnitario).toFixed(2).replace('.', ',')}`;
+    });
+  </script>
+</body>
+</html>

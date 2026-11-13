@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderno 01 — Como a Web funciona e o primeiro documento HTML · DW1</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/pygments.css">
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="../../shared/navigation.css">
+  <link rel="stylesheet" href="../assets/pratica.css">
+  <link rel="stylesheet" href="../assets/dw1.css">
+</head>
+<body data-root="../" data-course="dw1" data-doc-id="01_web_e_documento_html">
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
+        <strong>Cadernos de DW1</strong>
+        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
+      </a>
+
+      <div class="progress-card">
+        <div class="progress-top">
+          <strong>Progresso de leitura</strong>
+          <span data-progress-label>0/12 cadernos</span>
+        </div>
+        <div class="progress-bar"><span data-progress-bar></span></div>
+      </div>
+
+      <nav class="nav-sections" aria-label="Navegação do material">
+        <div class="nav-group">
+          <p class="nav-group-title">Visão geral</p>
+          <a href="../index.html">Início e Trilha</a>
+          <a href="../pratica/index.html">Catálogo Prático e ZIPs</a>
+          <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
+        </div>
+        <div class="nav-group">
+  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
+  <a class="doc-link active" data-visited="01_web_e_documento_html" href="../cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
+  <a class="doc-link" data-visited="02_texto_e_semantica" href="../cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
+  <a class="doc-link" data-visited="03_estrutura_links_e_midia" href="../cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
+  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="../cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
+  <a class="doc-link" data-visited="05_css_seletores_e_cascata" href="../cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
+  <a class="doc-link" data-visited="06_box_model_e_unidades" href="../cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
+  <a class="doc-link" data-visited="07_layout_flexbox" href="../cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
+  <a class="doc-link" data-visited="08_grid_e_responsividade" href="../cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
+  <a class="doc-link" data-visited="09_javascript_e_dom" href="../cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
+  <a class="doc-link" data-visited="10_eventos_e_interacao" href="../cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
+  <a class="doc-link" data-visited="11_elementos_dinamicos_e_storage" href="../cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
+  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="../cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
+</div>
+      </nav>
+    </aside>
+    <div class="main-panel">
+      <div class="content-wrap">
+        <div class="topbar">
+          <div class="breadcrumbs">
+            <a href="../../../index.html">Portal</a>
+            <span>/</span>
+            <a href="../index.html">DW1</a><span>/</span><span>Caderno 01</span>
+          </div>
+          <div class="topbar-actions">
+            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
+            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
+            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
+          </div>
+        </div>
+
+        <article class="doc-article">
+          <header class="doc-header">
+            <span class="eyebrow">Fase 1 — Estrutura Semântica com HTML5 · Caderno 01 de 12</span>
+            <h1>01. Como a Web funciona e o primeiro documento HTML</h1>
+            <p class="lead">Entenda o ciclo cliente-servidor HTTP, o papel complementar de HTML, CSS e JavaScript, a árvore DOM e a anatomia mínima obrigatória de um documento HTML5 válido.</p>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <button class="PillButton" type="button" data-read-toggle>Marcar como concluído</button>
+              <a class="PillButton" href="../arquivos/DW1_01_web_e_documento_html.zip" download>Baixar pacote deste tópico (.zip)</a>
+              <a class="PillButton" href="../pratica/index.html#topico-01">Ver arquivos no catálogo</a>
+            </div>
+          </header>
+
+          <nav class="toc-inline" aria-label="Sumário deste caderno">
+            <strong>Neste caderno interativo:</strong>
+            <ol>
+              <li><a href="#cap-1">1. Do clique na URL à página renderizada na tela</a></li>
+              <li><a href="#cap-2">2. Anatomia do Documento HTML5 e a Árvore DOM</a></li>
+              <li><a href="#cap-3">3. Simulador Visual Ao Vivo: Inspecionando &lt;head&gt;, &lt;body&gt; e HTTP</a></li>
+              <li><a href="#cap-4">4. Execução Passo a Passo e Teste de Mesa Web</a></li>
+              <li><a href="#cap-5">5. Laboratório de Desafios e Síntese de Referência</a></li>
+              <li><a href="#cap-6">6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</a></li>
+            </ol>
+          </nav>
+
+          <div class="callout note">
+            <strong>Objetivos de aprendizagem</strong>
+            <ul>
+              <li>Compreender a comunicação entre navegador (cliente) e servidor Web via protocolo HTTP.</li>
+<li>Distinguir as responsabilidades de HTML (estrutura/semântica), CSS (apresentação) e JavaScript (comportamento).</li>
+<li>Montar a estrutura mínima de um documento HTML5 com &lt;!DOCTYPE html&gt;, &lt;html lang=&quot;pt-BR&quot;&gt;, &lt;head&gt; e &lt;body&gt;.</li>
+<li>Configurar metadados essenciais (&lt;meta charset=&quot;UTF-8&quot;&gt;, viewport e &lt;title&gt;) e inspecionar elementos no DevTools.</li>
+            </ul>
+          </div>
+
+          <section id="cap-1">
+            <h2>1. Do clique na URL à página renderizada na tela</h2>
+            <p>Imagine que a <strong>Lojas Blue</strong> está inaugurando seu catálogo digital. Quando uma cliente digita o endereço da loja no navegador ou abre um arquivo <code>.html</code>, o navegador não exibe uma imagem estática pronta: ele recebe um <strong>documento de texto estruturado</strong> e constrói visualmente a interface diante dos olhos da pessoa usuária.</p>
+<p>Na Web, essa conversa acontece no modelo <strong>Cliente-Servidor</strong> usando o protocolo <strong>HTTP (HyperText Transfer Protocol)</strong>. O navegador atua como <em>cliente</em>: ele envia uma requisição (por exemplo, <code>GET /vitrine.html</code>). O <em>servidor</em> localiza o arquivo e devolve uma resposta contendo um código de status (como <code>200 OK</code> quando tudo dá certo, ou <code>404 Not Found</code> quando o endereço não existe) acompanhado do código HTML.</p>
+            <div class="callout tip">
+              <strong>As três camadas da Web moderna</strong>
+              <p>Pense em uma página Web como a vitrine física da Lojas Blue: o <strong>HTML</strong> é a estrutura de alvenaria, prateleiras e etiquetas de identificação (o significado de cada parte); o <strong>CSS</strong> é a pintura, iluminação, tipografia e disposição visual; e o <strong>JavaScript</strong> é o mecanismo interativo que calcula descontos, filtra produtos e atualiza a sacola sem precisar reconstruir o prédio.</p>
+            </div>
+          </section>
+
+          <section id="cap-2">
+            <h2>2. Anatomia do Documento HTML5 e a Árvore DOM</h2>
+            <p>Todo documento HTML5 profissional começa com uma estrutura mínima padronizada. Veja o código completo do primeiro cartaz digital da Lojas Blue:</p>
+            <div class="code-shell">
+  <div class="code-header">
+    <span>HTML · Cenário Vitrine Lojas Blue</span>
+    <button class="copy-code" type="button">Copiar</button>
+  </div>
+  <div class="highlight"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Lojas Blue — Vitrine Oficial&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Lojas Blue — Tecnologia e Papelaria&lt;/h1&gt;
+    &lt;p&gt;Bem-vindo ao catálogo oficial da nossa unidade digital.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+</div>
+
+            <h3>Tabela Comparativa e Referência Técnica</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Elemento / Declaração</th><th>Onde fica</th><th>Função técnica no navegador</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>1ª linha do arquivo</td><td>Ativa o modo padrão HTML5 (Standards Mode), evitando o modo de compatibilidade antigo (Quirks Mode).</td></tr>
+<tr><td><code>&lt;html lang="pt-BR"&gt;</code></td><td>Raiz do documento</td><td>Envolve todo o arquivo e informa aos leitores de tela e buscadores que o idioma é Português do Brasil.</td></tr>
+<tr><td><code>&lt;head&gt;</code></td><td>Dentro de <code>&lt;html&gt;</code></td><td>Guarda metadados invisíveis na área da página: codificação, viewport, título da aba e links de CSS.</td></tr>
+<tr><td><code>&lt;meta charset="UTF-8"&gt;</code></td><td>Dentro de <code>&lt;head&gt;</code></td><td>Garante que acentos (ã, é, ç) e símbolos (R$) sejam decodificados sem erros (mojibake).</td></tr>
+<tr><td><code>&lt;meta name="viewport" ...&gt;</code></td><td>Dentro de <code>&lt;head&gt;</code></td><td>Faz a largura lógica da página acompanhar a largura real da tela em celulares e tablets.</td></tr>
+<tr><td><code>&lt;title&gt;</code></td><td>Dentro de <code>&lt;head&gt;</code></td><td>Define o nome exibido na aba do navegador, nos favoritos e nos mecanismos de busca.</td></tr>
+<tr><td><code>&lt;body&gt;</code></td><td>Dentro de <code>&lt;html&gt;</code></td><td>Contém todo o conteúdo visível renderizado na janela do navegador (títulos, parágrafos, imagens, botões).</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-3">
+            <h2>3. Simulador Visual Ao Vivo: Inspecionando &lt;head&gt;, &lt;body&gt; e HTTP</h2>
+            <p>Interaja com o simulador abaixo para testar na prática a diferença entre o título da aba (<code>&lt;title&gt;</code>) e o título visível (<code>&lt;h1&gt;</code>), além de observar o que acontece quando esquecemos a codificação <code>UTF-8</code>:</p>
+
+            <!-- Simulador Visual Ao Vivo (.dw1-playground) -->
+            <div class="dw1-playground" data-dw1-playground="01"></div>
+
+            <div class="callout warning">
+              <strong>Erros clássicos em primeiros documentos HTML</strong>
+              <p>Nunca coloque tags visíveis como <code>&lt;h1&gt;</code> ou <code>&lt;p&gt;</code> dentro do <code>&lt;head&gt;</code>, e jamais confunda <code>&lt;title&gt;</code> (nome na aba do navegador) com <code>&lt;h1&gt;</code> (título principal impresso dentro da página).</p>
+            </div>
+          </section>
+
+          <section id="cap-4">
+            <h2>4. Execução Passo a Passo e Teste de Mesa Web</h2>
+            <p>Use os botões <strong>Próximo passo</strong>, <strong>Passo anterior</strong> e <strong>Executar tudo</strong> nos simuladores abaixo para inspecionar como o navegador processa cada linha e altera seu estado interno:</p>
+
+            <div class="ped-practice" data-practice-id="01-a"></div>
+            <div class="ped-practice" data-practice-id="01-b"></div>
+          </section>
+
+          <section id="cap-5">
+            <h2>5. Laboratório de Desafios e Síntese de Referência</h2>
+            <p>Resolva as <strong>3 rodadas interativas</strong> abaixo para validar seu domínio sobre os conceitos deste caderno antes de partir para o editor de código:</p>
+
+            <div class="lr-lab" data-dw1-lab="01"></div>
+
+            <h3>Quadro-Síntese de Revisão Rápida</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Conceito-Chave</th>
+                    <th>Regra Prática para a Vitrine Lojas Blue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Cliente vs. Servidor</strong></td><td>O navegador pede recursos via HTTP (GET/POST) e renderiza o HTML; o servidor processa e responde com códigos de status (200, 404, 500).</td></tr>
+<tr><td><strong>Anatomia de um Elemento</strong></td><td>Tag de abertura (<code>&lt;p class="aviso"&gt;</code>) + Conteúdo + Tag de fechamento (<code>&lt;/p&gt;</code>). Elementos vazios como <code>&lt;meta&gt;</code> não têm tag de fechamento.</td></tr>
+<tr><td><strong>Árvore DOM</strong></td><td>Representação em memória onde cada tag vira um nó com relações de pai, filho e irmão (ex.: <code>body</code> é pai de <code>h1</code> e <code>p</code>).</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-6">
+            <h2>6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</h2>
+            <p>Todos os arquivos abaixo são páginas <code>.html</code> autocontidas (com preview visual imediato no navegador e código comentado). Você pode abri-los diretamente clicando nos links ou baixar o pacote <code>.zip</code> para resolver no VS Code:</p>
+
+            <div class="hero-actions" style="margin:1rem 0;">
+              <a class="PillButton" href="../arquivos/DW1_01_web_e_documento_html.zip" download>Baixar DW1_01_web_e_documento_html.zip (10 arquivos .html)</a>
+              <a class="PillButton" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo do Curso (.zip)</a>
+            </div>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">4 Exemplos Comentados de Estudo (abrir no navegador)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/01_web_e_documento_html/exemplos/01_documento_minimo.html" target="_blank" rel="noopener"><code>01_documento_minimo.html</code></a> — <strong>Documento HTML5 mínimo da Lojas Blue</strong></li>
+<li><a href="../pratica/01_web_e_documento_html/exemplos/02_metadados_head.html" target="_blank" rel="noopener"><code>02_metadados_head.html</code></a> — <strong>Metadados essenciais no head (charset, viewport e description)</strong></li>
+<li><a href="../pratica/01_web_e_documento_html/exemplos/03_comentarios_e_inspecao.html" target="_blank" rel="noopener"><code>03_comentarios_e_inspecao.html</code></a> — <strong>Comentários HTML e organização do código-fonte</strong></li>
+<li><a href="../pratica/01_web_e_documento_html/exemplos/04_tres_camadas_web.html" target="_blank" rel="noopener"><code>04_tres_camadas_web.html</code></a> — <strong>As três camadas da Web em ação: estrutura (HTML), estilo (CSS) e comportamento (JS)</strong></li>
+              </ul>
+            </details>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">6 Exercícios Práticos Graduais (4 Implementar + 1 Teste de Mesa + 1 Debug)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/01_web_e_documento_html/exercicios/01_estruturar_boas_vindas.html" target="_blank" rel="noopener"><code>01_estruturar_boas_vindas.html</code></a> — <strong>Implementar: página de boas-vindas da filial Savassi</strong>: Monte um documento HTML5 completo (com &lt;!doctype html&gt;, html lang=&quot;pt-BR&quot;, head com meta charset, viewport e title &quot;Lojas Blue · Savassi&quot;) e, no body, um h1 com o nome da filial e um parágrafo com o endereço.</li>
+<li><a href="../pratica/01_web_e_documento_html/exercicios/02_configurar_head_completo.html" target="_blank" rel="noopener"><code>02_configurar_head_completo.html</code></a> — <strong>Implementar: configurar metadados de página de ofertas</strong>: Adicione dentro de &lt;head&gt; a codificação UTF-8, a meta tag viewport responsiva, uma meta description para a Semana Blue e o elemento &lt;title&gt;Ofertas da Semana · Lojas Blue&lt;/title&gt;.</li>
+<li><a href="../pratica/01_web_e_documento_html/exercicios/03_organizar_com_comentarios.html" target="_blank" rel="noopener"><code>03_organizar_com_comentarios.html</code></a> — <strong>Implementar: documentar blocos com comentários HTML</strong>: Adicione dois comentários HTML (&lt;!-- ... --&gt;): um antes do título identificando o cabeçalho da loja e outro antes do parágrafo identificando o aviso de estoque, sem exibir os comentários na tela.</li>
+<li><a href="../pratica/01_web_e_documento_html/exercicios/04_teste_de_mesa_arvore_dom.html" target="_blank" rel="noopener"><code>04_teste_de_mesa_arvore_dom.html</code></a> — <strong>Teste de mesa Web: prever a árvore DOM de um documento</strong>: Analise a marcação abaixo e preveja: 1) Quais elementos são filhos diretos de &lt;html&gt;? 2) Quantos elementos filhos diretos existem dentro de &lt;body&gt;? Registre sua resposta no parágrafo #resposta.</li>
+<li><a href="../pratica/01_web_e_documento_html/exercicios/05_investigar_titulo_no_lugar_errado.html" target="_blank" rel="noopener"><code>05_investigar_titulo_no_lugar_errado.html</code></a> — <strong>Investigar e corrigir: &lt;title&gt; e &lt;meta&gt; colocados dentro do &lt;body&gt;</strong>: O código abaixo colocou metadados dentro do &lt;body&gt; e um parágrafo dentro do &lt;head&gt;. Reorganize cada elemento para sua seção correta (&lt;head&gt; vs. &lt;body&gt;).</li>
+<li><a href="../pratica/01_web_e_documento_html/exercicios/06_investigar_tags_abertas.html" target="_blank" rel="noopener"><code>06_investigar_tags_abertas.html</code></a> — <strong>Investigar e corrigir: tags sem fechamento e atributo sem aspas</strong>: Corrija o documento abaixo fechando corretamente as tags &lt;h1&gt; e &lt;p&gt; e ajustando o atributo lang=&quot;pt-BR&quot;.</li>
+              </ul>
+            </details>
+          </section>
+
+          <footer class="doc-footer">
+            <div class="pager">
+              <a class="PagerButton" href="../index.html">← Voltar para a Trilha de DW1</a>
+              <a class="PagerButton" href="02_texto_e_semantica.html">Próximo: 02. Estrutura de texto e semântica de conteúdo →</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-dialog" data-search-dialog hidden>
+    <div class="search-panel">
+      <div class="search-Header">
+        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
+        <button class="PillButton" type="button" data-search-close>Fechar</button>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="../../shared/site.js"></script>
+  <script src="../../shared/navigation.js"></script>
+  <script src="../assets/pratica-data.js"></script>
+  <script src="../assets/pratica.js"></script>
+  <script src="../assets/dw1-labs.js"></script>
+</body>
+</html>

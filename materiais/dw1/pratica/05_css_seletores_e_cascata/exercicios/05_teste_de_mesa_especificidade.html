@@ -1,0 +1,22 @@
+<!--
+  05_teste_de_mesa_especificidade — Teste de mesa Web: calcular qual regra CSS vence
+  Tipo: Teste de mesa Web (inspecionar e prever)
+  Tópico: 05 — Introdução ao CSS: seletores, cascata e tipografia
+
+  Enunciado:
+  Dado um elemento <p id="aviso" class="destaque texto"> e as regras: 1) #aviso { color: green; }, 2) .destaque.texto { color: blue; }, 3) p { color: black; }, qual cor será exibida? Responda em #resposta.
+
+  Critério de conferência no navegador / DevTools:
+  A cor exibida será green, pois 1 seletor de ID (1,0,0) vence 2 classes (0,2,0) e 1 tag (0,0,1).
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teste de mesa Web: calcular qual regra CSS vence · DW1</title>
+</head>
+<body>
+  <p id="resposta">Cor vencedora = ? | Justificativa de especificidade = ?</p>
+</body>
+</html>

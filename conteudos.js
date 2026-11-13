@@ -34,11 +34,11 @@ window.CATALOGO_MATERIAIS = [
   {
     titulo: 'DW1',
     subtitulo: 'Desenvolvimento Web I',
-    descricao: 'Fundamentos da Web, páginas, estrutura, apresentação e primeiros recursos interativos.',
+    descricao: 'HTML5 semântico, CSS3 moderno (Box Model, Flexbox, Grid e responsividade) e JavaScript DOM com simuladores visuais ao vivo na Vitrine Lojas Blue.',
     categoria: 'Desenvolvimento Web', nivel: 'Iniciante',
-    detalhes: 'Material em preparação', destaque: 'DW1',
-    caminho: 'materiais/dw1/index.html', cor: 'azul', disponivel: false,
-    temas: ['HTML', 'CSS', 'JavaScript', 'Web']
+    detalhes: '12 cadernos interativos · 12 simuladores · 120 práticas (.zip)', destaque: 'DW1',
+    caminho: 'materiais/dw1/index.html', cor: 'azul', disponivel: true,
+    temas: ['HTML5', 'CSS3', 'Flexbox', 'CSS Grid', 'JavaScript', 'DOM', 'localStorage']
   },
   {
     titulo: 'DW2',
@@ -63,8 +63,8 @@ window.CATALOGO_MATERIAIS = [
     subtitulo: 'Programação de Jogos Eletrônicos',
     descricao: 'Criação de jogos 2D com Godot: cenas, nós, movimento, colisão, sinais, interface e projetos autorais.',
     categoria: 'Jogos', nivel: 'Iniciante a intermediário',
-    detalhes: 'Material em preparação', destaque: 'PJE',
-    caminho: 'materiais/pje/index.html', cor: 'azul', disponivel: false,
+    detalhes: 'Pesquisa individual disponível · demais etapas em preparação', destaque: 'PJE',
+    caminho: 'materiais/pje/index.html', cor: 'azul', disponivel: true,
     temas: ['Godot', 'Jogos 2D', 'Cenas', 'Movimentação', 'GDScript']
   }
 ];

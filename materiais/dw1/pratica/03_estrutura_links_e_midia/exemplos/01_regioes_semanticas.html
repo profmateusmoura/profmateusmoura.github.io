@@ -1,0 +1,39 @@
+<!--
+  DW1 · 03 — Marcos semânticos de página, links e imagens
+  Exemplo: Layout semântico completo (header, nav, main, section, article, aside, footer)
+  Objetivo do tópico: Organizar regiões da página com header, nav, main, section, article, aside e footer, criar links de navegação e inserir imagens acessíveis.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regiões Semânticas · Lojas Blue</title>
+</head>
+<body>
+  <header>
+    <h1>Lojas Blue</h1>
+    <nav aria-label="Principal">
+      <a href="#ofertas">Ofertas</a> |
+      <a href="#lojas">Unidades</a>
+    </nav>
+  </header>
+  <main>
+    <section id="ofertas">
+      <h2>Ofertas em Destaque</h2>
+      <article>
+        <h3>Shampoo Hidratante 400 ml</h3>
+        <p>Fórmula suave para uso diário — R$ 24,90.</p>
+      </article>
+    </section>
+    <aside>
+      <h2>Dica de Atendimento</h2>
+      <p>Clientes cadastrados têm frete grátis nas compras acima de R$ 100.</p>
+    </aside>
+  </main>
+  <footer>
+    <p>Lojas Blue · Central de Atendimento</p>
+  </footer>
+</body>
+</html>

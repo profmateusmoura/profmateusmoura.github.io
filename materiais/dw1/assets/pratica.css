@@ -1,0 +1,12 @@
+.ped-practice{margin:2rem 0;padding:clamp(.85rem,3vw,1.45rem);border:1px solid var(--border);border-radius:1rem;background:var(--paper);color:var(--ink);box-shadow:var(--shadow)}
+.ped-practice [hidden]{display:none!important}.ped-practice h3{margin-top:0;color:var(--ink)}
+.ped-practice pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:.9rem 1rem;border:1px solid var(--border);border-radius:.55rem;background:var(--code);color:var(--ink)}
+.ped-practice .code-shell pre.highlight{border:0;border-radius:0;background:var(--paper)!important}
+.ped-state,.ped-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0}
+.ped-cell{padding:.65rem .85rem;border:1px solid var(--green);border-radius:.55rem;background:var(--mint);color:var(--ink);font-weight:600;font-size:13px;overflow-wrap:anywhere;max-width:100%}
+.ped-practice label{display:grid;gap:.45rem;margin:1rem 0;font-weight:600;font-size:14px}.ped-practice input{width:7.5rem}
+.ped-practice button:not(.copy-code),.ped-practice input{font:inherit;min-height:2.6rem;max-width:100%;padding:.4rem .8rem;border:1px solid var(--border);border-radius:.55rem;background:var(--bg);color:var(--ink);font-size:13px;font-weight:600;transition:border-color .15s,background .15s}
+.ped-practice button:not(.copy-code):hover:enabled{border-color:var(--green);color:var(--green);background:var(--mint)}
+.ped-practice button:enabled{cursor:pointer}.ped-practice button:disabled{opacity:.48;cursor:not-allowed}.ped-practice :focus-visible{outline:3px solid #56a887;outline-offset:3px}
+.ped-practice [data-feedback]{min-height:1.5em;font-weight:700;color:var(--green)}.ped-practice a{color:var(--green);font-weight:700;overflow-wrap:anywhere}
+.ped-practice a:hover{text-decoration:underline}

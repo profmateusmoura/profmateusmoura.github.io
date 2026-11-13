@@ -1,0 +1,28 @@
+<!--
+  03_barra_progresso_frete_gratis — Implementar: atualizar barra de progresso rumo a R$ 100 de frete grátis
+  Tipo: Implementar e estruturar
+  Tópico: 12 — Projeto Integrado: Vitrine Interativa Lojas Blue
+
+  Enunciado:
+  Atualize o atributo value do elemento <progress id="barra-frete" max="100"> e o texto de #aviso-frete conforme o valor de subtotal.
+
+  Critério de conferência no navegador / DevTools:
+  Se subtotal >= 100, a barra deve ficar em 100 e o texto deve confirmar frete grátis.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Implementar: atualizar barra de progresso rumo a R$ 100 de frete grátis · DW1</title>
+</head>
+<body>
+  <progress id="barra-frete" value="40" max="100"></progress>
+  <p id="aviso-frete">Faltam R$ 60,00</p>
+  <button type="button" id="somar30">+ R$ 30,00 na sacola</button>
+  <script>
+    let subtotal = 40;
+    // Ao clicar em #somar30, atualize subtotal, barra.value e #aviso-frete
+  </script>
+</body>
+</html>

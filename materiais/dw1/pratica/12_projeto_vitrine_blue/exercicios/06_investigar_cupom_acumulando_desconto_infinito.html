@@ -1,0 +1,30 @@
+<!--
+  06_investigar_cupom_acumulando_desconto_infinito — Investigar e corrigir: botão de cupom aplicando desconto repetidamente sobre o valor já descontado
+  Tipo: Investigar e corrigir (debug)
+  Tópico: 12 — Projeto Integrado: Vitrine Interativa Lojas Blue
+
+  Enunciado:
+  O código abaixo altera a própria variável subtotal a cada clique em 'Aplicar cupom', permitindo clicar 10 vezes para zerar o preço. Corrija usando uma flag cupomAplicado = false (ou calculando sempre a partir do subtotalBruto).
+
+  Critério de conferência no navegador / DevTools:
+  O cupom só pode conceder 10% de desconto uma única vez.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Investigar e corrigir: botão de cupom aplicando desconto repetidamente sobre o valor já descontado · DW1</title>
+</head>
+<body>
+  <p id="visor">Total: R$ 100.00</p>
+  <button type="button" id="btn-cupom">Aplicar cupom 10%</button>
+  <script>
+    let subtotal = 100;
+    document.querySelector('#btn-cupom').addEventListener('click', () => {
+      subtotal = subtotal * 0.9;
+      document.querySelector('#visor').textContent = `Total: R$ ${subtotal.toFixed(2)}`;
+    });
+  </script>
+</body>
+</html>

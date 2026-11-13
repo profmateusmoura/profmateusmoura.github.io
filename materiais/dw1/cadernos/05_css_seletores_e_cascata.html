@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderno 05 — Introdução ao CSS: seletores, cascata e tipografia · DW1</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/pygments.css">
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="../../shared/navigation.css">
+  <link rel="stylesheet" href="../assets/pratica.css">
+  <link rel="stylesheet" href="../assets/dw1.css">
+</head>
+<body data-root="../" data-course="dw1" data-doc-id="05_css_seletores_e_cascata">
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
+        <strong>Cadernos de DW1</strong>
+        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
+      </a>
+
+      <div class="progress-card">
+        <div class="progress-top">
+          <strong>Progresso de leitura</strong>
+          <span data-progress-label>0/12 cadernos</span>
+        </div>
+        <div class="progress-bar"><span data-progress-bar></span></div>
+      </div>
+
+      <nav class="nav-sections" aria-label="Navegação do material">
+        <div class="nav-group">
+          <p class="nav-group-title">Visão geral</p>
+          <a href="../index.html">Início e Trilha</a>
+          <a href="../pratica/index.html">Catálogo Prático e ZIPs</a>
+          <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
+        </div>
+        <div class="nav-group">
+  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
+  <a class="doc-link" data-visited="01_web_e_documento_html" href="../cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
+  <a class="doc-link" data-visited="02_texto_e_semantica" href="../cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
+  <a class="doc-link" data-visited="03_estrutura_links_e_midia" href="../cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
+  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="../cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
+  <a class="doc-link active" data-visited="05_css_seletores_e_cascata" href="../cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
+  <a class="doc-link" data-visited="06_box_model_e_unidades" href="../cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
+  <a class="doc-link" data-visited="07_layout_flexbox" href="../cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
+  <a class="doc-link" data-visited="08_grid_e_responsividade" href="../cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
+  <a class="doc-link" data-visited="09_javascript_e_dom" href="../cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
+  <a class="doc-link" data-visited="10_eventos_e_interacao" href="../cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
+  <a class="doc-link" data-visited="11_elementos_dinamicos_e_storage" href="../cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
+  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="../cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
+</div>
+      </nav>
+    </aside>
+    <div class="main-panel">
+      <div class="content-wrap">
+        <div class="topbar">
+          <div class="breadcrumbs">
+            <a href="../../../index.html">Portal</a>
+            <span>/</span>
+            <a href="../index.html">DW1</a><span>/</span><span>Caderno 05</span>
+          </div>
+          <div class="topbar-actions">
+            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
+            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
+            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
+          </div>
+        </div>
+
+        <article class="doc-article">
+          <header class="doc-header">
+            <span class="eyebrow">Fase 2 — Estilização e Layout com CSS3 · Caderno 05 de 12</span>
+            <h1>05. Introdução ao CSS: seletores, cascata e tipografia</h1>
+            <p class="lead">Compreenda a sintaxe de regras CSS, seletores de tag, classe, ID e atributo, pseudo-classes de estado (:hover, :focus-visible), a matemática da especificidade e variáveis CSS (:root).</p>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <button class="PillButton" type="button" data-read-toggle>Marcar como concluído</button>
+              <a class="PillButton" href="../arquivos/DW1_05_css_seletores_e_cascata.zip" download>Baixar pacote deste tópico (.zip)</a>
+              <a class="PillButton" href="../pratica/index.html#topico-05">Ver arquivos no catálogo</a>
+            </div>
+          </header>
+
+          <nav class="toc-inline" aria-label="Sumário deste caderno">
+            <strong>Neste caderno interativo:</strong>
+            <ol>
+              <li><a href="#cap-1">1. Dando Identidade Visual à Vitrine Lojas Blue</a></li>
+              <li><a href="#cap-2">2. Seletores, Especificidade (a, b, c) e Tipografia</a></li>
+              <li><a href="#cap-3">3. Simulador Visual Ao Vivo: Disputa de Especificidade na Cascata</a></li>
+              <li><a href="#cap-4">4. Execução Passo a Passo e Teste de Mesa Web</a></li>
+              <li><a href="#cap-5">5. Laboratório de Desafios e Síntese de Referência</a></li>
+              <li><a href="#cap-6">6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</a></li>
+            </ol>
+          </nav>
+
+          <div class="callout note">
+            <strong>Objetivos de aprendizagem</strong>
+            <ul>
+              <li>Conectar folhas de estilo externas com &lt;link rel=&quot;stylesheet&quot;&gt; e compreender a anatomia de uma regra CSS.</li>
+<li>Dominar seletores de elemento, classe (.card), ID (#topo), combinadores e pseudo-classes (:hover, :focus-visible).</li>
+<li>Calcular a especificidade (a, b, c) para prever qual regra vence na cascata sem recorrer ao !important.</li>
+<li>Criar uma identidade visual consistente com Custom Properties (--variaveis no :root) e tipografia legível.</li>
+            </ul>
+          </div>
+
+          <section id="cap-1">
+            <h2>1. Dando Identidade Visual à Vitrine Lojas Blue</h2>
+            <p>Nos quatro primeiros cadernos, construímos uma estrutura HTML5 semântica, acessível e bem organizada. Agora entra em cena o <strong>CSS (Cascading Style Sheets)</strong> para transformar essa estrutura na identidade visual da <strong>Lojas Blue</strong>: paleta de azuis profundos, contrastes claros para preços, botões convidativos e hierarquia tipográfica limpa.</p>
+<p>O nome <em>Cascading</em> (Em Cascata) não é por acaso: um mesmo elemento HTML pode receber regras vindas do navegador, de um seletor de tag, de uma classe utilitária e de um ID. Entender como o navegador desempata essas regras por meio da <strong>Especificidade</strong> e da <strong>Herança</strong> é o que separa quem 'chuta propriedades até funcionar' de quem domina o CSS.</p>
+            <div class="callout tip">
+              <strong>Design Tokens com Variáveis CSS (:root)</strong>
+              <p>Em vez de repetir o código hexadecimal <code>#1d4ed8</code> em 40 lugares diferentes, declaramos variáveis globais no seletor <code>:root</code> (como <code>--blue-primaria: #1d4ed8;</code>) e as reutilizamos com <code>var(--blue-primaria)</code>. Precisou ajustar o tom da marca ou criar modo escuro? Basta alterar uma única linha!</p>
+            </div>
+          </section>
+
+          <section id="cap-2">
+            <h2>2. Seletores, Especificidade (a, b, c) e Tipografia</h2>
+            <p>Analise como organizamos os tokens da marca no <code>:root</code>, estilizamos classes reutilizáveis e garantimos estados interativos acessíveis:</p>
+            <div class="code-shell">
+  <div class="code-header">
+    <span>CSS · Cenário Vitrine Lojas Blue</span>
+    <button class="copy-code" type="button">Copiar</button>
+  </div>
+  <div class="highlight"><pre><code>:root {
+  --cor-primaria: #1d4ed8;
+  --cor-destaque: #15803d;
+  --cor-texto: #0f172a;
+  --cor-fundo-card: #ffffff;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--cor-texto);
+  line-height: 1.6;
+}
+
+/* Seletor de Classe: Especificidade (0, 1, 0) */
+.preco-atual {
+  color: var(--cor-primaria);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+/* Seletor de ID: Especificidade (1, 0, 0) — vence a classe */
+#oferta-relampago {
+  color: var(--cor-destaque);
+}
+
+/* Estados interativos para mouse (:hover) e teclado (:focus-visible) */
+.btn-comprar:hover,
+.btn-comprar:focus-visible {
+  background-color: #1e40af;
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}</code></pre></div>
+</div>
+
+            <h3>Tabela Comparativa e Referência Técnica</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Tipo de Seletor</th><th>Exemplo</th><th>Peso (ID, Classe, Tag)</th><th>Quando utilizar</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Tag / Pseudo-elemento</td><td><code>p</code>, <code>h2</code>, <code>::before</code></td><td><code>(0, 0, 1)</code></td><td>Estilos base e tipografia padrão de elementos HTML</td></tr>
+<tr><td>Classe / Pseudo-classe / Atributo</td><td><code>.card</code>, <code>:hover</code>, <code>[type="email"]</code></td><td><code>(0, 1, 0)</code></td><td>Componentes reutilizáveis (padrão principal em projetos reais)</td></tr>
+<tr><td>Identificador (ID)</td><td><code>#cabecalho-loja</code></td><td><code>(1, 0, 0)</code></td><td>Elementos únicos; evite usar para estilização geral por ter peso alto demais</td></tr>
+<tr><td>Estilo inline</td><td><code>style="color: red"</code></td><td><code>(1, 0, 0, 0)</code></td><td>Evitar em folhas de estilo estáticas; reservado a cálculos dinâmicos via JS</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-3">
+            <h2>3. Simulador Visual Ao Vivo: Disputa de Especificidade na Cascata</h2>
+            <p>Ative e desative os seletores no simulador abaixo e observe o placar de especificidade <code>(a, b, c)</code> decidindo a cor final do elemento:</p>
+
+            <!-- Simulador Visual Ao Vivo (.dw1-playground) -->
+            <div class="dw1-playground" data-dw1-playground="05"></div>
+
+            <div class="callout warning">
+              <strong>Por que evitar o uso de !important?</strong>
+              <p>Adicionar <code>!important</code> quebra a cascata natural do CSS e torna futuras manutenções um cabo de guerra. Em vez de usar <code>!important</code>, verifique no DevTools qual seletor mais específico está vencendo e ajuste a arquitetura das suas classes.</p>
+            </div>
+          </section>
+
+          <section id="cap-4">
+            <h2>4. Execução Passo a Passo e Teste de Mesa Web</h2>
+            <p>Use os botões <strong>Próximo passo</strong>, <strong>Passo anterior</strong> e <strong>Executar tudo</strong> nos simuladores abaixo para inspecionar como o navegador processa cada linha e altera seu estado interno:</p>
+
+            <div class="ped-practice" data-practice-id="05-a"></div>
+            <div class="ped-practice" data-practice-id="05-b"></div>
+          </section>
+
+          <section id="cap-5">
+            <h2>5. Laboratório de Desafios e Síntese de Referência</h2>
+            <p>Resolva as <strong>3 rodadas interativas</strong> abaixo para validar seu domínio sobre os conceitos deste caderno antes de partir para o editor de código:</p>
+
+            <div class="lr-lab" data-dw1-lab="05"></div>
+
+            <h3>Quadro-Síntese de Revisão Rápida</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Conceito-Chave</th>
+                    <th>Regra Prática para a Vitrine Lojas Blue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Herança CSS</strong></td><td>Propriedades tipográficas (<code>color</code>, <code>font-family</code>, <code>line-height</code>) são herdadas pelos filhos; propriedades de caixa (<code>border</code>, <code>padding</code>, <code>margin</code>) não são herdadas.</td></tr>
+<tr><td><strong>Desempate na Cascata</strong></td><td>1º Maior especificidade vence → 2º Em caso de empate de especificidade, vence a regra declarada por último no código.</td></tr>
+<tr><td><strong>Acessibilidade de Foco</strong></td><td>Nunca remova o contorno de foco (<code>outline: none</code>) sem oferecer um estilo claro em <code>:focus-visible</code>.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-6">
+            <h2>6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</h2>
+            <p>Todos os arquivos abaixo são páginas <code>.html</code> autocontidas (com preview visual imediato no navegador e código comentado). Você pode abri-los diretamente clicando nos links ou baixar o pacote <code>.zip</code> para resolver no VS Code:</p>
+
+            <div class="hero-actions" style="margin:1rem 0;">
+              <a class="PillButton" href="../arquivos/DW1_05_css_seletores_e_cascata.zip" download>Baixar DW1_05_css_seletores_e_cascata.zip (10 arquivos .html)</a>
+              <a class="PillButton" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo do Curso (.zip)</a>
+            </div>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">4 Exemplos Comentados de Estudo (abrir no navegador)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/05_css_seletores_e_cascata/exemplos/01_seletores_tag_classe_id.html" target="_blank" rel="noopener"><code>01_seletores_tag_classe_id.html</code></a> — <strong>Seletores de elemento (p), classe (.destaque) e ID (#cabecalho)</strong></li>
+<li><a href="../pratica/05_css_seletores_e_cascata/exemplos/02_cascata_e_especificidade.html" target="_blank" rel="noopener"><code>02_cascata_e_especificidade.html</code></a> — <strong>Como a cascata e a especificidade decidem qual cor vence</strong></li>
+<li><a href="../pratica/05_css_seletores_e_cascata/exemplos/03_variaveis_css_e_cores.html" target="_blank" rel="noopener"><code>03_variaveis_css_e_cores.html</code></a> — <strong>Paleta de cores consistente e contraste usando variáveis CSS (:root)</strong></li>
+<li><a href="../pratica/05_css_seletores_e_cascata/exemplos/04_tipografia_e_leitura.html" target="_blank" rel="noopener"><code>04_tipografia_e_leitura.html</code></a> — <strong>Tipografia legível: font-family, font-size, line-height e largura de linha (ch)</strong></li>
+              </ul>
+            </details>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">6 Exercícios Práticos Graduais (4 Implementar + 1 Teste de Mesa + 1 Debug)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/05_css_seletores_e_cascata/exercicios/01_estilizar_catalogo_por_classes.html" target="_blank" rel="noopener"><code>01_estilizar_catalogo_por_classes.html</code></a> — <strong>Implementar: estilizar cartões e selos usando classes CSS</strong>: Escreva regras CSS em &lt;style&gt; para que .cartao tenha fundo branco e borda #dee6e0, e .esgotado tenha texto cinza (#718278) e fundo #f1f5f2.</li>
+<li><a href="../pratica/05_css_seletores_e_cascata/exercicios/02_criar_tema_com_variaveis.html" target="_blank" rel="noopener"><code>02_criar_tema_com_variaveis.html</code></a> — <strong>Implementar: centralizar cores em variáveis CSS no :root</strong>: Declare --cor-primaria: #1c6550 e --cor-destaque: #dff2e9 em :root e utilize var(--cor-primaria) e var(--cor-destaque) no título h1 e no bloco .aviso.</li>
+<li><a href="../pratica/05_css_seletores_e_cascata/exercicios/03_ajustar_tipografia_editorial.html" target="_blank" rel="noopener"><code>03_ajustar_tipografia_editorial.html</code></a> — <strong>Implementar: configurar hierarquia tipográfica e conforto de leitura</strong>: Defina no CSS: fonte sem serifa no body, espaçamento entre linhas (line-height: 1.6), largura máxima de 65ch para o &lt;main&gt; e peso negrito (700) para .preco.</li>
+<li><a href="../pratica/05_css_seletores_e_cascata/exercicios/04_combinadores_descendente_e_filho.html" target="_blank" rel="noopener"><code>04_combinadores_descendente_e_filho.html</code></a> — <strong>Implementar: estilizar apenas links dentro do menu (.menu a)</strong>: Use um seletor descendente (.menu a) para deixar os links do menu sem sublinhado (text-decoration: none) e em negrito, mantendo os links comuns do texto sublinhados.</li>
+<li><a href="../pratica/05_css_seletores_e_cascata/exercicios/05_teste_de_mesa_especificidade.html" target="_blank" rel="noopener"><code>05_teste_de_mesa_especificidade.html</code></a> — <strong>Teste de mesa Web: calcular qual regra CSS vence</strong>: Dado um elemento &lt;p id=&quot;aviso&quot; class=&quot;destaque texto&quot;&gt; e as regras: 1) #aviso { color: green; }, 2) .destaque.texto { color: blue; }, 3) p { color: black; }, qual cor será exibida? Responda em #resposta.</li>
+<li><a href="../pratica/05_css_seletores_e_cascata/exercicios/06_investigar_baixo_contraste_e_important.html" target="_blank" rel="noopener"><code>06_investigar_baixo_contraste_e_important.html</code></a> — <strong>Investigar e corrigir: remover !important desnecessário e corrigir contraste ilegível</strong>: O CSS abaixo usou texto cinza-claro (#d0d5d2) sobre fundo branco (#ffffff) e espalhou !important. Remova os !important ajustando os seletores e aplique cor de alto contraste (#183128).</li>
+              </ul>
+            </details>
+          </section>
+
+          <footer class="doc-footer">
+            <div class="pager">
+              <a class="PagerButton" href="04_tabelas_e_formularios.html">← Anterior: 04. Tabelas de dados e formulários de entrada</a>
+              <a class="PagerButton" href="06_box_model_e_unidades.html">Próximo: 06. Modelo de Caixa (Box Model), dimensões e posicionamento →</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-dialog" data-search-dialog hidden>
+    <div class="search-panel">
+      <div class="search-Header">
+        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
+        <button class="PillButton" type="button" data-search-close>Fechar</button>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="../../shared/site.js"></script>
+  <script src="../../shared/navigation.js"></script>
+  <script src="../assets/pratica-data.js"></script>
+  <script src="../assets/pratica.js"></script>
+  <script src="../assets/dw1-labs.js"></script>
+</body>
+</html>

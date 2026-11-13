@@ -1,0 +1,35 @@
+<!--
+  DW1 · 11 — Criando elementos dinamicamente e persistência local (localStorage)
+  Exemplo: Renderizar cartões de produtos a partir de uma lista de objetos JavaScript
+  Objetivo do tópico: Criar e inserir elementos no DOM com createElement/append, filtrar listas de produtos na tela e persistir dados no navegador com localStorage e JSON.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Renderização de Dados · Lojas Blue</title>
+</head>
+<body>
+  <h1>Catálogo Dinâmico</h1>
+  <div id="vitrine"></div>
+  <script>
+    const produtos = [
+      { nome: 'Shampoo Neutro', setor: 'Cabelos', preco: 24.90 },
+      { nome: 'Sabonete Vegetal', setor: 'Higiene', preco: 8.50 },
+      { nome: 'Protetor Solar FPS 60', setor: 'Dermocosméticos', preco: 59.90 }
+    ];
+    const vitrine = document.querySelector('#vitrine');
+    produtos.forEach(p => {
+      const card = document.createElement('article');
+      const h2 = document.createElement('h2');
+      h2.textContent = p.nome;
+      const info = document.createElement('p');
+      info.textContent = `${p.setor} — R$ ${p.preco.toFixed(2)}`;
+      card.append(h2, info);
+      vitrine.append(card);
+    });
+  </script>
+</body>
+</html>

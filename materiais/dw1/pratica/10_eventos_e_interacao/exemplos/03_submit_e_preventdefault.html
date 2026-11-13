@@ -1,0 +1,37 @@
+<!--
+  DW1 · 10 — Eventos, leitura de campos e atualização dinâmica da interface
+  Exemplo: Interceptar envio de formulário com submit + event.preventDefault() e validar dados
+  Objetivo do tópico: Reagir a ações do usuário com addEventListener (click, input, submit), usar event.preventDefault(), ler e converter .value de campos e validar formulários na interface.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit e preventDefault · Lojas Blue</title>
+</head>
+<body>
+  <h1>Aplicar Cupom de Desconto</h1>
+  <form id="form-cupom">
+    <label for="cupom">Código do cupom:</label>
+    <input type="text" id="cupom" placeholder="Ex.: BLUE10">
+    <button type="submit">Aplicar</button>
+  </form>
+  <p id="feedback" role="status"></p>
+  <script>
+    const form = document.querySelector('#form-cupom');
+    const campo = document.querySelector('#cupom');
+    const feedback = document.querySelector('#feedback');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const codigo = campo.value.trim().toUpperCase();
+      if (codigo === 'BLUE10') {
+        feedback.textContent = 'Cupom BLUE10 aplicado: 10% de desconto!';
+      } else {
+        feedback.textContent = 'Cupom inválido ou expirado.';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!--
+  DW1 · 04 — Tabelas de dados e formulários de entrada
+  Exemplo: Agrupamento com fieldset/legend, select, radio, checkbox e textarea
+  Objetivo do tópico: Construir tabelas acessíveis (caption, thead, tbody, tfoot, th scope) e formulários estruturados com label, input, select, textarea e validação nativa.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Opções de Entrega · Lojas Blue</title>
+</head>
+<body>
+  <h1>Configurar Entrega do Pedido</h1>
+  <form action="#">
+    <fieldset>
+      <legend>Modalidade de entrega</legend>
+      <label><input type="radio" name="modalidade" value="loja" checked> Retirada rápida na loja</label><br>
+      <label><input type="radio" name="modalidade" value="padrao"> Entrega padrão (48h)</label>
+    </fieldset>
+    <p>
+      <label for="filial">Filial de referência:</label><br>
+      <select id="filial" name="filial">
+        <option value="bh-centro">BH — Centro</option>
+        <option value="bh-savassi">BH — Savassi</option>
+        <option value="contagem">Contagem</option>
+      </select>
+    </p>
+    <p>
+      <label><input type="checkbox" name="embalagem_presente" value="sim"> Incluir embalagem para presente</label>
+    </p>
+    <p>
+      <label for="obs">Observações para o entregador:</label><br>
+      <textarea id="obs" name="obs" rows="3" cols="40"></textarea>
+    </p>
+    <button type="submit">Confirmar</button>
+  </form>
+</body>
+</html>

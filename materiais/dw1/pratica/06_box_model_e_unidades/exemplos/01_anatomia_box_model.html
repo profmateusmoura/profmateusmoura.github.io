@@ -1,0 +1,29 @@
+<!--
+  DW1 · 06 — Modelo de Caixa (Box Model), dimensões e posicionamento
+  Exemplo: As quatro camadas do Box Model: content, padding, border e margin
+  Objetivo do tópico: Dominar content, padding, border, margin, box-sizing: border-box, unidades relativas (rem, %, vw/vh), modos de display e estados :hover/:focus-visible.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Box Model · Lojas Blue</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: #f7f8f5; padding: 1.5rem; }
+    .etiqueta {
+      width: 300px;
+      padding: 20px;
+      border: 4px solid #1c6550;
+      margin: 24px 0;
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Conferência do Box Model</h1>
+  <div class="etiqueta">Com box-sizing: border-box, a largura total externa continua exatamente 300px (20px de padding e 4px de borda já incluídos).</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!--
+  DW1 · 12 — Projeto Integrado: Vitrine Interativa Lojas Blue
+  Exemplo: Etapa 2 do Projeto: catálogo em CSS Grid com busca por texto e filtro por setor
+  Objetivo do tópico: Integrar HTML5 semântico, CSS responsivo (variáveis, Box Model, Flexbox e Grid) e JavaScript (DOM, eventos, filtros, sacola e localStorage) em uma aplicação completa.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Etapa 2 · Catálogo Filtrável Lojas Blue</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; padding: 1.5rem; background: #f7f8f5; }
+    .controles { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+    .grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .card { background: #fff; border: 1px solid #dee6e0; padding: 1rem; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <div class="controles">
+    <input type="search" id="busca" placeholder="Buscar produto...">
+    <select id="setor">
+      <option value="todos">Todos os setores</option>
+      <option value="Perfumaria">Perfumaria</option>
+      <option value="Higiene">Higiene</option>
+    </select>
+  </div>
+  <section id="grade" class="grade"></section>
+  <script>
+    const catalogo = [
+      { nome: 'Colônia Blue Cítrica', setor: 'Perfumaria', preco: 79.90 },
+      { nome: 'Sabonete Vegetal', setor: 'Higiene', preco: 8.50 },
+      { nome: 'Perfume Intense', setor: 'Perfumaria', preco: 119.00 }
+    ];
+    const grade = document.querySelector('#grade');
+    const busca = document.querySelector('#busca');
+    const setor = document.querySelector('#setor');
+    function render() {
+      const q = busca.value.trim().toLowerCase();
+      const s = setor.value;
+      grade.replaceChildren();
+      catalogo.filter(p => (s === 'todos' || p.setor === s) && p.nome.toLowerCase().includes(q)).forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `<h2>${p.nome}</h2><p>${p.setor} · R$ ${p.preco.toFixed(2)}</p>`;
+        grade.append(card);
+      });
+    }
+    busca.addEventListener('input', render);
+    setor.addEventListener('change', render);
+    render();
+  </script>
+</body>
+</html>

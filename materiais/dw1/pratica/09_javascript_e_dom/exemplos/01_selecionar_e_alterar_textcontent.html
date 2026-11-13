@@ -1,0 +1,24 @@
+<!--
+  DW1 · 09 — Primeiros passos com JavaScript no navegador e o DOM
+  Exemplo: Selecionar elementos com querySelector e atualizar o texto com textContent
+  Objetivo do tópico: Compreender a árvore DOM, selecionar elementos com querySelector/querySelectorAll e atualizar textos (textContent), classes (classList) e atributos com segurança.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DOM e textContent · Lojas Blue</title>
+</head>
+<body>
+  <h1 id="titulo-filial">Filial em carregamento...</h1>
+  <p class="estoque-info">Estoque inicial: 12 unidades</p>
+  <script>
+    const titulo = document.querySelector('#titulo-filial');
+    const info = document.querySelector('.estoque-info');
+    titulo.textContent = 'Lojas Blue — Unidade Savassi';
+    info.textContent = 'Estoque atualizado via DOM: 18 unidades disponíveis';
+  </script>
+</body>
+</html>

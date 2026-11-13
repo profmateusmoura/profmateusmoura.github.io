@@ -1,0 +1,32 @@
+<!--
+  DW1 · 04 — Tabelas de dados e formulários de entrada
+  Exemplo: Formulário de cadastro com label for + id e tipos semânticos de input
+  Objetivo do tópico: Construir tabelas acessíveis (caption, thead, tbody, tfoot, th scope) e formulários estruturados com label, input, select, textarea e validação nativa.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro de Cliente · Lojas Blue</title>
+</head>
+<body>
+  <h1>Cadastro Clube Lojas Blue</h1>
+  <form action="#" method="get">
+    <p>
+      <label for="nome">Nome completo:</label><br>
+      <input type="text" id="nome" name="nome" required placeholder="Ex.: Ana Souza">
+    </p>
+    <p>
+      <label for="email">E-mail:</label><br>
+      <input type="email" id="email" name="email" required placeholder="ana@exemplo.com">
+    </p>
+    <p>
+      <label for="quantidade">Quantidade de itens no pedido (1 a 20):</label><br>
+      <input type="number" id="quantidade" name="quantidade" min="1" max="20" value="1" required>
+    </p>
+    <button type="submit">Enviar cadastro</button>
+  </form>
+</body>
+</html>

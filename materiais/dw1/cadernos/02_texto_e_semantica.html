@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderno 02 — Estrutura de texto e semântica de conteúdo · DW1</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/pygments.css">
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="../../shared/navigation.css">
+  <link rel="stylesheet" href="../assets/pratica.css">
+  <link rel="stylesheet" href="../assets/dw1.css">
+</head>
+<body data-root="../" data-course="dw1" data-doc-id="02_texto_e_semantica">
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
+        <strong>Cadernos de DW1</strong>
+        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
+      </a>
+
+      <div class="progress-card">
+        <div class="progress-top">
+          <strong>Progresso de leitura</strong>
+          <span data-progress-label>0/12 cadernos</span>
+        </div>
+        <div class="progress-bar"><span data-progress-bar></span></div>
+      </div>
+
+      <nav class="nav-sections" aria-label="Navegação do material">
+        <div class="nav-group">
+          <p class="nav-group-title">Visão geral</p>
+          <a href="../index.html">Início e Trilha</a>
+          <a href="../pratica/index.html">Catálogo Prático e ZIPs</a>
+          <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
+        </div>
+        <div class="nav-group">
+  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
+  <a class="doc-link" data-visited="01_web_e_documento_html" href="../cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
+  <a class="doc-link active" data-visited="02_texto_e_semantica" href="../cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
+  <a class="doc-link" data-visited="03_estrutura_links_e_midia" href="../cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
+  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="../cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
+  <a class="doc-link" data-visited="05_css_seletores_e_cascata" href="../cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
+  <a class="doc-link" data-visited="06_box_model_e_unidades" href="../cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
+  <a class="doc-link" data-visited="07_layout_flexbox" href="../cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
+  <a class="doc-link" data-visited="08_grid_e_responsividade" href="../cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
+</div>
+<div class="nav-group">
+  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
+  <a class="doc-link" data-visited="09_javascript_e_dom" href="../cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
+  <a class="doc-link" data-visited="10_eventos_e_interacao" href="../cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
+  <a class="doc-link" data-visited="11_elementos_dinamicos_e_storage" href="../cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
+  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="../cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
+</div>
+      </nav>
+    </aside>
+    <div class="main-panel">
+      <div class="content-wrap">
+        <div class="topbar">
+          <div class="breadcrumbs">
+            <a href="../../../index.html">Portal</a>
+            <span>/</span>
+            <a href="../index.html">DW1</a><span>/</span><span>Caderno 02</span>
+          </div>
+          <div class="topbar-actions">
+            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
+            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
+            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
+          </div>
+        </div>
+
+        <article class="doc-article">
+          <header class="doc-header">
+            <span class="eyebrow">Fase 1 — Estrutura Semântica com HTML5 · Caderno 02 de 12</span>
+            <h1>02. Estrutura de texto e semântica de conteúdo</h1>
+            <p class="lead">Domine a hierarquia de títulos (h1 a h6), parágrafos, ênfase semântica (strong, em, mark, code) e os três tipos de listas do HTML5 (ul, ol e dl).</p>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <button class="PillButton" type="button" data-read-toggle>Marcar como concluído</button>
+              <a class="PillButton" href="../arquivos/DW1_02_texto_e_semantica.zip" download>Baixar pacote deste tópico (.zip)</a>
+              <a class="PillButton" href="../pratica/index.html#topico-02">Ver arquivos no catálogo</a>
+            </div>
+          </header>
+
+          <nav class="toc-inline" aria-label="Sumário deste caderno">
+            <strong>Neste caderno interativo:</strong>
+            <ol>
+              <li><a href="#cap-1">1. Por que semântica importa mais do que aparência inicial?</a></li>
+              <li><a href="#cap-2">2. Títulos, Ênfase Semântica e Listas (&lt;ul&gt;, &lt;ol&gt;, &lt;dl&gt;)</a></li>
+              <li><a href="#cap-3">3. Simulador Visual Ao Vivo: Comparando &lt;ul&gt;, &lt;ol&gt; e &lt;dl&gt;</a></li>
+              <li><a href="#cap-4">4. Execução Passo a Passo e Teste de Mesa Web</a></li>
+              <li><a href="#cap-5">5. Laboratório de Desafios e Síntese de Referência</a></li>
+              <li><a href="#cap-6">6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</a></li>
+            </ol>
+          </nav>
+
+          <div class="callout note">
+            <strong>Objetivos de aprendizagem</strong>
+            <ul>
+              <li>Construir um sumário lógico (Document Outline) usando níveis contínuos de &lt;h1&gt; a &lt;h6&gt; sem pular níveis.</li>
+<li>Aplicar marcação semântica em linha (&lt;strong&gt;, &lt;em&gt;, &lt;mark&gt;, &lt;small&gt;, &lt;code&gt;, &lt;abbr&gt;, &lt;time&gt;).</li>
+<li>Escolher criteriosamente entre listas não ordenadas (&lt;ul&gt;), ordenadas (&lt;ol&gt;) e de definição (&lt;dl&gt;).</li>
+<li>Estruturar citações e avaliações de clientes com &lt;blockquote&gt; e &lt;cite&gt;.</li>
+            </ul>
+          </div>
+
+          <section id="cap-1">
+            <h2>1. Por que semântica importa mais do que aparência inicial?</h2>
+            <p>Ao cadastrar a ficha de um produto na <strong>Lojas Blue</strong>, um iniciante poderia ser tentado a escolher uma tag <code>&lt;h4&gt;</code> apenas porque 'achou a letra de um tamanho bonito'. No Desenvolvimento Web profissional, <strong>HTML não serve para escolher tamanho de fonte</strong> (isso é papel do CSS): o HTML existe para declarar o <em>significado</em> e a <em>função</em> de cada bloco de texto.</p>
+<p>Tecnologias assistivas (como leitores de tela usados por pessoas com deficiência visual) e indexadores de busca constroem um índice navegável da página a partir das tags <code>&lt;h1&gt;</code> até <code>&lt;h6&gt;</code>. Se os níveis forem contínuos e coerentes, qualquer pessoa consegue navegar diretamente pelos departamentos da loja.</p>
+            <div class="callout important">
+              <strong>Regra de ouro da hierarquia de títulos</strong>
+              <p>Use um único <code>&lt;h1&gt;</code> por página representando o tema central do documento. As grandes seções usam <code>&lt;h2&gt;</code>; subseções dentro delas usam <code>&lt;h3&gt;</code>, e assim por diante, sem saltar de <code>&lt;h1&gt;</code> direto para <code>&lt;h4&gt;</code>.</p>
+            </div>
+          </section>
+
+          <section id="cap-2">
+            <h2>2. Títulos, Ênfase Semântica e Listas (&lt;ul&gt;, &lt;ol&gt;, &lt;dl&gt;)</h2>
+            <p>Observe como combinamos hierarquia de títulos, destaques semânticos no texto e as três famílias de listas na página de um produto:</p>
+            <div class="code-shell">
+  <div class="code-header">
+    <span>HTML · Cenário Vitrine Lojas Blue</span>
+    <button class="copy-code" type="button">Copiar</button>
+  </div>
+  <div class="highlight"><pre><code>&lt;h1&gt;Catálogo Lojas Blue — Linha Pro&lt;/h1&gt;
+
+&lt;h2&gt;Periféricos Sem Fio&lt;/h2&gt;
+&lt;h3&gt;Teclado Mecânico Blue Switch&lt;/h3&gt;
+&lt;p&gt;
+  &lt;strong&gt;Aviso de estoque:&lt;/strong&gt; restam apenas &lt;em&gt;4 unidades&lt;/em&gt; com
+  desconto imediato no &lt;mark&gt;PIX&lt;/mark&gt;. Código: &lt;code&gt;BL-TEC-87&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;!-- 1. Ordem não altera o significado: &lt;ul&gt; --&gt;
+&lt;h4&gt;Destaques do Produto&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Iluminação branca ajustável&lt;/li&gt;
+  &lt;li&gt;Cabo USB-C removível&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- 2. Sequência de passos obrigatória: &lt;ol&gt; --&gt;
+&lt;h4&gt;Como ativar o modo Bluetooth&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Mova a chave traseira para a posição BT&lt;/li&gt;
+  &lt;li&gt;Segure Fn + Q por 3 segundos&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- 3. Pares chave/valor da ficha técnica: &lt;dl&gt; --&gt;
+&lt;h4&gt;Especificações Técnicas&lt;/h4&gt;
+&lt;dl&gt;
+  &lt;dt&gt;Peso&lt;/dt&gt;
+  &lt;dd&gt;680 gramas&lt;/dd&gt;
+  &lt;dt&gt;Garantia&lt;/dt&gt;
+  &lt;dd&gt;12 meses&lt;/dd&gt;
+&lt;/dl&gt;</code></pre></div>
+</div>
+
+            <h3>Tabela Comparativa e Referência Técnica</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Elemento HTML</th><th>Significado Semântico</th><th>Exemplo na Lojas Blue</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>&lt;strong&gt;</code></td><td>Forte importância, seriedade ou urgência</td><td>Aviso de estoque limitado ou prazo final</td></tr>
+<tr><td><code>&lt;em&gt;</code></td><td>Ênfase que muda a entonação da frase</td><td>Destacar que o frete é <em>realmente</em> grátis</td></tr>
+<tr><td><code>&lt;mark&gt;</code></td><td>Trecho relevante destacado no contexto atual</td><td>Termo buscado ou condição <mark>10% no PIX</mark></td></tr>
+<tr><td><code>&lt;ul&gt; / &lt;li&gt;</code></td><td>Lista de itens sem ordem sequencial</td><td>Lista de benefícios de uma mochila</td></tr>
+<tr><td><code>&lt;ol&gt; / &lt;li&gt;</code></td><td>Lista ordenada onde a sequência importa</td><td>Passo a passo de troca ou ranking de mais vendidos</td></tr>
+<tr><td><code>&lt;dl&gt; / &lt;dt&gt; / &lt;dd&gt;</code></td><td>Lista de termos e suas descrições/valores</td><td>Ficha técnica (SKU, Dimensões, Voltagem)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-3">
+            <h2>3. Simulador Visual Ao Vivo: Comparando &lt;ul&gt;, &lt;ol&gt; e &lt;dl&gt;</h2>
+            <p>Alterne entre os três modos no simulador abaixo para visualizar como o mesmo produto usa cada tipo de lista conforme a natureza da informação:</p>
+
+            <!-- Simulador Visual Ao Vivo (.dw1-playground) -->
+            <div class="dw1-playground" data-dw1-playground="02"></div>
+
+            <div class="callout warning">
+              <strong>Evite listas falsas com <br></strong>
+              <p>Nunca simule uma lista escrevendo hifens ou números manualmente separados por <code>&lt;br&gt;</code> dentro de um único <code>&lt;p&gt;</code>. Além de prejudicar a manutenção, leitores de tela não conseguem anunciar quantos itens existem na lista.</p>
+            </div>
+          </section>
+
+          <section id="cap-4">
+            <h2>4. Execução Passo a Passo e Teste de Mesa Web</h2>
+            <p>Use os botões <strong>Próximo passo</strong>, <strong>Passo anterior</strong> e <strong>Executar tudo</strong> nos simuladores abaixo para inspecionar como o navegador processa cada linha e altera seu estado interno:</p>
+
+            <div class="ped-practice" data-practice-id="02-a"></div>
+            <div class="ped-practice" data-practice-id="02-b"></div>
+          </section>
+
+          <section id="cap-5">
+            <h2>5. Laboratório de Desafios e Síntese de Referência</h2>
+            <p>Resolva as <strong>3 rodadas interativas</strong> abaixo para validar seu domínio sobre os conceitos deste caderno antes de partir para o editor de código:</p>
+
+            <div class="lr-lab" data-dw1-lab="02"></div>
+
+            <h3>Quadro-Síntese de Revisão Rápida</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Conceito-Chave</th>
+                    <th>Regra Prática para a Vitrine Lojas Blue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Hierarquia de Títulos</strong></td><td><code>&lt;h1&gt;</code> (documento) → <code>&lt;h2&gt;</code> (seção) → <code>&lt;h3&gt;</code> (subseção). Nunca escolha a tag pelo tamanho visual.</td></tr>
+<tr><td><strong>Listas</strong></td><td>Filhos diretos de <code>&lt;ul&gt;</code> e <code>&lt;ol&gt;</code> devem ser sempre elementos <code>&lt;li&gt;</code>; em <code>&lt;dl&gt;</code> usamos pares <code>&lt;dt&gt;</code> e <code>&lt;dd&gt;</code>.</td></tr>
+<tr><td><strong>Citações</strong></td><td>Use <code>&lt;blockquote&gt;</code> para depoimentos em bloco e <code>&lt;cite&gt;</code> para referenciar a obra ou fonte.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="cap-6">
+            <h2>6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</h2>
+            <p>Todos os arquivos abaixo são páginas <code>.html</code> autocontidas (com preview visual imediato no navegador e código comentado). Você pode abri-los diretamente clicando nos links ou baixar o pacote <code>.zip</code> para resolver no VS Code:</p>
+
+            <div class="hero-actions" style="margin:1rem 0;">
+              <a class="PillButton" href="../arquivos/DW1_02_texto_e_semantica.zip" download>Baixar DW1_02_texto_e_semantica.zip (10 arquivos .html)</a>
+              <a class="PillButton" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo do Curso (.zip)</a>
+            </div>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">4 Exemplos Comentados de Estudo (abrir no navegador)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/02_texto_e_semantica/exemplos/01_hierarquia_de_titulos.html" target="_blank" rel="noopener"><code>01_hierarquia_de_titulos.html</code></a> — <strong>Hierarquia correta de títulos (h1 a h3) no catálogo</strong></li>
+<li><a href="../pratica/02_texto_e_semantica/exemplos/02_enfase_e_destaque_semantico.html" target="_blank" rel="noopener"><code>02_enfase_e_destaque_semantico.html</code></a> — <strong>Diferença entre importância (strong), ênfase (em) e código/citação</strong></li>
+<li><a href="../pratica/02_texto_e_semantica/exemplos/03_listas_ordenadas_e_nao_ordenadas.html" target="_blank" rel="noopener"><code>03_listas_ordenadas_e_nao_ordenadas.html</code></a> — <strong>Listas não ordenadas (ul) e listas ordenadas passo a passo (ol)</strong></li>
+<li><a href="../pratica/02_texto_e_semantica/exemplos/04_lista_de_definicoes_dl.html" target="_blank" rel="noopener"><code>04_lista_de_definicoes_dl.html</code></a> — <strong>Ficha técnica de produto com lista de descrição (dl, dt, dd)</strong></li>
+              </ul>
+            </details>
+
+            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
+              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">6 Exercícios Práticos Graduais (4 Implementar + 1 Teste de Mesa + 1 Debug)</summary>
+              <ul style="margin-top:0.75rem;">
+                <li><a href="../pratica/02_texto_e_semantica/exercicios/01_hierarquia_setores.html" target="_blank" rel="noopener"><code>01_hierarquia_setores.html</code></a> — <strong>Implementar: sumário hierárquico com h1, h2 e h3</strong>: Estruture o guia da filial com um &lt;h1&gt; &#x27;Guia da Unidade Lojas Blue&#x27;, dois &lt;h2&gt; (&#x27;Setor de Perfumaria&#x27; e &#x27;Setor Infantil&#x27;) e, dentro de cada um, um &lt;h3&gt; e um parágrafo descritivo.</li>
+<li><a href="../pratica/02_texto_e_semantica/exercicios/02_aviso_com_strong_e_em.html" target="_blank" rel="noopener"><code>02_aviso_com_strong_e_em.html</code></a> — <strong>Implementar: comunicado interno com strong, em e code</strong>: Escreva um parágrafo de aviso para o caixa destacando &#x27;Aviso importante:&#x27; com &lt;strong&gt;, enfatizando a palavra &#x27;nunca&#x27; com &lt;em&gt; e marcando a tecla &#x27;F4&#x27; com &lt;code&gt;.</li>
+<li><a href="../pratica/02_texto_e_semantica/exercicios/03_listas_de_procedimento.html" target="_blank" rel="noopener"><code>03_listas_de_procedimento.html</code></a> — <strong>Implementar: escolher corretamente entre ul e ol</strong>: Crie uma lista não ordenada (&lt;ul&gt;) com 4 produtos em promoção e uma lista ordenada (&lt;ol&gt;) com os 3 passos em sequência para trocar um produto na loja.</li>
+<li><a href="../pratica/02_texto_e_semantica/exercicios/04_ficha_produto_dl.html" target="_blank" rel="noopener"><code>04_ficha_produto_dl.html</code></a> — <strong>Implementar: ficha de especificações com dl, dt e dd</strong>: Monte uma lista de descrição (&lt;dl&gt;) para o produto &#x27;Protetor Solar Blue 60&#x27; contendo três pares &lt;dt&gt;/&lt;dd&gt;: Marca, Fator de Proteção e Peso Líquido.</li>
+<li><a href="../pratica/02_texto_e_semantica/exercicios/05_teste_de_mesa_outline.html" target="_blank" rel="noopener"><code>05_teste_de_mesa_outline.html</code></a> — <strong>Teste de mesa Web: auditar a árvore de títulos de uma página</strong>: Analise a estrutura abaixo e indique no parágrafo #diagnostico quantos títulos de nível 2 (&lt;h2&gt;) e quantos de nível 3 (&lt;h3&gt;) compõem o documento.</li>
+<li><a href="../pratica/02_texto_e_semantica/exercicios/06_investigar_falsa_lista_com_br.html" target="_blank" rel="noopener"><code>06_investigar_falsa_lista_com_br.html</code></a> — <strong>Investigar e corrigir: substituir quebras &lt;br&gt; improvisadas por lista semântica</strong>: O código abaixo usou um único &lt;p&gt; cheio de &lt;br&gt; e hifens manuais para fingir uma lista, além de usar &lt;h4&gt; apenas para deixar a letra menor. Substitua por &lt;h2&gt; e uma lista &lt;ul&gt; com &lt;li&gt;.</li>
+              </ul>
+            </details>
+          </section>
+
+          <footer class="doc-footer">
+            <div class="pager">
+              <a class="PagerButton" href="01_web_e_documento_html.html">← Anterior: 01. Como a Web funciona e o primeiro documento HTML</a>
+              <a class="PagerButton" href="03_estrutura_links_e_midia.html">Próximo: 03. Marcos semânticos de página, links e imagens →</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-dialog" data-search-dialog hidden>
+    <div class="search-panel">
+      <div class="search-Header">
+        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
+        <button class="PillButton" type="button" data-search-close>Fechar</button>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="../../shared/site.js"></script>
+  <script src="../../shared/navigation.js"></script>
+  <script src="../assets/pratica-data.js"></script>
+  <script src="../assets/pratica.js"></script>
+  <script src="../assets/dw1-labs.js"></script>
+</body>
+</html>

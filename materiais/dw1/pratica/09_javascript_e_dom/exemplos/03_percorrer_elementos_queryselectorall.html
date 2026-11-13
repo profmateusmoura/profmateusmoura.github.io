@@ -1,0 +1,31 @@
+<!--
+  DW1 · 09 — Primeiros passos com JavaScript no navegador e o DOM
+  Exemplo: Percorrer vários elementos com querySelectorAll e forEach
+  Objetivo do tópico: Compreender a árvore DOM, selecionar elementos com querySelector/querySelectorAll e atualizar textos (textContent), classes (classList) e atributos com segurança.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>querySelectorAll · Lojas Blue</title>
+</head>
+<body>
+  <h1>Preços na Vitrine</h1>
+  <ul>
+    <li class="preco-item" data-preco="25">Shampoo: R$ 25</li>
+    <li class="preco-item" data-preco="15">Sabonete: R$ 15</li>
+    <li class="preco-item" data-preco="60">Protetor: R$ 60</li>
+  </ul>
+  <p id="resumo"></p>
+  <script>
+    const itens = document.querySelectorAll('.preco-item');
+    let soma = 0;
+    itens.forEach(item => {
+      soma += Number(item.dataset.preco);
+    });
+    document.querySelector('#resumo').textContent = `Itens listados: ${itens.length} | Soma: R$ ${soma}`;
+  </script>
+</body>
+</html>

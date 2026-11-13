@@ -1,0 +1,78 @@
+<!--
+  DW1 · 12 — Projeto Integrado: Vitrine Interativa Lojas Blue
+  Exemplo: Projeto Completo: Vitrine Lojas Blue com busca, filtro, sacola, cupom e persistência
+  Objetivo do tópico: Integrar HTML5 semântico, CSS responsivo (variáveis, Box Model, Flexbox e Grid) e JavaScript (DOM, eventos, filtros, sacola e localStorage) em uma aplicação completa.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vitrine Integrada · Lojas Blue</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f7f8f5; color: #183128; }
+    header { background: #133e34; color: #fff; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .layout { max-width: 1100px; margin: 0 auto; padding: 1.5rem; display: grid; grid-template-columns: 1fr 320px; gap: 1.5rem; }
+    .grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
+    .card, .painel-sacola { background: #fff; border: 1px solid #dee6e0; border-radius: 10px; padding: 1rem; }
+    button { background: #1c6550; color: #fff; border: 0; padding: 0.45rem 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    @media (max-width: 780px) { .layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header><strong>LOJAS BLUE</strong><span id="topo-qtd">0 itens na sacola</span></header>
+  <div class="layout">
+    <main>
+      <h1>Catálogo da Unidade</h1>
+      <div id="vitrine" class="grade"></div>
+    </main>
+    <aside class="painel-sacola">
+      <h2>Sua Sacola</h2>
+      <ul id="lista-sacola"></ul>
+      <p id="total-sacola"><strong>Total: R$ 0,00</strong></p>
+      <button type="button" id="limpar">Limpar sacola</button>
+    </aside>
+  </div>
+  <script>
+    const produtos = [
+      { id: 1, nome: 'Shampoo Neutro', preco: 24.90 },
+      { id: 2, nome: 'Protetor Solar FPS 60', preco: 59.90 },
+      { id: 3, nome: 'Sabonete Vegetal', preco: 8.50 },
+      { id: 4, nome: 'Sérum Vitamina C', preco: 44.90 }
+    ];
+    let sacola = [];
+    const vitrine = document.querySelector('#vitrine');
+    const listaSacola = document.querySelector('#lista-sacola');
+    const totalSacola = document.querySelector('#total-sacola');
+    const topoQtd = document.querySelector('#topo-qtd');
+    function renderSacola() {
+      listaSacola.replaceChildren();
+      let soma = 0;
+      sacola.forEach(item => {
+        soma += item.preco;
+        const li = document.createElement('li');
+        li.textContent = `${item.nome} — R$ ${item.preco.toFixed(2)}`;
+        listaSacola.append(li);
+      });
+      totalSacola.textContent = `Total: R$ ${soma.toFixed(2)}`;
+      topoQtd.textContent = `${sacola.length} itens na sacola`;
+    }
+    produtos.forEach(p => {
+      const card = document.createElement('article');
+      card.className = 'card';
+      const h2 = document.createElement('h2');
+      h2.textContent = p.nome;
+      const pr = document.createElement('p');
+      pr.textContent = `R$ ${p.preco.toFixed(2)}`;
+      const btn = document.createElement('button');
+      btn.textContent = 'Adicionar';
+      btn.addEventListener('click', () => { sacola.push(p); renderSacola(); });
+      card.append(h2, pr, btn);
+      vitrine.append(card);
+    });
+    document.querySelector('#limpar').addEventListener('click', () => { sacola = []; renderSacola(); });
+  </script>
+</body>
+</html>

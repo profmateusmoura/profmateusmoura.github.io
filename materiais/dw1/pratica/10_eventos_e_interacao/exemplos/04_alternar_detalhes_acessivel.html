@@ -1,0 +1,30 @@
+<!--
+  DW1 · 10 — Eventos, leitura de campos e atualização dinâmica da interface
+  Exemplo: Mostrar/ocultar detalhes de produto atualizando hidden e aria-expanded
+  Objetivo do tópico: Reagir a ações do usuário com addEventListener (click, input, submit), usar event.preventDefault(), ler e converter .value de campos e validar formulários na interface.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mostrar e Ocultar · Lojas Blue</title>
+</head>
+<body>
+  <button type="button" id="btn-ficha" aria-expanded="false">Mostrar composição química</button>
+  <div id="painel-ficha" hidden>
+    <p>Água purificada, extrato de camomila, glicerina vegetal e pantenol.</p>
+  </div>
+  <script>
+    const btn = document.querySelector('#btn-ficha');
+    const painel = document.querySelector('#painel-ficha');
+    btn.addEventListener('click', () => {
+      const aberto = !painel.hidden;
+      painel.hidden = aberto;
+      btn.setAttribute('aria-expanded', String(!aberto));
+      btn.textContent = aberto ? 'Mostrar composição química' : 'Ocultar composição química';
+    });
+  </script>
+</body>
+</html>

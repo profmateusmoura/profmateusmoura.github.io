@@ -1,0 +1,36 @@
+<!--
+  06_investigar_lista_duplicada_a_cada_render — Investigar e corrigir: vitrine duplicando itens por não limpar o container antes de re-renderizar
+  Tipo: Investigar e corrigir (debug)
+  Tópico: 11 — Criando elementos dinamicamente e persistência local (localStorage)
+
+  Enunciado:
+  A função renderizar() abaixo adiciona os produtos em #grade sem limpar o conteúdo anterior (grade.replaceChildren()), duplicando os itens a cada clique. Corrija adicionando grade.replaceChildren() no início da função.
+
+  Critério de conferência no navegador / DevTools:
+  Clicar várias vezes em 'Atualizar' deve manter apenas 2 itens na lista, sem duplicatas.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Investigar e corrigir: vitrine duplicando itens por não limpar o container antes de re-renderizar · DW1</title>
+</head>
+<body>
+  <button type="button" id="atualizar">Atualizar vitrine</button>
+  <ul id="grade"></ul>
+  <script>
+    const itens = ['Shampoo', 'Condicionador'];
+    const grade = document.querySelector('#grade');
+    function renderizar() {
+      itens.forEach(nome => {
+        const li = document.createElement('li');
+        li.textContent = nome;
+        grade.append(li);
+      });
+    }
+    document.querySelector('#atualizar').addEventListener('click', renderizar);
+    renderizar();
+  </script>
+</body>
+</html>

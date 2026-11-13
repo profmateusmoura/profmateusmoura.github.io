@@ -1,0 +1,37 @@
+<!--
+  DW1 · 11 — Criando elementos dinamicamente e persistência local (localStorage)
+  Exemplo: Adicionar novos itens à lista de conferência usando document.createElement('li') e append
+  Objetivo do tópico: Criar e inserir elementos no DOM com createElement/append, filtrar listas de produtos na tela e persistir dados no navegador com localStorage e JSON.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>createElement · Lojas Blue</title>
+</head>
+<body>
+  <h1>Lista de Reposição da Vitrine</h1>
+  <form id="form-item">
+    <input type="text" id="novo-produto" required placeholder="Nome do produto">
+    <button type="submit">Adicionar</button>
+  </form>
+  <ul id="lista-reposicao"></ul>
+  <script>
+    const form = document.querySelector('#form-item');
+    const input = document.querySelector('#novo-produto');
+    const lista = document.querySelector('#lista-reposicao');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nome = input.value.trim();
+      if (!nome) return;
+      const li = document.createElement('li');
+      li.textContent = nome;
+      lista.append(li);
+      input.value = '';
+      input.focus();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!--
+  DW1 · 06 — Modelo de Caixa (Box Model), dimensões e posicionamento
+  Exemplo:  Botões interativos com :hover e contorno de teclado :focus-visible
+  Objetivo do tópico: Dominar content, padding, border, margin, box-sizing: border-box, unidades relativas (rem, %, vw/vh), modos de display e estados :hover/:focus-visible.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estados Interativos · Lojas Blue</title>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 1.5rem; }
+    .btn-blue {
+      padding: 0.65rem 1.2rem;
+      background: #1c6550;
+      color: #ffffff;
+      border: 2px solid #1c6550;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-blue:hover { background: #133e34; }
+    .btn-blue:focus-visible { outline: 3px solid #ad6300; outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <p>Passe o mouse ou navegue com a tecla Tab para testar o foco acessível:</p>
+  <button type="button" class="btn-blue">Adicionar à Sacola</button>
+</body>
+</html>

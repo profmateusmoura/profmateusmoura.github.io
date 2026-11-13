@@ -1,0 +1,35 @@
+<!--
+  DW1 · 08 — Layout em grade com CSS Grid e responsividade (Media Queries)
+  Exemplo: Abordagem Mobile-First: 1 coluna no celular e expansão progressiva com @media (min-width)
+  Objetivo do tópico: Construir grades bidimensionais com CSS Grid (fr, minmax, auto-fit) e adaptar layouts para celular e desktop com Media Queries (@media).
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mobile-First · Lojas Blue</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; padding: 1rem; }
+    .painel { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    .bloco { padding: 1rem; background: #dff2e9; border-radius: 8px; }
+    @media (min-width: 600px) {
+      .painel { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .painel { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Indicadores da Filial (Mobile-First)</h1>
+  <div class="painel">
+    <div class="bloco">Pedidos hoje: 84</div>
+    <div class="bloco">Ticket médio: R$ 112</div>
+    <div class="bloco">Retiradas em loja: 31</div>
+    <div class="bloco">Itens críticos: 2</div>
+  </div>
+</body>
+</html>

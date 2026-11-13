@@ -1,0 +1,33 @@
+<!--
+  DW1 · 12 — Projeto Integrado: Vitrine Interativa Lojas Blue
+  Exemplo: Etapa 1 do Projeto: estrutura semântica e variáveis de tema claro/escuro
+  Objetivo do tópico: Integrar HTML5 semântico, CSS responsivo (variáveis, Box Model, Flexbox e Grid) e JavaScript (DOM, eventos, filtros, sacola e localStorage) em uma aplicação completa.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Etapa 1 · Estrutura e Tema Lojas Blue</title>
+  <style>
+    :root { --bg: #f7f8f5; --paper: #ffffff; --ink: #183128; --green: #1c6550; --border: #dee6e0; }
+    :root[data-theme="dark"] { --bg: #101a17; --paper: #18251f; --ink: #e7f0e8; --green: #b5e3c9; --border: #33483d; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--paper); border-bottom: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>LOJAS BLUE · VITRINE</strong>
+    <button type="button" id="tema">Alternar tema</button>
+  </header>
+  <script>
+    document.querySelector('#tema').addEventListener('click', () => {
+      const html = document.documentElement;
+      html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+    });
+  </script>
+</body>
+</html>

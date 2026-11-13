@@ -1,0 +1,38 @@
+<!--
+  DW1 · 07 — Layout moderno com Flexbox
+  Exemplo: Vitrine flexível que quebra linha automaticamente (flex-wrap: wrap e gap)
+  Objetivo do tópico: Alinhar e distribuir componentes em uma dimensão usando display: flex, flex-direction, justify-content, align-items, gap e flex-wrap.
+  Como usar: abra este arquivo no navegador e no VS Code; inspecione com F12.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flex Wrap · Lojas Blue</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; padding: 1.5rem; background: #f7f8f5; }
+    .vitrine {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .card {
+      flex: 1 1 220px;
+      background: #ffffff;
+      border: 1px solid #dee6e0;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vitrine Flexível</h1>
+  <section class="vitrine">
+    <article class="card"><h2>Shampoo</h2><p>R$ 24,90</p></article>
+    <article class="card"><h2>Condicionador</h2><p>R$ 26,90</p></article>
+    <article class="card"><h2>Máscara Capilar</h2><p>R$ 39,90</p></article>
+  </section>
+</body>
+</html>

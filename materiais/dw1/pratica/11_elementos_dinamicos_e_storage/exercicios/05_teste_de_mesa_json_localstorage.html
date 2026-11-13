@@ -1,0 +1,22 @@
+<!--
+  05_teste_de_mesa_json_localstorage — Teste de mesa Web: por que usar JSON.stringify e JSON.parse no localStorage?
+  Tipo: Teste de mesa Web (inspecionar e prever)
+  Tópico: 11 — Criando elementos dinamicamente e persistência local (localStorage)
+
+  Enunciado:
+  O que acontece se tentarmos salvar um array ou objeto diretamente com localStorage.setItem('sacola', [{nome: 'Shampoo'}]) sem JSON.stringify? Responda em #resposta.
+
+  Critério de conferência no navegador / DevTools:
+  localStorage armazena apenas strings; sem JSON.stringify, o objeto é convertido na string inútil '[object Object]'.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teste de mesa Web: por que usar JSON.stringify e JSON.parse no localStorage? · DW1</title>
+</head>
+<body>
+  <p id="resposta">O que é salvo sem JSON.stringify = ? | Par de funções corretas = ?</p>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!--
+  02_filtrar_por_setor_select — Implementar: ocultar cartões que não pertencem ao setor selecionado
+  Tipo: Implementar e estruturar
+  Tópico: 11 — Criando elementos dinamicamente e persistência local (localStorage)
+
+  Enunciado:
+  Ouça o evento 'change' de #filtro-setor. Para cada cartão .produto, mostre-o (card.hidden = false) se o filtro for 'todos' ou se card.dataset.setor === filtro.value; caso contrário, oculte-o (card.hidden = true).
+
+  Critério de conferência no navegador / DevTools:
+  Selecionar 'higiene' deve deixar apenas os itens de higiene visíveis.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Implementar: ocultar cartões que não pertencem ao setor selecionado · DW1</title>
+</head>
+<body>
+  <select id="filtro-setor">
+    <option value="todos">Todos</option>
+    <option value="perfumaria">Perfumaria</option>
+    <option value="higiene">Higiene</option>
+  </select>
+  <div class="produto" data-setor="perfumaria">Colônia Blue</div>
+  <div class="produto" data-setor="higiene">Sabonete Vegetal</div>
+  <script>
+    // Implemente o filtro por data-setor aqui
+  </script>
+</body>
+</html>
