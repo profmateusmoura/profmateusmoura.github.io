@@ -1,134 +1,22 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Caderno 07 — Layout moderno com Flexbox · DW1</title>
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../shared/pygments.css">
-  <link rel="stylesheet" href="../../shared/style.css">
-  <link rel="stylesheet" href="../../shared/navigation.css">
-  <link rel="stylesheet" href="../assets/pratica.css">
-  <link rel="stylesheet" href="../assets/dw1.css">
-</head>
-<body data-root="../" data-course="dw1" data-doc-id="07_layout_flexbox">
-  <div class="site-shell">
-    <aside class="sidebar">
-      <a class="brand" href="../index.html">
-        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
-        <strong>Cadernos de DW1</strong>
-        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
-      </a>
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="Domine o modelo unidimensional Flexbox: Flex Container vs. Flex Items, eixos principal e transversal, justify-content, align-items, gap, flex-wrap e alinhamento de cards."><title>Layout com Flexbox · DW1</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../shared/style.css"><link rel="stylesheet" href="../../shared/pygments.css"><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../assets/pratica.css"><link rel="stylesheet" href="../assets/dw1.css"><link rel="stylesheet" href="../../shared/navigation.css"></head>
+<body data-root="../" data-page="Layout com Flexbox" data-course="dw1"><a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div class="app-frame"><aside class="sidebar" id="sidebar"><a class="portal-return" href="../../../index.html" aria-label="Voltar ao portal de materiais"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Todos os materiais</span></a><a class="brand" href="../index.html"><span class="brand-mark"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></span><span><strong>DW1</strong><small>Desenvolvimento Web I</small></span></a><div class="sidebar-section-title">VOLUME IV <span>12 CADERNOS</span></div><nav class="site-nav" aria-label="Cadernos do volume"><a href="../cadernos/01_web_e_documento_html.html" class="nav-module "><span class="nav-index">01</span><span class="nav-label">Web e primeiro documento HTML</span><span class="visit-dot" data-visited="01_web_e_documento_html" title="Caderno visitado"></span></a><a href="../cadernos/02_texto_e_semantica.html" class="nav-module "><span class="nav-index">02</span><span class="nav-label">Texto e semântica de conteúdo</span><span class="visit-dot" data-visited="02_texto_e_semantica" title="Caderno visitado"></span></a><a href="../cadernos/03_estrutura_links_e_midia.html" class="nav-module "><span class="nav-index">03</span><span class="nav-label">Estrutura, links e mídia</span><span class="visit-dot" data-visited="03_estrutura_links_e_midia" title="Caderno visitado"></span></a><a href="../cadernos/04_tabelas_e_formularios.html" class="nav-module "><span class="nav-index">04</span><span class="nav-label">Tabelas e formulários</span><span class="visit-dot" data-visited="04_tabelas_e_formularios" title="Caderno visitado"></span></a><a href="../cadernos/05_css_seletores_e_cascata.html" class="nav-module "><span class="nav-index">05</span><span class="nav-label">CSS: seletores e cascata</span><span class="visit-dot" data-visited="05_css_seletores_e_cascata" title="Caderno visitado"></span></a><a href="../cadernos/06_box_model_e_unidades.html" class="nav-module "><span class="nav-index">06</span><span class="nav-label">Box Model e unidades</span><span class="visit-dot" data-visited="06_box_model_e_unidades" title="Caderno visitado"></span></a><a href="../cadernos/07_layout_flexbox.html" class="nav-module active"><span class="nav-index">07</span><span class="nav-label">Layout com Flexbox</span><span class="visit-dot" data-visited="07_layout_flexbox" title="Caderno visitado"></span></a><a href="../cadernos/08_grid_e_responsividade.html" class="nav-module "><span class="nav-index">08</span><span class="nav-label">CSS Grid e responsividade</span><span class="visit-dot" data-visited="08_grid_e_responsividade" title="Caderno visitado"></span></a><a href="../cadernos/09_javascript_e_dom.html" class="nav-module "><span class="nav-index">09</span><span class="nav-label">JavaScript e árvore DOM</span><span class="visit-dot" data-visited="09_javascript_e_dom" title="Caderno visitado"></span></a><a href="../cadernos/10_eventos_e_interacao.html" class="nav-module "><span class="nav-index">10</span><span class="nav-label">Eventos e interação</span><span class="visit-dot" data-visited="10_eventos_e_interacao" title="Caderno visitado"></span></a><a href="../cadernos/11_elementos_dinamicos_e_storage.html" class="nav-module "><span class="nav-index">11</span><span class="nav-label">DOM dinâmico e localStorage</span><span class="visit-dot" data-visited="11_elementos_dinamicos_e_storage" title="Caderno visitado"></span></a><a href="../cadernos/12_projeto_vitrine_blue.html" class="nav-module "><span class="nav-index">12</span><span class="nav-label">Projeto: Vitrine Lojas Blue</span><span class="visit-dot" data-visited="12_projeto_vitrine_blue" title="Caderno visitado"></span></a></nav><div class="sidebar-foot"><div class="progress-title">Seu percurso <span id="progress-count">0/12</span></div><div class="progress-bar"><span id="progress-line" style="width:0%"></span></div><p>Seu progresso fica salvo apenas neste navegador.</p></div></aside>
+<div class="main-area"><header class="topbar"><div class="top-left"><button type="button" class="icon-button menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-controls="sidebar" aria-expanded="false"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a href="../index.html" class="top-home">Volume IV <span class="top-sep">/</span> <span class="top-current">Layout com Flexbox</span></a></div><div class="top-actions"><a class="icon-button portal-top" href="../../../index.html" aria-label="Voltar a todos os materiais" title="Todos os materiais"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Materiais</span></a><button type="button" class="search-open" id="search-open"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Buscar no material</span><kbd>Ctrl K</kbd></button><button type="button" class="icon-button theme-toggle" id="theme-toggle" aria-label="Alternar tema claro e escuro"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.1A8 8 0 0 1 9.9 3.5 8 8 0 1 0 20.5 14.1Z"/></svg></button></div></header>
+<main id="conteudo"><div class="reading-layout"><article class="article" id="article"><div class="article-header"><div class="article-path">CADERNO 07 <span>·</span> ESTILIZAÇÃO E LAYOUT COM CSS3</div><h1>Layout moderno com Flexbox</h1><p class="article-subtitle">Domine o modelo unidimensional Flexbox: Flex Container vs. Flex Items, eixos principal e transversal, justify-content, align-items, gap, flex-wrap e alinhamento de cards.</p><div class="article-controls"><a class="download-link" href="../arquivos/DW1_07_layout_flexbox.zip" download><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4-4 4 4 4-4M5 17v4h14v-4"/></svg> Baixar práticas (.zip)</a><button class="complete-btn" type="button" data-complete="07_layout_flexbox"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg> <span>Marcar como lido</span></button></div></div><div class="article-content">
+<aside class="callout"><p><strong>Prática de Layout com Flexbox no navegador e na IDE:</strong> <a href="../arquivos/DW1_07_layout_flexbox.zip" download>Baixar este assunto (.zip com 4 exemplos e 6 exercícios .html)</a> · <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar pacote único completo (todos os 12 assuntos)</a> · <a href="../pratica/index.html#07_layout_flexbox">Ver arquivos .html por assunto</a>.</p></aside>
 
-      <div class="progress-card">
-        <div class="progress-top">
-          <strong>Progresso de leitura</strong>
-          <span data-progress-label>0/12 cadernos</span>
-        </div>
-        <div class="progress-bar"><span data-progress-bar></span></div>
-      </div>
+<h2 id="percurso-deste-caderno">Percurso deste caderno <a class="anchor" href="#percurso-deste-caderno" aria-label="Link para a seção">#</a></h2>
+<div class="table-scroll" tabindex="0" aria-label="Tabela com rolagem horizontal"><table><thead><tr><th>Etapa</th><th>O que você vai dominar neste caderno</th></tr></thead><tbody><tr><td>Objetivo 1</td><td>Compreender a diferença entre o elemento pai (Flex Container) e seus filhos diretos (Flex Items).</td></tr><tr><td>Objetivo 2</td><td>Identificar o Eixo Principal (Main Axis) e o Eixo Transversal (Cross Axis) em row e column.</td></tr><tr><td>Objetivo 3</td><td>Alinhar barras de navegação, pílulas de filtro e cards com justify-content, align-items e gap.</td></tr><tr><td>Objetivo 4</td><td>Controlar quebra de linha (flex-wrap), proporções de crescimento (flex: 1) e alinhamento de rodapé (margin-top: auto).</td></tr></tbody></table></div>
 
-      <nav class="nav-sections" aria-label="Navegação do material">
-        <div class="nav-group">
-          <p class="nav-group-title">Visão geral</p>
-          <a href="../index.html">Início e Trilha</a>
-          <a href="../pratica/index.html">Catálogo Prático e ZIPs</a>
-          <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
-        </div>
-        <div class="nav-group">
-  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
-  <a class="doc-link" data-visited="01_web_e_documento_html" href="../cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
-  <a class="doc-link" data-visited="02_texto_e_semantica" href="../cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
-  <a class="doc-link" data-visited="03_estrutura_links_e_midia" href="../cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
-  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="../cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
-</div>
-<div class="nav-group">
-  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
-  <a class="doc-link" data-visited="05_css_seletores_e_cascata" href="../cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
-  <a class="doc-link" data-visited="06_box_model_e_unidades" href="../cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
-  <a class="doc-link active" data-visited="07_layout_flexbox" href="../cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
-  <a class="doc-link" data-visited="08_grid_e_responsividade" href="../cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
-</div>
-<div class="nav-group">
-  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
-  <a class="doc-link" data-visited="09_javascript_e_dom" href="../cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
-  <a class="doc-link" data-visited="10_eventos_e_interacao" href="../cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
-  <a class="doc-link" data-visited="11_elementos_dinamicos_e_storage" href="../cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
-  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="../cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
-</div>
-      </nav>
-    </aside>
-    <div class="main-panel">
-      <div class="content-wrap">
-        <div class="topbar">
-          <div class="breadcrumbs">
-            <a href="../../../index.html">Portal</a>
-            <span>/</span>
-            <a href="../index.html">DW1</a><span>/</span><span>Caderno 07</span>
-          </div>
-          <div class="topbar-actions">
-            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
-            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
-            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
-          </div>
-        </div>
+<h2 id="cap-1">1. Adeus gambiarras com float: o poder do Flexbox <a class="anchor" href="#cap-1" aria-label="Link para a seção">#</a></h2>
+<p>Como colocar a logomarca da <strong>Lojas Blue</strong> à esquerda, a barra de busca no centro e o botão da sacola à direita, todos perfeitamente alinhados na vertical? E como garantir que três cards de produto lado a lado tenham a mesma altura e mantenham o botão 'Adicionar à Sacola' colado na base, mesmo quando um produto tem um título de 3 linhas e o outro tem apenas 1 linha?</p><p>O <strong>CSS Flexbox (Flexible Box Layout)</strong> foi projetado exatamente para resolver layouts <strong>unidimensionais</strong> (uma linha ou uma coluna por vez) com distribuição inteligente de espaço e alinhamento automático.</p>
+<aside class="callout"><div class="callout-label">REGRA MENTAL N.º 1 DO FLEXBOX: QUEM É O EIXO PRINCIPAL?</div><p>Quando <code>flex-direction: row</code> (padrão), o <strong>eixo principal é horizontal</strong> (controlado por <code>justify-content</code>) e o <strong>eixo transversal é vertical</strong> (controlado por <code>align-items</code>). Quando mudamos para <code>flex-direction: column</code>, os eixos giram 90 graus: <code>justify-content</code> passa a atuar na vertical e <code>align-items</code> na horizontal!</p></aside>
+<section class="ped-practice" id="pratica-07-a" data-practice="07-a" aria-labelledby="titulo-pratica-07-a"><h3 id="titulo-pratica-07-a">Experimente · Distribuição de Navbar com Flexbox</h3><p>Avance estado por estado para acompanhar como o navegador processa esta operação e depois confira sua resposta.</p><noscript>Ative JavaScript para percorrer os estados.</noscript><div data-interaction hidden><p data-step role="status"></p><div class="ped-state" data-state></div><div class="ped-actions"><button type="button" data-back>Voltar</button><button type="button" data-next>Avançar um estado</button><button type="button" data-reset>Recomeçar</button></div><label>Quantos Flex Items são alinhados horizontalmente dentro da .navbar?<input data-answer type="number" step="1" inputmode="numeric"></label><button type="button" data-check>Conferir resposta</button><p data-feedback role="status"></p></div></section>
 
-        <article class="doc-article">
-          <header class="doc-header">
-            <span class="eyebrow">Fase 2 — Estilização e Layout com CSS3 · Caderno 07 de 12</span>
-            <h1>07. Layout moderno com Flexbox</h1>
-            <p class="lead">Domine o modelo unidimensional Flexbox: Flex Container vs. Flex Items, eixos principal e transversal, justify-content, align-items, gap, flex-wrap e alinhamento de cards.</p>
-            <div class="hero-actions" style="margin-top:1rem;">
-              <button class="PillButton" type="button" data-read-toggle>Marcar como concluído</button>
-              <a class="PillButton" href="../arquivos/DW1_07_layout_flexbox.zip" download>Baixar pacote deste tópico (.zip)</a>
-              <a class="PillButton" href="../pratica/index.html#topico-07">Ver arquivos no catálogo</a>
-            </div>
-          </header>
-
-          <nav class="toc-inline" aria-label="Sumário deste caderno">
-            <strong>Neste caderno interativo:</strong>
-            <ol>
-              <li><a href="#cap-1">1. Adeus gambiarras com float: o poder do Flexbox</a></li>
-              <li><a href="#cap-2">2. Navbar, Pílulas de Filtro e Cards de Altura Igualada</a></li>
-              <li><a href="#cap-3">3. Simulador Visual Ao Vivo: Playground de Eixos Flexbox</a></li>
-              <li><a href="#cap-4">4. Execução Passo a Passo e Teste de Mesa Web</a></li>
-              <li><a href="#cap-5">5. Laboratório de Desafios e Síntese de Referência</a></li>
-              <li><a href="#cap-6">6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</a></li>
-            </ol>
-          </nav>
-
-          <div class="callout note">
-            <strong>Objetivos de aprendizagem</strong>
-            <ul>
-              <li>Compreender a diferença entre o elemento pai (Flex Container) e seus filhos diretos (Flex Items).</li>
-<li>Identificar o Eixo Principal (Main Axis) e o Eixo Transversal (Cross Axis) em row e column.</li>
-<li>Alinhar barras de navegação, pílulas de filtro e cards com justify-content, align-items e gap.</li>
-<li>Controlar quebra de linha (flex-wrap), proporções de crescimento (flex: 1) e alinhamento de rodapé (margin-top: auto).</li>
-            </ul>
-          </div>
-
-          <section id="cap-1">
-            <h2>1. Adeus gambiarras com float: o poder do Flexbox</h2>
-            <p>Como colocar a logomarca da <strong>Lojas Blue</strong> à esquerda, a barra de busca no centro e o botão da sacola à direita, todos perfeitamente alinhados na vertical? E como garantir que três cards de produto lado a lado tenham a mesma altura e mantenham o botão 'Adicionar à Sacola' colado na base, mesmo quando um produto tem um título de 3 linhas e o outro tem apenas 1 linha?</p>
-<p>O <strong>CSS Flexbox (Flexible Box Layout)</strong> foi projetado exatamente para resolver layouts <strong>unidimensionais</strong> (uma linha ou uma coluna por vez) com distribuição inteligente de espaço e alinhamento automático.</p>
-            <div class="callout important">
-              <strong>Regra mental n.º 1 do Flexbox: quem é o Eixo Principal?</strong>
-              <p>Quando <code>flex-direction: row</code> (padrão), o <strong>eixo principal é horizontal</strong> (controlado por <code>justify-content</code>) e o <strong>eixo transversal é vertical</strong> (controlado por <code>align-items</code>). Quando mudamos para <code>flex-direction: column</code>, os eixos giram 90 graus: <code>justify-content</code> passa a atuar na vertical e <code>align-items</code> na horizontal!</p>
-            </div>
-          </section>
-
-          <section id="cap-2">
-            <h2>2. Navbar, Pílulas de Filtro e Cards de Altura Igualada</h2>
-            <p>Veja os dois padrões mais importantes de Flexbox na Vitrine Lojas Blue: o cabeçalho horizontal e o card vertical com botão fixo na base:</p>
-            <div class="code-shell">
-  <div class="code-header">
-    <span>CSS · Cenário Vitrine Lojas Blue</span>
-    <button class="copy-code" type="button">Copiar</button>
-  </div>
-  <div class="highlight"><pre><code>/* 1. Barra de navegação horizontal alinhada */
+<h2 id="cap-2">2. Navbar, Pílulas de Filtro e Cards de Altura Igualada <a class="anchor" href="#cap-2" aria-label="Link para a seção">#</a></h2>
+<p>Veja os dois padrões mais importantes de Flexbox na Vitrine Lojas Blue: o cabeçalho horizontal e o card vertical com botão fixo na base:</p>
+<div class="code-shell"><div class="code-head"><span class="code-lang">CSS</span><button type="button" class="copy-code" aria-label="Copiar código">Copiar</button></div><pre class="highlight"><code>/* 1. Barra de navegação horizontal alinhada */
 .navbar-blue {
   display: flex;
   flex-direction: row;
@@ -150,127 +38,26 @@
 .card-produto .btn-comprar {
   margin-top: auto; /* absorve toda a sobra vertical acima do botão! */
 }</code></pre></div>
+<div class="table-scroll" tabindex="0" aria-label="Tabela com rolagem horizontal"><table><thead><tr><th>Propriedade Flexbox</th><th>Onde aplica</th><th>Valores mais usados e efeito</th></tr></thead><tbody><tr><td><code>display: flex</code></td><td>Container Pai</td><td>Transforma os filhos diretos em Flex Items organizados no eixo principal</td></tr><tr><td><code>flex-direction</code></td><td>Container Pai</td><td><code>row</code> (linha →), <code>column</code> (coluna ↓), <code>row-reverse</code>, <code>column-reverse</code></td></tr><tr><td><code>justify-content</code></td><td>Container Pai</td><td>Alinha no Eixo Principal: <code>flex-start</code>, <code>center</code>, <code>space-between</code>, <code>space-evenly</code></td></tr><tr><td><code>align-items</code></td><td>Container Pai</td><td>Alinha no Eixo Transversal: <code>stretch</code> (padrão), <code>center</code>, <code>flex-start</code>, <code>flex-end</code></td></tr><tr><td><code>flex-wrap</code> + <code>gap</code></td><td>Container Pai</td><td><code>wrap</code> permite quebrar linha quando falta espaço; <code>gap</code> define o espaçamento exato entre itens</td></tr><tr><td><code>flex: 1</code> / <code>margin-top: auto</code></td><td>Flex Item (Filho)</td><td><code>flex: 1</code> faz o item crescer para ocupar a sobra; <code>margin-top: auto</code> empurra para a base</td></tr></tbody></table></div>
+<section class="ped-practice" id="pratica-07-b" data-practice="07-b" aria-labelledby="titulo-pratica-07-b"><h3 id="titulo-pratica-07-b">Experimente · Alinhamento de Botão na Base do Card</h3><p>Avance estado por estado para acompanhar como o navegador processa esta operação e depois confira sua resposta.</p><noscript>Ative JavaScript para percorrer os estados.</noscript><div data-interaction hidden><p data-step role="status"></p><div class="ped-state" data-state></div><div class="ped-actions"><button type="button" data-back>Voltar</button><button type="button" data-next>Avançar um estado</button><button type="button" data-reset>Recomeçar</button></div><label>Quantos elementos filhos diretos são empilhados em coluna dentro de .card?<input data-answer type="number" step="1" inputmode="numeric"></label><button type="button" data-check>Conferir resposta</button><p data-feedback role="status"></p></div></section>
+
+<h2 id="cap-3">3. Simulador Visual Ao Vivo: Playground de Eixos Flexbox <a class="anchor" href="#cap-3" aria-label="Link para a seção">#</a></h2>
+<p>Altere as propriedades <code>flex-direction</code>, <code>justify-content</code>, <code>align-items</code> e <code>gap</code> abaixo e observe os itens da navbar se reorganizarem em tempo real:</p>
+<div class="dw1-playground" id="simulador-07" data-dw1-playground="07"></div>
+<aside class="callout"><div class="callout-label">DISPLAY: FLEX AFETA APENAS OS FILHOS DIRETOS!</div><p>Ao aplicar <code>display: flex</code> em uma <code>&lt;section&gt;</code>, apenas os elementos filhos de primeiro nível viram Flex Items. Os elementos 'netos' (como textos dentro de um <code>&lt;article&gt;</code>) continuam no fluxo normal a menos que o próprio <code>&lt;article&gt;</code> também receba <code>display: flex</code>.</p></aside>
+
+<h2 id="cap-4">4. Desafio interativo e quadro-síntese <a class="anchor" href="#cap-4" aria-label="Link para a seção">#</a></h2>
+<p>Resolva as três rodadas interativas abaixo para consolidar os conceitos centrais deste caderno antes de abrir os arquivos práticos:</p>
+<div class="lr-lab" id="desafio-07" data-dw1-lab="07"></div>
+<div class="table-scroll" tabindex="0" aria-label="Tabela com rolagem horizontal"><table><thead><tr><th>Conceito-chave</th><th>Regra prática na Vitrine Lojas Blue</th></tr></thead><tbody><tr><td><strong>Quando escolher Flexbox</strong></td><td>Componentes lineares (uma dimensão por vez): menus, barras de ferramentas, listas de tags/pílulas, alinhamento interno de um card ou centralização de um modal.</td></tr><tr><td><strong>Espaçamento limpo com <code>gap</code></strong></td><td>Prefira <code>gap: 16px</code> no container em vez de colocar <code>margin-right</code> em cada filho e precisar zerar no <code>:last-child</code>.</td></tr><tr><td><strong>Igualando alturas</strong></td><td>Como o valor padrão de <code>align-items</code> é <code>stretch</code>, cards lado a lado em uma linha flexível esticam automaticamente para ter a mesma altura.</td></tr></tbody></table></div>
+
+<h3 id="arquivos-praticos">Exemplos e exercícios deste caderno (4 exemplos + 6 exercícios) <a class="anchor" href="#arquivos-praticos" aria-label="Link para a seção">#</a></h3>
+<p>Abra os arquivos diretamente no navegador ou baixe o pacote <code>.zip</code> deste assunto para editar no VS Code:</p>
+<p><a class="download-link" href="../arquivos/DW1_07_layout_flexbox.zip" download>Baixar ZIP deste assunto (DW1_07_layout_flexbox.zip)</a> · <a class="download-link" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar pacote único completo (DW1_Lojas_Blue.zip)</a></p>
+<details><summary><strong>Ver os 4 exemplos comentados (07_layout_flexbox/exemplos/)</strong></summary><ol><li><a href="../pratica/07_layout_flexbox/exemplos/01_topbar_com_space_between.html" target="_blank" rel="noopener">01_topbar_com_space_between — Cabeçalho de loja com marca à esquerda e menu à direita (justify-content: space-between)</a> (<a download href="../pratica/07_layout_flexbox/exemplos/01_topbar_com_space_between.html">baixar .html</a>)</li><li><a href="../pratica/07_layout_flexbox/exemplos/02_fileira_de_cards_com_wrap.html" target="_blank" rel="noopener">02_fileira_de_cards_com_wrap — Vitrine flexível que quebra linha automaticamente (flex-wrap: wrap e gap)</a> (<a download href="../pratica/07_layout_flexbox/exemplos/02_fileira_de_cards_com_wrap.html">baixar .html</a>)</li><li><a href="../pratica/07_layout_flexbox/exemplos/03_card_vertical_com_botao_alinhado_na_base.html" target="_blank" rel="noopener">03_card_vertical_com_botao_alinhado_na_base — Cartões de mesma altura com botão empurrado para o rodapé (flex-direction: column e margin-top: auto)</a> (<a download href="../pratica/07_layout_flexbox/exemplos/03_card_vertical_com_botao_alinhado_na_base.html">baixar .html</a>)</li><li><a href="../pratica/07_layout_flexbox/exemplos/04_centralizacao_perfeita_e_badges.html" target="_blank" rel="noopener">04_centralizacao_perfeita_e_badges — Centralização nos dois eixos e alinhamento de ícone + texto</a> (<a download href="../pratica/07_layout_flexbox/exemplos/04_centralizacao_perfeita_e_badges.html">baixar .html</a>)</li></ol></details>
+<details><summary><strong>Ver os 6 exercícios práticos (07_layout_flexbox/exercicios/)</strong></summary><ol><li><a href="../pratica/07_layout_flexbox/exercicios/01_alinhar_cabecalho_flex.html" target="_blank" rel="noopener">01_alinhar_cabecalho_flex — Implementar: barra superior com logo, busca e botão de sacola</a> (<a download href="../pratica/07_layout_flexbox/exercicios/01_alinhar_cabecalho_flex.html">baixar .html</a>)</li><li><a href="../pratica/07_layout_flexbox/exercicios/02_barra_de_filtros_com_gap.html" target="_blank" rel="noopener">02_barra_de_filtros_com_gap — Implementar: lista de categorias em linha com flex-wrap e gap</a> (<a download href="../pratica/07_layout_flexbox/exercicios/02_barra_de_filtros_com_gap.html">baixar .html</a>)</li><li><a href="../pratica/07_layout_flexbox/exercicios/03_cards_com_rodape_alinhado.html" target="_blank" rel="noopener">03_cards_com_rodape_alinhado — Implementar: manter o preço e botão sempre na base do cartão</a> (<a download href="../pratica/07_layout_flexbox/exercicios/03_cards_com_rodape_alinhado.html">baixar .html</a>)</li><li><a href="../pratica/07_layout_flexbox/exercicios/04_resumo_de_pedido_space_between.html" target="_blank" rel="noopener">04_resumo_de_pedido_space_between — Implementar: linhas de cupom fiscal com rótulo à esquerda e valor à direita</a> (<a download href="../pratica/07_layout_flexbox/exercicios/04_resumo_de_pedido_space_between.html">baixar .html</a>)</li><li><a href="../pratica/07_layout_flexbox/exercicios/05_teste_de_mesa_eixos_flex.html" target="_blank" rel="noopener">05_teste_de_mesa_eixos_flex — Teste de mesa Web: identificar eixo principal e transversal no Flexbox</a> (<a download href="../pratica/07_layout_flexbox/exercicios/05_teste_de_mesa_eixos_flex.html">baixar .html</a>)</li><li><a href="../pratica/07_layout_flexbox/exercicios/06_investigar_itens_espremidos_sem_wrap.html" target="_blank" rel="noopener">06_investigar_itens_espremidos_sem_wrap — Investigar e corrigir: cartões espremidos em uma única linha sem flex-wrap</a> (<a download href="../pratica/07_layout_flexbox/exercicios/06_investigar_itens_espremidos_sem_wrap.html">baixar .html</a>)</li></ol></details>
 </div>
-
-            <h3>Tabela Comparativa e Referência Técnica</h3>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr><th>Propriedade Flexbox</th><th>Onde aplica</th><th>Valores mais usados e efeito</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td><code>display: flex</code></td><td>Container Pai</td><td>Transforma os filhos diretos em Flex Items organizados no eixo principal</td></tr>
-<tr><td><code>flex-direction</code></td><td>Container Pai</td><td><code>row</code> (linha →), <code>column</code> (coluna ↓), <code>row-reverse</code>, <code>column-reverse</code></td></tr>
-<tr><td><code>justify-content</code></td><td>Container Pai</td><td>Alinha no Eixo Principal: <code>flex-start</code>, <code>center</code>, <code>space-between</code>, <code>space-evenly</code></td></tr>
-<tr><td><code>align-items</code></td><td>Container Pai</td><td>Alinha no Eixo Transversal: <code>stretch</code> (padrão), <code>center</code>, <code>flex-start</code>, <code>flex-end</code></td></tr>
-<tr><td><code>flex-wrap</code> + <code>gap</code></td><td>Container Pai</td><td><code>wrap</code> permite quebrar linha quando falta espaço; <code>gap</code> define o espaçamento exato entre itens</td></tr>
-<tr><td><code>flex: 1</code> / <code>margin-top: auto</code></td><td>Flex Item (Filho)</td><td><code>flex: 1</code> faz o item crescer para ocupar a sobra; <code>margin-top: auto</code> empurra para a base</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <section id="cap-3">
-            <h2>3. Simulador Visual Ao Vivo: Playground de Eixos Flexbox</h2>
-            <p>Altere as propriedades <code>flex-direction</code>, <code>justify-content</code>, <code>align-items</code> e <code>gap</code> abaixo e observe os itens da navbar se reorganizarem em tempo real:</p>
-
-            <!-- Simulador Visual Ao Vivo (.dw1-playground) -->
-            <div class="dw1-playground" data-dw1-playground="07"></div>
-
-            <div class="callout warning">
-              <strong>display: flex afeta apenas os filhos diretos!</strong>
-              <p>Ao aplicar <code>display: flex</code> em uma <code>&lt;section&gt;</code>, apenas os elementos filhos de primeiro nível viram Flex Items. Os elementos 'netos' (como textos dentro de um <code>&lt;article&gt;</code>) continuam no fluxo normal a menos que o próprio <code>&lt;article&gt;</code> também receba <code>display: flex</code>.</p>
-            </div>
-          </section>
-
-          <section id="cap-4">
-            <h2>4. Execução Passo a Passo e Teste de Mesa Web</h2>
-            <p>Use os botões <strong>Próximo passo</strong>, <strong>Passo anterior</strong> e <strong>Executar tudo</strong> nos simuladores abaixo para inspecionar como o navegador processa cada linha e altera seu estado interno:</p>
-
-            <div class="ped-practice" data-practice-id="07-a"></div>
-            <div class="ped-practice" data-practice-id="07-b"></div>
-          </section>
-
-          <section id="cap-5">
-            <h2>5. Laboratório de Desafios e Síntese de Referência</h2>
-            <p>Resolva as <strong>3 rodadas interativas</strong> abaixo para validar seu domínio sobre os conceitos deste caderno antes de partir para o editor de código:</p>
-
-            <div class="lr-lab" data-dw1-lab="07"></div>
-
-            <h3>Quadro-Síntese de Revisão Rápida</h3>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Conceito-Chave</th>
-                    <th>Regra Prática para a Vitrine Lojas Blue</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td><strong>Quando escolher Flexbox</strong></td><td>Componentes lineares (uma dimensão por vez): menus, barras de ferramentas, listas de tags/pílulas, alinhamento interno de um card ou centralização de um modal.</td></tr>
-<tr><td><strong>Espaçamento limpo com <code>gap</code></strong></td><td>Prefira <code>gap: 16px</code> no container em vez de colocar <code>margin-right</code> em cada filho e precisar zerar no <code>:last-child</code>.</td></tr>
-<tr><td><strong>Igualando alturas</strong></td><td>Como o valor padrão de <code>align-items</code> é <code>stretch</code>, cards lado a lado em uma linha flexível esticam automaticamente para ter a mesma altura.</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <section id="cap-6">
-            <h2>6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</h2>
-            <p>Todos os arquivos abaixo são páginas <code>.html</code> autocontidas (com preview visual imediato no navegador e código comentado). Você pode abri-los diretamente clicando nos links ou baixar o pacote <code>.zip</code> para resolver no VS Code:</p>
-
-            <div class="hero-actions" style="margin:1rem 0;">
-              <a class="PillButton" href="../arquivos/DW1_07_layout_flexbox.zip" download>Baixar DW1_07_layout_flexbox.zip (10 arquivos .html)</a>
-              <a class="PillButton" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo do Curso (.zip)</a>
-            </div>
-
-            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
-              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">4 Exemplos Comentados de Estudo (abrir no navegador)</summary>
-              <ul style="margin-top:0.75rem;">
-                <li><a href="../pratica/07_layout_flexbox/exemplos/01_topbar_com_space_between.html" target="_blank" rel="noopener"><code>01_topbar_com_space_between.html</code></a> — <strong>Cabeçalho de loja com marca à esquerda e menu à direita (justify-content: space-between)</strong></li>
-<li><a href="../pratica/07_layout_flexbox/exemplos/02_fileira_de_cards_com_wrap.html" target="_blank" rel="noopener"><code>02_fileira_de_cards_com_wrap.html</code></a> — <strong>Vitrine flexível que quebra linha automaticamente (flex-wrap: wrap e gap)</strong></li>
-<li><a href="../pratica/07_layout_flexbox/exemplos/03_card_vertical_com_botao_alinhado_na_base.html" target="_blank" rel="noopener"><code>03_card_vertical_com_botao_alinhado_na_base.html</code></a> — <strong>Cartões de mesma altura com botão empurrado para o rodapé (flex-direction: column e margin-top: auto)</strong></li>
-<li><a href="../pratica/07_layout_flexbox/exemplos/04_centralizacao_perfeita_e_badges.html" target="_blank" rel="noopener"><code>04_centralizacao_perfeita_e_badges.html</code></a> — <strong>Centralização nos dois eixos e alinhamento de ícone + texto</strong></li>
-              </ul>
-            </details>
-
-            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
-              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">6 Exercícios Práticos Graduais (4 Implementar + 1 Teste de Mesa + 1 Debug)</summary>
-              <ul style="margin-top:0.75rem;">
-                <li><a href="../pratica/07_layout_flexbox/exercicios/01_alinhar_cabecalho_flex.html" target="_blank" rel="noopener"><code>01_alinhar_cabecalho_flex.html</code></a> — <strong>Implementar: barra superior com logo, busca e botão de sacola</strong>: Transforme .cabecalho em um container Flex com itens centralizados verticalmente (align-items: center), distribuídos nas extremidades (justify-content: space-between) e gap de 1rem.</li>
-<li><a href="../pratica/07_layout_flexbox/exercicios/02_barra_de_filtros_com_gap.html" target="_blank" rel="noopener"><code>02_barra_de_filtros_com_gap.html</code></a> — <strong>Implementar: lista de categorias em linha com flex-wrap e gap</strong>: Faça a lista .categorias exibir seus itens lado a lado com display: flex, flex-wrap: wrap, gap: 0.75rem e sem marcadores (list-style: none).</li>
-<li><a href="../pratica/07_layout_flexbox/exercicios/03_cards_com_rodape_alinhado.html" target="_blank" rel="noopener"><code>03_cards_com_rodape_alinhado.html</code></a> — <strong>Implementar: manter o preço e botão sempre na base do cartão</strong>: Use display: flex e flex-direction: column em .produto e aplique margin-top: auto em .rodape-produto para alinhar a base de todos os cartões.</li>
-<li><a href="../pratica/07_layout_flexbox/exercicios/04_resumo_de_pedido_space_between.html" target="_blank" rel="noopener"><code>04_resumo_de_pedido_space_between.html</code></a> — <strong>Implementar: linhas de cupom fiscal com rótulo à esquerda e valor à direita</strong>: Use display: flex e justify-content: space-between na classe .linha-cupom para afastar o nome do item e seu preço em lados opostos do cupom.</li>
-<li><a href="../pratica/07_layout_flexbox/exercicios/05_teste_de_mesa_eixos_flex.html" target="_blank" rel="noopener"><code>05_teste_de_mesa_eixos_flex.html</code></a> — <strong>Teste de mesa Web: identificar eixo principal e transversal no Flexbox</strong>: Quando mudamos um container de flex-direction: row para flex-direction: column: 1) Qual propriedade passa a controlar o alinhamento vertical (de cima para baixo)? 2) Qual propriedade controla o alinhamento horizontal? Responda em #resposta.</li>
-<li><a href="../pratica/07_layout_flexbox/exercicios/06_investigar_itens_espremidos_sem_wrap.html" target="_blank" rel="noopener"><code>06_investigar_itens_espremidos_sem_wrap.html</code></a> — <strong>Investigar e corrigir: cartões espremidos em uma única linha sem flex-wrap</strong>: A vitrine abaixo tem 6 cartões com min-width: 200px, mas está sem flex-wrap e estoura a tela. Adicione flex-wrap: wrap e gap: 1rem ao container .vitrine.</li>
-              </ul>
-            </details>
-          </section>
-
-          <footer class="doc-footer">
-            <div class="pager">
-              <a class="PagerButton" href="06_box_model_e_unidades.html">← Anterior: 06. Modelo de Caixa (Box Model), dimensões e posicionamento</a>
-              <a class="PagerButton" href="08_grid_e_responsividade.html">Próximo: 08. Layout em grade com CSS Grid e responsividade (Media Queries) →</a>
-            </div>
-          </footer>
-        </article>
-      </div>
-    </div>
-  </div>
-
-  <div class="search-dialog" data-search-dialog hidden>
-    <div class="search-panel">
-      <div class="search-Header">
-        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
-        <button class="PillButton" type="button" data-search-close>Fechar</button>
-      </div>
-      <div class="search-results" data-search-results></div>
-    </div>
-  </div>
-  <script src="../../shared/site.js"></script>
-  <script src="../../shared/navigation.js"></script>
-  <script src="../assets/pratica-data.js"></script>
-  <script src="../assets/pratica.js"></script>
-  <script src="../assets/dw1-labs.js"></script>
-</body>
-</html>
+<div class="article-finish"><div class="article-finish-symbol">✓</div><h2>Você chegou ao fim deste caderno.</h2><p>Experimente o simulador ao vivo acima e resolva os exercícios deste assunto no VS Code para consolidar a prática.</p><button class="complete-btn complete-end" type="button" data-complete="07_layout_flexbox"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg> <span>Marcar como lido</span></button></div>
+<nav class="pager" aria-label="Próximo e anterior"><a href="06_box_model_e_unidades.html" class="pager-link"><span>← Caderno anterior</span><strong>06. Box Model e unidades</strong></a><a href="08_grid_e_responsividade.html" class="pager-link pager-next"><span>Próximo caderno →</span><strong>08. CSS Grid e responsividade</strong></a></nav></article>
+<aside class="page-toc" aria-label="Nesta página"><div class="toc-title">NESTE CADERNO</div><a href="#percurso-deste-caderno" class="toc-link">Percurso deste caderno</a><a href="#cap-1" class="toc-link">1. Adeus gambiarras com float: o poder do Flexbox</a><a href="#pratica-07-a" class="toc-link toc-sub">Experimente · Passo a passo 1</a><a href="#cap-2" class="toc-link">2. Navbar, Pílulas de Filtro e Cards de Altura Igualada</a><a href="#pratica-07-b" class="toc-link toc-sub">Experimente · Passo a passo 2</a><a href="#cap-3" class="toc-link">3. Simulador Visual Ao Vivo: Playground de Eixos Flexbox</a><a href="#simulador-07" class="toc-link toc-sub">Simulador Visual Ao Vivo</a><a href="#cap-4" class="toc-link">4. Desafio interativo e síntese</a><a href="#arquivos-praticos" class="toc-link toc-sub">Exemplos e exercícios (.zip)</a></aside></div></main>
+<footer class="site-footer"><span>DW1 · Desenvolvimento Web I (HTML5, CSS3 e JavaScript DOM)</span><span>Material didático · Lojas Blue (cenário fictício)</span></footer></div></div><div class="sidebar-scrim" id="sidebar-scrim"></div><div class="search-backdrop" id="search-backdrop" hidden><section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-dialog-head"><h2 id="search-title">Encontre um assunto</h2><button type="button" class="search-close" id="search-close" aria-label="Fechar busca">Esc ×</button></div><label class="search-input-wrap"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="search-input" type="search" autocomplete="off" placeholder="Ex.: head, form, flexbox, grid, querySelector, localStorage…" aria-label="Buscar assuntos"></label><div class="search-results" id="search-results" aria-live="polite"></div><p class="search-tip">Pesquise por tag HTML, propriedade CSS, método DOM ou palavra do texto. Funciona sem internet.</p></section></div><div id="toast" class="toast" role="status" aria-live="polite"></div><script src="../../shared/site.js" defer></script><script src="../assets/pratica-data.js" defer></script><script src="../assets/pratica.js" defer></script><script src="../assets/dw1-labs.js" defer></script><script src="../../shared/navigation.js" defer></script></body></html>

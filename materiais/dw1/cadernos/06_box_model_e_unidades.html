@@ -1,134 +1,22 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Caderno 06 — Modelo de Caixa (Box Model), dimensões e posicionamento · DW1</title>
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../shared/pygments.css">
-  <link rel="stylesheet" href="../../shared/style.css">
-  <link rel="stylesheet" href="../../shared/navigation.css">
-  <link rel="stylesheet" href="../assets/pratica.css">
-  <link rel="stylesheet" href="../assets/dw1.css">
-</head>
-<body data-root="../" data-course="dw1" data-doc-id="06_box_model_e_unidades">
-  <div class="site-shell">
-    <aside class="sidebar">
-      <a class="brand" href="../index.html">
-        <span class="brand-kicker">Desenvolvimento Web I · 2026</span>
-        <strong>Cadernos de DW1</strong>
-        <span>HTML5 Semântico, CSS3 Moderno e JavaScript DOM</span>
-      </a>
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="Domine as 4 camadas do Box Model (content, padding, border, margin), o reset universal box-sizing: border-box, unidades relativas (rem, em, %, vw/vh) e posicionamento (relative, absolute, sticky)."><title>Box Model e unidades · DW1</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../shared/style.css"><link rel="stylesheet" href="../../shared/pygments.css"><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../assets/pratica.css"><link rel="stylesheet" href="../assets/dw1.css"><link rel="stylesheet" href="../../shared/navigation.css"></head>
+<body data-root="../" data-page="Box Model e unidades" data-course="dw1"><a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div class="app-frame"><aside class="sidebar" id="sidebar"><a class="portal-return" href="../../../index.html" aria-label="Voltar ao portal de materiais"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Todos os materiais</span></a><a class="brand" href="../index.html"><span class="brand-mark"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></span><span><strong>DW1</strong><small>Desenvolvimento Web I</small></span></a><div class="sidebar-section-title">VOLUME IV <span>12 CADERNOS</span></div><nav class="site-nav" aria-label="Cadernos do volume"><a href="../cadernos/01_web_e_documento_html.html" class="nav-module "><span class="nav-index">01</span><span class="nav-label">Web e primeiro documento HTML</span><span class="visit-dot" data-visited="01_web_e_documento_html" title="Caderno visitado"></span></a><a href="../cadernos/02_texto_e_semantica.html" class="nav-module "><span class="nav-index">02</span><span class="nav-label">Texto e semântica de conteúdo</span><span class="visit-dot" data-visited="02_texto_e_semantica" title="Caderno visitado"></span></a><a href="../cadernos/03_estrutura_links_e_midia.html" class="nav-module "><span class="nav-index">03</span><span class="nav-label">Estrutura, links e mídia</span><span class="visit-dot" data-visited="03_estrutura_links_e_midia" title="Caderno visitado"></span></a><a href="../cadernos/04_tabelas_e_formularios.html" class="nav-module "><span class="nav-index">04</span><span class="nav-label">Tabelas e formulários</span><span class="visit-dot" data-visited="04_tabelas_e_formularios" title="Caderno visitado"></span></a><a href="../cadernos/05_css_seletores_e_cascata.html" class="nav-module "><span class="nav-index">05</span><span class="nav-label">CSS: seletores e cascata</span><span class="visit-dot" data-visited="05_css_seletores_e_cascata" title="Caderno visitado"></span></a><a href="../cadernos/06_box_model_e_unidades.html" class="nav-module active"><span class="nav-index">06</span><span class="nav-label">Box Model e unidades</span><span class="visit-dot" data-visited="06_box_model_e_unidades" title="Caderno visitado"></span></a><a href="../cadernos/07_layout_flexbox.html" class="nav-module "><span class="nav-index">07</span><span class="nav-label">Layout com Flexbox</span><span class="visit-dot" data-visited="07_layout_flexbox" title="Caderno visitado"></span></a><a href="../cadernos/08_grid_e_responsividade.html" class="nav-module "><span class="nav-index">08</span><span class="nav-label">CSS Grid e responsividade</span><span class="visit-dot" data-visited="08_grid_e_responsividade" title="Caderno visitado"></span></a><a href="../cadernos/09_javascript_e_dom.html" class="nav-module "><span class="nav-index">09</span><span class="nav-label">JavaScript e árvore DOM</span><span class="visit-dot" data-visited="09_javascript_e_dom" title="Caderno visitado"></span></a><a href="../cadernos/10_eventos_e_interacao.html" class="nav-module "><span class="nav-index">10</span><span class="nav-label">Eventos e interação</span><span class="visit-dot" data-visited="10_eventos_e_interacao" title="Caderno visitado"></span></a><a href="../cadernos/11_elementos_dinamicos_e_storage.html" class="nav-module "><span class="nav-index">11</span><span class="nav-label">DOM dinâmico e localStorage</span><span class="visit-dot" data-visited="11_elementos_dinamicos_e_storage" title="Caderno visitado"></span></a><a href="../cadernos/12_projeto_vitrine_blue.html" class="nav-module "><span class="nav-index">12</span><span class="nav-label">Projeto: Vitrine Lojas Blue</span><span class="visit-dot" data-visited="12_projeto_vitrine_blue" title="Caderno visitado"></span></a></nav><div class="sidebar-foot"><div class="progress-title">Seu percurso <span id="progress-count">0/12</span></div><div class="progress-bar"><span id="progress-line" style="width:0%"></span></div><p>Seu progresso fica salvo apenas neste navegador.</p></div></aside>
+<div class="main-area"><header class="topbar"><div class="top-left"><button type="button" class="icon-button menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-controls="sidebar" aria-expanded="false"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a href="../index.html" class="top-home">Volume IV <span class="top-sep">/</span> <span class="top-current">Box Model e unidades</span></a></div><div class="top-actions"><a class="icon-button portal-top" href="../../../index.html" aria-label="Voltar a todos os materiais" title="Todos os materiais"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Materiais</span></a><button type="button" class="search-open" id="search-open"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Buscar no material</span><kbd>Ctrl K</kbd></button><button type="button" class="icon-button theme-toggle" id="theme-toggle" aria-label="Alternar tema claro e escuro"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.1A8 8 0 0 1 9.9 3.5 8 8 0 1 0 20.5 14.1Z"/></svg></button></div></header>
+<main id="conteudo"><div class="reading-layout"><article class="article" id="article"><div class="article-header"><div class="article-path">CADERNO 06 <span>·</span> ESTILIZAÇÃO E LAYOUT COM CSS3</div><h1>Modelo de Caixa (Box Model), dimensões e posicionamento</h1><p class="article-subtitle">Domine as 4 camadas do Box Model (content, padding, border, margin), o reset universal box-sizing: border-box, unidades relativas (rem, em, %, vw/vh) e posicionamento (relative, absolute, sticky).</p><div class="article-controls"><a class="download-link" href="../arquivos/DW1_06_box_model_e_unidades.zip" download><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4-4 4 4 4-4M5 17v4h14v-4"/></svg> Baixar práticas (.zip)</a><button class="complete-btn" type="button" data-complete="06_box_model_e_unidades"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg> <span>Marcar como lido</span></button></div></div><div class="article-content">
+<aside class="callout"><p><strong>Prática de Box Model e unidades no navegador e na IDE:</strong> <a href="../arquivos/DW1_06_box_model_e_unidades.zip" download>Baixar este assunto (.zip com 4 exemplos e 6 exercícios .html)</a> · <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar pacote único completo (todos os 12 assuntos)</a> · <a href="../pratica/index.html#06_box_model_e_unidades">Ver arquivos .html por assunto</a>.</p></aside>
 
-      <div class="progress-card">
-        <div class="progress-top">
-          <strong>Progresso de leitura</strong>
-          <span data-progress-label>0/12 cadernos</span>
-        </div>
-        <div class="progress-bar"><span data-progress-bar></span></div>
-      </div>
+<h2 id="percurso-deste-caderno">Percurso deste caderno <a class="anchor" href="#percurso-deste-caderno" aria-label="Link para a seção">#</a></h2>
+<div class="table-scroll" tabindex="0" aria-label="Tabela com rolagem horizontal"><table><thead><tr><th>Etapa</th><th>O que você vai dominar neste caderno</th></tr></thead><tbody><tr><td>Objetivo 1</td><td>Inspecionar e calcular as dimensões exatas das 4 camadas do Box Model (conteúdo, padding, border e margin).</td></tr><tr><td>Objetivo 2</td><td>Aplicar box-sizing: border-box para garantir larguras previsíveis em cards e layouts.</td></tr><tr><td>Objetivo 3</td><td>Escolher entre unidades absolutas (px) e relativas (rem, em, %, vw, vh) e distinguir display block, inline e inline-block.</td></tr><tr><td>Objetivo 4</td><td>Posicionar badges e cabeçalhos fixos combinando position: relative, absolute e sticky.</td></tr></tbody></table></div>
 
-      <nav class="nav-sections" aria-label="Navegação do material">
-        <div class="nav-group">
-          <p class="nav-group-title">Visão geral</p>
-          <a href="../index.html">Início e Trilha</a>
-          <a href="../pratica/index.html">Catálogo Prático e ZIPs</a>
-          <a href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo (.zip)</a>
-        </div>
-        <div class="nav-group">
-  <p class="nav-group-title">Fase 1 — Estrutura Semântica com HTML5</p>
-  <a class="doc-link" data-visited="01_web_e_documento_html" href="../cadernos/01_web_e_documento_html.html"><span class="doc-num">01</span><span>Como a Web funciona e o primeiro documento HTML</span></a>
-  <a class="doc-link" data-visited="02_texto_e_semantica" href="../cadernos/02_texto_e_semantica.html"><span class="doc-num">02</span><span>Estrutura de texto e semântica de conteúdo</span></a>
-  <a class="doc-link" data-visited="03_estrutura_links_e_midia" href="../cadernos/03_estrutura_links_e_midia.html"><span class="doc-num">03</span><span>Marcos semânticos de página, links e imagens</span></a>
-  <a class="doc-link" data-visited="04_tabelas_e_formularios" href="../cadernos/04_tabelas_e_formularios.html"><span class="doc-num">04</span><span>Tabelas de dados e formulários de entrada</span></a>
-</div>
-<div class="nav-group">
-  <p class="nav-group-title">Fase 2 — Estilização e Layout com CSS3</p>
-  <a class="doc-link" data-visited="05_css_seletores_e_cascata" href="../cadernos/05_css_seletores_e_cascata.html"><span class="doc-num">05</span><span>Introdução ao CSS: seletores, cascata e tipografia</span></a>
-  <a class="doc-link active" data-visited="06_box_model_e_unidades" href="../cadernos/06_box_model_e_unidades.html"><span class="doc-num">06</span><span>Modelo de Caixa (Box Model), dimensões e posicionamento</span></a>
-  <a class="doc-link" data-visited="07_layout_flexbox" href="../cadernos/07_layout_flexbox.html"><span class="doc-num">07</span><span>Layout moderno com Flexbox</span></a>
-  <a class="doc-link" data-visited="08_grid_e_responsividade" href="../cadernos/08_grid_e_responsividade.html"><span class="doc-num">08</span><span>Layout em grade com CSS Grid e responsividade (Media Queries)</span></a>
-</div>
-<div class="nav-group">
-  <p class="nav-group-title">Fase 3 — Interatividade, DOM e Projeto Integrado</p>
-  <a class="doc-link" data-visited="09_javascript_e_dom" href="../cadernos/09_javascript_e_dom.html"><span class="doc-num">09</span><span>Primeiros passos com JavaScript no navegador e o DOM</span></a>
-  <a class="doc-link" data-visited="10_eventos_e_interacao" href="../cadernos/10_eventos_e_interacao.html"><span class="doc-num">10</span><span>Eventos, leitura de campos e atualização dinâmica da interface</span></a>
-  <a class="doc-link" data-visited="11_elementos_dinamicos_e_storage" href="../cadernos/11_elementos_dinamicos_e_storage.html"><span class="doc-num">11</span><span>Criando elementos dinamicamente e persistência local (localStorage)</span></a>
-  <a class="doc-link" data-visited="12_projeto_vitrine_blue" href="../cadernos/12_projeto_vitrine_blue.html"><span class="doc-num">12</span><span>Projeto Integrado: Vitrine Interativa Lojas Blue</span></a>
-</div>
-      </nav>
-    </aside>
-    <div class="main-panel">
-      <div class="content-wrap">
-        <div class="topbar">
-          <div class="breadcrumbs">
-            <a href="../../../index.html">Portal</a>
-            <span>/</span>
-            <a href="../index.html">DW1</a><span>/</span><span>Caderno 06</span>
-          </div>
-          <div class="topbar-actions">
-            <button class="MenuButton" type="button" data-menu-toggle aria-label="Abrir menu">Menu</button>
-            <button class="SearchButton" type="button" data-search-open>Buscar <kbd>Ctrl</kbd>+<kbd>K</kbd></button>
-            <button class="ThemeButton" type="button" data-theme-toggle>Alternar tema</button>
-          </div>
-        </div>
+<h2 id="cap-1">1. Tudo na Web é uma Caixa Retangular <a class="anchor" href="#cap-1" aria-label="Link para a seção">#</a></h2>
+<p>Para o motor de renderização do navegador, cada elemento HTML da <strong>Lojas Blue</strong> — seja um título, uma foto de produto, uma pílula de categoria ou um botão — é desenhado como uma <strong>caixa retangular</strong> composta por quatro camadas concêntricas conhecidas como <strong>CSS Box Model</strong>.</p><p>De dentro para fora, temos: 1) <strong>Content (Conteúdo)</strong>, onde ficam o texto e a imagem; 2) <strong>Padding (Preenchimento interno)</strong>, o respiro entre o conteúdo e a borda, que recebe a cor de fundo do card; 3) <strong>Border (Borda)</strong>, a moldura visível da caixa; e 4) <strong>Margin (Margem externa)</strong>, o espaço transparente que afasta um card dos seus vizinhos.</p>
+<aside class="callout"><div class="callout-label">POR QUE TODO PROJETO MODERNO COMEÇA COM BOX-SIZING: BORDER-BOX?</div><p>No comportamento padrão antigo (<code>content-box</code>), se você define <code>width: 260px</code> e adiciona <code>padding: 20px</code> e <code>border: 2px</code>, o card cresce para <code>304px</code> (260 + 40 + 4) e quebra o layout! Com <code>box-sizing: border-box</code>, os <code>260px</code> já incluem padding e borda, mantendo o tamanho externo travado e previsível.</p></aside>
+<section class="ped-practice" id="pratica-06-a" data-practice="06-a" aria-labelledby="titulo-pratica-06-a"><h3 id="titulo-pratica-06-a">Experimente · Cálculo de Largura: content-box vs. border-box</h3><p>Avance estado por estado para acompanhar como o navegador processa esta operação e depois confira sua resposta.</p><noscript>Ative JavaScript para percorrer os estados.</noscript><div data-interaction hidden><p data-step role="status"></p><div class="ped-state" data-state></div><div class="ped-actions"><button type="button" data-back>Voltar</button><button type="button" data-next>Avançar um estado</button><button type="button" data-reset>Recomeçar</button></div><label>No modo border-box, qual é a largura externa total (em px) ocupada pelo card?<input data-answer type="number" step="1" inputmode="numeric"></label><button type="button" data-check>Conferir resposta</button><p data-feedback role="status"></p></div></section>
 
-        <article class="doc-article">
-          <header class="doc-header">
-            <span class="eyebrow">Fase 2 — Estilização e Layout com CSS3 · Caderno 06 de 12</span>
-            <h1>06. Modelo de Caixa (Box Model), dimensões e posicionamento</h1>
-            <p class="lead">Domine as 4 camadas do Box Model (content, padding, border, margin), o reset universal box-sizing: border-box, unidades relativas (rem, em, %, vw/vh) e posicionamento (relative, absolute, sticky).</p>
-            <div class="hero-actions" style="margin-top:1rem;">
-              <button class="PillButton" type="button" data-read-toggle>Marcar como concluído</button>
-              <a class="PillButton" href="../arquivos/DW1_06_box_model_e_unidades.zip" download>Baixar pacote deste tópico (.zip)</a>
-              <a class="PillButton" href="../pratica/index.html#topico-06">Ver arquivos no catálogo</a>
-            </div>
-          </header>
-
-          <nav class="toc-inline" aria-label="Sumário deste caderno">
-            <strong>Neste caderno interativo:</strong>
-            <ol>
-              <li><a href="#cap-1">1. Tudo na Web é uma Caixa Retangular</a></li>
-              <li><a href="#cap-2">2. Reset Universal, Unidades Relativas e Position</a></li>
-              <li><a href="#cap-3">3. Simulador Visual Ao Vivo: Matemática das Camadas do Box Model</a></li>
-              <li><a href="#cap-4">4. Execução Passo a Passo e Teste de Mesa Web</a></li>
-              <li><a href="#cap-5">5. Laboratório de Desafios e Síntese de Referência</a></li>
-              <li><a href="#cap-6">6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</a></li>
-            </ol>
-          </nav>
-
-          <div class="callout note">
-            <strong>Objetivos de aprendizagem</strong>
-            <ul>
-              <li>Inspecionar e calcular as dimensões exatas das 4 camadas do Box Model (conteúdo, padding, border e margin).</li>
-<li>Aplicar box-sizing: border-box para garantir larguras previsíveis em cards e layouts.</li>
-<li>Escolher entre unidades absolutas (px) e relativas (rem, em, %, vw, vh) e distinguir display block, inline e inline-block.</li>
-<li>Posicionar badges e cabeçalhos fixos combinando position: relative, absolute e sticky.</li>
-            </ul>
-          </div>
-
-          <section id="cap-1">
-            <h2>1. Tudo na Web é uma Caixa Retangular</h2>
-            <p>Para o motor de renderização do navegador, cada elemento HTML da <strong>Lojas Blue</strong> — seja um título, uma foto de produto, uma pílula de categoria ou um botão — é desenhado como uma <strong>caixa retangular</strong> composta por quatro camadas concêntricas conhecidas como <strong>CSS Box Model</strong>.</p>
-<p>De dentro para fora, temos: 1) <strong>Content (Conteúdo)</strong>, onde ficam o texto e a imagem; 2) <strong>Padding (Preenchimento interno)</strong>, o respiro entre o conteúdo e a borda, que recebe a cor de fundo do card; 3) <strong>Border (Borda)</strong>, a moldura visível da caixa; e 4) <strong>Margin (Margem externa)</strong>, o espaço transparente que afasta um card dos seus vizinhos.</p>
-            <div class="callout important">
-              <strong>Por que todo projeto moderno começa com box-sizing: border-box?</strong>
-              <p>No comportamento padrão antigo (<code>content-box</code>), se você define <code>width: 260px</code> e adiciona <code>padding: 20px</code> e <code>border: 2px</code>, o card cresce para <code>304px</code> (260 + 40 + 4) e quebra o layout! Com <code>box-sizing: border-box</code>, os <code>260px</code> já incluem padding e borda, mantendo o tamanho externo travado e previsível.</p>
-            </div>
-          </section>
-
-          <section id="cap-2">
-            <h2>2. Reset Universal, Unidades Relativas e Position</h2>
-            <p>Veja o padrão profissional de configuração do Box Model e como ancoramos um selo de desconto no canto superior direito de um card:</p>
-            <div class="code-shell">
-  <div class="code-header">
-    <span>CSS · Cenário Vitrine Lojas Blue</span>
-    <button class="copy-code" type="button">Copiar</button>
-  </div>
-  <div class="highlight"><pre><code>/* 1. Reset universal de Box Sizing */
+<h2 id="cap-2">2. Reset Universal, Unidades Relativas e Position <a class="anchor" href="#cap-2" aria-label="Link para a seção">#</a></h2>
+<p>Veja o padrão profissional de configuração do Box Model e como ancoramos um selo de desconto no canto superior direito de um card:</p>
+<div class="code-shell"><div class="code-head"><span class="code-lang">CSS</span><button type="button" class="copy-code" aria-label="Copiar código">Copiar</button></div><pre class="highlight"><code>/* 1. Reset universal de Box Sizing */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -158,125 +46,26 @@
   font-weight: 700;
   border-radius: 999px;
 }</code></pre></div>
+<div class="table-scroll" tabindex="0" aria-label="Tabela com rolagem horizontal"><table><thead><tr><th>Propriedade / Conceito</th><th>Opções Principais</th><th>Como funciona na prática</th></tr></thead><tbody><tr><td><code>box-sizing</code></td><td><code>content-box</code> vs. <code>border-box</code></td><td>Em <code>border-box</code>, <code>width</code> engloba conteúdo + padding + border</td></tr><tr><td>Unidades de medida</td><td><code>rem</code>, <code>em</code>, <code>%</code>, <code>vw/vh</code>, <code>px</code></td><td><code>rem</code> escala a partir do <code>&lt;html&gt;</code> (acessível); <code>px</code> é ideal para bordas finas</td></tr><tr><td><code>display</code> clássico</td><td><code>block</code>, <code>inline</code>, <code>inline-block</code></td><td><code>inline</code> (como <code>&lt;span&gt;</code>) ignora <code>width/height</code>; <code>inline-block</code> aceita dimensões mantendo fluxo em linha</td></tr><tr><td><code>position</code></td><td><code>static</code>, <code>relative</code>, <code>absolute</code>, <code>sticky</code></td><td><code>absolute</code> se guia pelo ancestral posicionado (<code>relative</code>) mais próximo; <code>sticky</code> fixa no topo ao rolar</td></tr></tbody></table></div>
+<section class="ped-practice" id="pratica-06-b" data-practice="06-b" aria-labelledby="titulo-pratica-06-b"><h3 id="titulo-pratica-06-b">Experimente · Ancoragem de Selo com position: relative e absolute</h3><p>Avance estado por estado para acompanhar como o navegador processa esta operação e depois confira sua resposta.</p><noscript>Ative JavaScript para percorrer os estados.</noscript><div data-interaction hidden><p data-step role="status"></p><div class="ped-state" data-state></div><div class="ped-actions"><button type="button" data-back>Voltar</button><button type="button" data-next>Avançar um estado</button><button type="button" data-reset>Recomeçar</button></div><label>A quantos pixels do topo do card o selo .badge ficará posicionado?<input data-answer type="number" step="1" inputmode="numeric"></label><button type="button" data-check>Conferir resposta</button><p data-feedback role="status"></p></div></section>
+
+<h2 id="cap-3">3. Simulador Visual Ao Vivo: Matemática das Camadas do Box Model <a class="anchor" href="#cap-3" aria-label="Link para a seção">#</a></h2>
+<p>Ajuste os controles deslizantes de <code>width</code>, <code>padding</code>, <code>border</code> e <code>margin</code> e alterne o botão <code>box-sizing</code> para observar a diferença imediata na largura real da caixa:</p>
+<div class="dw1-playground" id="simulador-06" data-dw1-playground="06"></div>
+<aside class="callout"><div class="callout-label">SELO ABSOLUTE &#x27;FUGINDO&#x27; PARA O CANTO DA JANELA INTEIRA</div><p>Se você aplicar <code>position: absolute; top: 10px; right: 10px;</code> em um selo e esquecer de colocar <code>position: relative;</code> no card pai, o navegador subirá toda a árvore DOM sem achar referência e prenderá o selo no canto da página inteira (<code>&lt;body&gt;</code>).</p></aside>
+
+<h2 id="cap-4">4. Desafio interativo e quadro-síntese <a class="anchor" href="#cap-4" aria-label="Link para a seção">#</a></h2>
+<p>Resolva as três rodadas interativas abaixo para consolidar os conceitos centrais deste caderno antes de abrir os arquivos práticos:</p>
+<div class="lr-lab" id="desafio-06" data-dw1-lab="06"></div>
+<div class="table-scroll" tabindex="0" aria-label="Tabela com rolagem horizontal"><table><thead><tr><th>Conceito-chave</th><th>Regra prática na Vitrine Lojas Blue</th></tr></thead><tbody><tr><td><strong>Atalhos de <code>padding</code> e <code>margin</code></strong></td><td>1 valor: todos os 4 lados | 2 valores: <code>vertical horizontal</code> | 4 valores: <code>topo direita baixo esquerda</code> (sentido horário).</td></tr><tr><td><strong>Centralização horizontal de bloco</strong></td><td>Um elemento de bloco com largura definida (ex.: <code>max-width: 1100px</code>) centraliza-se perfeitamente com <code>margin: 0 auto;</code>.</td></tr><tr><td><strong>Colapso de margens</strong></td><td>Margens verticais adjacentes no fluxo normal não se somam; prevalece a maior delas (em containers Flexbox e Grid não há colapso).</td></tr></tbody></table></div>
+
+<h3 id="arquivos-praticos">Exemplos e exercícios deste caderno (4 exemplos + 6 exercícios) <a class="anchor" href="#arquivos-praticos" aria-label="Link para a seção">#</a></h3>
+<p>Abra os arquivos diretamente no navegador ou baixe o pacote <code>.zip</code> deste assunto para editar no VS Code:</p>
+<p><a class="download-link" href="../arquivos/DW1_06_box_model_e_unidades.zip" download>Baixar ZIP deste assunto (DW1_06_box_model_e_unidades.zip)</a> · <a class="download-link" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar pacote único completo (DW1_Lojas_Blue.zip)</a></p>
+<details><summary><strong>Ver os 4 exemplos comentados (06_box_model_e_unidades/exemplos/)</strong></summary><ol><li><a href="../pratica/06_box_model_e_unidades/exemplos/01_anatomia_box_model.html" target="_blank" rel="noopener">01_anatomia_box_model — As quatro camadas do Box Model: content, padding, border e margin</a> (<a download href="../pratica/06_box_model_e_unidades/exemplos/01_anatomia_box_model.html">baixar .html</a>)</li><li><a href="../pratica/06_box_model_e_unidades/exemplos/02_content_box_vs_border_box.html" target="_blank" rel="noopener">02_content_box_vs_border_box — Comparação direta: content-box (padrão que soma borda/padding) vs. border-box</a> (<a download href="../pratica/06_box_model_e_unidades/exemplos/02_content_box_vs_border_box.html">baixar .html</a>)</li><li><a href="../pratica/06_box_model_e_unidades/exemplos/03_display_block_inline_inline_block.html" target="_blank" rel="noopener">03_display_block_inline_inline_block — Diferença prática entre display: block, inline e inline-block</a> (<a download href="../pratica/06_box_model_e_unidades/exemplos/03_display_block_inline_inline_block.html">baixar .html</a>)</li><li><a href="../pratica/06_box_model_e_unidades/exemplos/04_estados_hover_e_focus_visible.html" target="_blank" rel="noopener">04_estados_hover_e_focus_visible —  Botões interativos com :hover e contorno de teclado :focus-visible</a> (<a download href="../pratica/06_box_model_e_unidades/exemplos/04_estados_hover_e_focus_visible.html">baixar .html</a>)</li></ol></details>
+<details><summary><strong>Ver os 6 exercícios práticos (06_box_model_e_unidades/exercicios/)</strong></summary><ol><li><a href="../pratica/06_box_model_e_unidades/exercicios/01_aplicar_border_box_e_espacamento.html" target="_blank" rel="noopener">01_aplicar_border_box_e_espacamento — Implementar: cartão com respiro interno (padding) e externo (margin)</a> (<a download href="../pratica/06_box_model_e_unidades/exercicios/01_aplicar_border_box_e_espacamento.html">baixar .html</a>)</li><li><a href="../pratica/06_box_model_e_unidades/exercicios/02_badges_com_inline_block.html" target="_blank" rel="noopener">02_badges_com_inline_block — Implementar: transformar links em botões com inline-block</a> (<a download href="../pratica/06_box_model_e_unidades/exercicios/02_badges_com_inline_block.html">baixar .html</a>)</li><li><a href="../pratica/06_box_model_e_unidades/exercicios/03_centralizar_container_com_margin_auto.html" target="_blank" rel="noopener">03_centralizar_container_com_margin_auto — Implementar: container centralizado com max-width e margin: 0 auto</a> (<a download href="../pratica/06_box_model_e_unidades/exercicios/03_centralizar_container_com_margin_auto.html">baixar .html</a>)</li><li><a href="../pratica/06_box_model_e_unidades/exercicios/04_unidades_rem_e_porcentagem.html" target="_blank" rel="noopener">04_unidades_rem_e_porcentagem — Implementar: substituir medidas fixas rígidas por rem e %</a> (<a download href="../pratica/06_box_model_e_unidades/exercicios/04_unidades_rem_e_porcentagem.html">baixar .html</a>)</li><li><a href="../pratica/06_box_model_e_unidades/exercicios/05_teste_de_mesa_calculo_largura.html" target="_blank" rel="noopener">05_teste_de_mesa_calculo_largura — Teste de mesa Web: calcular a largura total no content-box vs. border-box</a> (<a download href="../pratica/06_box_model_e_unidades/exercicios/05_teste_de_mesa_calculo_largura.html">baixar .html</a>)</li><li><a href="../pratica/06_box_model_e_unidades/exercicios/06_investigar_estouro_de_largura_100.html" target="_blank" rel="noopener">06_investigar_estouro_de_largura_100 — Investigar e corrigir: caixa com width: 100% + padding estourando a tela</a> (<a download href="../pratica/06_box_model_e_unidades/exercicios/06_investigar_estouro_de_largura_100.html">baixar .html</a>)</li></ol></details>
 </div>
-
-            <h3>Tabela Comparativa e Referência Técnica</h3>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr><th>Propriedade / Conceito</th><th>Opções Principais</th><th>Como funciona na prática</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td><code>box-sizing</code></td><td><code>content-box</code> vs. <code>border-box</code></td><td>Em <code>border-box</code>, <code>width</code> engloba conteúdo + padding + border</td></tr>
-<tr><td>Unidades de medida</td><td><code>rem</code>, <code>em</code>, <code>%</code>, <code>vw/vh</code>, <code>px</code></td><td><code>rem</code> escala a partir do <code>&lt;html&gt;</code> (acessível); <code>px</code> é ideal para bordas finas</td></tr>
-<tr><td><code>display</code> clássico</td><td><code>block</code>, <code>inline</code>, <code>inline-block</code></td><td><code>inline</code> (como <code>&lt;span&gt;</code>) ignora <code>width/height</code>; <code>inline-block</code> aceita dimensões mantendo fluxo em linha</td></tr>
-<tr><td><code>position</code></td><td><code>static</code>, <code>relative</code>, <code>absolute</code>, <code>sticky</code></td><td><code>absolute</code> se guia pelo ancestral posicionado (<code>relative</code>) mais próximo; <code>sticky</code> fixa no topo ao rolar</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <section id="cap-3">
-            <h2>3. Simulador Visual Ao Vivo: Matemática das Camadas do Box Model</h2>
-            <p>Ajuste os controles deslizantes de <code>width</code>, <code>padding</code>, <code>border</code> e <code>margin</code> e alterne o botão <code>box-sizing</code> para observar a diferença imediata na largura real da caixa:</p>
-
-            <!-- Simulador Visual Ao Vivo (.dw1-playground) -->
-            <div class="dw1-playground" data-dw1-playground="06"></div>
-
-            <div class="callout warning">
-              <strong>Selo absolute 'fugindo' para o canto da janela inteira</strong>
-              <p>Se você aplicar <code>position: absolute; top: 10px; right: 10px;</code> em um selo e esquecer de colocar <code>position: relative;</code> no card pai, o navegador subirá toda a árvore DOM sem achar referência e prenderá o selo no canto da página inteira (<code>&lt;body&gt;</code>).</p>
-            </div>
-          </section>
-
-          <section id="cap-4">
-            <h2>4. Execução Passo a Passo e Teste de Mesa Web</h2>
-            <p>Use os botões <strong>Próximo passo</strong>, <strong>Passo anterior</strong> e <strong>Executar tudo</strong> nos simuladores abaixo para inspecionar como o navegador processa cada linha e altera seu estado interno:</p>
-
-            <div class="ped-practice" data-practice-id="06-a"></div>
-            <div class="ped-practice" data-practice-id="06-b"></div>
-          </section>
-
-          <section id="cap-5">
-            <h2>5. Laboratório de Desafios e Síntese de Referência</h2>
-            <p>Resolva as <strong>3 rodadas interativas</strong> abaixo para validar seu domínio sobre os conceitos deste caderno antes de partir para o editor de código:</p>
-
-            <div class="lr-lab" data-dw1-lab="06"></div>
-
-            <h3>Quadro-Síntese de Revisão Rápida</h3>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Conceito-Chave</th>
-                    <th>Regra Prática para a Vitrine Lojas Blue</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td><strong>Atalhos de <code>padding</code> e <code>margin</code></strong></td><td>1 valor: todos os 4 lados | 2 valores: <code>vertical horizontal</code> | 4 valores: <code>topo direita baixo esquerda</code> (sentido horário).</td></tr>
-<tr><td><strong>Centralização horizontal de bloco</strong></td><td>Um elemento de bloco com largura definida (ex.: <code>max-width: 1100px</code>) centraliza-se perfeitamente com <code>margin: 0 auto;</code>.</td></tr>
-<tr><td><strong>Colapso de margens</strong></td><td>Margens verticais adjacentes no fluxo normal não se somam; prevalece a maior delas (em containers Flexbox e Grid não há colapso).</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <section id="cap-6">
-            <h2>6. Prática no Editor: 4 Exemplos + 6 Exercícios (.html)</h2>
-            <p>Todos os arquivos abaixo são páginas <code>.html</code> autocontidas (com preview visual imediato no navegador e código comentado). Você pode abri-los diretamente clicando nos links ou baixar o pacote <code>.zip</code> para resolver no VS Code:</p>
-
-            <div class="hero-actions" style="margin:1rem 0;">
-              <a class="PillButton" href="../arquivos/DW1_06_box_model_e_unidades.zip" download>Baixar DW1_06_box_model_e_unidades.zip (10 arquivos .html)</a>
-              <a class="PillButton" href="../arquivos/DW1_Lojas_Blue.zip" download>Baixar Pacote Completo do Curso (.zip)</a>
-            </div>
-
-            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
-              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">4 Exemplos Comentados de Estudo (abrir no navegador)</summary>
-              <ul style="margin-top:0.75rem;">
-                <li><a href="../pratica/06_box_model_e_unidades/exemplos/01_anatomia_box_model.html" target="_blank" rel="noopener"><code>01_anatomia_box_model.html</code></a> — <strong>As quatro camadas do Box Model: content, padding, border e margin</strong></li>
-<li><a href="../pratica/06_box_model_e_unidades/exemplos/02_content_box_vs_border_box.html" target="_blank" rel="noopener"><code>02_content_box_vs_border_box.html</code></a> — <strong>Comparação direta: content-box (padrão que soma borda/padding) vs. border-box</strong></li>
-<li><a href="../pratica/06_box_model_e_unidades/exemplos/03_display_block_inline_inline_block.html" target="_blank" rel="noopener"><code>03_display_block_inline_inline_block.html</code></a> — <strong>Diferença prática entre display: block, inline e inline-block</strong></li>
-<li><a href="../pratica/06_box_model_e_unidades/exemplos/04_estados_hover_e_focus_visible.html" target="_blank" rel="noopener"><code>04_estados_hover_e_focus_visible.html</code></a> — <strong> Botões interativos com :hover e contorno de teclado :focus-visible</strong></li>
-              </ul>
-            </details>
-
-            <details open style="margin-bottom:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--paper);">
-              <summary style="cursor:pointer;font-weight:800;font-size:1.02rem;">6 Exercícios Práticos Graduais (4 Implementar + 1 Teste de Mesa + 1 Debug)</summary>
-              <ul style="margin-top:0.75rem;">
-                <li><a href="../pratica/06_box_model_e_unidades/exercicios/01_aplicar_border_box_e_espacamento.html" target="_blank" rel="noopener"><code>01_aplicar_border_box_e_espacamento.html</code></a> — <strong>Implementar: cartão com respiro interno (padding) e externo (margin)</strong>: Ative box-sizing: border-box universal (*), defina largura de 320px para .card, padding de 1.25rem, borda de 1px solid #aebfb5, border-radius de 12px e margin-bottom de 1rem.</li>
-<li><a href="../pratica/06_box_model_e_unidades/exercicios/02_badges_com_inline_block.html" target="_blank" rel="noopener"><code>02_badges_com_inline_block.html</code></a> — <strong>Implementar: transformar links em botões com inline-block</strong>: Configure a classe .botao-link com display: inline-block, padding de 0.6rem 1rem, border-radius de 8px e estados :hover e :focus-visible.</li>
-<li><a href="../pratica/06_box_model_e_unidades/exercicios/03_centralizar_container_com_margin_auto.html" target="_blank" rel="noopener"><code>03_centralizar_container_com_margin_auto.html</code></a> — <strong>Implementar: container centralizado com max-width e margin: 0 auto</strong>: Configure .container para ter largura máxima (max-width) de 720px, ficar centralizado horizontalmente na tela (margin: 0 auto) e ter padding lateral de 1rem.</li>
-<li><a href="../pratica/06_box_model_e_unidades/exercicios/04_unidades_rem_e_porcentagem.html" target="_blank" rel="noopener"><code>04_unidades_rem_e_porcentagem.html</code></a> — <strong>Implementar: substituir medidas fixas rígidas por rem e %</strong>: Configure os espaçamentos e tamanhos de fonte do cartão usando rem (ex.: 1rem, 1.25rem) e width: 100% com max-width: 24rem.</li>
-<li><a href="../pratica/06_box_model_e_unidades/exercicios/05_teste_de_mesa_calculo_largura.html" target="_blank" rel="noopener"><code>05_teste_de_mesa_calculo_largura.html</code></a> — <strong>Teste de mesa Web: calcular a largura total no content-box vs. border-box</strong>: Uma caixa tem width: 200px, padding: 15px (em todos os lados) e border: 3px solid. Qual é a largura total ocupada: 1) com box-sizing: content-box? 2) com box-sizing: border-box? Anote em #resposta.</li>
-<li><a href="../pratica/06_box_model_e_unidades/exercicios/06_investigar_estouro_de_largura_100.html" target="_blank" rel="noopener"><code>06_investigar_estouro_de_largura_100.html</code></a> — <strong>Investigar e corrigir: caixa com width: 100% + padding estourando a tela</strong>: A barra abaixo tem width: 100% e padding: 24px no modo content-box padrão, gerando rolagem horizontal indesejada. Corrija adicionando box-sizing: border-box.</li>
-              </ul>
-            </details>
-          </section>
-
-          <footer class="doc-footer">
-            <div class="pager">
-              <a class="PagerButton" href="05_css_seletores_e_cascata.html">← Anterior: 05. Introdução ao CSS: seletores, cascata e tipografia</a>
-              <a class="PagerButton" href="07_layout_flexbox.html">Próximo: 07. Layout moderno com Flexbox →</a>
-            </div>
-          </footer>
-        </article>
-      </div>
-    </div>
-  </div>
-
-  <div class="search-dialog" data-search-dialog hidden>
-    <div class="search-panel">
-      <div class="search-Header">
-        <input type="search" placeholder="Buscar por tag HTML, Flexbox, Grid, DOM, localStorage..." data-search-input aria-label="Buscar no material">
-        <button class="PillButton" type="button" data-search-close>Fechar</button>
-      </div>
-      <div class="search-results" data-search-results></div>
-    </div>
-  </div>
-  <script src="../../shared/site.js"></script>
-  <script src="../../shared/navigation.js"></script>
-  <script src="../assets/pratica-data.js"></script>
-  <script src="../assets/pratica.js"></script>
-  <script src="../assets/dw1-labs.js"></script>
-</body>
-</html>
+<div class="article-finish"><div class="article-finish-symbol">✓</div><h2>Você chegou ao fim deste caderno.</h2><p>Experimente o simulador ao vivo acima e resolva os exercícios deste assunto no VS Code para consolidar a prática.</p><button class="complete-btn complete-end" type="button" data-complete="06_box_model_e_unidades"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg> <span>Marcar como lido</span></button></div>
+<nav class="pager" aria-label="Próximo e anterior"><a href="05_css_seletores_e_cascata.html" class="pager-link"><span>← Caderno anterior</span><strong>05. CSS: seletores e cascata</strong></a><a href="07_layout_flexbox.html" class="pager-link pager-next"><span>Próximo caderno →</span><strong>07. Layout com Flexbox</strong></a></nav></article>
+<aside class="page-toc" aria-label="Nesta página"><div class="toc-title">NESTE CADERNO</div><a href="#percurso-deste-caderno" class="toc-link">Percurso deste caderno</a><a href="#cap-1" class="toc-link">1. Tudo na Web é uma Caixa Retangular</a><a href="#pratica-06-a" class="toc-link toc-sub">Experimente · Passo a passo 1</a><a href="#cap-2" class="toc-link">2. Reset Universal, Unidades Relativas e Position</a><a href="#pratica-06-b" class="toc-link toc-sub">Experimente · Passo a passo 2</a><a href="#cap-3" class="toc-link">3. Simulador Visual Ao Vivo: Matemática das Camadas do Box Model</a><a href="#simulador-06" class="toc-link toc-sub">Simulador Visual Ao Vivo</a><a href="#cap-4" class="toc-link">4. Desafio interativo e síntese</a><a href="#arquivos-praticos" class="toc-link toc-sub">Exemplos e exercícios (.zip)</a></aside></div></main>
+<footer class="site-footer"><span>DW1 · Desenvolvimento Web I (HTML5, CSS3 e JavaScript DOM)</span><span>Material didático · Lojas Blue (cenário fictício)</span></footer></div></div><div class="sidebar-scrim" id="sidebar-scrim"></div><div class="search-backdrop" id="search-backdrop" hidden><section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-dialog-head"><h2 id="search-title">Encontre um assunto</h2><button type="button" class="search-close" id="search-close" aria-label="Fechar busca">Esc ×</button></div><label class="search-input-wrap"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="search-input" type="search" autocomplete="off" placeholder="Ex.: head, form, flexbox, grid, querySelector, localStorage…" aria-label="Buscar assuntos"></label><div class="search-results" id="search-results" aria-live="polite"></div><p class="search-tip">Pesquise por tag HTML, propriedade CSS, método DOM ou palavra do texto. Funciona sem internet.</p></section></div><div id="toast" class="toast" role="status" aria-live="polite"></div><script src="../../shared/site.js" defer></script><script src="../assets/pratica-data.js" defer></script><script src="../assets/pratica.js" defer></script><script src="../assets/dw1-labs.js" defer></script><script src="../../shared/navigation.js" defer></script></body></html>
