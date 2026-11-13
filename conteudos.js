@@ -25,11 +25,11 @@ window.CATALOGO_MATERIAIS = [
   {
     titulo: 'POO',
     subtitulo: 'Programação Orientada a Objetos',
-    descricao: 'Classes, objetos, atributos, métodos, encapsulamento, herança, composição e princípios SOLID.',
+    descricao: 'Classes, objetos, validação, composição, herança, polimorfismo, JSON e testes no cenário Lojas Blue.',
     categoria: 'Programação', nivel: 'Intermediário',
-    detalhes: 'Material em preparação', destaque: 'POO',
-    caminho: 'materiais/poo/index.html', cor: 'roxo', disponivel: false,
-    temas: ['Classes', 'Objetos', 'Herança', 'Polimorfismo', 'SOLID']
+    detalhes: '12 cadernos · 36 exemplos · 72 exercícios', destaque: 'POO',
+    caminho: 'materiais/poo/index.html', cor: 'roxo', disponivel: true,
+    temas: ['Classes', 'Objetos', 'Herança', 'Polimorfismo', 'Testes']
   },
   {
     titulo: 'DW1',

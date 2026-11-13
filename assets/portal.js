@@ -32,6 +32,6 @@
   document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)&&!e.altKey&&!e.metaKey&&!e.ctrlKey){e.preventDefault();search.focus()}});
   $('#year').textContent=new Date().getFullYear();
   const themeBtn=$('#theme-toggle');
-  function themeLabel(){themeBtn.setAttribute('aria-label',document.documentElement.dataset.theme==='dark'?'Ativar tema claro':'Ativar tema escuro')}
-  themeLabel();themeBtn.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('portal-theme',next)}catch(e){}themeLabel()});
+  function themeLabel(){const dark=document.documentElement.dataset.theme==='dark';themeBtn.setAttribute('aria-label',dark?'Ativar tema claro':'Ativar tema escuro');themeBtn.title=themeBtn.getAttribute('aria-label');const svg=themeBtn.querySelector('svg');if(svg)svg.innerHTML=dark?'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>':'<path d="M20.5 14.1A8 8 0 0 1 9.9 3.5 8 8 0 1 0 20.5 14.1Z"/>';}
+  themeLabel();themeBtn.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('pi-theme',next);localStorage.setItem('portal-theme',next)}catch(e){}themeLabel()});
 })();
