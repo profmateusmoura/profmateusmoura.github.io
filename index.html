@@ -8,7 +8,7 @@
   <title>Portal de Estudos | ALP · PED · POO · DW1 · DW2 · DW3 · PJE</title>
   <link rel="icon" href="assets/portal-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/portal.css">
-  <script>try{document.documentElement.dataset.theme=localStorage.getItem('portal-theme')||'light'}catch(e){}</script>
+  <script>try{const theme=localStorage.getItem('pi-theme')||localStorage.getItem('portal-theme')||'light';document.documentElement.dataset.theme=theme;localStorage.setItem('pi-theme',theme)}catch(e){}</script>
   <script src="conteudos.js" defer></script>
   <script src="assets/portal.js" defer></script>
 </head>
