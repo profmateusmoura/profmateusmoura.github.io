@@ -6,6 +6,17 @@
  function syncTheme(){const dark=root.dataset.theme==='dark';theme.querySelector('svg').innerHTML=dark?sun:moon;theme.title=dark?'Ativar tema claro':'Ativar tema escuro';theme.setAttribute('aria-label',theme.title);}
  syncTheme();new MutationObserver(syncTheme).observe(root,{attributes:true,attributeFilter:['data-theme']});
  const sidebar=document.getElementById('sidebar'),toggle=document.getElementById('menu-toggle');
+ const portalReturn=sidebar.querySelector('.portal-return');
+ if(portalReturn&&!portalReturn.title)portalReturn.title='Todos os materiais';
+ sidebar.querySelectorAll('.nav-module').forEach(link=>{
+  if(!link.title){
+   const idx=link.querySelector('.nav-index')?.textContent?.trim()||'';
+   const lbl=link.querySelector('.nav-label')?.textContent?.trim()||'';
+   if(idx&&lbl)link.title=`Caderno ${idx} — ${lbl}`;
+  }
+ });
+ const activeNav=sidebar.querySelector('.nav-module.active');
+ activeNav?.scrollIntoView({block:'nearest'});
  toggle.addEventListener('click',()=>{if(toggle.getAttribute('aria-expanded')==='true'){const current=sidebar.querySelector('.nav-module.active')||sidebar.querySelector('.portal-return');current?.focus();current?.scrollIntoView({block:'nearest'});}});
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&sidebar.contains(document.activeElement))toggle.focus();});
  const backdrop=document.getElementById('search-backdrop'),dialog=backdrop.querySelector('.search-dialog');
