@@ -1,0 +1,286 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Investigar: como os jogos funcionam? · PJE</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../../shared/style.css"><link rel="stylesheet" href="../../shared/navigation.css"><link rel="stylesheet" href="../assets/pje.css"><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script></head><body data-root="../" data-course="pje"><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><div class="app-frame"><aside class="sidebar" id="sidebar"><a class="portal-return" href="../../../index.html" aria-label="Voltar ao portal de materiais"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Todos os materiais</span></a><a class="brand" href="../index.html"><span class="brand-mark"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></span><span><strong>PJE</strong><small>Jogos Eletrônicos</small></span></a><div class="sidebar-section-title">TRILHA PJE <span>13 CADERNOS</span></div><nav class="site-nav" aria-label="Cadernos de PJE"><a class="nav-module active" href="../cadernos/01_investigar.html"><span class="nav-index">01</span><span class="nav-label">Investigar: como os jogos funcionam?</span><span class="visit-dot" data-visited="01_investigar"></span></a><a class="nav-module " href="../cadernos/02_game_design.html"><span class="nav-index">02</span><span class="nav-label">Das descobertas ao game design</span><span class="visit-dot" data-visited="02_game_design"></span></a><a class="nav-module " href="../cadernos/03_ambiente.html"><span class="nav-index">03</span><span class="nav-label">Godot e VS Code: preparar e entender o ambiente</span><span class="visit-dot" data-visited="03_ambiente"></span></a><a class="nav-module " href="../cadernos/04_cenas.html"><span class="nav-index">04</span><span class="nav-label">Cenas, nós e o primeiro movimento</span><span class="visit-dot" data-visited="04_cenas"></span></a><a class="nav-module " href="../cadernos/05_obstaculos.html"><span class="nav-index">05</span><span class="nav-label">Obstáculos, instâncias e sinais</span><span class="visit-dot" data-visited="05_obstaculos"></span></a><a class="nav-module " href="../cadernos/06_partida.html"><span class="nav-index">06</span><span class="nav-label">Uma partida completa: início, resultado e reinício</span><span class="visit-dot" data-visited="06_partida"></span></a><a class="nav-module " href="../cadernos/07_plataforma.html"><span class="nav-index">07</span><span class="nav-label">Plataformas, gravidade e salto</span><span class="visit-dot" data-visited="07_plataforma"></span></a><a class="nav-module " href="../cadernos/08_resgate.html"><span class="nav-index">08</span><span class="nav-label">Resgates, porta e condições de vitória</span><span class="visit-dot" data-visited="08_resgate"></span></a><a class="nav-module " href="../cadernos/09_seguidores.html"><span class="nav-index">09</span><span class="nav-label">Seguidores, patrulha e consequências</span><span class="visit-dot" data-visited="09_seguidores"></span></a><a class="nav-module " href="../cadernos/10_wrap_parallax.html"><span class="nav-index">10</span><span class="nav-label">Screen wrap, câmera e parallax</span><span class="visit-dot" data-visited="10_wrap_parallax"></span></a><a class="nav-module " href="../cadernos/11_fase_autoral.html"><span class="nav-index">11</span><span class="nav-label">Projetar uma fase que ensina</span><span class="visit-dot" data-visited="11_fase_autoral"></span></a><a class="nav-module " href="../cadernos/12_projeto_etmsl.html"><span class="nav-index">12</span><span class="nav-label">Do curso da ETMSL ao protótipo de jogo</span><span class="visit-dot" data-visited="12_projeto_etmsl"></span></a><a class="nav-module " href="../cadernos/13_testes_publicacao.html"><span class="nav-index">13</span><span class="nav-label">Testar, exportar e apresentar</span><span class="visit-dot" data-visited="13_testes_publicacao"></span></a></nav><div class="sidebar-foot"><div class="progress-title">Seu percurso <span id="progress-count">0/13</span></div><div class="progress-bar"><span id="progress-line" style="width:0%"></span></div><p>Seu progresso fica salvo apenas neste navegador.</p></div></aside><div class="main-area"><header class="topbar"><div class="top-left"><button type="button" class="icon-button menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-controls="sidebar" aria-expanded="false"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a href="../index.html" class="top-home">PJE <span class="top-sep">/</span> <span class="top-current">Investigar: como os jogos funcionam?</span></a></div><div class="top-actions"><a class="icon-button portal-top" href="../../../index.html" aria-label="Voltar a todos os materiais" title="Todos os materiais"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Materiais</span></a><button type="button" class="search-open" id="search-open"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Buscar no material</span><kbd>Ctrl K</kbd></button><button type="button" class="icon-button theme-toggle" id="theme-toggle" aria-label="Alternar tema claro e escuro"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.1A8 8 0 0 1 9.9 3.5 8 8 0 1 0 20.5 14.1Z"/></svg></button></div></header><main id="conteudo"><div class="reading-layout"><article class="article"><header class="article-header"><div class="article-path">PJE · GODOT · GAME DESIGN</div><h1>Investigar: como os jogos funcionam?</h1></header><div class="article-content"><p class="article-subtitle">Observar um jogo, justificar suas características e compartilhar evidências.</p><div class="pje-tools"><button data-print type="button">Imprimir caderno / salvar PDF</button></div><h2 id="proposito">Propósito</h2>
+<p>Antes de criar um jogo, cada estudante observa uma proposta diferente e identifica, com exemplos, o que o jogador faz, quais regras organizam a experiência e como o jogo comunica resultados. A turma reunirá esse repertório para tomar decisões de game design.</p>
+<p>É uma pesquisa de observação, não uma resenha: descreva situações concretas. Os títulos são sugestões; registre sua escolha para o professor evitar repetições. Jogos híbridos podem caber em mais de um recorte, então explique sua classificação.</p>
+<h2 id="distribuicao-de-temas">Distribuição de temas</h2>
+<div class="pje-table"><table>
+<thead>
+<tr>
+<th style="text-align: right;">Nº</th>
+<th>Recorte</th>
+<th>Jogos sugeridos</th>
+<th>Observe especialmente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>Corrida arcade</td>
+<td>Top Gear; Out Run</td>
+<td>Curvas, velocidade, ultrapassagens e tempo</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>Encaixe de peças</td>
+<td>Tetris</td>
+<td>Rotação, espaço e eliminação de linhas</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>Tabuleiro com dados</td>
+<td>Ludo; Ludo King</td>
+<td>Sorte, turnos, escolha e captura</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>Mundo de faz de conta</td>
+<td>Toca Boca World</td>
+<td>Manipulação de objetos e histórias livres</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>Separação de líquidos</td>
+<td>Water Sort Puzzle</td>
+<td>Transferência, espaço livre e planejamento</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>Raquetes e bola</td>
+<td>Pong</td>
+<td>Rebater, prever trajetórias e defender área</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>Destruição de blocos</td>
+<td>Breakout; Arkanoid</td>
+<td>Rebotes, alvos e trajetória</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>Crescimento e desvio</td>
+<td>Snake</td>
+<td>Coleta, crescimento e espaço disponível</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>Labirinto com perseguição</td>
+<td>Pac-Man</td>
+<td>Rotas, coleta e perseguição</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>Travessia de obstáculos</td>
+<td>Frogger; Crossy Road</td>
+<td>Padrões e momento de avançar</td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td>Voo com um comando</td>
+<td>Flappy Bird</td>
+<td>Impulso, gravidade e precisão</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td>Tiro contra formações</td>
+<td>Space Invaders; Galaga</td>
+<td>Mira, esquiva e ondas</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td>Empurrar caixas</td>
+<td>Sokoban</td>
+<td>Planejamento espacial e bloqueios</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td>Dedução em grade</td>
+<td>Campo Minado</td>
+<td>Inferência a partir de pistas</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td>Memorização de pares</td>
+<td>Jogo da Memória</td>
+<td>Recordação e associação</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td>Repetição de sequências</td>
+<td>Genius; Simon</td>
+<td>Ordem, som e dificuldade crescente</td>
+</tr>
+<tr>
+<td style="text-align: right;">17</td>
+<td>Reação a alvos</td>
+<td>Acerte a toupeira</td>
+<td>Tempo de reação e seleção</td>
+</tr>
+<tr>
+<td style="text-align: right;">18</td>
+<td>Combinação de peças</td>
+<td>Bejeweled; Candy Crush</td>
+<td>Trocas e reações em cadeia</td>
+</tr>
+<tr>
+<td style="text-align: right;">19</td>
+<td>Fusão de números</td>
+<td>2048</td>
+<td>Deslocamento e planejamento</td>
+</tr>
+<tr>
+<td style="text-align: right;">20</td>
+<td>Lançamento com física</td>
+<td>Angry Birds</td>
+<td>Ângulo, trajetória e impacto</td>
+</tr>
+<tr>
+<td style="text-align: right;">21</td>
+<td>Corte de conexões</td>
+<td>Cut the Rope</td>
+<td>Gravidade, sequência e momento</td>
+</tr>
+<tr>
+<td style="text-align: right;">22</td>
+<td>Desenho de caminhos</td>
+<td>Flow Free</td>
+<td>Conexões sem cruzar rotas</td>
+</tr>
+<tr>
+<td style="text-align: right;">23</td>
+<td>Montagem de tubulações</td>
+<td>Pipe Mania</td>
+<td>Orientação, continuidade e fluxo</td>
+</tr>
+<tr>
+<td style="text-align: right;">24</td>
+<td>Atendimento sob pressão</td>
+<td>Diner Dash; jogos Papa’s</td>
+<td>Tarefas e prioridades</td>
+</tr>
+<tr>
+<td style="text-align: right;">25</td>
+<td>Ritmo musical</td>
+<td>Friday Night Funkin’; jogos de piano</td>
+<td>Sincronização e precisão</td>
+</tr>
+<tr>
+<td style="text-align: right;">26</td>
+<td>Busca de objetos</td>
+<td>Hidden Folks</td>
+<td>Observação e pistas visuais</td>
+</tr>
+<tr>
+<td style="text-align: right;">27</td>
+<td>Desenho e adivinhação</td>
+<td>Gartic; Draw Something</td>
+<td>Comunicação visual e interpretação</td>
+</tr>
+<tr>
+<td style="text-align: right;">28</td>
+<td>Programação por comandos</td>
+<td>Lightbot</td>
+<td>Sequências e repetição</td>
+</tr>
+<tr>
+<td style="text-align: right;">29</td>
+<td>Defesa por posicionamento</td>
+<td>Plants vs. Zombies</td>
+<td>Recursos e distribuição de defesas</td>
+</tr>
+<tr>
+<td style="text-align: right;">30</td>
+<td>Organização de objetos</td>
+<td>A Little to the Left; Unpacking</td>
+<td>Classificação e descoberta de critérios</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="como-pesquisar">Como pesquisar</h2>
+<ol>
+<li>Registre jogo, versão e plataforma. Informe se jogou ou analisou vídeo.</li>
+<li>Observe uma partida ou situação completa e anote acontecimentos concretos.</li>
+<li>Consulte fontes para confirmar regras e contexto; registre título e endereço.</li>
+<li>Responda com suas palavras e prepare apresentação de até três minutos.</li>
+<li>Inclua duas ou três evidências: captura própria quando permitido, desenho ou descrição com marcação de tempo. Legende o que cada uma demonstra.</li>
+</ol>
+<p>Análise por vídeo é aceita. Separe o que observou do que leu. Não use imagens sem indicar a origem.</p>
+<h2 id="questionario">Questionário</h2>
+<h3 id="identificacao-e-observacao">Identificação e observação</h3>
+<ol>
+<li>Qual jogo, versão e plataforma você analisou? Jogou ou observou gravação? Quais fontes consultou?</li>
+<li>Descreva uma situação específica que represente bem o jogo.</li>
+</ol>
+<h3 id="acoes-e-regras">Ações e regras</h3>
+<ol>
+<li>O que o jogador pode fazer? Quais ações mais se repetem?</li>
+<li>Descreva um ciclo curto: ação do jogador, resposta do jogo e próxima ação.</li>
+<li>Explique duas regras com exemplos. O que o jogo impede o jogador de fazer?</li>
+</ol>
+<h3 id="objetivos-e-desafios">Objetivos e desafios</h3>
+<ol>
+<li>Há objetivo definido? Como se percebe que foi alcançado? Se não, que objetivos o jogador pode criar?</li>
+<li>O que torna o jogo desafiador? Descreva uma decisão e sua consequência.</li>
+<li>O resultado depende de habilidade, planejamento, sorte, rapidez ou memória? Apresente evidência.</li>
+<li>É possível falhar? O que ocorre? Se não há derrota, como o jogo mantém interesse?</li>
+</ol>
+<h3 id="comunicacao-e-progressao">Comunicação e progressão</h3>
+<ol>
+<li>Como o jogo ensina controles e regras? O que se aprende primeiro?</li>
+<li>Como imagens, animações, sons ou textos comunicam acerto, erro e perigo?</li>
+<li>Há pontos, tempo, vidas, recursos ou fases? O que mudam? Responda “não se aplica” quando couber.</li>
+<li>O jogo muda ou fica mais difícil? Dê exemplo, ou explique como as situações variam.</li>
+</ol>
+<h3 id="analise-e-criacao">Análise e criação</h3>
+<ol>
+<li>Quais evidências justificam o tipo de jogo atribuído? Combina outros tipos?</li>
+<li>Escolha uma regra para alterar. Como isso mudaria as escolhas e a dificuldade?</li>
+<li>Que mecânica poderia inspirar jogo sobre um curso da ETMSL? Proponha uma situação sem inventar fatos do curso.</li>
+<li>Que dúvida restou e como você a investigaria?</li>
+</ol>
+<h2 id="apresentacao">Apresentação</h2>
+<p>Em até três minutos, apresente o recorte e o jogo, explique uma situação que revele a mecânica principal, mostre uma regra particular e sugira uma inspiração para jogo sobre curso da ETMSL. Separe observação, interpretação e informação consultada.</p>
+<h2 id="criterios">Critérios</h2>
+<div class="pje-table"><table>
+<thead>
+<tr>
+<th>Critério</th>
+<th>Evidência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Observação</td>
+<td>Situações específicas, além de opiniões</td>
+</tr>
+<tr>
+<td>Compreensão</td>
+<td>Ações, regras e consequências claras</td>
+</tr>
+<tr>
+<td>Análise</td>
+<td>Classificação justificada e reconhecimento de elementos híbridos</td>
+</tr>
+<tr>
+<td>Pesquisa</td>
+<td>Fontes identificadas e observação separada de informação externa</td>
+</tr>
+<tr>
+<td>Comunicação</td>
+<td>Apresentação organizada e dentro do tempo</td>
+</tr>
+<tr>
+<td>Relação com ETMSL</td>
+<td>Inspiração pertinente, sem afirmar fatos não pesquisados</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="fechamento-da-etapa">Fechamento da etapa</h2>
+<p>Após as apresentações, a turma monta um painel com cartões: objetivo, ação principal, regra, desafio, escolha, feedback, progressão e liberdade de criação. O painel será consultado no projeto autoral.</p>
+<h2 id="glossario">Glossário</h2>
+<ul>
+<li><strong>Mecânica:</strong> ação ou regra com que o jogador interage.</li>
+<li><strong>Ciclo principal:</strong> sequência de ações que se repete.</li>
+<li><strong>Feedback:</strong> resposta do jogo às ações do jogador.</li>
+<li><strong>Progressão:</strong> mudança de conteúdo, desafio ou possibilidades ao longo do jogo.</li>
+<li><strong>Game design:</strong> decisões que organizam regras, objetivos, desafios e experiência.</li>
+<li><strong>Jogo híbrido:</strong> jogo que combina características de mais de um tipo.</li>
+</ul><section class="pje-form" data-form="pesquisa"><h2 id="ficha">Sua ficha de trabalho</h2><p id="form-status" role="status">Rascunho local: não é enviado ao professor nem sincronizado entre computadores.</p><div class="pje-tools"><button id="download-answers" type="button">Baixar respostas (.txt)</button><button type="button" data-print>Imprimir / salvar PDF</button></div><label for="pesquisa-0">Nome e turma</label><textarea id="pesquisa-0" data-save rows="4"></textarea><label for="pesquisa-1">Categoria atribuída e jogo escolhido</label><textarea id="pesquisa-1" data-save rows="4"></textarea><label for="pesquisa-2">Qual jogo, versão e plataforma você analisou? Jogou ou observou gravação? Quais fontes consultou?</label><textarea id="pesquisa-2" data-save rows="4"></textarea><label for="pesquisa-3">Descreva uma situação específica que represente bem o jogo.</label><textarea id="pesquisa-3" data-save rows="4"></textarea><label for="pesquisa-4">O que o jogador pode fazer? Quais ações mais se repetem?</label><textarea id="pesquisa-4" data-save rows="4"></textarea><label for="pesquisa-5">Descreva um ciclo curto: ação do jogador, resposta do jogo e próxima ação.</label><textarea id="pesquisa-5" data-save rows="4"></textarea><label for="pesquisa-6">Explique duas regras com exemplos. O que o jogo impede o jogador de fazer?</label><textarea id="pesquisa-6" data-save rows="4"></textarea><label for="pesquisa-7">Há objetivo definido? Como se percebe que foi alcançado? Se não, que objetivos o jogador pode criar?</label><textarea id="pesquisa-7" data-save rows="4"></textarea><label for="pesquisa-8">O que torna o jogo desafiador? Descreva uma decisão e sua consequência.</label><textarea id="pesquisa-8" data-save rows="4"></textarea><label for="pesquisa-9">O resultado depende de habilidade, planejamento, sorte, rapidez ou memória? Apresente evidência.</label><textarea id="pesquisa-9" data-save rows="4"></textarea><label for="pesquisa-10">É possível falhar? O que ocorre? Se não há derrota, como o jogo mantém interesse?</label><textarea id="pesquisa-10" data-save rows="4"></textarea><label for="pesquisa-11">Como o jogo ensina controles e regras? O que se aprende primeiro?</label><textarea id="pesquisa-11" data-save rows="4"></textarea><label for="pesquisa-12">Como imagens, animações, sons ou textos comunicam acerto, erro e perigo?</label><textarea id="pesquisa-12" data-save rows="4"></textarea><label for="pesquisa-13">Há pontos, tempo, vidas, recursos ou fases? O que mudam? Responda “não se aplica” quando couber.</label><textarea id="pesquisa-13" data-save rows="4"></textarea><label for="pesquisa-14">O jogo muda ou fica mais difícil? Dê exemplo, ou explique como as situações variam.</label><textarea id="pesquisa-14" data-save rows="4"></textarea><label for="pesquisa-15">Quais evidências justificam o tipo de jogo atribuído? Combina outros tipos?</label><textarea id="pesquisa-15" data-save rows="4"></textarea><label for="pesquisa-16">Escolha uma regra para alterar. Como isso mudaria as escolhas e a dificuldade?</label><textarea id="pesquisa-16" data-save rows="4"></textarea><label for="pesquisa-17">Que mecânica poderia inspirar jogo sobre um curso da ETMSL? Proponha uma situação sem inventar fatos do curso.</label><textarea id="pesquisa-17" data-save rows="4"></textarea><label for="pesquisa-18">Que dúvida restou e como você a investigaria?</label><textarea id="pesquisa-18" data-save rows="4"></textarea></section><h2 id="pratica">Prática e desafios</h2><p>Baixe o pacote deste bloco e abra a pasta exercicios/01_investigar. Os enunciados também estão nos arquivos; resolva em uma cópia do projeto.</p><p><a class="download-link" href="../arquivos/PJE_01_pesquisa_e_design.zip" download>Baixar prática deste bloco</a> · <a href="../arquivos/PJE_Completo.zip" download>Pacote completo</a></p><details class="pje-card"><summary>Observar uma decisão</summary><p>Registre uma jogada com duas opções, a opção escolhida e o resultado.</p><p><strong>Conferência:</strong> A evidência identifica estado inicial, ação e consequência.</p></details><details class="pje-card"><summary>Comparar sem repetir</summary><p>Compare seu jogo com o de um colega de outra categoria. Liste duas diferenças nas regras.</p><p><strong>Conferência:</strong> As diferenças não se limitam a tema ou aparência.</p></details><details class="pje-card"><summary>Alterar uma regra</summary><p>Proponha uma mudança e preveja como ela altera as decisões.</p><p><strong>Conferência:</strong> Explique uma situação antes e depois.</p></details><details class="pje-card"><summary>Fonte e interpretação</summary><p>Escolha uma afirmação da pesquisa e diferencie observação própria de informação consultada.</p><p><strong>Conferência:</strong> Indique a fonte ou a situação observada.</p></details><div class="article-finish"><p>Antes de avançar, explique uma decisão e mostre uma evidência.</p><button class="complete-btn" data-complete="01_investigar"><span>Marcar como lido</span></button></div><nav class="pager" aria-label="Cadernos anterior e próximo"><a class="pager-link pager-next" href="02_game_design.html">Das descobertas ao game design →</a></nav></div></article><aside class="page-toc" aria-label="Neste caderno"><div class="toc-title">NESTE CADERNO</div><a class="toc-link" href="#proposito">Propósito</a><a class="toc-link" href="#distribuicao-de-temas">Distribuição de temas</a><a class="toc-link" href="#como-pesquisar">Como pesquisar</a><a class="toc-link" href="#questionario">Questionário</a><a class="toc-link" href="#apresentacao">Apresentação</a><a class="toc-link" href="#criterios">Critérios</a><a class="toc-link" href="#fechamento-da-etapa">Fechamento da etapa</a><a class="toc-link" href="#glossario">Glossário</a><a class="toc-link" href="#ficha">Sua ficha de trabalho</a><a class="toc-link" href="#pratica">Prática e desafios</a></aside></div></main><footer class="site-footer"><span>PJE · Programação de Jogos Eletrônicos</span><span>Godot 4.5.1 · Material autoral</span></footer></div></div><div id="sidebar-scrim" class="sidebar-scrim"></div><div class="search-backdrop" id="search-backdrop" hidden><section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-dialog-head"><h2 id="search-title">Encontre um assunto</h2><button type="button" class="search-close" id="search-close" aria-label="Fechar busca">Esc ×</button></div><label class="search-input-wrap"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="search-input" type="search" autocomplete="off" placeholder="Ex.: sinais, salto, parallax, pesquisa…" aria-label="Buscar assuntos"></label><div class="search-results" id="search-results" aria-live="polite"></div><p class="search-tip">Pesquise por conceito, método ou palavra do texto. Funciona sem internet.</p></section></div><div id="toast" class="toast" role="status" aria-live="polite"></div><script src="../../shared/site.js" defer></script><script src="../../shared/navigation.js" defer></script><script src="../assets/pje.js" defer></script></body></html>

@@ -1,0 +1,11 @@
+# Conferência da entrega
+- [ ] Instruções de abertura e controles
+- [ ] Objetivo compreensível e feedback
+- [ ] Partida pode ser concluída e repetida
+- [ ] Código-fonte com project.godot e recursos
+- [ ] Exportação testada no destino acordado
+- [ ] Créditos e licenças
+- [ ] Proposta atualizada
+- [ ] Registro de testes e revisões
+- [ ] Revisão do conteúdo do curso e pendências declaradas
+- [ ] Contribuições individuais

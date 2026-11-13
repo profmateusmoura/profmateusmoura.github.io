@@ -63,7 +63,7 @@ window.CATALOGO_MATERIAIS = [
     subtitulo: 'Programação de Jogos Eletrônicos',
     descricao: 'Criação de jogos 2D com Godot: cenas, nós, movimento, colisão, sinais, interface e projetos autorais.',
     categoria: 'Jogos', nivel: 'Iniciante a intermediário',
-    detalhes: 'Pesquisa individual disponível · demais etapas em preparação', destaque: 'PJE',
+    detalhes: '13 cadernos · 9 versões Godot · 52 atividades (.zip)', destaque: 'PJE',
     caminho: 'materiais/pje/index.html', cor: 'azul', disponivel: true,
     temas: ['Godot', 'Jogos 2D', 'Cenas', 'Movimentação', 'GDScript']
   }
