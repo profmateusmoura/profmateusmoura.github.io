@@ -1,1 +1,360 @@
-.sidebar .site-nav{overflow-y:auto;min-height:0;overscroll-behavior:contain;scrollbar-width:thin}.sidebar .portal-return,.sidebar .brand,.sidebar .sidebar-section-title,.sidebar .sidebar-foot{flex-shrink:0}.sidebar .sidebar-foot{margin-top:16px}.portal-top{display:inline-flex;width:auto;gap:5px;padding:8px!important;font-size:12px;font-weight:600}.top-left{min-width:0}.top-home{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.top-actions{flex-shrink:0}.search-dialog :focus-visible{outline:3px solid #56a887;outline-offset:3px}@media(max-width:620px){.portal-top span{display:none}.portal-top{width:36px}.topbar{gap:8px}.top-left{gap:6px}}
+.sidebar .site-nav {
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.sidebar .portal-return,
+.sidebar .brand,
+.sidebar .sidebar-section-title,
+.sidebar .sidebar-foot {
+  flex-shrink: 0;
+}
+.sidebar .sidebar-foot {
+  margin-top: auto;
+}
+.portal-top {
+  display: inline-flex;
+  width: auto;
+  gap: 5px;
+  padding: 8px !important;
+  font-size: 12px;
+  font-weight: 600;
+}
+.top-left {
+  min-width: 0;
+}
+.top-home {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.top-actions {
+  flex-shrink: 0;
+}
+.search-dialog :focus-visible {
+  outline: 3px solid #56a887;
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   Barra Lateral Compacta (Rail) no Desktop (> 990px)
+   com expansão suave que empurra o conteúdo
+   ========================================================= */
+@media (min-width: 991px) {
+  .sidebar {
+    width: 74px;
+    flex: 0 0 74px;
+    padding: 16px 8px;
+    overflow-x: hidden;
+    transition:
+      width 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+      flex-basis 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+      padding 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.36s ease;
+  }
+
+  /* Estado recolhido (padrão): exibe botão voltar, ícone + sigla, números dos cadernos e progresso */
+  .sidebar .portal-return {
+    margin: 0 auto 12px;
+    width: 42px;
+    height: 38px;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+    white-space: nowrap;
+    transition:
+      width 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      padding 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      margin 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      gap 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      background 0.2s,
+      border-color 0.2s;
+  }
+  .sidebar .portal-return span {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition:
+      max-width 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.22s ease;
+  }
+
+  .sidebar .brand {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 4px 0 14px;
+    text-align: center;
+    white-space: nowrap;
+    transition:
+      padding 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      gap 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .sidebar .brand-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    flex-shrink: 0;
+  }
+  .sidebar .brand strong {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    transition: font-size 0.28s ease, letter-spacing 0.28s ease;
+  }
+  .sidebar .brand small {
+    max-height: 0;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 0;
+    transition:
+      max-height 0.3s ease,
+      max-width 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.22s ease,
+      margin-top 0.25s ease;
+  }
+
+  .sidebar .sidebar-section-title {
+    max-height: 0;
+    opacity: 0;
+    padding: 0 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.2s ease,
+      padding 0.3s ease;
+  }
+
+  .sidebar .site-nav {
+    gap: 6px;
+  }
+  .sidebar .nav-module {
+    position: relative;
+    justify-content: center;
+    gap: 0;
+    padding: 6px 0;
+    border-radius: 10px;
+    white-space: nowrap;
+    transition:
+      padding 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      gap 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      background 0.15s ease;
+  }
+  .sidebar .nav-index {
+    min-width: 36px;
+    height: 30px;
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+    border-radius: 8px;
+    flex-shrink: 0;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .sidebar .nav-label {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    transform: translateX(-6px);
+    transition:
+      max-width 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.22s ease,
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .sidebar .visit-dot {
+    position: absolute;
+    top: 5px;
+    right: 11px;
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+  }
+
+  .sidebar .sidebar-foot {
+    margin-top: 14px;
+    padding: 10px 6px;
+    border-radius: 10px;
+    transition: padding 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .sidebar .progress-title {
+    font-size: 0;
+    justify-content: center;
+    transition: font-size 0.22s ease;
+  }
+  .sidebar .progress-title span {
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .sidebar .progress-bar {
+    margin: 6px 0 0;
+    transition: margin 0.3s ease;
+  }
+  .sidebar .sidebar-foot p {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.22s ease;
+  }
+
+  /* Estado expandido (ao passar o mouse, focar ou clicar no botão de menu): empurra o conteúdo */
+  .sidebar:hover,
+  .sidebar:focus-within,
+  .sidebar.open {
+    width: 288px;
+    flex: 0 0 288px;
+    padding: 24px 18px;
+    box-shadow: var(--shadow);
+  }
+  .sidebar:hover .portal-return,
+  .sidebar:focus-within .portal-return,
+  .sidebar.open .portal-return {
+    width: auto;
+    height: auto;
+    margin: 0 4px 16px;
+    padding: 10px 12px;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  .sidebar:hover .portal-return span,
+  .sidebar:focus-within .portal-return span,
+  .sidebar.open .portal-return span {
+    max-width: 190px;
+    opacity: 1;
+  }
+  .sidebar:hover .brand,
+  .sidebar:focus-within .brand,
+  .sidebar.open .brand {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 11px;
+    padding: 4px 9px 22px;
+    text-align: left;
+  }
+  .sidebar:hover .brand strong,
+  .sidebar:focus-within .brand strong,
+  .sidebar.open .brand strong {
+    font-size: 15px;
+    letter-spacing: -0.02em;
+  }
+  .sidebar:hover .brand small,
+  .sidebar:focus-within .brand small,
+  .sidebar.open .brand small {
+    max-height: 28px;
+    max-width: 190px;
+    opacity: 1;
+    margin-top: 3px;
+  }
+  .sidebar:hover .sidebar-section-title,
+  .sidebar:focus-within .sidebar-section-title,
+  .sidebar.open .sidebar-section-title {
+    max-height: 44px;
+    opacity: 1;
+    padding: 10px 13px 12px;
+  }
+  .sidebar:hover .nav-module,
+  .sidebar:focus-within .nav-module,
+  .sidebar.open .nav-module {
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 10px 11px;
+  }
+  .sidebar:hover .nav-label,
+  .sidebar:focus-within .nav-label,
+  .sidebar.open .nav-label {
+    max-width: 190px;
+    opacity: 1;
+    transform: translateX(0);
+    flex: 1;
+  }
+  .sidebar:hover .visit-dot,
+  .sidebar:focus-within .visit-dot,
+  .sidebar.open .visit-dot {
+    position: static;
+    width: 7px;
+    height: 7px;
+  }
+  .sidebar:hover .sidebar-foot,
+  .sidebar:focus-within .sidebar-foot,
+  .sidebar.open .sidebar-foot {
+    padding: 15px;
+  }
+  .sidebar:hover .progress-title,
+  .sidebar:focus-within .progress-title,
+  .sidebar.open .progress-title {
+    font-size: 12px;
+    justify-content: space-between;
+  }
+  .sidebar:hover .progress-title span,
+  .sidebar:focus-within .progress-title span,
+  .sidebar.open .progress-title span {
+    font-size: 12px;
+  }
+  .sidebar:hover .progress-bar,
+  .sidebar:focus-within .progress-bar,
+  .sidebar.open .progress-bar {
+    margin: 12px 0 9px;
+  }
+  .sidebar:hover .sidebar-foot p,
+  .sidebar:focus-within .sidebar-foot p,
+  .sidebar.open .sidebar-foot p {
+    max-height: 52px;
+    opacity: 1;
+    white-space: normal;
+  }
+
+  /* No desktop a expansão empurra o conteúdo, sem escurecer a tela com scrim */
+  .sidebar-scrim.visible {
+    display: none !important;
+  }
+}
+
+/* Em telas menores (<= 990px), funciona como gaveta deslizante suave */
+@media (max-width: 990px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 290px;
+    max-width: 85vw;
+    padding: 24px 18px;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition:
+      transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.34s;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+    visibility: visible;
+    box-shadow: var(--shadow);
+  }
+}
+
+@media (max-width: 620px) {
+  .portal-top span {
+    display: none;
+  }
+  .portal-top {
+    width: 36px;
+  }
+  .topbar {
+    gap: 8px;
+  }
+  .top-left {
+    gap: 6px;
+  }
+}
