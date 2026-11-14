@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="Gerador de Prompt para Plano de Negócios com IA — Empreendedorismo e Inovação · Técnico em Administração · ETMSL · Prof. Mateus Moura."><title>Gerador de Prompt — Plano de Negócios com IA · EMI</title><link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../shared/style.css"><link rel="stylesheet" href="../shared/pygments.css"><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../shared/navigation.css">
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="Gerador de Prompt para Plano de Negócios Completo (Padrão PNBOX) com IA — Empreendedorismo e Inovação · Técnico em Administração · ETMSL · Prof. Mateus Moura."><title>Gerador de Prompt — Plano de Negócios com IA (Padrão PNBOX) · EMI</title><link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../shared/style.css"><link rel="stylesheet" href="../shared/pygments.css"><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../shared/navigation.css">
 <style>
 .emi-progressbox {
   position: sticky;
@@ -13,6 +13,8 @@
 .emi-rowp {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 10px;
   font-size: 13px;
   font-weight: 700;
   color: var(--ink);
@@ -43,6 +45,18 @@
   margin: 0 0 4px;
   padding-top: 0;
   border-top: 0;
+}
+.emi-badge-pnbox {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--mint);
+  color: var(--green);
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
 }
 .emi-help {
   color: var(--muted);
@@ -76,6 +90,7 @@
   color: var(--muted);
   font-weight: 400;
   margin-top: 2px;
+  line-height: 1.45;
 }
 .emi-section input,
 .emi-section textarea,
@@ -91,7 +106,7 @@
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 .emi-section textarea {
-  min-height: 105px;
+  min-height: 98px;
   resize: vertical;
 }
 .emi-section input:focus,
@@ -112,6 +127,61 @@
 }
 :root[data-theme="dark"] .emi-err {
   color: #f97066;
+}
+.emi-team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+.emi-team-list {
+  display: grid;
+  gap: 10px;
+}
+.emi-member-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+.emi-member-row input,
+.emi-member-row select {
+  background: var(--paper);
+}
+.emi-btn-add {
+  background: var(--mint);
+  color: var(--deep);
+  border: 1px solid var(--green);
+  border-radius: 8px;
+  padding: 8px 13px;
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+:root[data-theme="dark"] .emi-btn-add {
+  color: var(--green);
+}
+.emi-btn-remove {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 25px;
+}
+.emi-btn-remove:hover {
+  border-color: #d92d20;
+  color: #d92d20;
 }
 .emi-actions {
   display: flex;
@@ -168,10 +238,10 @@
   display: none;
 }
 #prompt {
-  min-height: 520px;
+  min-height: 560px;
   font-family: ui-monospace, SFMono-Regular, Consolas, "Courier New", monospace;
-  font-size: 0.88rem;
-  line-height: 1.6;
+  font-size: 0.86rem;
+  line-height: 1.58;
   background: var(--code);
 }
 @media (max-width: 700px) {
@@ -180,6 +250,12 @@
   }
   .emi-full {
     grid-column: auto;
+  }
+  .emi-member-row {
+    grid-template-columns: 1fr;
+  }
+  .emi-btn-remove {
+    margin-top: 0;
   }
   .emi-section {
     padding: 16px;
@@ -191,165 +267,265 @@
 </style>
 </head>
 <body data-root="./" data-page="Gerador de Prompt — Plano de Negócios com IA" data-course="emi"><a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-<div class="app-frame"><aside class="sidebar" id="sidebar"><a class="portal-return" href="../../index.html" aria-label="Voltar ao portal de materiais"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Todos os materiais</span></a><a class="brand" href="./index.html"><span class="brand-mark"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></span><span><strong>EMI</strong><small>Empreendedorismo e Inovação</small></span></a><div class="sidebar-section-title">FERRAMENTA <span>1 ATIVIDADE</span></div><nav class="site-nav" aria-label="Atividades da disciplina"><a href="./index.html" class="nav-module active"><span class="nav-index">01</span><span class="nav-label">Gerador de Prompt — Plano de Negócios com IA</span><span class="visit-dot" data-visited="01_gerador_prompt_plano_negocios" title="Atividade visitada"></span></a></nav><div class="sidebar-foot"><div class="progress-title">Seu percurso <span id="progress-count">0/1</span></div><div class="progress-bar"><span id="progress-line" style="width:0%"></span></div><p>Seu progresso fica salvo apenas neste navegador.</p></div></aside>
-<div class="main-area"><header class="topbar"><div class="top-left"><button type="button" class="icon-button menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-controls="sidebar" aria-expanded="false"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a href="./index.html" class="top-home">Empreendedorismo e Inovação <span class="top-sep">/</span> <span class="top-current">Gerador de Prompt — Plano de Negócios com IA</span></a></div><div class="top-actions"><a class="icon-button portal-top" href="../../index.html" aria-label="Voltar a todos os materiais" title="Todos os materiais"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Materiais</span></a><button type="button" class="search-open" id="search-open"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Buscar no material</span><kbd>Ctrl K</kbd></button><button type="button" class="icon-button theme-toggle" id="theme-toggle" aria-label="Alternar tema claro e escuro"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.1A8 8 0 0 1 9.9 3.5 8 8 0 1 0 20.5 14.1Z"/></svg></button></div></header>
-<main id="conteudo"><div class="reading-layout"><article class="article"><header class="article-header"><div class="article-path">EMPREENDEDORISMO E INOVAÇÃO <span>·</span> TÉCNICO EM ADMINISTRAÇÃO · ETMSL</div><h1>Gerador de Prompt — Plano de Negócios com IA</h1><p class="article-subtitle">Empreendedorismo e Inovação · Técnico em Administração · ETMSL · Prof. Mateus Moura</p><div class="article-controls"><button type="button" class="complete-btn" data-complete="01_gerador_prompt_plano_negocios"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg> <span>Marcar como concluído</span></button></div></header>
+<div class="app-frame"><aside class="sidebar" id="sidebar"><a class="portal-return" href="../../index.html" aria-label="Voltar ao portal de materiais"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Todos os materiais</span></a><a class="brand" href="./index.html"><span class="brand-mark"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></span><span><strong>EMI</strong><small>Empreendedorismo e Inovação</small></span></a><div class="sidebar-section-title">FERRAMENTA <span>1 ATIVIDADE</span></div><nav class="site-nav" aria-label="Atividades da disciplina"><a href="./index.html" class="nav-module active"><span class="nav-index">01</span><span class="nav-label">Gerador de Prompt — Plano de Negócios (PNBOX)</span><span class="visit-dot" data-visited="01_gerador_prompt_plano_negocios" title="Atividade visitada"></span></a></nav><div class="sidebar-foot"><div class="progress-title">Seu percurso <span id="progress-count">0/1</span></div><div class="progress-bar"><span id="progress-line" style="width:0%"></span></div><p>Seu progresso fica salvo apenas neste navegador.</p></div></aside>
+<div class="main-area"><header class="topbar"><div class="top-left"><button type="button" class="icon-button menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-controls="sidebar" aria-expanded="false"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a href="./index.html" class="top-home">Empreendedorismo e Inovação <span class="top-sep">/</span> <span class="top-current">Gerador de Prompt — Plano de Negócios (Padrão PNBOX)</span></a></div><div class="top-actions"><a class="icon-button portal-top" href="../../index.html" aria-label="Voltar a todos os materiais" title="Todos os materiais"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Materiais</span></a><button type="button" class="search-open" id="search-open"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Buscar no material</span><kbd>Ctrl K</kbd></button><button type="button" class="icon-button theme-toggle" id="theme-toggle" aria-label="Alternar tema claro e escuro"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.1A8 8 0 0 1 9.9 3.5 8 8 0 1 0 20.5 14.1Z"/></svg></button></div></header>
+<main id="conteudo"><div class="reading-layout"><article class="article"><header class="article-header"><div class="article-path">EMPREENDEDORISMO E INOVAÇÃO <span>·</span> TÉCNICO EM ADMINISTRAÇÃO · ETMSL</div><h1>Gerador de Prompt — Plano de Negócios com IA</h1><p class="article-subtitle">Estrutura completa inspirada no PNBOX / SEBRAE para elaborar a 1ª versão do Plano de Negócios (individual ou em equipe) · Prof. Mateus Moura</p><div class="article-controls"><button type="button" class="complete-btn" data-complete="01_gerador_prompt_plano_negocios"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg> <span>Marcar como concluído</span></button></div></header>
 <div class="article-content">
 
-<aside class="callout"><div class="callout-label">Como utilizar</div><p><strong>Preencha os campos com *</strong>. Quando todos estiverem completos, o botão para gerar o prompt será liberado. Tudo funciona no próprio aparelho.</p></aside>
+<aside class="callout"><div class="callout-label">Como funciona (Padrão PNBOX)</div><p><strong>Preencha os campos essenciais marcados com *</strong>. Você pode cadastrar <strong>1 ou vários integrantes</strong> no grupo. O estágio já vem ajustado por padrão para <strong>trabalho acadêmico / negócio fictício em fase inicial</strong>, e o prompt gerado instrui a IA a produzir a <strong>1ª versão completa do Plano de Negócios</strong> (Sumário Executivo, Mercado, Marketing 4Ps, Operações, Finanças com DRE/Indicadores, Cenários e Matriz SWOT/FOFA) pronta para o grupo revisar e aperfeiçoar.</p></aside>
 
 <div class="emi-progressbox">
-  <div class="emi-rowp"><span id="txtProg">0 de 12 campos obrigatórios preenchidos</span><span id="pct">0%</span></div>
+  <div class="emi-rowp"><span id="txtProg">0 de 16 campos obrigatórios preenchidos</span><span id="pct">0%</span></div>
   <div class="emi-progress"><div class="emi-bar" id="bar"></div></div>
 </div>
 
 <form id="form" novalidate>
 
 <section class="emi-section">
-  <h2 id="sec-1-identificacao">1. Identificação <a class="anchor" href="#sec-1-identificacao" aria-label="Link para esta seção">#</a></h2>
-  <p class="emi-help">Dados básicos do trabalho.</p>
+  <span class="emi-badge-pnbox">Bloco 1 · Equipe Empreendedora</span>
+  <h2 id="sec-1-equipe">1. Identificação e Integrantes (1 ou mais) <a class="anchor" href="#sec-1-equipe" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">Informe a turma e adicione todos os integrantes do trabalho (individual, dupla ou grupo com vários integrantes).</p>
   <div class="emi-grid">
     <div>
-      <label for="aluno">Nome do aluno ou da dupla <span class="emi-req">*</span></label>
-      <input id="aluno" required placeholder="Ex.: Ana Souza e João Lima">
-      <div class="emi-err">Preencha este campo.</div>
+      <label for="turma">Turma / Módulo <span class="emi-req">*</span><span class="emi-hint">Já preenchido com a turma padrão (4º módulo).</span></label>
+      <input id="turma" required value="Técnico em Administração — 4º módulo">
+      <div class="emi-err">Informe a turma.</div>
     </div>
     <div>
-      <label for="turma">Turma <span class="emi-req">*</span></label>
-      <input id="turma" required placeholder="Ex.: Administração 2º módulo">
-      <div class="emi-err">Preencha este campo.</div>
+      <label for="formato_equipe">Configuração rápida de integrantes</label>
+      <select id="formato_equipe">
+        <option value="1">Individual (1 integrante)</option>
+        <option value="2">Dupla (2 integrantes)</option>
+        <option value="3">Trio (3 integrantes)</option>
+        <option value="4">Grupo de 4 integrantes</option>
+        <option value="5">Grupo de 5 integrantes</option>
+      </select>
+      <span class="emi-hint">Você também pode adicionar ou remover quantos integrantes quiser no botão abaixo.</span>
+    </div>
+    <div class="emi-full">
+      <div class="emi-team-header">
+        <label style="margin:0">Integrantes da equipe e função no plano <span class="emi-req">*</span></label>
+        <button type="button" class="emi-btn-add" id="add-member">+ Adicionar integrante</button>
+      </div>
+      <div class="emi-team-list" id="team-list">
+        <div class="emi-member-row">
+          <div>
+            <label for="member-name-1">Nome do integrante 1 <span class="emi-req">*</span></label>
+            <input id="member-name-1" class="member-name" required placeholder="Nome completo do(a) estudante">
+            <div class="emi-err">Preencha o nome do integrante.</div>
+          </div>
+          <div>
+            <label for="member-role-1">Foco / papel no projeto</label>
+            <select id="member-role-1" class="member-role">
+              <option value="Todas as áreas do plano (elaboração conjunta)">Todas as áreas do plano (elaboração conjunta)</option>
+              <option value="Coordenação Geral e Sumário Executivo">Coordenação Geral e Sumário Executivo</option>
+              <option value="Análise de Mercado (Clientes, Concorrentes e Fornecedores)">Análise de Mercado (Clientes, Concorrentes e Fornecedores)</option>
+              <option value="Plano de Marketing e Comercialização (4 Ps)">Plano de Marketing e Comercialização (4 Ps)</option>
+              <option value="Plano Operacional, Processos e Pessoal">Plano Operacional, Processos e Pessoal</option>
+              <option value="Plano Financeiro, Custos e Viabilidade">Plano Financeiro, Custos e Viabilidade</option>
+              <option value="Cenários, Matriz SWOT (FOFA) e Estratégia">Cenários, Matriz SWOT (FOFA) e Estratégia</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="emi-section">
-  <h2 id="sec-2-ideia">2. Ideia do negócio <a class="anchor" href="#sec-2-ideia" aria-label="Link para esta seção">#</a></h2>
-  <p class="emi-help">Explique a ideia com suas próprias palavras. Não precisa estar perfeita.</p>
+  <span class="emi-badge-pnbox">Bloco 2 · Sumário Executivo PNBOX</span>
+  <h2 id="sec-2-ideia">2. Conceito do Negócio e Estágio Atual <a class="anchor" href="#sec-2-ideia" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">Defina a ideia central do negócio. Para trabalhos acadêmicos fictícios, o estágio inicial já vem selecionado por padrão.</p>
   <div class="emi-grid">
     <div>
-      <label for="nome">Nome provisório do negócio <span class="emi-req">*</span></label>
-      <input id="nome" required>
-      <div class="emi-err">Preencha este campo.</div>
+      <label for="nome">Nome provisório da empresa / negócio <span class="emi-req">*</span></label>
+      <input id="nome" required placeholder="Ex.: EcoBox Embalagens, Café Ponto Certo, TechFix...">
+      <div class="emi-err">Informe o nome provisório do negócio.</div>
     </div>
     <div>
-      <label for="estagio">Estágio atual <span class="emi-req">*</span></label>
-      <select id="estagio" required>
-        <option value="">Selecione...</option>
-        <option>Somente uma ideia</option>
-        <option>Ideia já pesquisada informalmente</option>
-        <option>Já conversei com possíveis clientes</option>
-        <option>Já fiz protótipo ou teste</option>
-        <option>Já realizei vendas</option>
-        <option>Negócio já existe e será analisado/melhorado</option>
+      <label for="setor">Setor de atividade (Padrão PNBOX) <span class="emi-req">*</span></label>
+      <select id="setor" required>
+        <option value="">Selecione o setor...</option>
+        <option>Comércio (varejo ou atacado)</option>
+        <option>Prestação de Serviços</option>
+        <option>Alimentação, Gastronomia e Bebidas</option>
+        <option>Tecnologia, Aplicativos e Negócios Digitais</option>
+        <option>Indústria / Produção Artesanal ou Manufatura</option>
+        <option>Economia Criativa, Educação, Cultura ou Esporte</option>
+        <option>Saúde, Beleza e Bem-Estar</option>
+        <option>Agronegócio / Sustentabilidade</option>
+        <option>Comércio e Serviços (Misto)</option>
       </select>
-      <div class="emi-err">Selecione uma opção.</div>
-    </div>
-    <div class="emi-full">
-      <label for="ideia">Descreva a ideia do negócio <span class="emi-req">*</span></label>
-      <textarea id="ideia" required></textarea>
-      <div class="emi-err">Descreva a ideia.</div>
+      <div class="emi-err">Selecione o setor de atividade.</div>
     </div>
     <div>
-      <label for="local">Onde pretende atuar? <span class="emi-req">*</span><span class="emi-hint">Cidade, região, ambiente digital etc.</span></label>
-      <input id="local" required>
-      <div class="emi-err">Informe a área de atuação.</div>
+      <label for="estagio">Estágio atual do projeto <span class="emi-req">*</span><span class="emi-hint">Pré-selecionado na fase inicial para trabalhos fictícios.</span></label>
+      <select id="estagio" required>
+        <option value="Ideia em fase inicial (trabalho acadêmico / negócio fictício)" selected>Ideia em fase inicial (trabalho acadêmico / negócio fictício)</option>
+        <option value="Ideia inicial com pesquisa exploratória feita pelo grupo">Ideia inicial com pesquisa exploratória feita pelo grupo</option>
+        <option value="Protótipo, cardápio ou MVP em teste inicial">Protótipo, cardápio ou MVP em teste inicial</option>
+        <option value="Negócio real em fase de planejamento para abertura">Negócio real em fase de planejamento para abertura</option>
+        <option value="Negócio já existente que será estruturado ou expandido">Negócio já existente que será estruturado ou expandido</option>
+      </select>
+      <div class="emi-err">Selecione o estágio atual.</div>
     </div>
     <div>
       <label for="tipo">Tipo principal de cliente <span class="emi-req">*</span></label>
       <select id="tipo" required>
         <option value="">Selecione...</option>
-        <option>Pessoas físicas (B2C)</option>
-        <option>Empresas (B2B)</option>
-        <option>Governo/órgãos públicos (B2G)</option>
-        <option>Mais de um tipo</option>
-        <option>Ainda não sei</option>
+        <option>Pessoas físicas — B2C (consumidor final)</option>
+        <option>Empresas — B2B (vende para outros negócios)</option>
+        <option>Misto — B2C e B2B (pessoas físicas e empresas)</option>
+        <option>Governo / Órgãos públicos — B2G</option>
+        <option>Ainda em definição (pedir sugestão à IA)</option>
       </select>
-      <div class="emi-err">Selecione uma opção.</div>
+      <div class="emi-err">Selecione o tipo principal de cliente.</div>
+    </div>
+    <div class="emi-full">
+      <label for="ideia">Descreva a ideia do negócio <span class="emi-req">*</span><span class="emi-hint">O que a empresa faz, como pretende atuar e por que o grupo escolheu essa ideia.</span></label>
+      <textarea id="ideia" required placeholder="Ex.: Uma cafeteria e coworking compacta próxima a escolas técnicas e escritórios, oferecendo cafés especiais, lanches rápidos e bancadas com tomadas e Wi-Fi para estudantes e profissionais..."></textarea>
+      <div class="emi-err">Descreva a ideia do negócio.</div>
+    </div>
+    <div class="emi-full">
+      <label for="local">Onde e como pretende atuar (Localização / Abrangência) <span class="emi-req">*</span><span class="emi-hint">Cidade/bairro, ponto físico, delivery, loja online/Instagram, atendimento domiciliar etc.</span></label>
+      <input id="local" required placeholder="Ex.: Ponto físico no centro da cidade + entregas via delivery próprio e iFood">
+      <div class="emi-err">Informe a área e forma de atuação.</div>
     </div>
   </div>
 </section>
 
 <section class="emi-section">
-  <h2 id="sec-3-nucleo">3. Cliente, problema e solução <a class="anchor" href="#sec-3-nucleo" aria-label="Link para esta seção">#</a></h2>
-  <p class="emi-help">Esse é o núcleo do plano de negócios.</p>
+  <span class="emi-badge-pnbox">Blocos 3 e 4 · Análise de Mercado e Marketing (4 Ps)</span>
+  <h2 id="sec-3-mercado">3. Clientes, Concorrentes, Fornecedores e Marketing <a class="anchor" href="#sec-3-mercado" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">Esses dados alimentam a Análise de Mercado e os 4 Ps de Marketing (Produto, Preço, Praça e Promoção) como no PNBOX.</p>
   <div class="emi-grid">
     <div class="emi-full">
-      <label for="cliente">Quem você imagina que será o cliente? <span class="emi-req">*</span></label>
-      <textarea id="cliente" required placeholder="Evite responder apenas 'todo mundo'."></textarea>
-      <div class="emi-err">Descreva o cliente.</div>
+      <label for="cliente">Quem será o público-alvo / cliente ideal (Persona)? <span class="emi-req">*</span><span class="emi-hint">Faixa etária, rotina, interesses ou tipo de empresa. Evite responder apenas "todo mundo".</span></label>
+      <textarea id="cliente" required placeholder="Ex.: Estudantes de cursos técnicos/universitários (16 a 30 anos) e trabalhadores do comércio local que buscam refeições rápidas e acessíveis entre os turnos..."></textarea>
+      <div class="emi-err">Descreva o público-alvo.</div>
     </div>
     <div class="emi-full">
-      <label for="problema">Qual problema, necessidade ou desejo pretende atender? <span class="emi-req">*</span></label>
-      <textarea id="problema" required></textarea>
-      <div class="emi-err">Descreva o problema ou necessidade.</div>
+      <label for="problema">Qual problema, dor ou necessidade o negócio resolve? <span class="emi-req">*</span></label>
+      <textarea id="problema" required placeholder="Ex.: Falta de opções de alimentação rápida com preço justo e ambiente adequado para estudar ou fazer trabalhos em grupo perto da escola..."></textarea>
+      <div class="emi-err">Descreva o problema ou necessidade atendida.</div>
     </div>
     <div class="emi-full">
-      <label for="solucao">Qual produto ou serviço será oferecido? <span class="emi-req">*</span></label>
-      <textarea id="solucao" required></textarea>
-      <div class="emi-err">Descreva a solução.</div>
+      <label for="solucao">Principais produtos e/ou serviços oferecidos (Produto) <span class="emi-req">*</span><span class="emi-hint">Liste os principais itens, pacotes ou serviços que compõem o catálogo inicial.</span></label>
+      <textarea id="solucao" required placeholder="Ex.: 1) Combos de lanche + bebida; 2) Cafés e salgados assados; 3) Planos semanais de lanche estudantil; 4) Reserva de mesa coletiva para grupos..."></textarea>
+      <div class="emi-err">Descreva os produtos ou serviços.</div>
     </div>
     <div class="emi-full">
-      <label for="receita">Como o negócio pretende ganhar dinheiro? <span class="emi-req">*</span><span class="emi-hint">Venda unitária, mensalidade, assinatura, comissão etc. Se ainda não souber, escreva isso.</span></label>
-      <textarea id="receita" required></textarea>
-      <div class="emi-err">Explique como poderá gerar receita.</div>
+      <label for="valor">Proposta de valor e diferencial competitivo <span class="emi-req">*</span><span class="emi-hint">Por que o cliente escolheria sua empresa em vez das opções que já existem?</span></label>
+      <textarea id="valor" required placeholder="Ex.: Atendimento em até 5 minutos no intervalo de aula, desconto para combos em grupo, pedido antecipado pelo WhatsApp sem fila e ambiente com tomadas..."></textarea>
+      <div class="emi-err">Informe o diferencial ou proposta de valor.</div>
     </div>
     <div class="emi-full">
-      <label for="valor">Por que o cliente poderia escolher sua solução? <span class="emi-req">*</span><span class="emi-hint">Pode ser apenas uma hipótese inicial.</span></label>
-      <textarea id="valor" required></textarea>
-      <div class="emi-err">Apresente uma hipótese de valor ou diferencial.</div>
+      <label for="concorrentes_fornecedores">Concorrentes (diretos/indiretos) e principais fornecedores necessários <span class="emi-req">*</span><span class="emi-hint">No trabalho fictício, cite tipos de concorrentes da região/setor e quais fornecedores de insumos/equipamentos serão necessários.</span></label>
+      <textarea id="concorrentes_fornecedores" required placeholder="Ex.: Concorrentes: lanchonetes tradicionais da rua e padarias próximas. Fornecedores necessários: distribuidoras de bebidas e laticínios, torrefação de café local, fornecedor de embalagens biodegradáveis..."></textarea>
+      <div class="emi-err">Informe os concorrentes e fornecedores previstos.</div>
+    </div>
+    <div class="emi-full">
+      <label for="receita">Modelo de receita, faixa de preço e canais de divulgação (Preço e Promoção) <span class="emi-req">*</span><span class="emi-hint">Como o negócio ganha dinheiro (venda unitária, assinatura, mensalidade, comissão), ideia de preço médio e como atrairá clientes.</span></label>
+      <textarea id="receita" required placeholder="Ex.: Venda direta de combos (ticket médio estimado de R$ 18 a R$ 28) via PIX/cartão. Divulgação pelo Instagram, TikTok, parcerias com grêmios estudantis e cartão fidelidade digital..."></textarea>
+      <div class="emi-err">Explique o modelo de receita, preço estimado e divulgação.</div>
     </div>
   </div>
 </section>
 
 <section class="emi-section">
-  <h2 id="sec-4-informacoes">4. O que você já sabe <a class="anchor" href="#sec-4-informacoes" aria-label="Link para esta seção">#</a></h2>
-  <p class="emi-help">Campos opcionais. Preencha somente o que já possuir.</p>
+  <span class="emi-badge-pnbox">Blocos 5 e 6 · Plano Operacional e Financeiro PNBOX</span>
+  <h2 id="sec-4-operacao-financas">4. Operação e Estimativa Financeira Essencial <a class="anchor" href="#sec-4-operacao-financas" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">Mesmo sendo um projeto fictício, informe uma ideia inicial para que a IA monte as tabelas completas do Plano Operacional e do Plano Financeiro (Investimento, Custos, DRE e Indicadores).</p>
   <div class="emi-grid">
     <div class="emi-full">
-      <label for="evidencias">Pesquisas, conversas ou evidências já obtidas</label>
-      <textarea id="evidencias"></textarea>
-    </div>
-    <div class="emi-full">
-      <label for="concorrentes">Concorrentes ou alternativas que já conhece</label>
-      <textarea id="concorrentes"></textarea>
+      <label for="operacao">Como funcionará a operação no dia a dia e quem fará o quê? <span class="emi-req">*</span><span class="emi-hint">Horário de funcionamento, etapas básicas do atendimento/produção e quantas pessoas trabalharão na operação.</span></label>
+      <textarea id="operacao" required placeholder="Ex.: Funcionamento de segunda a sábado das 7h às 21h. Processo: recebimento de insumos -> preparo diário -> pedido no balcão/WhatsApp -> entrega rápida. Equipe operacional inicial formada pelos próprios sócios + 1 auxiliar..."></textarea>
+      <div class="emi-err">Descreva como funcionará a operação básica.</div>
     </div>
     <div>
-      <label for="preco">Preço imaginado ou pesquisado</label>
-      <input id="preco">
+      <label for="faixa_investimento">Faixa estimada de investimento inicial <span class="emi-req">*</span></label>
+      <select id="faixa_investimento" required>
+        <option value="">Selecione uma faixa...</option>
+        <option>Até R$ 5.000 (baixo investimento / operação enxuta ou digital)</option>
+        <option>De R$ 5.000 a R$ 20.000 (pequeno negócio / equipamentos básicos)</option>
+        <option>De R$ 20.000 a R$ 50.000 (estrutura física compacta ou estoque inicial)</option>
+        <option>De R$ 50.000 a R$ 120.000 (ponto comercial estruturado e reforma)</option>
+        <option>Acima de R$ 120.000 (operação de maior porte)</option>
+        <option>Ainda não sabemos — pedir para a IA estimar valores realistas para o setor</option>
+      </select>
+      <div class="emi-err">Selecione a faixa de investimento inicial.</div>
     </div>
     <div>
-      <label for="investimento">Investimento inicial disponível ou estimado</label>
-      <input id="investimento">
+      <label for="porte">Enquadramento jurídico / porte pretendido <span class="emi-req">*</span></label>
+      <select id="porte" required>
+        <option value="Sugerir o enquadramento mais adequado no plano (MEI ou ME — Simples Nacional)" selected>Sugerir o enquadramento mais adequado (MEI ou ME — Simples Nacional)</option>
+        <option value="MEI — Microempreendedor Individual">MEI — Microempreendedor Individual</option>
+        <option value="ME — Microempresa (Sociedade Limitada / Simples Nacional)">ME — Microempresa (Sociedade Limitada / Simples Nacional)</option>
+        <option value="EPP — Empresa de Pequeno Porte">EPP — Empresa de Pequeno Porte</option>
+        <option value="Cooperativa / Associação / Negócio de Impacto Social">Cooperativa / Associação / Negócio de Impacto Social</option>
+      </select>
+      <div class="emi-err">Selecione o enquadramento pretendido.</div>
     </div>
     <div class="emi-full">
-      <label for="recursos">Recursos, conhecimentos ou parceiros disponíveis</label>
-      <textarea id="recursos"></textarea>
-    </div>
-    <div class="emi-full">
-      <label for="limitacoes">Limitações ou dificuldades já percebidas</label>
-      <textarea id="limitacoes"></textarea>
-    </div>
-    <div class="emi-full">
-      <label for="obs">Observações ou preferências adicionais</label>
-      <textarea id="obs"></textarea>
+      <label for="financas_essencial">Principais itens de investimento fixo e gastos mensais que o grupo imagina ter <span class="emi-req">*</span><span class="emi-hint">Liste máquinas/equipamentos/móveis para começar e contas fixas/variáveis mensais (aluguel, luz, internet, insumos, pró-labore etc.).</span></label>
+      <textarea id="financas_essencial" required placeholder="Ex.: Investimento fixo: estufa, cafeteira expresso, freezer, balcão, mesas, 1 notebook. Gastos mensais: aluguel do ponto, energia, internet, compra de insumos (pães, café, embalagens), DAS/impostos e retirada dos sócios..."></textarea>
+      <div class="emi-err">Informe os principais investimentos e gastos imaginados.</div>
     </div>
   </div>
 </section>
 
 <section class="emi-section">
-  <h2 id="sec-5-gerar">5. Gerar o prompt <a class="anchor" href="#sec-5-gerar" aria-label="Link para esta seção">#</a></h2>
-  <p class="emi-help">O prompt orientará a IA escolhida a conduzir o plano por etapas, sem inventar informações.</p>
+  <span class="emi-badge-pnbox">Bloco 7 · Informações Complementares (Opcional)</span>
+  <h2 id="sec-5-complementar">5. Estratégia, SWOT e Detalhes Adicionais (Opcional) <a class="anchor" href="#sec-5-complementar" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">Preencha se o grupo já tiver rascunhado algum desses itens. O que ficar em branco será sugerido pela IA na 1ª versão do plano.</p>
+  <div class="emi-grid">
+    <div class="emi-full">
+      <label for="missao_visao">Missão, Visão e Valores (se já tiverem ideias)</label>
+      <textarea id="missao_visao" placeholder="Opcional: se deixar em branco, a IA criará propostas de Missão, Visão e Valores alinhadas ao negócio."></textarea>
+    </div>
+    <div>
+      <label for="capacidade">Meta ou capacidade mensal inicial de vendas/atendimentos</label>
+      <input id="capacidade" placeholder="Ex.: 600 combos por mês ou 40 clientes por dia">
+    </div>
+    <div>
+      <label for="capital_terceiros">Origem dos recursos financeiros</label>
+      <input id="capital_terceiros" placeholder="Ex.: 100% capital próprio dos sócios (ou parte financiada)">
+    </div>
+    <div class="emi-full">
+      <label for="swot_inicial">Forças, Fraquezas, Oportunidades ou Ameaças já percebidas (Matriz FOFA / SWOT)</label>
+      <textarea id="swot_inicial" placeholder="Ex.: Força: localização próxima à escola. Fraqueza: pouca experiência inicial em gestão. Oportunidade: crescimento de pedidos pelo celular. Ameaça: alta no preço dos alimentos..."></textarea>
+    </div>
+    <div class="emi-full">
+      <label for="obs">Observações adicionais ou requisitos específicos solicitados pelo professor</label>
+      <textarea id="obs" placeholder="Ex.: Precisamos apresentar slides na semana que vem; incluir tabela de rateio de tarefas entre os integrantes..."></textarea>
+    </div>
+  </div>
+</section>
+
+<section class="emi-section">
+  <span class="emi-badge-pnbox">Bloco 8 · Geração do Prompt PNBOX</span>
+  <h2 id="sec-6-gerar">6. Gerar Prompt para a 1ª Versão do Plano de Negócios <a class="anchor" href="#sec-6-gerar" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">O prompt gerado fará a IA entregar uma <strong>1ª versão completa do Plano de Negócios (no padrão PNBOX / SEBRAE)</strong> e, em seguida, guiar o grupo na revisão e ajuste de cada seção.</p>
+  <div class="emi-grid">
+    <div class="emi-full">
+      <label for="modo_entrega">Como você quer que a IA conduza a resposta inicial?</label>
+      <select id="modo_entrega">
+        <option value="completa" selected>Gerar imediatamente a 1ª versão completa e detalhada do Plano de Negócios (padrão PNBOX) + guia de revisão para o grupo</option>
+        <option value="blocos">Entregar um Sumário Executivo + 1ª versão dos blocos iniciais e construir o Plano Financeiro passo a passo com o grupo</option>
+      </select>
+    </div>
+  </div>
   <div class="emi-actions">
-    <button type="button" class="emi-btn emi-btn-primary" id="gerar" disabled>Gerar prompt completo</button>
+    <button type="button" class="emi-btn emi-btn-primary" id="gerar" disabled>Gerar prompt completo (Padrão PNBOX)</button>
     <button type="reset" class="emi-btn emi-btn-secondary">Limpar formulário</button>
   </div>
-  <div class="emi-status emi-warn" id="status">Preencha todos os campos obrigatórios.</div>
+  <div class="emi-status emi-warn" id="status">Preencha todos os campos essenciais obrigatórios (*).</div>
 </section>
 </form>
 
 <section class="emi-section emi-out" id="saida">
-  <h2 id="sec-prompt-gerado">Prompt completo gerado</h2>
-  <p class="emi-help">Copie e cole na IA de sua preferência.</p>
+  <h2 id="sec-prompt-gerado">Prompt completo gerado (Padrão PNBOX)</h2>
+  <p class="emi-help">Copie o prompt abaixo e cole na IA de sua preferência (ChatGPT, Gemini, Claude, Copilot etc.) para gerar a 1ª versão do Plano de Negócios.</p>
   <textarea id="prompt" readonly></textarea>
   <div class="emi-actions">
     <button type="button" class="emi-btn emi-btn-copy" id="copiar">Copiar prompt</button>
@@ -361,39 +537,137 @@
 
 <section class="article-finish"><div class="article-finish-symbol">✓</div><h2>Concluiu o seu prompt?</h2><p>Marque esta atividade como concluída para registrar seu progresso neste navegador.</p><button type="button" class="complete-btn" data-complete="01_gerador_prompt_plano_negocios"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg> <span>Marcar como concluído</span></button></section>
 </article>
-<aside class="page-toc" aria-label="Sumário da página"><div class="toc-title">NESTA PÁGINA</div><a class="toc-link " href="#sec-1-identificacao">1. Identificação</a><a class="toc-link " href="#sec-2-ideia">2. Ideia do negócio</a><a class="toc-link " href="#sec-3-nucleo">3. Cliente, problema e solução</a><a class="toc-link " href="#sec-4-informacoes">4. O que você já sabe</a><a class="toc-link " href="#sec-5-gerar">5. Gerar o prompt</a></aside></div></main>
-<footer class="site-footer"><span>ETMSL · Técnico em Administração · Empreendedorismo e Inovação</span><span>Prof. Mateus Moura · Gerador de Prompt para Plano de Negócios com IA</span></footer></div></div><div class="sidebar-scrim" id="sidebar-scrim"></div><div class="search-backdrop" id="search-backdrop" hidden><section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-dialog-head"><h2 id="search-title">Encontre um assunto</h2><button type="button" class="search-close" id="search-close" aria-label="Fechar busca">Esc ×</button></div><label class="search-input-wrap"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="search-input" type="search" autocomplete="off" placeholder="Ex.: plano de negócios, persona, MVP, DRE, viabilidade…" aria-label="Buscar assuntos"></label><div class="search-results" id="search-results" aria-live="polite"></div><p class="search-tip">Pesquise por etapa do plano de negócios ou conceito de empreendedorismo. Funciona sem internet.</p></section></div><div id="toast" class="toast" role="status" aria-live="polite"></div>
+<aside class="page-toc" aria-label="Sumário da página"><div class="toc-title">NESTA PÁGINA</div><a class="toc-link " href="#sec-1-equipe">1. Equipe (1 ou + integrantes)</a><a class="toc-link " href="#sec-2-ideia">2. Conceito e Estágio Inicial</a><a class="toc-link " href="#sec-3-mercado">3. Mercado e Marketing (4 Ps)</a><a class="toc-link " href="#sec-4-operacao-financas">4. Operação e Finanças</a><a class="toc-link " href="#sec-5-complementar">5. SWOT e Complementos</a><a class="toc-link " href="#sec-6-gerar">6. Gerar o Prompt PNBOX</a></aside></div></main>
+<footer class="site-footer"><span>ETMSL · Técnico em Administração · Empreendedorismo e Inovação</span><span>Prof. Mateus Moura · Gerador de Prompt para Plano de Negócios (Padrão PNBOX)</span></footer></div></div><div class="sidebar-scrim" id="sidebar-scrim"></div><div class="search-backdrop" id="search-backdrop" hidden><section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-dialog-head"><h2 id="search-title">Encontre um assunto</h2><button type="button" class="search-close" id="search-close" aria-label="Fechar busca">Esc ×</button></div><label class="search-input-wrap"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="search-input" type="search" autocomplete="off" placeholder="Ex.: PNBOX, equipe, marketing 4Ps, DRE, ponto de equilíbrio, SWOT…" aria-label="Buscar assuntos"></label><div class="search-results" id="search-results" aria-live="polite"></div><p class="search-tip">Pesquise por etapa do plano de negócios ou conceito de empreendedorismo. Funciona sem internet.</p></section></div><div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
 (() => {
   const f = document.getElementById('form');
-  const req = [...f.querySelectorAll('[required]')];
+  const teamList = document.getElementById('team-list');
+  const addMemberBtn = document.getElementById('add-member');
+  const formatoEquipe = document.getElementById('formato_equipe');
   const gerar = document.getElementById('gerar');
   const saida = document.getElementById('saida');
   const prompt = document.getElementById('prompt');
-  const val = id => (document.getElementById(id).value || '').trim();
-  const opt = (rot, id) => val(id) ? rot + ': ' + val(id) : rot + ': ainda não informado pelo aluno.';
+  const val = id => (document.getElementById(id)?.value || '').trim();
+  const opt = (rot, id, padrao) => val(id)
+    ? `${rot}: ${val(id)}`
+    : `${rot}: [Não informado — ${padrao || 'elabore uma proposta inicial realista e coerente com o negócio para o grupo validar'}].`;
+
+  const roleOptions = [
+    'Todas as áreas do plano (elaboração conjunta)',
+    'Coordenação Geral e Sumário Executivo',
+    'Análise de Mercado (Clientes, Concorrentes e Fornecedores)',
+    'Plano de Marketing e Comercialização (4 Ps)',
+    'Plano Operacional, Processos e Pessoal',
+    'Plano Financeiro, Custos e Viabilidade',
+    'Cenários, Matriz SWOT (FOFA) e Estratégia'
+  ];
+
+  function getRequiredFields() {
+    return [...f.querySelectorAll('[required]')];
+  }
+
+  function bindFieldEvents(el) {
+    el.addEventListener('input', atualiza);
+    el.addEventListener('change', atualiza);
+  }
+
+  function renumberMembers() {
+    const rows = [...teamList.querySelectorAll('.emi-member-row')];
+    rows.forEach((row, idx) => {
+      const n = idx + 1;
+      const nameLabel = row.querySelector('.member-name-label');
+      const nameInput = row.querySelector('.member-name');
+      const roleLabel = row.querySelector('.member-role-label');
+      const roleSelect = row.querySelector('.member-role');
+      if (nameLabel) {
+        nameLabel.setAttribute('for', `member-name-${n}`);
+        nameLabel.innerHTML = `Nome do integrante ${n} <span class="emi-req">*</span>`;
+      }
+      if (nameInput) nameInput.id = `member-name-${n}`;
+      if (roleLabel) roleLabel.setAttribute('for', `member-role-${n}`);
+      if (roleSelect) roleSelect.id = `member-role-${n}`;
+    });
+  }
+
+  function createMemberRow(index, defaultRoleIndex) {
+    const row = document.createElement('div');
+    row.className = 'emi-member-row';
+    const roleIdx = defaultRoleIndex !== undefined ? defaultRoleIndex % roleOptions.length : 0;
+    const optsHtml = roleOptions.map((r, i) => `<option value="${r}"${i === roleIdx ? ' selected' : ''}>${r}</option>`).join('');
+    row.innerHTML = `
+      <div>
+        <label class="member-name-label" for="member-name-${index}">Nome do integrante ${index} <span class="emi-req">*</span></label>
+        <input id="member-name-${index}" class="member-name" required placeholder="Nome completo do(a) estudante">
+        <div class="emi-err">Preencha o nome do integrante.</div>
+      </div>
+      <div>
+        <label class="member-role-label" for="member-role-${index}">Foco / papel no projeto</label>
+        <select id="member-role-${index}" class="member-role">${optsHtml}</select>
+      </div>
+      <button type="button" class="emi-btn-remove" aria-label="Remover integrante">Remover</button>
+    `;
+    const input = row.querySelector('.member-name');
+    const select = row.querySelector('.member-role');
+    const removeBtn = row.querySelector('.emi-btn-remove');
+    bindFieldEvents(input);
+    bindFieldEvents(select);
+    removeBtn.addEventListener('click', () => {
+      row.remove();
+      renumberMembers();
+      atualiza();
+    });
+    return row;
+  }
+
+  function setTeamCount(targetCount) {
+    const currentRows = [...teamList.querySelectorAll('.emi-member-row')];
+    if (targetCount > currentRows.length) {
+      for (let i = currentRows.length + 1; i <= targetCount; i++) {
+        teamList.appendChild(createMemberRow(i, i));
+      }
+    } else if (targetCount < currentRows.length && targetCount >= 1) {
+      for (let i = currentRows.length - 1; i >= targetCount; i--) {
+        currentRows[i].remove();
+      }
+    }
+    renumberMembers();
+    atualiza();
+  }
+
+  addMemberBtn.addEventListener('click', () => {
+    const nextIndex = teamList.querySelectorAll('.emi-member-row').length + 1;
+    teamList.appendChild(createMemberRow(nextIndex, nextIndex));
+    renumberMembers();
+    atualiza();
+    teamList.lastElementChild?.querySelector('.member-name')?.focus();
+  });
+
+  formatoEquipe.addEventListener('change', () => {
+    const count = parseInt(formatoEquipe.value, 10) || 1;
+    setTeamCount(count);
+  });
 
   function atualiza() {
+    const req = getRequiredFields();
     const ok = req.filter(x => x.value.trim() !== '').length;
-    const p = Math.round(ok / req.length * 100);
-    document.getElementById('txtProg').textContent = ok + ' de ' + req.length + ' campos obrigatórios preenchidos';
-    document.getElementById('pct').textContent = p + '%';
-    document.getElementById('bar').style.width = p + '%';
+    const p = Math.round((ok / req.length) * 100);
+    document.getElementById('txtProg').textContent = `${ok} de ${req.length} campos essenciais obrigatórios preenchidos`;
+    document.getElementById('pct').textContent = `${p}%`;
+    document.getElementById('bar').style.width = `${p}%`;
     gerar.disabled = ok !== req.length;
     const st = document.getElementById('status');
     st.textContent = ok === req.length
-      ? 'Todos os campos obrigatórios foram preenchidos. O prompt já pode ser gerado.'
-      : 'Preencha todos os campos obrigatórios.';
+      ? 'Todos os campos essenciais foram preenchidos! Clique para gerar o prompt completo da 1ª versão do Plano de Negócios.'
+      : `Preencha todos os campos essenciais obrigatórios (*) — faltam ${req.length - ok}.`;
     st.className = 'emi-status ' + (ok === req.length ? 'emi-ok' : 'emi-warn');
   }
-  req.forEach(x => {
-    x.addEventListener('input', atualiza);
-    x.addEventListener('change', atualiza);
-  });
+
+  getRequiredFields().forEach(bindFieldEvents);
 
   function valida() {
     let ok = true;
-    req.forEach(x => {
+    getRequiredFields().forEach(x => {
       const v = x.value.trim() !== '';
       x.classList.toggle('emi-invalid', !v);
       const e = x.parentElement.querySelector('.emi-err');
@@ -403,136 +677,178 @@
     return ok;
   }
 
+  function formatTeamMembers() {
+    const rows = [...teamList.querySelectorAll('.emi-member-row')];
+    return rows.map((row, idx) => {
+      const nome = (row.querySelector('.member-name')?.value || '').trim();
+      const papel = (row.querySelector('.member-role')?.value || '').trim();
+      return `  ${idx + 1}. ${nome} — Foco/Responsabilidade: ${papel}`;
+    }).join('\n');
+  }
+
   gerar.addEventListener('click', () => {
     if (!valida()) return;
-    prompt.value = `Estou elaborando um PLANO DE NEGÓCIOS para a disciplina de Empreendedorismo e Inovação do Curso Técnico em Administração da ETMSL.
+    const totalIntegrantes = teamList.querySelectorAll('.emi-member-row').length;
+    const modalidadeTexto = totalIntegrantes === 1
+      ? 'Trabalho Individual (1 integrante)'
+      : `Trabalho em Equipe (${totalIntegrantes} integrantes)`;
+    const modoEntrega = val('modo_entrega');
 
-Quero que você atue como meu ASSISTENTE DE PLANEJAMENTO. Não faça o trabalho inteiro por mim e não transforme hipóteses em fatos.
+    const instrucaoEntrega = modoEntrega === 'completa'
+      ? `COMO PRODUZIR A RESPOSTA AGORA (ENTREGA DA 1ª VERSÃO COMPLETA):
+1. Gere IMEDIATAMENTE a **PRIMEIRA VERSÃO COMPLETA E ESTRUTURADA DO PLANO DE NEGÓCIOS** seguindo todos os 7 Blocos do padrão PNBOX descritos abaixo.
+2. Como o projeto está em estágio inicial/acadêmico (trabalho fictício), onde o grupo ainda não tiver números exatos, construa tabelas e estimativas iniciais realistas e coerentes com o porte e setor do negócio, sinalizando claramente o que é **[DEFINIDO PELO GRUPO]** e o que é **[SUGESTÃO / ESTIMATIVA INICIAL PARA VALIDAÇÃO DO GRUPO]**.
+3. Ao final da 1ª versão completa, apresente um **Checklist de Revisão e Próximos Passos** organizado por integrante da equipe e pergunte qual bloco queremos ajustar ou aprofundar primeiro.`
+      : `COMO PRODUZIR A RESPOSTA AGORA (ENTREGA POR BLOCOS):
+1. Apresente primeiro a **1ª versão estruturada dos Blocos 1, 2 e 3** (Sumário Executivo, Equipe, Análise de Mercado e Plano de Marketing 4Ps) já redigida no padrão PNBOX, sinalizando o que é **[DEFINIDO PELO GRUPO]** e o que é **[SUGESTÃO INICIAL PARA VALIDAÇÃO]**.
+2. Em seguida, faça perguntas objetivas para validarmos esses blocos antes de gerar as tabelas completas do **Plano Operacional (Bloco 4)**, **Plano Financeiro PNBOX (Bloco 5)** e **Cenários/SWOT (Blocos 6 e 7)**.`;
 
-==============================
-1. IDENTIFICAÇÃO
-==============================
-Aluno(s): ${val('aluno')}
-Turma: ${val('turma')}
-Nome provisório do negócio: ${val('nome')}
-Estágio atual: ${val('estagio')}
+    prompt.value = `Estou elaborando um PLANO DE NEGÓCIOS COMPLETO para a disciplina de Empreendedorismo e Inovação do Curso Técnico em Administração da ETMSL (Prof. Mateus Moura).
 
-==============================
-2. IDEIA INICIAL
-==============================
-Descrição do negócio:
+Quero que você atue como nosso CONSULTOR E ASSISTENTE DE PLANEJAMENTO EMPRESARIAL utilizando a metodologia completa do **PNBOX / SEBRAE** (Plano de Negócios estruturado em Sumário Executivo, Análise de Mercado, Plano de Marketing, Plano Operacional, Plano Financeiro, Construção de Cenários, Matriz SWOT/FOFA e Avaliação de Viabilidade).
+
+O seu objetivo é nos ajudar a produzir uma **PRIMEIRA VERSÃO COMPLETA, COERENTE E BEM FUNDAMENTADA DO PLANO DE NEGÓCIOS**, adequada a um trabalho acadêmico de Curso Técnico em Administração (que parte de uma ideia inicial/fictícia e precisa ser estruturada com rigor técnico, clareza didática e dados realistas para o porte do negócio).
+
+============================================================
+1. IDENTIFICAÇÃO E EQUIPE EMPREENDEDORA
+============================================================
+Turma / Módulo: ${val('turma')}
+Modalidade: ${modalidadeTexto}
+Integrantes e atribuições no projeto:
+${formatTeamMembers()}
+
+============================================================
+2. SUMÁRIO EXECUTIVO E CONCEITO DO NEGÓCIO (PADRÃO PNBOX)
+============================================================
+Nome provisório da empresa / negócio: ${val('nome')}
+Setor de atividade: ${val('setor')}
+Estágio atual / Natureza do projeto: ${val('estagio')}
+Enquadramento jurídico / tributário pretendido: ${val('porte')}
+Tipo principal de cliente (B2C / B2B / B2G): ${val('tipo')}
+
+Descrição da ideia do negócio:
 ${val('ideia')}
 
-Área de atuação:
+Localização e abrangência de atuação (Praça):
 ${val('local')}
 
-Tipo principal de cliente:
-${val('tipo')}
-
-==============================
-3. CLIENTE, PROBLEMA E SOLUÇÃO
-==============================
-Cliente que imagino atender:
+============================================================
+3. ANÁLISE DE MERCADO E MARKETING (4 Ps)
+============================================================
+Público-alvo e perfil do cliente ideal (Persona):
 ${val('cliente')}
 
-Problema, necessidade ou desejo:
+Problema, dor ou necessidade que o negócio resolve:
 ${val('problema')}
 
-Produto ou serviço:
+Principais produtos e/ou serviços oferecidos (Portfólio inicial):
 ${val('solucao')}
 
-Como imagino que o negócio poderá ganhar dinheiro:
-${val('receita')}
-
-Por que acredito que o cliente poderia escolher essa solução:
+Proposta de valor e diferencial competitivo:
 ${val('valor')}
 
-==============================
-4. INFORMAÇÕES QUE JÁ POSSUO
-==============================
-${opt('Pesquisas, conversas ou evidências', 'evidencias')}
+Concorrentes (diretos/indiretos) e principais fornecedores necessários:
+${val('concorrentes_fornecedores')}
 
-${opt('Concorrentes ou alternativas conhecidos', 'concorrentes')}
+Modelo de receita, faixa de preço e canais de divulgação/vendas:
+${val('receita')}
 
-${opt('Preço imaginado ou pesquisado', 'preco')}
+============================================================
+4. PLANO OPERACIONAL E BASE FINANCEIRA ESSENCIAL
+============================================================
+Funcionamento da operação no dia a dia, processos e equipe:
+${val('operacao')}
 
-${opt('Investimento disponível ou estimado', 'investimento')}
+Faixa estimada de investimento inicial:
+${val('faixa_investimento')}
 
-${opt('Recursos, conhecimentos ou parceiros', 'recursos')}
+Principais investimentos fixos (máquinas, móveis, equipamentos) e gastos mensais previstos:
+${val('financas_essencial')}
 
-${opt('Limitações ou dificuldades', 'limitacoes')}
+============================================================
+5. INFORMAÇÕES COMPLEMENTARES E ESTRATÉGIA
+============================================================
+${opt('Missão, Visão e Valores', 'missao_visao', 'sugira propostas de Missão, Visão e 4 a 5 Valores coerentes com o negócio')}
 
-${opt('Observações adicionais', 'obs')}
+${opt('Capacidade ou meta mensal inicial de vendas/atendimento', 'capacidade', 'estime uma capacidade mensal inicial realista para o porte da operação')}
 
-==============================
-5. REGRAS PARA NOSSA CONVERSA
-==============================
-1. Não invente dados de mercado, preços, concorrentes, entrevistas, clientes ou fontes.
-2. Diferencie sempre FATO, ESTIMATIVA, HIPÓTESE e DECISÃO.
-3. Quando faltar informação, diga claramente o que precisa ser pesquisado.
-4. Explique siglas e termos técnicos quando aparecerem.
-5. Termos em inglês podem ser usados, mas devem ser explicados em português de forma simples.
-6. Não apresente uma sequência de siglas sem explicar a relação entre elas.
-7. Quando houver cálculo, explique: qual pergunta ele responde, quais dados são necessários, fórmula, substituição dos valores, resultado e interpretação.
-8. Não decida automaticamente por mim quando houver alternativas. Apresente opções e deixe a decisão comigo.
-9. Aponte incoerências entre partes do plano.
-10. Preserve decisões anteriores e avise quando alguma precisar ser revista.
-11. Use linguagem clara e adequada a um aluno de curso técnico em Administração.
-12. Trabalhe UMA ETAPA POR VEZ e espere minha resposta antes de avançar.
-13. Ao final de cada etapa, registre: o que foi definido, o que ainda é hipótese, o que precisa ser pesquisado/testado e quais decisões tomei.
-14. Nunca apresente projeções financeiras como certeza.
+${opt('Origem dos recursos e participação societária', 'capital_terceiros', 'considere divisão equilibrada entre os integrantes ou capital próprio inicial')}
 
-==============================
-6. ROTEIRO DO PLANO
-==============================
-Trabalhe nesta ordem:
+${opt(' Elementos iniciais para Matriz F.O.F.A. (SWOT)', 'swot_inicial', 'construa a Matriz SWOT completa com base no setor e nas características informadas')}
 
-1 — Definição do negócio
-2 — Segmentação de mercado
-3 — Persona
-4 — Jornada do cliente
-5 — Proposta de valor
-6 — Concorrência
-7 — Experimentação e MVP, quando fizer sentido
-8 — Canais de aquisição
-9 — Funil de vendas
-10 — Estrutura operacional
-11 — Investimento inicial
-12 — Projeção de receitas
-13 — Custos e despesas
-14 — DRE simplificada
-15 — Indicadores financeiros
-16 — Dimensionamento de mercado
-17 — Métricas de clientes e receita
-18 — Cenários
-19 — Riscos e pendências
-20 — Conclusão de viabilidade
+${opt('Observações adicionais ou requisitos do professor', 'obs', 'seguir estrutura padrão completa de Plano de Negócios PNBOX/SEBRAE')}
 
-Quando aparecerem conceitos como Payback, VPL, TIR, TAM, SAM, SOM, CAC, LTV, MRR, ARR, churn, retenção, MVP, PMF ou outros termos técnicos, NÃO presuma que eu conheço o significado. Explique primeiro:
-- o que é;
-- qual problema ou pergunta ajuda a responder;
-- em que situação faz sentido usar;
-- quais dados são necessários;
-- um exemplo simples, se necessário;
-- e só depois aplique ao meu negócio.
+============================================================
+6. ESTRUTURA OBRIGATÓRIA DO PLANO DE NEGÓCIOS (MODELO PNBOX)
+============================================================
+Estruture o Plano de Negócios contemplando os 7 blocos oficiais abaixo:
 
-Se o conceito não fizer sentido para o meu modelo de negócio, diga isso em vez de forçar seu uso.
+BLOCO 1 — SUMÁRIO EXECUTIVO E EQUIPE EMPREENDEDORA
+- 1.1 Resumo dos principais pontos do Plano de Negócios
+- 1.2 Dados dos empreendedores (quadro com os ${totalIntegrantes} integrante(s), perfil, atribuições na empresa e divisão de responsabilidades no trabalho)
+- 1.3 Dados do empreendimento (Nome, setor de atividade, forma jurídica e enquadramento tributário explicado — ex.: MEI ou ME no Simples Nacional — e capital social estimado)
+- 1.4 Missão, Visão e Valores da empresa
+- 1.5 Fonte de recursos (próprios e/ou de terceiros)
 
-==============================
-7. COMO COMEÇAR
-==============================
-Não desenvolva o plano inteiro agora.
+BLOCO 2 — ANÁLISE DE MERCADO (CLIENTES, CONCORRENTES E FORNECEDORES)
+- 2.1 Estudo dos Clientes: segmentação de mercado, perfil detalhado da Persona, dores/necessidades, comportamento de compra e jornada do cliente
+- 2.2 Estudo dos Concorrentes: quadro comparativo entre a nossa empresa e 2 a 3 perfis de concorrentes diretos/indiretos (comparando preço, qualidade, atendimento, localização/canais e diferenciais)
+- 2.3 Estudo dos Fornecedores: quadro com os principais insumos/mercadorias/equipamentos, tipos de fornecedores necessários, prazos e critérios de escolha
 
-Comece apenas pela ETAPA 1 — DEFINIÇÃO DO NEGÓCIO.
+BLOCO 3 — PLANO DE MARKETING (OS 4 Ps)
+- 3.1 Produto/Serviço: descrição detalhada da linha de produtos ou serviços, apresentação/embalagem, garantia ou suporte
+- 3.2 Preço: lógica de formação de preço, tabela inicial sugerida de preços/pacotes, ticket médio estimado e meios de pagamento
+- 3.3 Praça (Estrutura de Comercialização): localização física e/ou estrutura digital, canais de distribuição e logística de entrega/atendimento
+- 3.4 Promoção (Estratégias Promocionais): canais de divulgação, redes sociais, ações de inauguração/lançamento, relacionamento e funil de vendas
 
-Faça o seguinte:
-1. diga em linguagem simples o que entendeu sobre meu negócio;
-2. separe o que já está definido do que ainda é hipótese;
-3. identifique contradições ou pontos vagos;
-4. faça somente as perguntas realmente necessárias para concluirmos esta etapa;
-5. espere minha resposta antes de avançar.
+BLOCO 4 — PLANO OPERACIONAL
+- 4.1 Layout ou arranjo físico/digital necessário (ambientes, equipamentos e infraestrutura)
+- 4.2 Capacidade produtiva, comercial ou de atendimento (capacidade instalada vs. volume inicial estimado no 1º semestre)
+- 4.3 Processos operacionais passo a passo (fluxo desde a compra/preparo até a venda, entrega e pós-venda)
+- 4.4 Necessidade de pessoal: quadro de cargos/funções, distribuição entre os integrantes do grupo e eventuais contratações
 
-Ao final de cada etapa, mantenha um REGISTRO DAS DECISÕES para que o plano permaneça coerente até o final.`;
+BLOCO 5 — PLANO FINANCEIRO ESTRUTURADO (PADRÃO PNBOX / SEBRAE)
+Apresente quadros organizados, coerentes entre si e com memória de cálculo explicada passo a passo:
+- 5.1 Investimento Total Inicial:
+  a) Investimentos Fixos (máquinas, equipamentos, móveis, utensílios, informática);
+  b) Capital de Giro (estoque inicial + caixa mínimo para sustentar a operação no início);
+  c) Investimentos Pré-Operacionais (registro, identidade visual, adaptações, divulgação inicial);
+  d) Quadro-resumo do Investimento Total (Fixo + Giro + Pré-Operacional).
+- 5.2 Estimativa de Faturamento Mensal (tabela com produtos/serviços × quantidade mensal estimada × preço unitário = Receita Bruta Mensal).
+- 5.3 Custos Variáveis Mensais (CMV / custos unitários de insumos + impostos sobre vendas/DAS + taxas de meios de pagamento/comissões) e cálculo do **Índice de Margem de Contribuição**.
+- 5.4 Custos Fixos Operacionais Mensais (aluguel, energia, água, internet, sistemas, pró-labore, contabilidade, marketing fixo, manutenção e depreciação).
+- 5.5 Demonstrativo de Resultados (DRE Simplificada Mensal e Projeção Anual):
+  Receita Bruta (-) Impostos e Custos Variáveis (=) Margem de Contribuição (-) Custos Fixos (=) Resultado Operacional (Lucro/Prejuízo Líquido).
+- 5.6 Indicadores de Viabilidade Financeira (explique o conceito, mostre a fórmula, substitua os valores e interprete o resultado):
+  - **Ponto de Equilíbrio Contábil (PE)** (quanto precisa faturar por mês para empatar custos);
+  - **Lucratividade (%)** = (Lucro Líquido / Receita Total) × 100;
+  - **Rentabilidade (% ao mês e ao ano)** = (Lucro Líquido / Investimento Total) × 100;
+  - **Prazo de Retorno do Investimento (Payback)** = Investimento Total / Lucro Líquido Mensal.
+
+BLOCO 6 — CONSTRUÇÃO DE CENÁRIOS E MATRIZ F.O.F.A. (SWOT)
+- 6.1 Simulação de 3 Cenários (Realista/Provável, Pessimista com queda nas vendas e Otimista com crescimento) + ações preventivas e contingenciais
+- 6.2 Matriz F.O.F.A. (SWOT) completa:
+  - Ambiente Interno: **Forças** e **Fraquezas**
+  - Ambiente Externo: **Oportunidades** e **Ameaças**
+  - Estratégias cruzadas (como usar as forças para aproveitar oportunidades e como reduzir fraquezas e ameaças)
+
+BLOCO 7 — AVALIAÇÃO ESTRATÉGICA E CONCLUSÃO DE VIABILIDADE
+- 7.1 Parecer técnico sobre a viabilidade mercadológica, operacional e financeira do projeto
+- 7.2 Quadro de divisão de tarefas entre os ${totalIntegrantes} integrante(s) da equipe para finalizar e apresentar o trabalho
+
+============================================================
+7. DIRETRIZES DIDÁTICAS E REGRAS DE QUALIDADE
+============================================================
+1. Linguagem clara, profissional e didática, adequada a estudantes do Curso Técnico em Administração da ETMSL.
+2. Sempre diferencie com clareza o que foi **[DEFINIDO PELO GRUPO]** no formulário do que é **[SUGESTÃO / ESTIMATIVA DIDÁTICA PARA VALIDAÇÃO]** (já que se trata de um projeto em estágio inicial/fictício).
+3. Não jogue siglas ou indicadores financeiros soltos: sempre explique o significado de termos como CMV, Margem de Contribuição, Ponto de Equilíbrio, Lucratividade, Rentabilidade, Payback, Capital de Giro, Ticket Médio, CAC, LTV ou MVP quando aparecerem.
+4. Garanta consistência matemática: o faturamento, os custos variáveis, os custos fixos, a DRE e os indicadores (Ponto de Equilíbrio, Lucratividade, Rentabilidade e Payback) devem bater exatamente entre si.
+
+============================================================
+8. INSTRUÇÃO DE INÍCIO
+============================================================
+${instrucaoEntrega}`;
+
     saida.style.display = 'block';
     saida.scrollIntoView({ behavior: 'smooth' });
   });
@@ -540,19 +856,21 @@ Ao final de cada etapa, mantenha um REGISTRO DAS DECISÕES para que o plano perm
   document.getElementById('copiar').addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(prompt.value);
-      document.getElementById('copystatus').textContent = 'Prompt copiado. Agora é só colar na IA escolhida.';
+      document.getElementById('copystatus').textContent = 'Prompt copiado! Agora é só colar na IA escolhida para gerar a 1ª versão do Plano de Negócios.';
     } catch (e) {
       prompt.select();
       document.execCommand('copy');
-      document.getElementById('copystatus').textContent = 'Prompt copiado.';
+      document.getElementById('copystatus').textContent = 'Prompt copiado!';
     }
   });
 
   f.addEventListener('reset', () => setTimeout(() => {
+    setTeamCount(1);
+    document.getElementById('turma').value = 'Técnico em Administração — 4º módulo';
     saida.style.display = 'none';
     prompt.value = '';
     document.getElementById('copystatus').textContent = '';
-    req.forEach(x => {
+    getRequiredFields().forEach(x => {
       x.classList.remove('emi-invalid');
       const e = x.parentElement.querySelector('.emi-err');
       if (e) e.style.display = 'none';
