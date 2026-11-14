@@ -66,5 +66,14 @@ window.CATALOGO_MATERIAIS = [
     detalhes: 'Pesquisa individual disponível · demais etapas em preparação', destaque: 'PJE',
     caminho: 'materiais/pje/index.html', cor: 'azul', disponivel: true,
     temas: ['Godot', 'Jogos 2D', 'Cenas', 'Movimentação', 'GDScript']
+  },
+  {
+    titulo: 'EMI',
+    subtitulo: 'Empreendedorismo e Inovação',
+    descricao: 'Formulário interativo que estrutura a ideia de negócio e gera um prompt completo para criar um Plano de Negócios passo a passo com apoio de IA.',
+    categoria: 'Gestão e Inovação', nivel: 'Técnico em Administração',
+    detalhes: 'Formulário gerador de prompt · 20 etapas', destaque: 'EMI',
+    caminho: 'materiais/emi/index.html', cor: 'verde', disponivel: true,
+    temas: ['Plano de Negócios', 'Prompt com IA', 'Proposta de Valor', 'Persona', 'Viabilidade']
   }
 ];
