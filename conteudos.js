@@ -70,10 +70,10 @@ window.CATALOGO_MATERIAIS = [
   {
     titulo: 'EMI',
     subtitulo: 'Empreendedorismo e Inovação',
-    descricao: 'Formulário interativo que estrutura a ideia de negócio e gera um prompt completo para criar um Plano de Negócios passo a passo com apoio de IA.',
-    categoria: 'Gestão e Inovação', nivel: 'Técnico em Administração',
-    detalhes: 'Formulário gerador de prompt · 20 etapas', destaque: 'EMI',
+    descricao: 'Formulário interativo no padrão PNBOX que estrutura a equipe e a ideia de negócio para gerar com IA a 1ª versão completa do Plano de Negócios.',
+    categoria: 'Gestão e Inovação', nivel: 'Técnico em Administração · 4º módulo',
+    detalhes: 'Gerador de prompt PNBOX · Individual ou em equipe', destaque: 'EMI',
     caminho: 'materiais/emi/index.html', cor: 'verde', disponivel: true,
-    temas: ['Plano de Negócios', 'Prompt com IA', 'Proposta de Valor', 'Persona', 'Viabilidade']
+    temas: ['Plano de Negócios', 'Padrão PNBOX', 'Marketing 4Ps', 'Plano Financeiro e DRE', 'Matriz SWOT']
   }
 ];
