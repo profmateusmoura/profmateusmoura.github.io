@@ -21,6 +21,35 @@
     <button id="entrar" type="button" hidden>Entrar com Google</button>
     <button id="sair" type="button" hidden>Sair</button>
     <button id="trocar" type="button" hidden>Trocar chave publicável</button>
+    <button id="solicitar-ead" type="button" hidden>Solicitar vaga na turma EAD</button>
+    <section id="turmas" hidden aria-labelledby="titulo-turmas">
+      <h2 id="titulo-turmas">Minhas turmas</h2>
+      <ul id="lista-turmas"></ul>
+      <form id="nova-turma" hidden>
+        <h3>Criar turma</h3>
+        <label>Disciplina <select id="curso" required></select></label>
+        <label>Nome <input id="nome-turma" maxlength="100" required></label>
+        <label>Ano <input id="ano-turma" type="number" min="2000" max="2100" required></label>
+        <button>Criar turma</button>
+      </form>
+      <form id="matriculas" hidden>
+        <h3>Cadastro prévio de alunos</h3>
+        <label>Turma <select id="turma-matricula" required></select></label>
+        <label>E-mails do Classroom, um por linha
+          <textarea id="emails" rows="6" required></textarea>
+        </label>
+        <button>Cadastrar e-mails</button>
+        <div id="config-ead" hidden>
+          <button id="abrir-ead" type="button">Receber inscrições EAD nesta turma</button>
+          <button id="fechar-ead" type="button">Encerrar novas inscrições EAD</button>
+        </div>
+        <ul id="lista-emails"></ul>
+        <h3>Solicitações EAD pendentes</h3>
+        <ul id="lista-ead"></ul>
+      </form>
+      <p id="estado-turmas" role="status"></p>
+    </section>
   </main>
+  <script src="./turmas.js" defer></script>
 </body>
 </html>

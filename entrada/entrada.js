@@ -32,7 +32,7 @@ async function start() {
   if (!user) {
     login.hidden = false;
     statusLine.textContent = callbackError || query.has('code')
-      ? 'O login não foi concluído. Confira a conta de teste e as URLs autorizadas.'
+      ? 'O login não foi concluído. Use a conta Google cadastrada pela escola.'
       : 'Entre com sua conta Google de teste.';
     login.onclick = async () => {
       login.disabled = true;
@@ -61,11 +61,41 @@ async function start() {
       showError();
     }
   };
+  const { data: allowed, error: accessError } = await client.rpc('pje_can_enter');
+  if (accessError) {
+    statusLine.textContent = 'Não foi possível confirmar a autorização de acesso.';
+    return;
+  }
+  if (!allowed) {
+    const request = document.querySelector('#solicitar-ead');
+    const pending = await client.from('ead_requests').select('requested_at')
+      .eq('user_id', user.id).is('approved_at', null).limit(1);
+    if (pending.data?.length) {
+      statusLine.textContent = 'Sua solicitação de vaga EAD aguarda aprovação.';
+      return;
+    }
+    statusLine.textContent = 'Esta conta ainda não tem acesso às turmas. Você pode solicitar uma vaga EAD.';
+    request.hidden = false;
+    request.onclick = async () => {
+      request.disabled = true;
+      try {
+        const { error } = await client.rpc('request_ead_access');
+        if (error) throw error;
+        request.hidden = true;
+        statusLine.textContent = 'Solicitação enviada. Aguarde a aprovação do professor.';
+      } catch {
+        statusLine.textContent = 'Não foi possível solicitar a vaga. Confira se a turma EAD está recebendo inscrições.';
+        request.disabled = false;
+      }
+    };
+    return;
+  }
   const { data: profile, error } = await client.from('user_profiles')
     .select('display_name, app_role').eq('user_id', user.id).maybeSingle();
   statusLine.textContent = error || !profile
     ? 'Login confirmado. O perfil do piloto ainda não está disponível.'
     : 'Login confirmado. Perfil: ' + profile.app_role + '.';
+  if (profile && !error) await showClasses(client, user.id, profile.app_role);
 }
 
 changeKey.addEventListener('click', () => {
