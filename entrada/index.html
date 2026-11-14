@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar no piloto de PJE</title>
+  <link rel="stylesheet" href="../assets/portal.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="entrada.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <p><a href="../index.html">← Portal de Estudos</a></p>
+    <h1>Entrar no piloto de PJE</h1>
+    <p id="estado" role="status">Verificando a sessão…</p>
+    <form id="config" hidden>
+      <label for="chave">Chave publicável do Supabase</label>
+      <input id="chave" required autocomplete="off" spellcheck="false">
+      <button type="submit">Salvar neste navegador</button>
+    </form>
+    <button id="entrar" type="button" hidden>Entrar com Google</button>
+    <button id="sair" type="button" hidden>Sair</button>
+    <button id="trocar" type="button" hidden>Trocar chave publicável</button>
+  </main>
+</body>
+</html>
