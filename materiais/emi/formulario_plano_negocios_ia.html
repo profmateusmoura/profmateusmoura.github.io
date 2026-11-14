@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gerador de Prompt — Plano de Negócios com IA</title>
+<style>
+:root{--azul:#2457a6;--azul2:#173f7a;--bg:#f4f6f8;--texto:#1f2937;--linha:#d0d5dd;--muted:#667085;--ok:#16794b;--erro:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--texto);line-height:1.5}
+.wrap{width:min(980px,calc(100% - 24px));margin:auto}header{background:white;border-bottom:1px solid var(--linha);padding:26px 0 20px}
+h1{margin:0 0 6px;font-size:clamp(1.6rem,4vw,2.3rem)}.sub{margin:0;color:var(--muted)}
+main{padding:22px 0 44px}.info{background:#eef4ff;border:1px solid #bfd0ef;border-radius:12px;padding:14px 16px;margin-bottom:16px}
+.progressbox{position:sticky;top:0;background:rgba(244,246,248,.96);padding:10px 0;z-index:10}.rowp{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:6px}
+.progress{height:9px;background:#e4e7ec;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:var(--azul);transition:.2s}
+section{background:#fff;border:1px solid var(--linha);border-radius:14px;padding:20px;margin:16px 0}h2{font-size:1.2rem;margin:0 0 5px}.help{color:var(--muted);margin:0 0 16px;font-size:.94rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.full{grid-column:1/-1}label{display:block;font-weight:700;margin-bottom:5px}
+.req{color:var(--erro)}.hint{display:block;font-size:.83rem;color:var(--muted);font-weight:400;margin-top:3px}
+input,textarea,select{width:100%;padding:11px 12px;border:1px solid #98a2b3;border-radius:9px;font:inherit;color:var(--texto);background:white}
+textarea{min-height:105px;resize:vertical}input:focus,textarea:focus,select:focus{outline:0;border-color:var(--azul);box-shadow:0 0 0 3px rgba(36,87,166,.12)}
+.invalid{border-color:var(--erro)!important}.err{display:none;color:var(--erro);font-size:.8rem;margin-top:4px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}button{border:0;border-radius:9px;padding:12px 16px;font-weight:700;cursor:pointer;font:inherit}
+.primary{background:var(--azul);color:white}.primary:disabled{opacity:.45;cursor:not-allowed}.secondary{background:#eaecf0}.copy{background:var(--ok);color:white}
+.status{font-size:.9rem;font-weight:700;margin-top:10px}.ok{color:var(--ok)}.warn{color:#a15c00}.out{display:none}
+#prompt{min-height:520px;font-family:Consolas,"Courier New",monospace;font-size:.9rem;background:#fbfcfe}
+footer{text-align:center;color:var(--muted);font-size:.83rem;padding:12px 0 30px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.full{grid-column:auto}section{padding:16px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>Gerador de Prompt — Plano de Negócios com IA</h1>
+<p class="sub">Empreendedorismo e Inovação · Técnico em Administração · ETMSL · Prof. Mateus Moura</p>
+</div></header>
+<main class="wrap">
+<div class="info"><strong>Preencha os campos com *</strong>. Quando todos estiverem completos, o botão para gerar o prompt será liberado. Tudo funciona no próprio aparelho.</div>
+
+<div class="progressbox">
+<div class="rowp"><span id="txtProg">0 de 12 campos obrigatórios preenchidos</span><span id="pct">0%</span></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+</div>
+
+<form id="form" novalidate>
+
+<section>
+<h2>1. Identificação</h2><p class="help">Dados básicos do trabalho.</p>
+<div class="grid">
+<div><label>Nome do aluno ou da dupla <span class="req">*</span></label><input id="aluno" required placeholder="Ex.: Ana Souza e João Lima"><div class="err">Preencha este campo.</div></div>
+<div><label>Turma <span class="req">*</span></label><input id="turma" required placeholder="Ex.: Administração 2º módulo"><div class="err">Preencha este campo.</div></div>
+</div>
+</section>
+
+<section>
+<h2>2. Ideia do negócio</h2><p class="help">Explique a ideia com suas próprias palavras. Não precisa estar perfeita.</p>
+<div class="grid">
+<div><label>Nome provisório do negócio <span class="req">*</span></label><input id="nome" required><div class="err">Preencha este campo.</div></div>
+<div><label>Estágio atual <span class="req">*</span></label>
+<select id="estagio" required><option value="">Selecione...</option><option>Somente uma ideia</option><option>Ideia já pesquisada informalmente</option><option>Já conversei com possíveis clientes</option><option>Já fiz protótipo ou teste</option><option>Já realizei vendas</option><option>Negócio já existe e será analisado/melhorado</option></select><div class="err">Selecione uma opção.</div></div>
+<div class="full"><label>Descreva a ideia do negócio <span class="req">*</span></label><textarea id="ideia" required></textarea><div class="err">Descreva a ideia.</div></div>
+<div><label>Onde pretende atuar? <span class="req">*</span><span class="hint">Cidade, região, ambiente digital etc.</span></label><input id="local" required><div class="err">Informe a área de atuação.</div></div>
+<div><label>Tipo principal de cliente <span class="req">*</span></label>
+<select id="tipo" required><option value="">Selecione...</option><option>Pessoas físicas (B2C)</option><option>Empresas (B2B)</option><option>Governo/órgãos públicos (B2G)</option><option>Mais de um tipo</option><option>Ainda não sei</option></select><div class="err">Selecione uma opção.</div></div>
+</div>
+</section>
+
+<section>
+<h2>3. Cliente, problema e solução</h2><p class="help">Esse é o núcleo do plano de negócios.</p>
+<div class="grid">
+<div class="full"><label>Quem você imagina que será o cliente? <span class="req">*</span></label><textarea id="cliente" required placeholder="Evite responder apenas 'todo mundo'."></textarea><div class="err">Descreva o cliente.</div></div>
+<div class="full"><label>Qual problema, necessidade ou desejo pretende atender? <span class="req">*</span></label><textarea id="problema" required></textarea><div class="err">Descreva o problema ou necessidade.</div></div>
+<div class="full"><label>Qual produto ou serviço será oferecido? <span class="req">*</span></label><textarea id="solucao" required></textarea><div class="err">Descreva a solução.</div></div>
+<div class="full"><label>Como o negócio pretende ganhar dinheiro? <span class="req">*</span><span class="hint">Venda unitária, mensalidade, assinatura, comissão etc. Se ainda não souber, escreva isso.</span></label><textarea id="receita" required></textarea><div class="err">Explique como poderá gerar receita.</div></div>
+<div class="full"><label>Por que o cliente poderia escolher sua solução? <span class="req">*</span><span class="hint">Pode ser apenas uma hipótese inicial.</span></label><textarea id="valor" required></textarea><div class="err">Apresente uma hipótese de valor ou diferencial.</div></div>
+</div>
+</section>
+
+<section>
+<h2>4. O que você já sabe</h2><p class="help">Campos opcionais. Preencha somente o que já possuir.</p>
+<div class="grid">
+<div class="full"><label>Pesquisas, conversas ou evidências já obtidas</label><textarea id="evidencias"></textarea></div>
+<div class="full"><label>Concorrentes ou alternativas que já conhece</label><textarea id="concorrentes"></textarea></div>
+<div><label>Preço imaginado ou pesquisado</label><input id="preco"></div>
+<div><label>Investimento inicial disponível ou estimado</label><input id="investimento"></div>
+<div class="full"><label>Recursos, conhecimentos ou parceiros disponíveis</label><textarea id="recursos"></textarea></div>
+<div class="full"><label>Limitações ou dificuldades já percebidas</label><textarea id="limitacoes"></textarea></div>
+<div class="full"><label>Observações ou preferências adicionais</label><textarea id="obs"></textarea></div>
+</div>
+</section>
+
+<section>
+<h2>5. Gerar o prompt</h2>
+<p class="help">O prompt orientará a IA escolhida a conduzir o plano por etapas, sem inventar informações.</p>
+<div class="actions"><button type="button" class="primary" id="gerar" disabled>Gerar prompt completo</button><button type="reset" class="secondary">Limpar formulário</button></div>
+<div class="status warn" id="status">Preencha todos os campos obrigatórios.</div>
+</section>
+</form>
+
+<section class="out" id="saida">
+<h2>Prompt completo gerado</h2>
+<p class="help">Copie e cole na IA de sua preferência.</p>
+<textarea id="prompt" readonly></textarea>
+<div class="actions"><button type="button" class="copy" id="copiar">Copiar prompt</button></div>
+<div class="status ok" id="copystatus"></div>
+</section>
+</main>
+
+<footer class="wrap">ETMSL · Técnico em Administração · Empreendedorismo e Inovação · Prof. Mateus Moura</footer>
+
+<script>
+const f=document.getElementById('form');
+const req=[...f.querySelectorAll('[required]')];
+const gerar=document.getElementById('gerar');
+const saida=document.getElementById('saida');
+const prompt=document.getElementById('prompt');
+const val=id=>(document.getElementById(id).value||'').trim();
+const opt=(rot,id)=>val(id)?rot+': '+val(id):rot+': ainda não informado pelo aluno.';
+
+function atualiza(){
+ const ok=req.filter(x=>x.value.trim()!=='').length;
+ const p=Math.round(ok/req.length*100);
+ document.getElementById('txtProg').textContent=ok+' de '+req.length+' campos obrigatórios preenchidos';
+ document.getElementById('pct').textContent=p+'%';
+ document.getElementById('bar').style.width=p+'%';
+ gerar.disabled=ok!==req.length;
+ const st=document.getElementById('status');
+ st.textContent=ok===req.length?'Todos os campos obrigatórios foram preenchidos. O prompt já pode ser gerado.':'Preencha todos os campos obrigatórios.';
+ st.className='status '+(ok===req.length?'ok':'warn');
+}
+req.forEach(x=>{x.addEventListener('input',atualiza);x.addEventListener('change',atualiza)});
+
+function valida(){
+ let ok=true;
+ req.forEach(x=>{
+   const v=x.value.trim()!=='';
+   x.classList.toggle('invalid',!v);
+   const e=x.parentElement.querySelector('.err'); if(e)e.style.display=v?'none':'block';
+   if(!v)ok=false;
+ });
+ return ok;
+}
+
+gerar.addEventListener('click',()=>{
+ if(!valida())return;
+ prompt.value=`Estou elaborando um PLANO DE NEGÓCIOS para a disciplina de Empreendedorismo e Inovação do Curso Técnico em Administração da ETMSL.
+
+Quero que você atue como meu ASSISTENTE DE PLANEJAMENTO. Não faça o trabalho inteiro por mim e não transforme hipóteses em fatos.
+
+==============================
+1. IDENTIFICAÇÃO
+==============================
+Aluno(s): ${val('aluno')}
+Turma: ${val('turma')}
+Nome provisório do negócio: ${val('nome')}
+Estágio atual: ${val('estagio')}
+
+==============================
+2. IDEIA INICIAL
+==============================
+Descrição do negócio:
+${val('ideia')}
+
+Área de atuação:
+${val('local')}
+
+Tipo principal de cliente:
+${val('tipo')}
+
+==============================
+3. CLIENTE, PROBLEMA E SOLUÇÃO
+==============================
+Cliente que imagino atender:
+${val('cliente')}
+
+Problema, necessidade ou desejo:
+${val('problema')}
+
+Produto ou serviço:
+${val('solucao')}
+
+Como imagino que o negócio poderá ganhar dinheiro:
+${val('receita')}
+
+Por que acredito que o cliente poderia escolher essa solução:
+${val('valor')}
+
+==============================
+4. INFORMAÇÕES QUE JÁ POSSUO
+==============================
+${opt('Pesquisas, conversas ou evidências', 'evidencias')}
+
+${opt('Concorrentes ou alternativas conhecidos', 'concorrentes')}
+
+${opt('Preço imaginado ou pesquisado', 'preco')}
+
+${opt('Investimento disponível ou estimado', 'investimento')}
+
+${opt('Recursos, conhecimentos ou parceiros', 'recursos')}
+
+${opt('Limitações ou dificuldades', 'limitacoes')}
+
+${opt('Observações adicionais', 'obs')}
+
+==============================
+5. REGRAS PARA NOSSA CONVERSA
+==============================
+1. Não invente dados de mercado, preços, concorrentes, entrevistas, clientes ou fontes.
+2. Diferencie sempre FATO, ESTIMATIVA, HIPÓTESE e DECISÃO.
+3. Quando faltar informação, diga claramente o que precisa ser pesquisado.
+4. Explique siglas e termos técnicos quando aparecerem.
+5. Termos em inglês podem ser usados, mas devem ser explicados em português de forma simples.
+6. Não apresente uma sequência de siglas sem explicar a relação entre elas.
+7. Quando houver cálculo, explique: qual pergunta ele responde, quais dados são necessários, fórmula, substituição dos valores, resultado e interpretação.
+8. Não decida automaticamente por mim quando houver alternativas. Apresente opções e deixe a decisão comigo.
+9. Aponte incoerências entre partes do plano.
+10. Preserve decisões anteriores e avise quando alguma precisar ser revista.
+11. Use linguagem clara e adequada a um aluno de curso técnico em Administração.
+12. Trabalhe UMA ETAPA POR VEZ e espere minha resposta antes de avançar.
+13. Ao final de cada etapa, registre: o que foi definido, o que ainda é hipótese, o que precisa ser pesquisado/testado e quais decisões tomei.
+14. Nunca apresente projeções financeiras como certeza.
+
+==============================
+6. ROTEIRO DO PLANO
+==============================
+Trabalhe nesta ordem:
+
+1 — Definição do negócio
+2 — Segmentação de mercado
+3 — Persona
+4 — Jornada do cliente
+5 — Proposta de valor
+6 — Concorrência
+7 — Experimentação e MVP, quando fizer sentido
+8 — Canais de aquisição
+9 — Funil de vendas
+10 — Estrutura operacional
+11 — Investimento inicial
+12 — Projeção de receitas
+13 — Custos e despesas
+14 — DRE simplificada
+15 — Indicadores financeiros
+16 — Dimensionamento de mercado
+17 — Métricas de clientes e receita
+18 — Cenários
+19 — Riscos e pendências
+20 — Conclusão de viabilidade
+
+Quando aparecerem conceitos como Payback, VPL, TIR, TAM, SAM, SOM, CAC, LTV, MRR, ARR, churn, retenção, MVP, PMF ou outros termos técnicos, NÃO presuma que eu conheço o significado. Explique primeiro:
+- o que é;
+- qual problema ou pergunta ajuda a responder;
+- em que situação faz sentido usar;
+- quais dados são necessários;
+- um exemplo simples, se necessário;
+- e só depois aplique ao meu negócio.
+
+Se o conceito não fizer sentido para o meu modelo de negócio, diga isso em vez de forçar seu uso.
+
+==============================
+7. COMO COMEÇAR
+==============================
+Não desenvolva o plano inteiro agora.
+
+Comece apenas pela ETAPA 1 — DEFINIÇÃO DO NEGÓCIO.
+
+Faça o seguinte:
+1. diga em linguagem simples o que entendeu sobre meu negócio;
+2. separe o que já está definido do que ainda é hipótese;
+3. identifique contradições ou pontos vagos;
+4. faça somente as perguntas realmente necessárias para concluirmos esta etapa;
+5. espere minha resposta antes de avançar.
+
+Ao final de cada etapa, mantenha um REGISTRO DAS DECISÕES para que o plano permaneça coerente até o final.`;
+ saida.style.display='block';
+ saida.scrollIntoView({behavior:'smooth'});
+});
+
+document.getElementById('copiar').addEventListener('click',async()=>{
+ try{await navigator.clipboard.writeText(prompt.value);document.getElementById('copystatus').textContent='Prompt copiado. Agora é só colar na IA escolhida.'}
+ catch(e){prompt.select();document.execCommand('copy');document.getElementById('copystatus').textContent='Prompt copiado.'}
+});
+
+f.addEventListener('reset',()=>setTimeout(()=>{saida.style.display='none';prompt.value='';atualiza();},0));
+atualiza();
+</script>
+</body>
+</html>

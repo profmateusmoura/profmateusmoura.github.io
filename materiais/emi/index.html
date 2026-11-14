@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="Gerador de Prompt para Plano de Negócios com IA — Empreendedorismo e Inovação · Técnico em Administração · ETMSL · Prof. Mateus Moura."><title>Gerador de Prompt — Plano de Negócios com IA · EMI</title><link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../shared/style.css"><link rel="stylesheet" href="../shared/pygments.css"><script>try{document.documentElement.dataset.theme=localStorage.getItem('pi-theme')||'light'}catch(e){}</script><link rel="stylesheet" href="../shared/navigation.css">
+<style>
+.emi-progressbox {
+  position: sticky;
+  top: 72px;
+  background: var(--bg);
+  padding: 12px 0;
+  z-index: 20;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.emi-rowp {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 7px;
+}
+.emi-progress {
+  height: 9px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.emi-bar {
+  height: 100%;
+  width: 0;
+  background: var(--green);
+  transition: width 0.22s ease;
+}
+.emi-section {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  margin: 18px 0;
+  box-shadow: var(--shadow);
+}
+.article-content .emi-section h2 {
+  font-size: 1.22rem;
+  margin: 0 0 4px;
+  padding-top: 0;
+  border-top: 0;
+}
+.emi-help {
+  color: var(--muted);
+  margin: 0 0 16px !important;
+  font-size: 0.92rem;
+}
+.emi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.emi-full {
+  grid-column: 1 / -1;
+}
+.emi-section label {
+  display: block;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.emi-req {
+  color: #d92d20;
+}
+:root[data-theme="dark"] .emi-req {
+  color: #f97066;
+}
+.emi-hint {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.emi-section input,
+.emi-section textarea,
+.emi-section select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--bg);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.emi-section textarea {
+  min-height: 105px;
+  resize: vertical;
+}
+.emi-section input:focus,
+.emi-section textarea:focus,
+.emi-section select:focus {
+  outline: 0;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(28, 101, 80, 0.16);
+}
+.emi-invalid {
+  border-color: #d92d20 !important;
+}
+.emi-err {
+  display: none;
+  color: #d92d20;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+:root[data-theme="dark"] .emi-err {
+  color: #f97066;
+}
+.emi-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+.emi-btn {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 18px;
+  font-weight: 750;
+  font-size: 13.5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.15s, opacity 0.15s, background 0.15s;
+}
+.emi-btn-primary {
+  background: var(--deep);
+  color: var(--accent);
+}
+:root[data-theme="dark"] .emi-btn-primary {
+  background: var(--green);
+  color: #10241c;
+}
+.emi-btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.emi-btn-secondary {
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+.emi-btn-copy {
+  background: #16794b;
+  color: #ffffff;
+}
+.emi-status {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.emi-ok {
+  color: var(--green);
+}
+.emi-warn {
+  color: #b54708;
+}
+:root[data-theme="dark"] .emi-warn {
+  color: #fdb022;
+}
+.emi-out {
+  display: none;
+}
+#prompt {
+  min-height: 520px;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Courier New", monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  background: var(--code);
+}
+@media (max-width: 700px) {
+  .emi-grid {
+    grid-template-columns: 1fr;
+  }
+  .emi-full {
+    grid-column: auto;
+  }
+  .emi-section {
+    padding: 16px;
+  }
+  .emi-progressbox {
+    top: 62px;
+  }
+}
+</style>
+</head>
+<body data-root="./" data-page="Gerador de Prompt — Plano de Negócios com IA" data-course="emi"><a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div class="app-frame"><aside class="sidebar" id="sidebar"><a class="portal-return" href="../../index.html" aria-label="Voltar ao portal de materiais"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Todos os materiais</span></a><a class="brand" href="./index.html"><span class="brand-mark"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></span><span><strong>EMI</strong><small>Empreendedorismo e Inovação</small></span></a><div class="sidebar-section-title">FERRAMENTA <span>1 ATIVIDADE</span></div><nav class="site-nav" aria-label="Atividades da disciplina"><a href="./index.html" class="nav-module active"><span class="nav-index">01</span><span class="nav-label">Gerador de Prompt — Plano de Negócios com IA</span><span class="visit-dot" data-visited="01_gerador_prompt_plano_negocios" title="Atividade visitada"></span></a></nav><div class="sidebar-foot"><div class="progress-title">Seu percurso <span id="progress-count">0/1</span></div><div class="progress-bar"><span id="progress-line" style="width:0%"></span></div><p>Seu progresso fica salvo apenas neste navegador.</p></div></aside>
+<div class="main-area"><header class="topbar"><div class="top-left"><button type="button" class="icon-button menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-controls="sidebar" aria-expanded="false"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a href="./index.html" class="top-home">Empreendedorismo e Inovação <span class="top-sep">/</span> <span class="top-current">Gerador de Prompt — Plano de Negócios com IA</span></a></div><div class="top-actions"><a class="icon-button portal-top" href="../../index.html" aria-label="Voltar a todos os materiais" title="Todos os materiais"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Materiais</span></a><button type="button" class="search-open" id="search-open"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Buscar no material</span><kbd>Ctrl K</kbd></button><button type="button" class="icon-button theme-toggle" id="theme-toggle" aria-label="Alternar tema claro e escuro"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.1A8 8 0 0 1 9.9 3.5 8 8 0 1 0 20.5 14.1Z"/></svg></button></div></header>
+<main id="conteudo"><div class="reading-layout"><article class="article"><header class="article-header"><div class="article-path">EMPREENDEDORISMO E INOVAÇÃO <span>·</span> TÉCNICO EM ADMINISTRAÇÃO · ETMSL</div><h1>Gerador de Prompt — Plano de Negócios com IA</h1><p class="article-subtitle">Empreendedorismo e Inovação · Técnico em Administração · ETMSL · Prof. Mateus Moura</p><div class="article-controls"><a class="download-link" href="./formulario_plano_negocios_ia.html" download><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4-4 4 4 4-4M5 17v4h14v-4"/></svg> Baixar formulário (.html)</a><button type="button" class="complete-btn" data-complete="01_gerador_prompt_plano_negocios"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg> <span>Marcar como concluído</span></button></div></header>
+<div class="article-content">
+
+<aside class="callout"><div class="callout-label">Como utilizar</div><p><strong>Preencha os campos com *</strong>. Quando todos estiverem completos, o botão para gerar o prompt será liberado. Tudo funciona no próprio aparelho.</p></aside>
+
+<div class="emi-progressbox">
+  <div class="emi-rowp"><span id="txtProg">0 de 12 campos obrigatórios preenchidos</span><span id="pct">0%</span></div>
+  <div class="emi-progress"><div class="emi-bar" id="bar"></div></div>
+</div>
+
+<form id="form" novalidate>
+
+<section class="emi-section">
+  <h2 id="sec-1-identificacao">1. Identificação <a class="anchor" href="#sec-1-identificacao" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">Dados básicos do trabalho.</p>
+  <div class="emi-grid">
+    <div>
+      <label for="aluno">Nome do aluno ou da dupla <span class="emi-req">*</span></label>
+      <input id="aluno" required placeholder="Ex.: Ana Souza e João Lima">
+      <div class="emi-err">Preencha este campo.</div>
+    </div>
+    <div>
+      <label for="turma">Turma <span class="emi-req">*</span></label>
+      <input id="turma" required placeholder="Ex.: Administração 2º módulo">
+      <div class="emi-err">Preencha este campo.</div>
+    </div>
+  </div>
+</section>
+
+<section class="emi-section">
+  <h2 id="sec-2-ideia">2. Ideia do negócio <a class="anchor" href="#sec-2-ideia" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">Explique a ideia com suas próprias palavras. Não precisa estar perfeita.</p>
+  <div class="emi-grid">
+    <div>
+      <label for="nome">Nome provisório do negócio <span class="emi-req">*</span></label>
+      <input id="nome" required>
+      <div class="emi-err">Preencha este campo.</div>
+    </div>
+    <div>
+      <label for="estagio">Estágio atual <span class="emi-req">*</span></label>
+      <select id="estagio" required>
+        <option value="">Selecione...</option>
+        <option>Somente uma ideia</option>
+        <option>Ideia já pesquisada informalmente</option>
+        <option>Já conversei com possíveis clientes</option>
+        <option>Já fiz protótipo ou teste</option>
+        <option>Já realizei vendas</option>
+        <option>Negócio já existe e será analisado/melhorado</option>
+      </select>
+      <div class="emi-err">Selecione uma opção.</div>
+    </div>
+    <div class="emi-full">
+      <label for="ideia">Descreva a ideia do negócio <span class="emi-req">*</span></label>
+      <textarea id="ideia" required></textarea>
+      <div class="emi-err">Descreva a ideia.</div>
+    </div>
+    <div>
+      <label for="local">Onde pretende atuar? <span class="emi-req">*</span><span class="emi-hint">Cidade, região, ambiente digital etc.</span></label>
+      <input id="local" required>
+      <div class="emi-err">Informe a área de atuação.</div>
+    </div>
+    <div>
+      <label for="tipo">Tipo principal de cliente <span class="emi-req">*</span></label>
+      <select id="tipo" required>
+        <option value="">Selecione...</option>
+        <option>Pessoas físicas (B2C)</option>
+        <option>Empresas (B2B)</option>
+        <option>Governo/órgãos públicos (B2G)</option>
+        <option>Mais de um tipo</option>
+        <option>Ainda não sei</option>
+      </select>
+      <div class="emi-err">Selecione uma opção.</div>
+    </div>
+  </div>
+</section>
+
+<section class="emi-section">
+  <h2 id="sec-3-nucleo">3. Cliente, problema e solução <a class="anchor" href="#sec-3-nucleo" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">Esse é o núcleo do plano de negócios.</p>
+  <div class="emi-grid">
+    <div class="emi-full">
+      <label for="cliente">Quem você imagina que será o cliente? <span class="emi-req">*</span></label>
+      <textarea id="cliente" required placeholder="Evite responder apenas 'todo mundo'."></textarea>
+      <div class="emi-err">Descreva o cliente.</div>
+    </div>
+    <div class="emi-full">
+      <label for="problema">Qual problema, necessidade ou desejo pretende atender? <span class="emi-req">*</span></label>
+      <textarea id="problema" required></textarea>
+      <div class="emi-err">Descreva o problema ou necessidade.</div>
+    </div>
+    <div class="emi-full">
+      <label for="solucao">Qual produto ou serviço será oferecido? <span class="emi-req">*</span></label>
+      <textarea id="solucao" required></textarea>
+      <div class="emi-err">Descreva a solução.</div>
+    </div>
+    <div class="emi-full">
+      <label for="receita">Como o negócio pretende ganhar dinheiro? <span class="emi-req">*</span><span class="emi-hint">Venda unitária, mensalidade, assinatura, comissão etc. Se ainda não souber, escreva isso.</span></label>
+      <textarea id="receita" required></textarea>
+      <div class="emi-err">Explique como poderá gerar receita.</div>
+    </div>
+    <div class="emi-full">
+      <label for="valor">Por que o cliente poderia escolher sua solução? <span class="emi-req">*</span><span class="emi-hint">Pode ser apenas uma hipótese inicial.</span></label>
+      <textarea id="valor" required></textarea>
+      <div class="emi-err">Apresente uma hipótese de valor ou diferencial.</div>
+    </div>
+  </div>
+</section>
+
+<section class="emi-section">
+  <h2 id="sec-4-informacoes">4. O que você já sabe <a class="anchor" href="#sec-4-informacoes" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">Campos opcionais. Preencha somente o que já possuir.</p>
+  <div class="emi-grid">
+    <div class="emi-full">
+      <label for="evidencias">Pesquisas, conversas ou evidências já obtidas</label>
+      <textarea id="evidencias"></textarea>
+    </div>
+    <div class="emi-full">
+      <label for="concorrentes">Concorrentes ou alternativas que já conhece</label>
+      <textarea id="concorrentes"></textarea>
+    </div>
+    <div>
+      <label for="preco">Preço imaginado ou pesquisado</label>
+      <input id="preco">
+    </div>
+    <div>
+      <label for="investimento">Investimento inicial disponível ou estimado</label>
+      <input id="investimento">
+    </div>
+    <div class="emi-full">
+      <label for="recursos">Recursos, conhecimentos ou parceiros disponíveis</label>
+      <textarea id="recursos"></textarea>
+    </div>
+    <div class="emi-full">
+      <label for="limitacoes">Limitações ou dificuldades já percebidas</label>
+      <textarea id="limitacoes"></textarea>
+    </div>
+    <div class="emi-full">
+      <label for="obs">Observações ou preferências adicionais</label>
+      <textarea id="obs"></textarea>
+    </div>
+  </div>
+</section>
+
+<section class="emi-section">
+  <h2 id="sec-5-gerar">5. Gerar o prompt <a class="anchor" href="#sec-5-gerar" aria-label="Link para esta seção">#</a></h2>
+  <p class="emi-help">O prompt orientará a IA escolhida a conduzir o plano por etapas, sem inventar informações.</p>
+  <div class="emi-actions">
+    <button type="button" class="emi-btn emi-btn-primary" id="gerar" disabled>Gerar prompt completo</button>
+    <button type="reset" class="emi-btn emi-btn-secondary">Limpar formulário</button>
+  </div>
+  <div class="emi-status emi-warn" id="status">Preencha todos os campos obrigatórios.</div>
+</section>
+</form>
+
+<section class="emi-section emi-out" id="saida">
+  <h2 id="sec-prompt-gerado">Prompt completo gerado</h2>
+  <p class="emi-help">Copie e cole na IA de sua preferência.</p>
+  <textarea id="prompt" readonly></textarea>
+  <div class="emi-actions">
+    <button type="button" class="emi-btn emi-btn-copy" id="copiar">Copiar prompt</button>
+  </div>
+  <div class="emi-status emi-ok" id="copystatus"></div>
+</section>
+
+</div>
+
+<section class="article-finish"><div class="article-finish-symbol">✓</div><h2>Concluiu o seu prompt?</h2><p>Marque esta atividade como concluída para registrar seu progresso neste navegador.</p><button type="button" class="complete-btn" data-complete="01_gerador_prompt_plano_negocios"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg> <span>Marcar como concluído</span></button></section>
+</article>
+<aside class="page-toc" aria-label="Sumário da página"><div class="toc-title">NESTA PÁGINA</div><a class="toc-link " href="#sec-1-identificacao">1. Identificação</a><a class="toc-link " href="#sec-2-ideia">2. Ideia do negócio</a><a class="toc-link " href="#sec-3-nucleo">3. Cliente, problema e solução</a><a class="toc-link " href="#sec-4-informacoes">4. O que você já sabe</a><a class="toc-link " href="#sec-5-gerar">5. Gerar o prompt</a></aside></div></main>
+<footer class="site-footer"><span>ETMSL · Técnico em Administração · Empreendedorismo e Inovação</span><span>Prof. Mateus Moura · Gerador de Prompt para Plano de Negócios com IA</span></footer></div></div><div class="sidebar-scrim" id="sidebar-scrim"></div><div class="search-backdrop" id="search-backdrop" hidden><section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-dialog-head"><h2 id="search-title">Encontre um assunto</h2><button type="button" class="search-close" id="search-close" aria-label="Fechar busca">Esc ×</button></div><label class="search-input-wrap"><svg class="icon " aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="search-input" type="search" autocomplete="off" placeholder="Ex.: plano de negócios, persona, MVP, DRE, viabilidade…" aria-label="Buscar assuntos"></label><div class="search-results" id="search-results" aria-live="polite"></div><p class="search-tip">Pesquise por etapa do plano de negócios ou conceito de empreendedorismo. Funciona sem internet.</p></section></div><div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+(() => {
+  const f = document.getElementById('form');
+  const req = [...f.querySelectorAll('[required]')];
+  const gerar = document.getElementById('gerar');
+  const saida = document.getElementById('saida');
+  const prompt = document.getElementById('prompt');
+  const val = id => (document.getElementById(id).value || '').trim();
+  const opt = (rot, id) => val(id) ? rot + ': ' + val(id) : rot + ': ainda não informado pelo aluno.';
+
+  function atualiza() {
+    const ok = req.filter(x => x.value.trim() !== '').length;
+    const p = Math.round(ok / req.length * 100);
+    document.getElementById('txtProg').textContent = ok + ' de ' + req.length + ' campos obrigatórios preenchidos';
+    document.getElementById('pct').textContent = p + '%';
+    document.getElementById('bar').style.width = p + '%';
+    gerar.disabled = ok !== req.length;
+    const st = document.getElementById('status');
+    st.textContent = ok === req.length
+      ? 'Todos os campos obrigatórios foram preenchidos. O prompt já pode ser gerado.'
+      : 'Preencha todos os campos obrigatórios.';
+    st.className = 'emi-status ' + (ok === req.length ? 'emi-ok' : 'emi-warn');
+  }
+  req.forEach(x => {
+    x.addEventListener('input', atualiza);
+    x.addEventListener('change', atualiza);
+  });
+
+  function valida() {
+    let ok = true;
+    req.forEach(x => {
+      const v = x.value.trim() !== '';
+      x.classList.toggle('emi-invalid', !v);
+      const e = x.parentElement.querySelector('.emi-err');
+      if (e) e.style.display = v ? 'none' : 'block';
+      if (!v) ok = false;
+    });
+    return ok;
+  }
+
+  gerar.addEventListener('click', () => {
+    if (!valida()) return;
+    prompt.value = `Estou elaborando um PLANO DE NEGÓCIOS para a disciplina de Empreendedorismo e Inovação do Curso Técnico em Administração da ETMSL.
+
+Quero que você atue como meu ASSISTENTE DE PLANEJAMENTO. Não faça o trabalho inteiro por mim e não transforme hipóteses em fatos.
+
+==============================
+1. IDENTIFICAÇÃO
+==============================
+Aluno(s): ${val('aluno')}
+Turma: ${val('turma')}
+Nome provisório do negócio: ${val('nome')}
+Estágio atual: ${val('estagio')}
+
+==============================
+2. IDEIA INICIAL
+==============================
+Descrição do negócio:
+${val('ideia')}
+
+Área de atuação:
+${val('local')}
+
+Tipo principal de cliente:
+${val('tipo')}
+
+==============================
+3. CLIENTE, PROBLEMA E SOLUÇÃO
+==============================
+Cliente que imagino atender:
+${val('cliente')}
+
+Problema, necessidade ou desejo:
+${val('problema')}
+
+Produto ou serviço:
+${val('solucao')}
+
+Como imagino que o negócio poderá ganhar dinheiro:
+${val('receita')}
+
+Por que acredito que o cliente poderia escolher essa solução:
+${val('valor')}
+
+==============================
+4. INFORMAÇÕES QUE JÁ POSSUO
+==============================
+${opt('Pesquisas, conversas ou evidências', 'evidencias')}
+
+${opt('Concorrentes ou alternativas conhecidos', 'concorrentes')}
+
+${opt('Preço imaginado ou pesquisado', 'preco')}
+
+${opt('Investimento disponível ou estimado', 'investimento')}
+
+${opt('Recursos, conhecimentos ou parceiros', 'recursos')}
+
+${opt('Limitações ou dificuldades', 'limitacoes')}
+
+${opt('Observações adicionais', 'obs')}
+
+==============================
+5. REGRAS PARA NOSSA CONVERSA
+==============================
+1. Não invente dados de mercado, preços, concorrentes, entrevistas, clientes ou fontes.
+2. Diferencie sempre FATO, ESTIMATIVA, HIPÓTESE e DECISÃO.
+3. Quando faltar informação, diga claramente o que precisa ser pesquisado.
+4. Explique siglas e termos técnicos quando aparecerem.
+5. Termos em inglês podem ser usados, mas devem ser explicados em português de forma simples.
+6. Não apresente uma sequência de siglas sem explicar a relação entre elas.
+7. Quando houver cálculo, explique: qual pergunta ele responde, quais dados são necessários, fórmula, substituição dos valores, resultado e interpretação.
+8. Não decida automaticamente por mim quando houver alternativas. Apresente opções e deixe a decisão comigo.
+9. Aponte incoerências entre partes do plano.
+10. Preserve decisões anteriores e avise quando alguma precisar ser revista.
+11. Use linguagem clara e adequada a um aluno de curso técnico em Administração.
+12. Trabalhe UMA ETAPA POR VEZ e espere minha resposta antes de avançar.
+13. Ao final de cada etapa, registre: o que foi definido, o que ainda é hipótese, o que precisa ser pesquisado/testado e quais decisões tomei.
+14. Nunca apresente projeções financeiras como certeza.
+
+==============================
+6. ROTEIRO DO PLANO
+==============================
+Trabalhe nesta ordem:
+
+1 — Definição do negócio
+2 — Segmentação de mercado
+3 — Persona
+4 — Jornada do cliente
+5 — Proposta de valor
+6 — Concorrência
+7 — Experimentação e MVP, quando fizer sentido
+8 — Canais de aquisição
+9 — Funil de vendas
+10 — Estrutura operacional
+11 — Investimento inicial
+12 — Projeção de receitas
+13 — Custos e despesas
+14 — DRE simplificada
+15 — Indicadores financeiros
+16 — Dimensionamento de mercado
+17 — Métricas de clientes e receita
+18 — Cenários
+19 — Riscos e pendências
+20 — Conclusão de viabilidade
+
+Quando aparecerem conceitos como Payback, VPL, TIR, TAM, SAM, SOM, CAC, LTV, MRR, ARR, churn, retenção, MVP, PMF ou outros termos técnicos, NÃO presuma que eu conheço o significado. Explique primeiro:
+- o que é;
+- qual problema ou pergunta ajuda a responder;
+- em que situação faz sentido usar;
+- quais dados são necessários;
+- um exemplo simples, se necessário;
+- e só depois aplique ao meu negócio.
+
+Se o conceito não fizer sentido para o meu modelo de negócio, diga isso em vez de forçar seu uso.
+
+==============================
+7. COMO COMEÇAR
+==============================
+Não desenvolva o plano inteiro agora.
+
+Comece apenas pela ETAPA 1 — DEFINIÇÃO DO NEGÓCIO.
+
+Faça o seguinte:
+1. diga em linguagem simples o que entendeu sobre meu negócio;
+2. separe o que já está definido do que ainda é hipótese;
+3. identifique contradições ou pontos vagos;
+4. faça somente as perguntas realmente necessárias para concluirmos esta etapa;
+5. espere minha resposta antes de avançar.
+
+Ao final de cada etapa, mantenha um REGISTRO DAS DECISÕES para que o plano permaneça coerente até o final.`;
+    saida.style.display = 'block';
+    saida.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.getElementById('copiar').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(prompt.value);
+      document.getElementById('copystatus').textContent = 'Prompt copiado. Agora é só colar na IA escolhida.';
+    } catch (e) {
+      prompt.select();
+      document.execCommand('copy');
+      document.getElementById('copystatus').textContent = 'Prompt copiado.';
+    }
+  });
+
+  f.addEventListener('reset', () => setTimeout(() => {
+    saida.style.display = 'none';
+    prompt.value = '';
+    document.getElementById('copystatus').textContent = '';
+    req.forEach(x => {
+      x.classList.remove('emi-invalid');
+      const e = x.parentElement.querySelector('.emi-err');
+      if (e) e.style.display = 'none';
+    });
+    atualiza();
+  }, 0));
+
+  atualiza();
+})();
+</script>
+<script src="../shared/site.js" defer></script><script src="../shared/navigation.js" defer></script></body></html>
