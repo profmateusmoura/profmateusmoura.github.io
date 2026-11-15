@@ -1,6 +1,31 @@
 # Supabase do portal — piloto PJE
 
+## Calendário e chamada
+
+Aplique `202611140003_school_calendar_attendance.sql` após as migrações
+anteriores e antes de publicar a interface. O calendário é compartilhado
+pelas turmas do ano letivo. A coordenação escolhe o ano e semestre e registra
+a data real e o horário pedagógico de cada dia. A contagem indica 18 dias por
+dia da semana pedagógica e 90 no total para um semestre completo.
+Para um sábado valendo segunda, selecione a data do sábado e o horário de
+segunda. Nenhuma data oficial é inserida pela migração.
+
+Na Chamada, a coordenação ou o docente responsável escolhe a turma,
+um dia letivo e o horário local da aula. O formulário mostra as matrículas
+vinculadas e recupera marcações salvas para a mesma aula. O banco valida
+o calendário e a turma e salva a chamada em uma única operação.
+
 ## Gestão de turmas e inscrições EAD
+
+### Turma EAD separada
+
+Em um projeto com a gestão já instalada, aplique a migração
+`202611140002_class_modality.sql` antes de publicar a interface com o campo **Modalidade**.
+As turmas existentes ficam como presenciais. Crie uma nova turma com **Modalidade → EAD**,
+selecione-a na gestão e clique em **Receber inscrições EAD nesta turma**.
+O cadastro anterior de inscrições só permanece válido se apontar para uma turma EAD ativa.
+Matrículas e pedidos existentes ficam nas turmas originais. Revise qualquer cadastro de teste
+feito na turma presencial antes de voltar a receber inscrições.
 
 No projeto que já recebeu a migração inicial, aplique somente
 `migrations/202611130002_class_management.sql` no SQL Editor.
