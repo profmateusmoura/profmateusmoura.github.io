@@ -69,22 +69,11 @@
       </section>
       <p id="estado-turmas" role="status"></p>
       <section id="calendario" hidden>
-        <h2>Calendário letivo</h2>
+        <h2>Calendário semestral</h2>
         <label>Ano letivo <input id="cal-ano" type="number" min="2000" max="2100" required></label>
         <label>Semestre <select id="cal-semestre">
           <option value="1">1º semestre</option><option value="2">2º semestre</option>
         </select></label>
-        <ul id="cal-totais" aria-label="Dias por horário pedagógico"></ul>
-        <form id="cal-form" hidden>
-          <label>Data real <input id="cal-data" type="date" required></label>
-          <label>Tipo de dia <select id="cal-tipo">
-            <option value="letivo">Dia letivo</option><option value="feriado">Feriado</option>
-          </select></label>
-          <label>Vale pelo horário de <select id="cal-dia" required></select></label>
-          <label hidden>Nome do feriado <input id="cal-feriado" maxlength="120"></label>
-          <button>Salvar data</button>
-          <button id="cal-remover" type="button">Remover dia selecionado</button>
-        </form>
         <form id="cal-lote" hidden>
           <h3>Marcar dias em lote</h3>
           <label>Horário pedagógico <select id="cal-lote-dia" required></select></label>
@@ -100,7 +89,6 @@
           <span class="calendar-holiday">Feriado</span>
           <span class="calendar-marked">Selecionado</span></p>
         <div id="cal-meses" aria-label="Calendário do semestre"></div>
-        <ul id="cal-lista"></ul>
       </section>
       <section id="chamada" hidden>
         <h2>Chamada</h2>
