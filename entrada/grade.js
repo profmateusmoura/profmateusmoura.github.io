@@ -108,4 +108,5 @@ function setupAcademicPlanning(client, role, courses) {
     } catch (error) { scheduleStatus.textContent = error.message || 'Não foi possível salvar a distribuição. Confira se nenhum horário do professor foi ocupado.'; } finally { updateSummary(); }
   };
   loadPlanningOptions();
+  setupSemesterOfferings(client, courses);
 }
