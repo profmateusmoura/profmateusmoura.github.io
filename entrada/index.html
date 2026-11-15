@@ -29,7 +29,9 @@
       <nav id="menu-gestao" hidden aria-label="Áreas da gestão">
         <a href="#cadastro">Cadastro</a>
         <a href="#gestao">Gestão de turmas</a>
-        <a href="#calendario">Calendário letivo</a>
+        <a href="#calendario">Calendário semestral</a>
+        <a href="#curriculo">Grade curricular</a>
+        <a href="#distribuicao">Distribuição semanal</a>
         <a href="#chamada">Chamada</a>
       </nav>
       <section id="cadastro" hidden>
@@ -69,7 +71,8 @@
       </section>
       <p id="estado-turmas" role="status"></p>
       <section id="calendario" hidden>
-        <h2>Calendário semestral</h2>
+        <h2>Calendário do semestre</h2>
+        <p class="setup-guide">1. Defina o ano e o semestre. Este calendário é compartilhado por todas as matérias e turmas do mesmo ano. Marque os dias letivos em lote; feriados e reposições fazem parte da mesma organização do semestre.</p>
         <label>Ano letivo <input id="cal-ano" type="number" min="2000" max="2100" required></label>
         <label>Semestre <select id="cal-semestre">
           <option value="1">1º semestre</option><option value="2">2º semestre</option>
@@ -89,6 +92,32 @@
           <span class="calendar-holiday">Feriado</span>
           <span class="calendar-marked">Selecionado</span></p>
         <div id="cal-meses" aria-label="Calendário do semestre"></div>
+      </section>
+      <section id="curriculo" hidden>
+        <h2>Grade curricular</h2>
+        <p class="setup-guide">2. Escolha o curso e cadastre as matérias que fazem parte dele. Para cada matéria, informe quantas aulas semanais terá. Essa quantidade será usada na distribuição dos horários de cada turma.</p>
+        <form id="materia-form" hidden>
+          <label>Curso <select id="materia-curso" required></select></label>
+          <label>Nome da matéria <input id="materia-nome" maxlength="100" required></label>
+          <label>Aulas por semana <input id="materia-aulas" type="number" min="1" max="25" value="1" required></label>
+          <button>Adicionar matéria</button>
+        </form>
+        <p id="materia-estado" role="status"></p>
+        <div id="materias-lista"></div>
+      </section>
+      <section id="distribuicao" hidden>
+        <h2>Distribuição semanal</h2>
+        <p class="setup-guide">3. Selecione uma turma, uma matéria e o professor responsável. Distribua em lote os horários semanais exigidos, escolhendo até cinco aulas por dia. Um horário ocupado por esse professor em outra matéria ou turma fica indisponível.</p>
+        <form id="grade-form" hidden>
+          <label>Turma <select id="grade-turma" required></select></label>
+          <label>Matéria <select id="grade-materia" required></select></label>
+          <label>Professor <select id="grade-professor" required></select></label>
+          <p id="grade-resumo" role="status"></p>
+          <div id="grade-semana"></div>
+          <button id="grade-salvar">Salvar distribuição da matéria</button>
+        </form>
+        <p id="grade-estado" role="status"></p>
+        <div id="grade-atual"></div>
       </section>
       <section id="chamada" hidden>
         <h2>Chamada</h2>
@@ -110,6 +139,7 @@
     </section>
   </main>
   <script src="./turmas.js" defer></script>
+  <script src="./grade.js" defer></script>
   <script src="./diario.js" defer></script>
 </body>
 </html>
