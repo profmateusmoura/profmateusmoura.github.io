@@ -13,6 +13,13 @@ function setupSchoolDiary(client, role) {
   const semester = find('cal-semestre');
   const day = find('cal-data');
   const equivalent = find('cal-dia');
+  const kind = find('cal-tipo');
+  const holiday = find('cal-feriado');
+  const batchWeekday = find('cal-lote-dia');
+  const batch = new Set();
+  const coordinator = role === 'coordenacao';
+  let calendarReady = false;
+  let savingCalendar = false;
   const group = find('chamada-turma');
   const lessonDay = find('chamada-dia');
   const lessonTime = find('chamada-hora');
@@ -36,8 +43,96 @@ function setupSchoolDiary(client, role) {
   }
 
   function dayLabel(row) {
-    return dateFormat.format(new Date(row.school_date + 'T00:00:00Z')) +
-      ' · horário de ' + weekdays[row.teaching_weekday - 1].toLowerCase();
+    const label = dateFormat.format(new Date(row.school_date + 'T00:00:00Z'));
+    return label + (row.holiday_name ? ' · feriado: ' + row.holiday_name
+      : ' · horário de ' + weekdays[row.teaching_weekday - 1].toLowerCase());
+  }
+
+  function setDayFields() {
+    const isHoliday = kind.value === 'feriado';
+    equivalent.closest('label').hidden = isHoliday;
+    equivalent.required = !isHoliday;
+    holiday.closest('label').hidden = !isHoliday;
+    holiday.required = isHoliday;
+  }
+
+  function selectDate(value) {
+    const row = days.find(entry => entry.school_date === value);
+    const weekday = new Date(value + 'T00:00:00Z').getUTCDay();
+    day.value = value;
+    kind.value = row?.holiday_name ? 'feriado' : 'letivo';
+    holiday.value = row?.holiday_name || '';
+    equivalent.value = row?.teaching_weekday || (weekday >= 1 && weekday <= 5 ? weekday : '');
+    setDayFields();
+  }
+
+  function remaining() {
+    return Math.max(0, 18 - days.filter(row => row.teaching_weekday === Number(batchWeekday.value)).length);
+  }
+
+  function gridDates() {
+    const startMonth = semester.value === '1' ? 0 : 6;
+    return Array.from({ length: 6 }, (_, offset) => {
+      const month = startMonth + offset;
+      const start = new Date(Date.UTC(Number(year.value), month, 1));
+      const size = new Date(Date.UTC(Number(year.value), month + 1, 0)).getUTCDate();
+      return { start, dates: Array.from({ length: size }, (_, i) =>
+        new Date(Date.UTC(Number(year.value), month, i + 1))) };
+    });
+  }
+
+  function updateBatch() {
+    find('cal-selecao').textContent = batch.size + ' selecionado(s) · faltam ' + remaining() + ' para a meta.';
+    find('cal-salvar-lote').disabled = savingCalendar || !calendarReady || batch.size === 0 || batch.size > remaining();
+  }
+
+  function renderSemester() {
+    const container = find('cal-meses');
+    container.replaceChildren();
+    if (!calendarReady) return;
+    const known = new Map(days.map(row => [row.school_date, row]));
+    for (const { start, dates } of gridDates()) {
+      const month = document.createElement('section');
+      const title = document.createElement('h4');
+      title.textContent = new Intl.DateTimeFormat('pt-BR', { month: 'long', timeZone: 'UTC' }).format(start);
+      const grid = document.createElement('div');
+      grid.className = 'calendar-grid';
+      for (const name of ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom']) {
+        const header = document.createElement('span');
+        header.textContent = name;
+        grid.append(header);
+      }
+      for (let i = 0; i < (start.getUTCDay() + 6) % 7; i++) grid.append(document.createElement('span'));
+      for (const date of dates) {
+        const value = date.toISOString().slice(0, 10);
+        const row = known.get(value);
+        const tile = document.createElement(coordinator ? 'button' : 'span');
+        tile.textContent = date.getUTCDate();
+        tile.title = row ? dayLabel(row) : dateFormat.format(date);
+        tile.setAttribute('aria-label', tile.title);
+        if (row) tile.className = row.holiday_name ? 'calendar-holiday' : 'calendar-teaching';
+        if (coordinator) {
+          tile.type = 'button';
+          if (!row) tile.setAttribute('aria-pressed', String(batch.has(value)));
+          tile.onclick = () => {
+            if (savingCalendar) return;
+            selectDate(value);
+            if (row) {
+              day.focus();
+              return;
+            }
+            if (batch.has(value)) batch.delete(value);
+            else if (batch.size < remaining()) batch.add(value);
+            tile.setAttribute('aria-pressed', String(batch.has(value)));
+            updateBatch();
+          };
+        }
+        grid.append(tile);
+      }
+      month.append(title, grid);
+      container.append(month);
+    }
+    updateBatch();
   }
 
   function clearCall() {
@@ -50,7 +145,8 @@ function setupSchoolDiary(client, role) {
   function refreshDayOptions() {
     clearCall();
     const previous = lessonDay.value;
-    const eligible = days.filter(row => String(row.school_year) === group.selectedOptions[0]?.dataset.year);
+    const eligible = days.filter(row => !row.holiday_name &&
+      String(row.school_year) === group.selectedOptions[0]?.dataset.year);
     lessonDay.replaceChildren(new Option('Selecione um dia letivo', ''),
       ...eligible.map(row => new Option(dayLabel(row), row.school_date)));
     if (eligible.some(row => row.school_date === previous)) lessonDay.value = previous;
@@ -61,6 +157,9 @@ function setupSchoolDiary(client, role) {
 
   async function refreshCalendar() {
     const version = ++calendarRequest;
+    calendarReady = false;
+    batch.clear();
+    renderSemester();
     days = [];
     refreshDayOptions();
     find('cal-totais').replaceChildren();
@@ -69,11 +168,13 @@ function setupSchoolDiary(client, role) {
     try {
       if (!year.checkValidity()) throw new Error('Ano inválido');
       const rows = expect(await client.from('school_days')
-        .select('school_date, school_year, teaching_weekday')
+        .select('school_date, school_year, teaching_weekday, holiday_name')
         .eq('school_year', Number(year.value)).eq('semester', Number(semester.value))
         .order('school_date'));
       if (version !== calendarRequest) return;
       days = rows;
+      calendarReady = true;
+      renderSemester();
       const totals = weekdays.map((_, i) => rows.filter(row => row.teaching_weekday === i + 1).length);
       find('cal-totais').replaceChildren(...weekdays.map((name, i) => {
         const total = totals[i];
@@ -90,8 +191,7 @@ function setupSchoolDiary(client, role) {
         edit.type = 'button';
         edit.textContent = dayLabel(row);
         edit.onclick = () => {
-          day.value = row.school_date;
-          equivalent.value = row.teaching_weekday;
+          selectDate(row.school_date);
           day.focus();
         };
         li.append(edit);
@@ -100,7 +200,7 @@ function setupSchoolDiary(client, role) {
       refreshDayOptions();
     } catch (error) {
       if (version !== calendarRequest) return;
-      calendarStatus.textContent = error.code === '42P01' || error.code === 'PGRST205'
+      calendarStatus.textContent = ['42P01', '42703', 'PGRST204', 'PGRST205'].includes(error.code)
         ? 'Calendário indisponível até a instalação da migração no Supabase.'
         : 'Não foi possível carregar o calendário.';
     }
@@ -113,24 +213,27 @@ function setupSchoolDiary(client, role) {
   semester.value = Number(month) <= 6 ? '1' : '2';
   equivalent.replaceChildren(new Option('Selecione um horário', ''),
     ...weekdays.map((name, index) => new Option(name, index + 1)));
+  batchWeekday.replaceChildren(...weekdays.map((name, index) => new Option(name, index + 1)));
   year.onchange = semester.onchange = () => {
     day.value = '';
     equivalent.value = '';
+    find('cal-lote-inicio').value = '';
     refreshCalendar();
   };
-  day.onchange = () => {
-    const existing = days.find(row => row.school_date === day.value);
-    const real = new Date(day.value + 'T00:00:00Z').getUTCDay();
-    equivalent.value = existing?.teaching_weekday || (real >= 1 && real <= 5 ? real : '');
-  };
+  day.onchange = () => selectDate(day.value);
+  kind.onchange = setDayFields;
+  setDayFields();
 
-  if (role === 'coordenacao') {
+  if (coordinator) {
     const calendarForm = find('cal-form');
     const remove = find('cal-remover');
     const save = calendarForm.querySelector('button[type="submit"], button:not([type])');
     calendarForm.hidden = false;
+    find('cal-lote').hidden = false;
     async function writeCalendar(action, message) {
       save.disabled = remove.disabled = true;
+      savingCalendar = true;
+      updateBatch();
       try {
         await action();
         await refreshCalendar();
@@ -138,13 +241,16 @@ function setupSchoolDiary(client, role) {
       } catch (error) {
         calendarStatus.textContent = error.code === '23503'
           ? 'O dia tem chamada registrada e não pode ser removido.'
-          : 'Não foi possível salvar a alteração no calendário.';
+          : error.message || 'Não foi possível salvar a alteração no calendário.';
       } finally {
         save.disabled = remove.disabled = false;
+        savingCalendar = false;
+        updateBatch();
       }
     }
     calendarForm.onsubmit = (event) => {
       event.preventDefault();
+      if (!calendarReady || savingCalendar) return;
       if (!year.checkValidity() || day.value.slice(0, 4) !== year.value) {
         calendarStatus.textContent = 'A data real deve pertencer ao ano letivo selecionado.';
         return;
@@ -152,11 +258,14 @@ function setupSchoolDiary(client, role) {
       writeCalendar(async () => {
         expect(await client.from('school_days').upsert({
           school_date: day.value, school_year: Number(year.value),
-          semester: Number(semester.value), teaching_weekday: Number(equivalent.value),
+          semester: Number(semester.value),
+          teaching_weekday: kind.value === 'feriado' ? null : Number(equivalent.value),
+          holiday_name: kind.value === 'feriado' ? holiday.value.trim() : null,
         }));
       }, 'Dia salvo.');
     };
     remove.onclick = () => {
+      if (savingCalendar) return;
       if (!days.some(row => row.school_date === day.value)) {
         calendarStatus.textContent = 'Selecione um dia cadastrado no semestre.';
         return;
@@ -167,6 +276,34 @@ function setupSchoolDiary(client, role) {
         day.value = '';
         equivalent.value = '';
       }, 'Dia removido.');
+    };
+    function clearBatch() {
+      batch.clear();
+      renderSemester();
+    }
+    batchWeekday.onchange = clearBatch;
+    find('cal-limpar').onclick = clearBatch;
+    find('cal-sugerir').onclick = () => {
+      if (!calendarReady || savingCalendar) return;
+      const used = new Set(days.map(row => row.school_date));
+      const start = find('cal-lote-inicio').value;
+      const candidates = gridDates().flatMap(month => month.dates)
+        .filter(date => date.getUTCDay() === Number(batchWeekday.value))
+        .map(date => date.toISOString().slice(0, 10))
+        .filter(value => (!start || value >= start) && !used.has(value));
+      batch.clear();
+      candidates.slice(0, remaining()).forEach(value => batch.add(value));
+      renderSemester();
+    };
+    find('cal-lote').onsubmit = (event) => {
+      event.preventDefault();
+      if (!calendarReady || savingCalendar || !batch.size || batch.size > remaining()) return;
+      writeCalendar(async () => {
+        expect(await client.rpc('save_school_days_bulk', {
+          p_year: Number(year.value), p_semester: Number(semester.value),
+          p_weekday: Number(batchWeekday.value), p_dates: [...batch].sort(),
+        }));
+      }, 'Datas marcadas salvas.');
     };
   }
 

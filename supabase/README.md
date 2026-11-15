@@ -10,6 +10,12 @@ dia da semana pedagógica e 90 no total para um semestre completo.
 Para um sábado valendo segunda, selecione a data do sábado e o horário de
 segunda. Nenhuma data oficial é inserida pela migração.
 
+A visão semestral, os feriados e a seleção em lote precisam também da
+migração `202611140004_calendar_holidays_bulk.sql`. Cadastre os feriados
+antes de sugerir as datas letivas. Depois escolha o horário pedagógico
+e, se necessário, a data de início das aulas. A sugestão exclui feriados
+e datas ocupadas, e pode ser ajustada antes de salvar.
+
 Na Chamada, a coordenação ou o docente responsável escolhe a turma,
 um dia letivo e o horário local da aula. O formulário mostra as matrículas
 vinculadas e recupera marcações salvas para a mesma aula. O banco valida

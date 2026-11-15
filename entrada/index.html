@@ -77,11 +77,29 @@
         <ul id="cal-totais" aria-label="Dias por horário pedagógico"></ul>
         <form id="cal-form" hidden>
           <label>Data real <input id="cal-data" type="date" required></label>
+          <label>Tipo de dia <select id="cal-tipo">
+            <option value="letivo">Dia letivo</option><option value="feriado">Feriado</option>
+          </select></label>
           <label>Vale pelo horário de <select id="cal-dia" required></select></label>
-          <button>Salvar dia letivo</button>
+          <label hidden>Nome do feriado <input id="cal-feriado" maxlength="120"></label>
+          <button>Salvar data</button>
           <button id="cal-remover" type="button">Remover dia selecionado</button>
         </form>
+        <form id="cal-lote" hidden>
+          <h3>Marcar dias em lote</h3>
+          <label>Horário pedagógico <select id="cal-lote-dia" required></select></label>
+          <label>Sugerir a partir de <input id="cal-lote-inicio" type="date"></label>
+          <button id="cal-sugerir" type="button">Sugerir datas desse dia da semana</button>
+          <button id="cal-limpar" type="button">Limpar seleção</button>
+          <p id="cal-selecao" role="status"></p>
+          <p>Marque datas livres no calendário. Use sábados ou outros dias para repor feriados.</p>
+          <button id="cal-salvar-lote">Salvar datas marcadas</button>
+        </form>
         <p id="cal-estado" role="status"></p>
+        <p class="calendar-legend"><span class="calendar-teaching">Dia letivo</span>
+          <span class="calendar-holiday">Feriado</span>
+          <span class="calendar-marked">Selecionado</span></p>
+        <div id="cal-meses" aria-label="Calendário do semestre"></div>
         <ul id="cal-lista"></ul>
       </section>
       <section id="chamada" hidden>

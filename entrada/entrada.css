@@ -90,3 +90,66 @@
   gap: .5rem 1rem;
   margin-block: 1rem;
 }
+
+#cal-meses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+}
+
+#cal-meses section {
+  min-width: 0;
+  margin: 0;
+  padding: .75rem 0;
+}
+
+#cal-meses h4 {
+  margin: 0 0 .5rem;
+  text-transform: capitalize;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: .2rem;
+  text-align: center;
+}
+
+.calendar-grid button,
+.calendar-grid span {
+  min-height: 2rem;
+  padding: .15rem;
+}
+
+.calendar-grid > span {
+  align-content: center;
+}
+
+.calendar-legend {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+.calendar-legend span {
+  padding: .15rem .5rem;
+  border-radius: .4rem;
+}
+
+.calendar-grid .calendar-teaching,
+.calendar-teaching {
+  background: #cbe9dd;
+  color: #1b483a;
+}
+
+.calendar-grid .calendar-holiday,
+.calendar-holiday {
+  background: #f6dfcc;
+  color: #622f14;
+}
+
+.calendar-grid button[aria-pressed="true"],
+.calendar-marked {
+  background: #225b8a;
+  color: #fff;
+}
