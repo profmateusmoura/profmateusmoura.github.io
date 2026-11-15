@@ -1,3 +1,16 @@
+const themeToggle = document.querySelector('#theme-toggle');
+function updateThemeLabel() {
+  const dark = document.documentElement.dataset.theme === 'dark';
+  themeToggle.setAttribute('aria-label', dark ? 'Ativar tema claro' : 'Ativar tema escuro');
+}
+themeToggle.onclick = () => {
+  const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = theme;
+  try { localStorage.setItem('pi-theme', theme); } catch {}
+  updateThemeLabel();
+};
+updateThemeLabel();
+
 const projectUrl = 'https://sucjdjirzcercpvqqhwz.supabase.co';
 const publishableKey = 'sb_publishable_OTvKh8qN5LjGqHd3MVUsBg_tpDYfA0E';
 const returnUrl = new URL('./', location.href).href;

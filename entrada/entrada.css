@@ -214,3 +214,45 @@
   #menu-gestao a { flex: 0 0 auto; }
   .subject-card { align-items: flex-start; flex-direction: column; }
 }
+
+/* Área de Estudos usa os mesmos cartões e cores do portal. */
+.access-shell { width: min(100% - 2rem, 72rem); }
+.access-card, #turmas {
+  background: var(--paper);
+  border-color: var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1rem, 3vw, 2rem);
+}
+.access-card h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: .75rem; }
+.access-card p { color: var(--muted); }
+.access-shell button, .access-shell input, .access-shell select, .access-shell textarea {
+  background: var(--paper);
+  border-color: var(--line);
+}
+.access-shell form button:not([type]), #entrar {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+#turmas > section { border-color: var(--line); }
+#turmas > section > h2 { margin-bottom: .65rem; }
+#menu-gestao:not([hidden]) {
+  background: var(--paper2);
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+  padding: .4rem;
+}
+#menu-gestao a { border-radius: .55rem; }
+#menu-gestao a[hidden] { display: none; }
+#menu-gestao a.is-active {
+  box-shadow: none;
+  background: var(--navy);
+  color: #fff;
+}
+#cal-meses section {
+  background: var(--paper2);
+  border: 1px solid var(--line);
+  border-radius: .75rem;
+  padding: .75rem;
+}
