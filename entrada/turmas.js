@@ -6,6 +6,7 @@ async function showClasses(client, userId, role) {
   const roster = document.querySelector('#matriculas');
   const course = document.querySelector('#curso');
   const selected = document.querySelector('#turma-matricula');
+  const managedClass = document.querySelector('#turma-gestao');
   const invitations = document.querySelector('#lista-emails');
   const requests = document.querySelector('#lista-ead');
   const emails = document.querySelector('#emails');
@@ -22,10 +23,7 @@ async function showClasses(client, userId, role) {
 
   async function refreshInvitations() {
     const classId = selected.value;
-    const isEad = selected.selectedOptions[0]?.dataset.modality === 'ead';
-    document.querySelector('#abrir-ead').disabled = supportsModality && !isEad;
     invitations.replaceChildren();
-    requests.replaceChildren();
     if (!classId) return;
     const { data, error } = await client.from('class_email_invitations')
       .select('email, claimed_at').eq('class_id', classId).order('email');
@@ -53,9 +51,17 @@ async function showClasses(client, userId, role) {
       }
       return row;
     }));
+  }
+
+  async function refreshRequests() {
+    const classId = managedClass.value;
+    const isEad = managedClass.selectedOptions[0]?.dataset.modality === 'ead';
+    document.querySelector('#abrir-ead').disabled = supportsModality && !isEad;
+    requests.replaceChildren();
+    if (!classId) return;
     const queue = await client.from('ead_requests').select('user_id, email')
       .eq('class_id', classId).is('approved_at', null).order('requested_at');
-    if (selected.value !== classId) return;
+    if (managedClass.value !== classId) return;
     if (queue.error) throw queue.error;
     requests.replaceChildren(...queue.data.map(({ user_id, email }) => {
       const row = item(email);
@@ -67,7 +73,7 @@ async function showClasses(client, userId, role) {
         try {
           const result = await client.rpc('approve_ead_request', { p_class: classId, p_user: user_id });
           if (result.error) throw result.error;
-          await refreshInvitations();
+          await Promise.all([refreshRequests(), refreshInvitations()]);
           state.textContent = 'Matrícula EAD aprovada.';
         } catch {
           state.textContent = 'Não foi possível aprovar a solicitação.';
@@ -98,15 +104,20 @@ async function showClasses(client, userId, role) {
     if (membership.error) throw membership.error;
     const managed = new Set(membership.data.map(row => row.class_id));
     const options = data.filter(group => role === 'coordenacao' || managed.has(group.id));
-    const previous = selected.value;
-    selected.replaceChildren(...options.map(group => {
-      const option = new Option(label(group), group.id);
-      option.dataset.modality = group.modality;
-      return option;
-    }));
-    if (options.some(group => group.id === previous)) selected.value = previous;
+    for (const select of [selected, managedClass, document.querySelector('#chamada-turma')]) {
+      const previous = select.value;
+      select.replaceChildren(...options.map(group => {
+        const option = new Option(label(group), group.id);
+        option.dataset.modality = group.modality;
+        option.dataset.year = group.school_year;
+        return option;
+      }));
+      if (options.some(group => group.id === previous)) select.value = previous;
+    }
     roster.hidden = !options.length;
-    await refreshInvitations();
+    document.querySelector('#chamada-turma').dispatchEvent(new Event('diary-classes-updated'));
+    document.querySelector('#gestao').hidden = !options.length;
+    await Promise.all([refreshInvitations(), refreshRequests()]);
   }
 
   function handleSubmit(form, action, message) {
@@ -132,6 +143,9 @@ async function showClasses(client, userId, role) {
     if (claim.error) throw claim.error;
     await refreshClasses();
     if (!staff) return;
+    document.querySelector('#menu-gestao').hidden = false;
+    document.querySelector('#cadastro').hidden = false;
+    setupSchoolDiary(client, role);
 
     const catalog = await client.from('courses').select('id, code, title').eq('active', true).order('code');
     if (catalog.error) throw catalog.error;
@@ -145,13 +159,13 @@ async function showClasses(client, userId, role) {
         button.onclick = async () => {
           button.disabled = true;
           try {
-            const result = await client.rpc('set_ead_intake', { p_class: open ? selected.value : null });
+            const result = await client.rpc('set_ead_intake', { p_class: open ? managedClass.value : null });
             if (result.error) throw result.error;
             state.textContent = open ? 'Inscrições EAD abertas para a turma selecionada.' : 'Novas inscrições EAD encerradas.';
           } catch {
             state.textContent = 'Não foi possível configurar as inscrições EAD.';
           } finally {
-            button.disabled = false;
+            button.disabled = open && supportsModality && managedClass.selectedOptions[0]?.dataset.modality !== 'ead';
           }
         };
       }
@@ -159,6 +173,9 @@ async function showClasses(client, userId, role) {
 
     selected.addEventListener('change', () => refreshInvitations().catch(() => {
       state.textContent = 'Não foi possível carregar os cadastros da turma.';
+    }));
+    managedClass.addEventListener('change', () => refreshRequests().catch(() => {
+      state.textContent = 'Não foi possível carregar as solicitações da turma.';
     }));
     handleSubmit(create, async () => {
       const name = document.querySelector('#nome-turma');

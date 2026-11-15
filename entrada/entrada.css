@@ -66,3 +66,27 @@
   margin-block: .5rem;
   overflow-wrap: anywhere;
 }
+
+#menu-gestao:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1rem;
+  padding-block: 1rem;
+}
+
+#menu-gestao a {
+  text-decoration: underline;
+}
+
+#turmas section {
+  border-top: 1px solid currentColor;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+}
+
+#chamada-alunos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: .5rem 1rem;
+  margin-block: 1rem;
+}

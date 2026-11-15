@@ -26,6 +26,14 @@
     <section id="turmas" hidden aria-labelledby="titulo-turmas">
       <h2 id="titulo-turmas">Minhas turmas</h2>
       <ul id="lista-turmas"></ul>
+      <nav id="menu-gestao" hidden aria-label="Áreas da gestão">
+        <a href="#cadastro">Cadastro</a>
+        <a href="#gestao">Gestão de turmas</a>
+        <a href="#calendario">Calendário letivo</a>
+        <a href="#chamada">Chamada</a>
+      </nav>
+      <section id="cadastro" hidden>
+      <h2>Cadastro</h2>
       <form id="nova-turma" hidden>
         <h3>Criar turma</h3>
         <label>Disciplina <select id="curso" required></select></label>
@@ -46,17 +54,56 @@
           <textarea id="emails" rows="6" required></textarea>
         </label>
         <button>Cadastrar e-mails</button>
+        <ul id="lista-emails"></ul>
+      </form>
+      </section>
+      <section id="gestao" hidden>
+        <h2>Gestão de turmas</h2>
+        <label>Turma em gestão <select id="turma-gestao"></select></label>
         <div id="config-ead" hidden>
           <button id="abrir-ead" type="button">Receber inscrições EAD nesta turma</button>
           <button id="fechar-ead" type="button">Encerrar novas inscrições EAD</button>
         </div>
-        <ul id="lista-emails"></ul>
         <h3>Solicitações EAD pendentes</h3>
         <ul id="lista-ead"></ul>
-      </form>
+      </section>
       <p id="estado-turmas" role="status"></p>
+      <section id="calendario" hidden>
+        <h2>Calendário letivo</h2>
+        <label>Ano letivo <input id="cal-ano" type="number" min="2000" max="2100" required></label>
+        <label>Semestre <select id="cal-semestre">
+          <option value="1">1º semestre</option><option value="2">2º semestre</option>
+        </select></label>
+        <ul id="cal-totais" aria-label="Dias por horário pedagógico"></ul>
+        <form id="cal-form" hidden>
+          <label>Data real <input id="cal-data" type="date" required></label>
+          <label>Vale pelo horário de <select id="cal-dia" required></select></label>
+          <button>Salvar dia letivo</button>
+          <button id="cal-remover" type="button">Remover dia selecionado</button>
+        </form>
+        <p id="cal-estado" role="status"></p>
+        <ul id="cal-lista"></ul>
+      </section>
+      <section id="chamada" hidden>
+        <h2>Chamada</h2>
+        <p>Escolha o ano e o semestre no calendário, depois selecione a turma, a data real e o horário da aula.</p>
+        <form id="chamada-busca">
+          <label>Turma <select id="chamada-turma" required></select></label>
+          <label>Dia letivo <select id="chamada-dia" required></select></label>
+          <label>Horário da aula <input id="chamada-hora" type="time" required></label>
+          <button>Carregar chamada</button>
+        </form>
+        <form id="chamada-form" hidden>
+          <label>Conteúdo da aula <input id="chamada-conteudo" maxlength="200"></label>
+          <button id="todos-presentes" type="button">Marcar todos presentes</button>
+          <div id="chamada-alunos"></div>
+          <button>Salvar chamada</button>
+        </form>
+        <p id="chamada-estado" role="status"></p>
+      </section>
     </section>
   </main>
   <script src="./turmas.js" defer></script>
+  <script src="./diario.js" defer></script>
 </body>
 </html>
