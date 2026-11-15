@@ -11,10 +11,6 @@ function setupSchoolDiary(client, role) {
   const dateFormat = new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC', dateStyle: 'full' });
   const year = find('cal-ano');
   const semester = find('cal-semestre');
-  const day = find('cal-data');
-  const equivalent = find('cal-dia');
-  const kind = find('cal-tipo');
-  const holiday = find('cal-feriado');
   const batchWeekday = find('cal-lote-dia');
   const batch = new Set();
   const coordinator = role === 'coordenacao';
@@ -48,24 +44,6 @@ function setupSchoolDiary(client, role) {
       : ' · horário de ' + weekdays[row.teaching_weekday - 1].toLowerCase());
   }
 
-  function setDayFields() {
-    const isHoliday = kind.value === 'feriado';
-    equivalent.closest('label').hidden = isHoliday;
-    equivalent.required = !isHoliday;
-    holiday.closest('label').hidden = !isHoliday;
-    holiday.required = isHoliday;
-  }
-
-  function selectDate(value) {
-    const row = days.find(entry => entry.school_date === value);
-    const weekday = new Date(value + 'T00:00:00Z').getUTCDay();
-    day.value = value;
-    kind.value = row?.holiday_name ? 'feriado' : 'letivo';
-    holiday.value = row?.holiday_name || '';
-    equivalent.value = row?.teaching_weekday || (weekday >= 1 && weekday <= 5 ? weekday : '');
-    setDayFields();
-  }
-
   function remaining() {
     return Math.max(0, 18 - days.filter(row => row.teaching_weekday === Number(batchWeekday.value)).length);
   }
@@ -82,7 +60,9 @@ function setupSchoolDiary(client, role) {
   }
 
   function updateBatch() {
-    find('cal-selecao').textContent = batch.size + ' selecionado(s) · faltam ' + remaining() + ' para a meta.';
+    const pending = remaining();
+    find('cal-selecao').textContent = (18 - pending) + '/18 cadastrados · ' +
+      batch.size + ' selecionado(s) · faltam ' + Math.max(0, pending - batch.size) + ' nesta seleção.';
     find('cal-salvar-lote').disabled = savingCalendar || !calendarReady || batch.size === 0 || batch.size > remaining();
   }
 
@@ -106,21 +86,17 @@ function setupSchoolDiary(client, role) {
       for (const date of dates) {
         const value = date.toISOString().slice(0, 10);
         const row = known.get(value);
-        const tile = document.createElement(coordinator ? 'button' : 'span');
+        const selectable = coordinator && !row;
+        const tile = document.createElement(selectable ? 'button' : 'span');
         tile.textContent = date.getUTCDate();
         tile.title = row ? dayLabel(row) : dateFormat.format(date);
         tile.setAttribute('aria-label', tile.title);
         if (row) tile.className = row.holiday_name ? 'calendar-holiday' : 'calendar-teaching';
-        if (coordinator) {
+        if (selectable) {
           tile.type = 'button';
-          if (!row) tile.setAttribute('aria-pressed', String(batch.has(value)));
+          tile.setAttribute('aria-pressed', String(batch.has(value)));
           tile.onclick = () => {
             if (savingCalendar) return;
-            selectDate(value);
-            if (row) {
-              day.focus();
-              return;
-            }
             if (batch.has(value)) batch.delete(value);
             else if (batch.size < remaining()) batch.add(value);
             tile.setAttribute('aria-pressed', String(batch.has(value)));
@@ -162,8 +138,6 @@ function setupSchoolDiary(client, role) {
     renderSemester();
     days = [];
     refreshDayOptions();
-    find('cal-totais').replaceChildren();
-    find('cal-lista').replaceChildren();
     calendarStatus.textContent = 'Carregando calendário…';
     try {
       if (!year.checkValidity()) throw new Error('Ano inválido');
@@ -176,27 +150,8 @@ function setupSchoolDiary(client, role) {
       calendarReady = true;
       renderSemester();
       const totals = weekdays.map((_, i) => rows.filter(row => row.teaching_weekday === i + 1).length);
-      find('cal-totais').replaceChildren(...weekdays.map((name, i) => {
-        const total = totals[i];
-        const difference = total < 18 ? ' · faltam ' + (18 - total)
-          : total > 18 ? ' · excede por ' + (total - 18) : ' · meta atingida';
-        return item(name + ' · ' + total + '/18' + difference);
-      }));
       calendarStatus.textContent = totals.every(total => total === 18)
-        ? 'Calendário completo: 90 dias letivos.' : 'A meta é de 18 dias para cada horário pedagógico.';
-      find('cal-lista').replaceChildren(...rows.map(row => {
-        if (role !== 'coordenacao') return item(dayLabel(row));
-        const li = item('');
-        const edit = document.createElement('button');
-        edit.type = 'button';
-        edit.textContent = dayLabel(row);
-        edit.onclick = () => {
-          selectDate(row.school_date);
-          day.focus();
-        };
-        li.append(edit);
-        return li;
-      }));
+        ? 'Calendário completo: 90 dias letivos.' : '';
       refreshDayOptions();
     } catch (error) {
       if (version !== calendarRequest) return;
@@ -211,72 +166,28 @@ function setupSchoolDiary(client, role) {
   year.value = new Intl.DateTimeFormat('pt-BR', { timeZone: zone, year: 'numeric' }).format();
   const month = new Intl.DateTimeFormat('pt-BR', { timeZone: zone, month: 'numeric' }).format();
   semester.value = Number(month) <= 6 ? '1' : '2';
-  equivalent.replaceChildren(new Option('Selecione um horário', ''),
-    ...weekdays.map((name, index) => new Option(name, index + 1)));
   batchWeekday.replaceChildren(...weekdays.map((name, index) => new Option(name, index + 1)));
   year.onchange = semester.onchange = () => {
-    day.value = '';
-    equivalent.value = '';
     find('cal-lote-inicio').value = '';
     refreshCalendar();
   };
-  day.onchange = () => selectDate(day.value);
-  kind.onchange = setDayFields;
-  setDayFields();
 
   if (coordinator) {
-    const calendarForm = find('cal-form');
-    const remove = find('cal-remover');
-    const save = calendarForm.querySelector('button[type="submit"], button:not([type])');
-    calendarForm.hidden = false;
     find('cal-lote').hidden = false;
     async function writeCalendar(action, message) {
-      save.disabled = remove.disabled = true;
       savingCalendar = true;
       updateBatch();
       try {
         await action();
         await refreshCalendar();
-        calendarStatus.textContent += ' ' + message;
+        calendarStatus.textContent = message;
       } catch (error) {
-        calendarStatus.textContent = error.code === '23503'
-          ? 'O dia tem chamada registrada e não pode ser removido.'
-          : error.message || 'Não foi possível salvar a alteração no calendário.';
+        calendarStatus.textContent = error.message || 'Não foi possível salvar as datas selecionadas.';
       } finally {
-        save.disabled = remove.disabled = false;
         savingCalendar = false;
         updateBatch();
       }
     }
-    calendarForm.onsubmit = (event) => {
-      event.preventDefault();
-      if (!calendarReady || savingCalendar) return;
-      if (!year.checkValidity() || day.value.slice(0, 4) !== year.value) {
-        calendarStatus.textContent = 'A data real deve pertencer ao ano letivo selecionado.';
-        return;
-      }
-      writeCalendar(async () => {
-        expect(await client.from('school_days').upsert({
-          school_date: day.value, school_year: Number(year.value),
-          semester: Number(semester.value),
-          teaching_weekday: kind.value === 'feriado' ? null : Number(equivalent.value),
-          holiday_name: kind.value === 'feriado' ? holiday.value.trim() : null,
-        }));
-      }, 'Dia salvo.');
-    };
-    remove.onclick = () => {
-      if (savingCalendar) return;
-      if (!days.some(row => row.school_date === day.value)) {
-        calendarStatus.textContent = 'Selecione um dia cadastrado no semestre.';
-        return;
-      }
-      writeCalendar(async () => {
-        expect(await client.from('school_days').delete().eq('school_date', day.value)
-          .eq('school_year', Number(year.value)).eq('semester', Number(semester.value)));
-        day.value = '';
-        equivalent.value = '';
-      }, 'Dia removido.');
-    };
     function clearBatch() {
       batch.clear();
       renderSemester();
