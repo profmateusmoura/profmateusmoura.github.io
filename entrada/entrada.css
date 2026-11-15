@@ -1,0 +1,68 @@
+.access-shell {
+  width: min(100% - 2rem, 48rem);
+  margin: 2rem auto 4rem;
+}
+
+.access-card,
+#turmas {
+  margin-block: 1.5rem;
+  padding: clamp(1rem, 5vw, 2.5rem);
+  border: 1px solid currentColor;
+  border-radius: 1.25rem;
+}
+
+.access-card h1 {
+  margin-top: 0;
+}
+
+.access-actions,
+#config-ead:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.access-shell button,
+.access-shell input,
+.access-shell select,
+.access-shell textarea {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: .6rem;
+  padding: .65rem .85rem;
+}
+
+.access-shell :focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.access-shell button:disabled {
+  opacity: .55;
+}
+
+#entrar {
+  background: #174a3b;
+  color: #fff;
+}
+
+#turmas form {
+  margin-block: 1.5rem;
+}
+
+#turmas label {
+  display: grid;
+  gap: .35rem;
+  margin-block: .75rem;
+}
+
+#turmas label[hidden] {
+  display: none;
+}
+
+#turmas li {
+  margin-block: .5rem;
+  overflow-wrap: anywhere;
+}

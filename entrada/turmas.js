@@ -10,6 +10,8 @@ async function showClasses(client, userId, role) {
   const requests = document.querySelector('#lista-ead');
   const emails = document.querySelector('#emails');
   const year = document.querySelector('#ano-turma');
+  const modality = document.querySelector('#modalidade-turma');
+  let supportsModality = true;
   const staff = role === 'docente' || role === 'coordenacao';
 
   function item(text) {
@@ -20,6 +22,8 @@ async function showClasses(client, userId, role) {
 
   async function refreshInvitations() {
     const classId = selected.value;
+    const isEad = selected.selectedOptions[0]?.dataset.modality === 'ead';
+    document.querySelector('#abrir-ead').disabled = supportsModality && !isEad;
     invitations.replaceChildren();
     requests.replaceChildren();
     if (!classId) return;
@@ -76,10 +80,17 @@ async function showClasses(client, userId, role) {
   }
 
   async function refreshClasses() {
-    const { data, error } = await client.from('classes')
-      .select('id, name, school_year, courses(code)').eq('active', true).order('name');
+    let { data, error } = await client.from('classes')
+      .select('id, name, school_year, modality, courses(code)').eq('active', true).order('name');
+    if (error?.code === '42703') {
+      supportsModality = false;
+      modality.closest('label').hidden = true;
+      ({ data, error } = await client.from('classes')
+        .select('id, name, school_year, courses(code)').eq('active', true).order('name'));
+    }
     if (error) throw error;
-    const label = (group) => group.name + ' · ' + group.school_year + ' · ' + (group.courses?.code || '');
+    const label = (group) => group.name + ' · ' + group.school_year + ' · ' +
+      (group.courses?.code || '') + (group.modality ? ' · ' + (group.modality === 'ead' ? 'EAD' : 'Presencial') : '');
     list.replaceChildren(...(data.length ? data.map(group => item(label(group))) : [item('Nenhuma turma vinculada.')]));
     if (!staff) return;
     const membership = await client.from('class_memberships').select('class_id')
@@ -88,7 +99,11 @@ async function showClasses(client, userId, role) {
     const managed = new Set(membership.data.map(row => row.class_id));
     const options = data.filter(group => role === 'coordenacao' || managed.has(group.id));
     const previous = selected.value;
-    selected.replaceChildren(...options.map(group => new Option(label(group), group.id)));
+    selected.replaceChildren(...options.map(group => {
+      const option = new Option(label(group), group.id);
+      option.dataset.modality = group.modality;
+      return option;
+    }));
     if (options.some(group => group.id === previous)) selected.value = previous;
     roster.hidden = !options.length;
     await refreshInvitations();
@@ -149,6 +164,7 @@ async function showClasses(client, userId, role) {
       const name = document.querySelector('#nome-turma');
       const result = await client.rpc('create_managed_class', {
         p_course_id: course.value, p_name: name.value.trim(), p_year: Number(year.value),
+        ...(supportsModality ? { p_modality: modality.value } : {}),
       });
       if (result.error) throw result.error;
       name.value = '';
