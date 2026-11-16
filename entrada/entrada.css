@@ -302,3 +302,20 @@
   border-bottom: 1px solid var(--line);
   vertical-align: top;
 }
+
+.setup-context {
+  padding: .8rem 1rem;
+  background: var(--accent-soft);
+  border-radius: .75rem;
+  font-weight: 700;
+}
+.setup-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+#turmas .setup-filters label:last-child {
+  display: flex;
+  align-items: center;
+}

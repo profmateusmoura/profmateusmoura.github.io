@@ -133,7 +133,10 @@ function setupAcademicRegistry(client, refreshClasses) {
   nav.className = 'calendar-legend';
   nav.setAttribute('role', 'group');
   nav.setAttribute('aria-label', 'Cadastros acadêmicos');
-  panel.prepend(nav);
+  const context = document.createElement('p');
+  context.className = 'setup-context';
+  context.setAttribute('aria-live', 'polite');
+  panel.prepend(context, nav);
   const sections = groups.map(([title, description, ids]) => {
     const section = document.createElement('section');
     const heading = document.createElement('h3');
@@ -153,7 +156,18 @@ function setupAcademicRegistry(client, refreshClasses) {
     nav.append(button);
     return { section, button };
   });
+  let moduleTitle = '';
+  function showContext() {
+    const course = courses.find(row => row.id === activeCourse);
+    const turma = classForm.elements.entry.selectedOptions[0];
+    context.textContent = [
+      course?.title || 'Escolha um curso',
+      moduleTitle,
+      turma?.value ? turma.textContent : '',
+    ].filter(Boolean).join(' › ');
+  }
   function selectGroup(active) {
+    showContext();
     sections.forEach(({ section, button }, index) => {
       section.hidden = index !== active;
       button.setAttribute('aria-pressed', String(index === active));
@@ -163,6 +177,22 @@ function setupAcademicRegistry(client, refreshClasses) {
   const moduleCards = document.createElement('div');
   courseCards.className = moduleCards.className = 'setup-cards';
   courseForm.before(courseCards);
+  const editCourse = document.createElement('button');
+  editCourse.type = 'button';
+  editCourse.textContent = 'Editar curso';
+  editCourse.hidden = true;
+  editCourse.onclick = () => {
+    courseForm.hidden = !courseForm.hidden;
+    editCourse.textContent = courseForm.hidden ? 'Editar curso' : 'Fechar edição';
+    if (!courseForm.hidden) courseForm.elements.code.focus();
+  };
+  courseCards.after(editCourse);
+  const newClass = document.createElement('button');
+  newClass.type = 'button';
+  newClass.textContent = 'Nova turma neste módulo';
+  newClass.hidden = true;
+  newClass.onclick = () => sections[2].button.click();
+  moduleCards.after(newClass);
   const moduleForm = document.querySelector('#modulo-form');
   moduleForm.before(moduleCards);
   function makeCard(title, detail, active, action) {
@@ -181,35 +211,53 @@ function setupAcademicRegistry(client, refreshClasses) {
     courseCards.replaceChildren(...courses.map(course =>
       makeCard(course.title, course.planned_modules + ' módulos', course.id === activeCourse, () => {
         activeCourse = course.id;
-        activeModule = '';
+        activeModule = moduleTitle = '';
+        classForm.elements.entry.value = '';
         renderCourses();
-        renderModules().catch(error => { status.textContent = error.message; });
+        sections[1].button.click();
       })), makeCard('Novo curso', 'Cadastrar', !activeCourse, () => {
-        activeCourse = activeModule = '';
+        activeCourse = activeModule = moduleTitle = '';
         renderCourses();
         moduleCards.replaceChildren();
       }));
     courseForm.elements.entry.value = activeCourse;
     courseForm.elements.entry.onchange();
+    courseForm.hidden = Boolean(activeCourse);
+    editCourse.hidden = !activeCourse;
+    editCourse.textContent = 'Editar curso';
+    showContext();
   }
   async function renderModules() {
     const course = courses.find(row => row.id === activeCourse);
     moduleCards.replaceChildren();
+    newClass.hidden = !activeModule;
+    moduleForm.hidden = true;
     if (!course) return;
     const modules = await result(client.from('course_modules').select('id,module_number,title')
       .eq('course_id', course.id).order('module_number'));
     if (course.id !== activeCourse) return;
+    const links = !modules.length ? [] : await result(client.from('module_subjects')
+      .select('module_id,curriculum_subjects(weekly_lessons)').in('module_id', modules.map(row => row.id)));
+    if (course.id !== activeCourse) return;
     for (let number = 1; number <= course.planned_modules; number++) {
       const module = modules.find(row => row.module_number === number);
+      const entries = links.filter(row => row.module_id === module?.id);
+      const lessons = entries.reduce((total, row) => total + (row.curriculum_subjects?.weekly_lessons || 0), 0);
       moduleCards.append(makeCard(module?.title || 'Módulo ' + number,
-        module ? 'Configurar disciplinas' : 'Cadastrar módulo', module?.id === activeModule, () => {
+        module ? entries.length + ' disciplinas · ' + lessons + '/25 aulas semanais' : 'Cadastrar módulo', module?.id === activeModule, () => {
           activeModule = module?.id || '';
+          moduleTitle = module?.title || 'Módulo ' + number;
+          classForm.elements.entry.value = '';
+          showContext();
+          newClass.hidden = !activeModule;
+          moduleForm.hidden = false;
+          for (const [index, card] of [...moduleCards.children].entries()) card.setAttribute('aria-pressed', String(index + 1 === number));
           const fields = moduleForm.elements;
           fields.course.value = course.id;
           fields.course.dispatchEvent(new Event('change'));
           fields.number.value = number;
           fields.number.dispatchEvent(new Event('change'));
-          renderModules().catch(error => { status.textContent = error.message; });
+          fields.title.focus();
         }));
     }
   }
@@ -217,10 +265,24 @@ function setupAcademicRegistry(client, refreshClasses) {
   matrix.className = 'setup-matrix';
   const matrixTitle = document.createElement('h4');
   matrixTitle.textContent = 'Alunos e disciplinas';
-  classForm.after(matrixTitle, matrix);
+  const filters = document.createElement('div');
+  filters.className = 'setup-filters';
+  filters.innerHTML = `<label>Buscar aluno <input type="search"></label>
+    <label><input type="checkbox"> Só dispensas</label>`;
+  const search = filters.querySelector('input[type="search"]');
+  const onlyWaivers = filters.querySelector('input[type="checkbox"]');
+  function filterMatrix() {
+    const query = search.value.trim().toLocaleLowerCase('pt-BR');
+    for (const row of matrix.querySelectorAll('tbody tr')) {
+      row.hidden = !row.dataset.name.includes(query) || (onlyWaivers.checked && row.dataset.waiver !== 'true');
+    }
+  }
+  search.oninput = onlyWaivers.onchange = filterMatrix;
+  classForm.after(matrixTitle, filters, matrix);
   const fillClassFields = classForm.elements.entry.onchange;
   classForm.elements.entry.onchange = () => {
     fillClassFields();
+    showContext();
     loadMatrix().catch(error => { matrix.textContent = error.message; });
   };
   async function loadMatrix() {
@@ -262,6 +324,8 @@ function setupAcademicRegistry(client, refreshClasses) {
       for (const student of roster) {
         const row = body.insertRow();
         const name = student.user_profiles?.display_name || 'Aluno';
+        row.dataset.name = name.toLocaleLowerCase('pt-BR');
+        row.dataset.waiver = String(waivers.some(entry => entry.student_id === student.user_id));
         row.insertCell().textContent = name;
         for (const component of components) {
           const criteria = { offering_id: offering.id, subject_id: component.subject_id, student_id: student.user_id };
@@ -299,6 +363,7 @@ function setupAcademicRegistry(client, refreshClasses) {
         }
       }
       matrix.append(table);
+      filterMatrix();
     }
   }
   sections.forEach(({ button }, index) => {
@@ -318,6 +383,19 @@ function setupAcademicRegistry(client, refreshClasses) {
         }
       } catch (error) { status.textContent = error.message; }
     };
+  });
+  const scheduleLink = document.createElement('a');
+  scheduleLink.href = '#distribuicao';
+  scheduleLink.textContent = 'Abrir horários e distribuição semanal';
+  sections[2].section.append(scheduleLink);
+  const createForm = document.querySelector('#nova-turma');
+  createForm.addEventListener('semester-class-created', async event => {
+    try {
+      await load();
+      classForm.elements.entry.value = event.detail;
+      classForm.elements.entry.onchange();
+      selectGroup(2);
+    } catch (error) { status.textContent = error.message; }
   });
   selectGroup(0);
   load().catch(error => { status.textContent = error.message; });

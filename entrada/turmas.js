@@ -220,6 +220,7 @@ async function showClasses(client, userId, role) {
       await refreshClasses();
       selected.value = result.data;
       await refreshInvitations();
+      create.dispatchEvent(new CustomEvent('semester-class-created', { detail: result.data }));
     }, 'Turma criada.');
     handleSubmit(roster, async () => {
       const batch = [...new Set(emails.value.split(/\r?\n/).map(value => value.trim().toLowerCase()).filter(Boolean))];
