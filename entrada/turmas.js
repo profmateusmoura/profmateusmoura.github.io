@@ -153,7 +153,23 @@ async function showClasses(client, userId, role) {
     const period = document.querySelector('#turma-periodo');
     const moduleSelect = document.querySelector('#turma-modulo');
     const coordinator = role === 'coordenacao';
+    const semester = document.querySelector('#turma-semestre');
+    const className = document.querySelector('#nome-turma');
+    let suggestedName = '';
+    function suggestClassName() {
+      const code = course.selectedOptions[0]?.dataset.code;
+      const moduleNumber = moduleSelect.selectedOptions[0]?.dataset.number;
+      const abbreviation = code === 'INF' ? 'TI' : code;
+      const nextName = abbreviation && moduleNumber && year.value && year.checkValidity()
+        ? moduleNumber + '° mód ' + abbreviation + ' ' + year.value + '/' + semester.value
+        : '';
+      if (!className.value.trim() || className.value === suggestedName) className.value = nextName;
+      suggestedName = nextName;
+    }
     if (coordinator) {
+      moduleSelect.addEventListener('change', suggestClassName);
+      semester.addEventListener('change', suggestClassName);
+      year.addEventListener('input', suggestClassName);
       setupAcademicRegistry(client, refreshClasses);
       period.hidden = false;
       period.disabled = false;
@@ -161,14 +177,19 @@ async function showClasses(client, userId, role) {
         const selectedCourse = course.value;
         moduleSelect.replaceChildren(new Option('Selecione um módulo', ''));
         if (!selectedCourse) return;
-        const response = await client.from('course_modules').select('id,title')
+        const response = await client.from('course_modules').select('id,title,module_number')
           .eq('course_id', selectedCourse).order('module_number');
         if (course.value !== selectedCourse) return;
         if (response.error) { state.textContent = response.error.message; return; }
-        moduleSelect.append(...response.data.map(row => new Option(row.title, row.id)));
+        moduleSelect.append(...response.data.map(row => {
+          const option = new Option(row.title, row.id);
+          option.dataset.number = row.module_number;
+          return option;
+        }));
         const preferred = moduleSelect.dataset.preferred;
         if (response.data.some(row => row.id === preferred)) moduleSelect.value = preferred;
         delete moduleSelect.dataset.preferred;
+        suggestClassName();
       }
       course.addEventListener('change', loadClassModules);
       course.addEventListener('focus', () => {
@@ -176,7 +197,11 @@ async function showClasses(client, userId, role) {
       });
       document.querySelector('#turma-semestre').value = new Date().getMonth() < 6 ? '1' : '2';
     }
-    course.replaceChildren(...catalog.data.map(entry => new Option(entry.code + ' · ' + entry.title, entry.id)));
+    course.replaceChildren(...catalog.data.map(entry => {
+      const option = new Option(entry.code + ' · ' + entry.title, entry.id);
+      option.dataset.code = entry.code;
+      return option;
+    }));
     if (coordinator) course.dispatchEvent(new Event('change'));
     year.value = new Date().getFullYear();
     create.hidden = !catalog.data.length;

@@ -186,7 +186,14 @@ function setupAcademicRegistry(client, refreshClasses) {
     editCourse.textContent = courseForm.hidden ? 'Editar curso' : 'Fechar edição';
     if (!courseForm.hidden) courseForm.elements.code.focus();
   };
-  courseCards.after(editCourse);
+  const courseActions = document.createElement('div');
+  courseActions.className = 'access-actions';
+  const continueCourse = document.createElement('button');
+  continueCourse.type = 'button';
+  continueCourse.textContent = 'Avançar para módulos';
+  continueCourse.onclick = () => sections[1].button.click();
+  courseActions.append(editCourse, continueCourse);
+  courseCards.after(courseActions);
   const newClass = document.createElement('button');
   newClass.type = 'button';
   newClass.textContent = 'Nova turma neste módulo';
@@ -214,7 +221,7 @@ function setupAcademicRegistry(client, refreshClasses) {
         activeModule = moduleTitle = '';
         classForm.elements.entry.value = '';
         renderCourses();
-        sections[1].button.click();
+        continueCourse.focus();
       })), makeCard('Novo curso', 'Cadastrar', !activeCourse, () => {
         activeCourse = activeModule = moduleTitle = '';
         renderCourses();
@@ -223,6 +230,8 @@ function setupAcademicRegistry(client, refreshClasses) {
     courseForm.elements.entry.value = activeCourse;
     courseForm.elements.entry.onchange();
     courseForm.hidden = Boolean(activeCourse);
+    courseActions.hidden = !activeCourse;
+    continueCourse.disabled = !activeCourse;
     editCourse.hidden = !activeCourse;
     editCourse.textContent = 'Editar curso';
     showContext();
@@ -232,18 +241,23 @@ function setupAcademicRegistry(client, refreshClasses) {
     moduleCards.replaceChildren();
     newClass.hidden = !activeModule;
     moduleForm.hidden = true;
-    if (!course) return;
+    if (!course) {
+      moduleCards.textContent = 'Selecione um curso para ver os módulos cadastrados.';
+      return;
+    }
     const modules = await result(client.from('course_modules').select('id,module_number,title')
       .eq('course_id', course.id).order('module_number'));
     if (course.id !== activeCourse) return;
     const links = !modules.length ? [] : await result(client.from('module_subjects')
       .select('module_id,curriculum_subjects(weekly_lessons)').in('module_id', modules.map(row => row.id)));
     if (course.id !== activeCourse) return;
-    for (let number = 1; number <= course.planned_modules; number++) {
+    const moduleNumbers = new Set(Array.from({ length: course.planned_modules }, (_, i) => i + 1));
+    modules.forEach(module => moduleNumbers.add(module.module_number));
+    for (const number of [...moduleNumbers].sort((first, second) => first - second)) {
       const module = modules.find(row => row.module_number === number);
       const entries = links.filter(row => row.module_id === module?.id);
       const lessons = entries.reduce((total, row) => total + (row.curriculum_subjects?.weekly_lessons || 0), 0);
-      moduleCards.append(makeCard(module?.title || 'Módulo ' + number,
+      const card = makeCard(module?.title || 'Módulo ' + number,
         module ? entries.length + ' disciplinas · ' + lessons + '/25 aulas semanais' : 'Cadastrar módulo', module?.id === activeModule, () => {
           activeModule = module?.id || '';
           moduleTitle = module?.title || 'Módulo ' + number;
@@ -251,14 +265,16 @@ function setupAcademicRegistry(client, refreshClasses) {
           showContext();
           newClass.hidden = !activeModule;
           moduleForm.hidden = false;
-          for (const [index, card] of [...moduleCards.children].entries()) card.setAttribute('aria-pressed', String(index + 1 === number));
+          for (const item of moduleCards.children) item.setAttribute('aria-pressed', String(Number(item.dataset.number) === number));
           const fields = moduleForm.elements;
           fields.course.value = course.id;
           fields.course.dispatchEvent(new Event('change'));
           fields.number.value = number;
           fields.number.dispatchEvent(new Event('change'));
           fields.title.focus();
-        }));
+        });
+      card.dataset.number = String(number);
+      moduleCards.append(card);
     }
   }
   const matrix = document.createElement('div');
@@ -375,7 +391,9 @@ function setupAcademicRegistry(client, refreshClasses) {
           const course = document.querySelector('#curso');
           if (![...course.options].some(option => option.value === activeCourse)) {
             const saved = courses.find(row => row.id === activeCourse);
-            course.add(new Option(saved.title, saved.id));
+            const option = new Option(saved.title, saved.id);
+            option.dataset.code = saved.code;
+            course.add(option);
           }
           course.value = activeCourse;
           document.querySelector('#turma-modulo').dataset.preferred = activeModule;
