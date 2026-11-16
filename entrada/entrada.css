@@ -270,3 +270,9 @@
   opacity: .55;
   text-decoration: line-through;
 }
+
+#cal-lote-dia button[aria-pressed="true"] {
+  outline: 2px solid currentColor;
+  outline-offset: -4px;
+  font-weight: 750;
+}
