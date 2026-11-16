@@ -3,17 +3,19 @@ function setupSemesterOfferings(client, courses) {
   panel.innerHTML = `
     <h3>Grade da oferta semestral</h3>
     <form id="modulo-form">
-      <h4>Cadastrar módulo</h4>
+      <h4>Configurar módulo do curso</h4>
       <label>Curso <select name="course" required></select></label>
       <label>Número <input name="number" type="number" min="1" required></label>
       <label>Nome <input name="title" required></label>
-      <button>Cadastrar módulo</button>
+      <label>Disciplinas do curso <select name="subjects" multiple size="6" required></select></label>
+      <p id="modulo-carga" role="status"></p>
+      <button>Salvar módulo</button>
     </form>
     <form id="oferta-form">
       <label>Turma <select name="class" required></select></label>
       <label>Semestre <select name="semester"><option value="1">1º semestre</option><option value="2">2º semestre</option></select></label>
       <label>Módulo <select name="module" required></select></label>
-      <label>Disciplinas do módulo <select name="subjects" multiple required></select></label>
+
       <div id="oferta-responsaveis"></div>
       <button>Preparar grade</button>
     </form>
@@ -28,8 +30,8 @@ function setupSemesterOfferings(client, courses) {
   const fields = form.elements;
   const moduleForm = panel.querySelector('#modulo-form');
   const responsibleFields = panel.querySelector('#oferta-responsaveis');
-  const selectedSubjects = () => [...fields.subjects.selectedOptions]
-    .map(option => subjects.find(row => row.id === option.value));
+  const selectedSubjects = () => subjects.filter(subject => memberships.some(link =>
+    link.module_id === fields.module.value && link.subject_id === subject.id));
   const responsibleFor = id => responsibleFields.querySelector('[data-subject="' + id + '"]')?.value;
   function renderResponsibleFields() {
     const previous = new Map([...responsibleFields.querySelectorAll('select')]
@@ -49,7 +51,7 @@ function setupSemesterOfferings(client, courses) {
   }
   const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
   const times = ['18h30', '19h10', '19h50', '20h40', '21h20'];
-  let classes, modules, subjects, teachers;
+  let classes, modules, subjects, teachers, memberships;
   let currentOffering;
   const options = (field, rows, label, key = 'id') => {
     field.replaceChildren(new Option('Selecione', ''), ...rows.map(row => new Option(label(row), row[key])));
@@ -64,21 +66,48 @@ function setupSemesterOfferings(client, courses) {
     const group = classes.find(row => row.id === fields.class.value);
     options(fields.module, modules.filter(row => row.course_id === group?.course_id),
       row => row.module_number + ' · ' + row.title);
-    fields.subjects.replaceChildren(...subjects.filter(row => row.course_id === group?.course_id)
-      .map(row => new Option(row.title + ' · ' + row.weekly_lessons + ' aulas', row.id)));
     renderResponsibleFields();
   }
   async function initialize() {
-    [classes, modules, subjects, teachers] = await Promise.all([
+    [classes, modules, subjects, teachers, memberships] = await Promise.all([
       data(client.from('classes').select('id,name,school_year,course_id').eq('active', true).order('name')),
       data(client.from('course_modules').select('id,course_id,module_number,title').order('module_number')),
       data(client.from('curriculum_subjects').select('id,course_id,title,weekly_lessons').order('title')),
       data(client.from('user_profiles').select('user_id,display_name').in('app_role', ['docente', 'coordenacao']).order('display_name')),
+      data(client.from('module_subjects').select('module_id,subject_id')),
     ]);
     options(fields.class, classes, row => row.name + ' · ' + row.school_year +
       ' · ' + (courses.find(course => course.id === row.course_id)?.code || ''));
     options(moduleForm.elements.course, courses, row => row.code + ' · ' + row.title);
-    fields.subjects.onchange = renderResponsibleFields;
+    fields.module.onchange = renderResponsibleFields;
+    const moduleFields = moduleForm.elements;
+    const updateLoad = () => {
+      const selected = [...moduleFields.subjects.selectedOptions];
+      const total = selected.reduce((sum, option) => sum + Number(option.dataset.lessons), 0);
+      panel.querySelector('#modulo-carga').textContent = total + ' de 25 aulas semanais.';
+      moduleForm.querySelector('button').disabled = total !== 25;
+    };
+    moduleFields.course.onchange = () => {
+      moduleFields.subjects.replaceChildren(...subjects.filter(row => row.course_id === moduleFields.course.value)
+        .map(row => {
+          const option = new Option(row.title + ' · ' + row.weekly_lessons + ' aulas', row.id);
+          option.dataset.lessons = row.weekly_lessons;
+          return option;
+        }));
+      updateLoad();
+    };
+    moduleFields.number.onchange = () => {
+      const module = modules.find(row => row.course_id === moduleFields.course.value &&
+        row.module_number === Number(moduleFields.number.value));
+      moduleFields.title.value = module?.title || '';
+      for (const option of moduleFields.subjects.options) {
+        option.selected = memberships.some(link => link.module_id === module?.id &&
+          link.subject_id === option.value);
+      }
+      updateLoad();
+    };
+    moduleFields.subjects.onchange = updateLoad;
+    moduleFields.course.onchange();
     fields.class.onchange = updateCourse;
     form.onchange = () => { grid.hidden = true; currentOffering = null; };
     updateCourse();
@@ -139,9 +168,6 @@ function setupSemesterOfferings(client, courses) {
         status.textContent = 'Grade fechada.';
         return;
       }
-      await data(client.from('module_subjects').upsert(selected.map(row => ({
-        module_id: module.id, course_id: group.course_id, subject_id: row.id,
-      })), { onConflict: 'module_id,subject_id', ignoreDuplicates: true }));
       if (!offering) offering = await data(client.from('semester_offerings').insert({
         class_id: group.id, course_id: group.course_id, module_id: module.id, semester,
       }).select('id').single());
@@ -178,17 +204,22 @@ function setupSemesterOfferings(client, courses) {
     const fields = moduleForm.elements;
     button.disabled = true;
     try {
-      const module = await data(client.from('course_modules').insert({
-        course_id: fields.course.value,
-        module_number: Number(fields.number.value),
-        title: fields.title.value.trim(),
-      }).select('id,course_id,module_number,title').single());
+      const ids = [...fields.subjects.selectedOptions].map(option => option.value);
+      const module = await data(client.rpc('create_module_with_subjects', {
+        p_course: fields.course.value, p_number: Number(fields.number.value),
+        p_title: fields.title.value.trim(), p_subjects: ids,
+      }).single());
+      modules = modules.filter(row => row.id !== module.id);
       modules.push(module);
+      memberships = memberships.filter(row => row.module_id !== module.id);
+      memberships.push(...ids.map(id => ({ module_id: module.id, subject_id: id })));
       updateCourse();
       moduleForm.reset();
-      status.textContent = 'Módulo cadastrado.';
+      fields.course.onchange();
+      status.textContent = 'Módulo e disciplinas salvos.';
     } catch (error) { status.textContent = error.message; }
-    finally { button.disabled = false; }
+    finally { button.disabled = [...fields.subjects.selectedOptions].reduce((sum, option) =>
+      sum + Number(option.dataset.lessons), 0) !== 25; }
   };
   initialize().catch(error => { form.hidden = moduleForm.hidden = true; status.textContent = error.message; });
 }
