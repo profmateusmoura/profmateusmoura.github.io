@@ -52,7 +52,12 @@
         <p class="setup-guide">Crie a turma e cadastre os e-mails dos alunos que poderão acessá-la.</p>
       <form id="nova-turma" hidden>
         <h3>Criar turma</h3>
-        <label>Disciplina <select id="curso" required></select></label>
+        <label>Curso <select id="curso" required></select></label>
+        <fieldset id="turma-periodo" hidden disabled>
+          <label>Módulo <select id="turma-modulo" required></select></label>
+          <label>Semestre <select id="turma-semestre"><option value="1">1º semestre</option><option value="2">2º semestre</option></select></label>
+          <p>A turma usa as disciplinas do módulo selecionado.</p>
+        </fieldset>
         <label>Nome <input id="nome-turma" maxlength="100" required></label>
         <label>Ano <input id="ano-turma" type="number" min="2000" max="2100" required></label>
         <label>Modalidade

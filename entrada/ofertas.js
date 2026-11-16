@@ -10,6 +10,7 @@ function setupSemesterOfferings(client, courses) {
       <label>Disciplinas do curso <select name="subjects" multiple size="6" required></select></label>
       <p id="modulo-carga" role="status"></p>
       <button>Salvar módulo</button>
+      <p id="modulo-estado" role="status"></p>
     </form>
     <form id="oferta-form">
       <label>Turma <select name="class" required></select></label>
@@ -84,7 +85,7 @@ function setupSemesterOfferings(client, courses) {
     const updateLoad = () => {
       const selected = [...moduleFields.subjects.selectedOptions];
       const total = selected.reduce((sum, option) => sum + Number(option.dataset.lessons), 0);
-      panel.querySelector('#modulo-carga').textContent = total + ' de 25 aulas semanais.';
+      moduleForm.querySelector('#modulo-carga').textContent = total + ' de 25 aulas semanais.';
       moduleForm.querySelector('button').disabled = total !== 25;
     };
     moduleFields.course.onchange = () => {
@@ -216,8 +217,8 @@ function setupSemesterOfferings(client, courses) {
       updateCourse();
       moduleForm.reset();
       fields.course.onchange();
-      status.textContent = 'Módulo e disciplinas salvos.';
-    } catch (error) { status.textContent = error.message; }
+      moduleForm.querySelector('#modulo-estado').textContent = 'Módulo e disciplinas salvos.';
+    } catch (error) { moduleForm.querySelector('#modulo-estado').textContent = error.message; }
     finally { button.disabled = [...fields.subjects.selectedOptions].reduce((sum, option) =>
       sum + Number(option.dataset.lessons), 0) !== 25; }
   };
