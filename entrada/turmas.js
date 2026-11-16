@@ -166,6 +166,9 @@ async function showClasses(client, userId, role) {
         if (course.value !== selectedCourse) return;
         if (response.error) { state.textContent = response.error.message; return; }
         moduleSelect.append(...response.data.map(row => new Option(row.title, row.id)));
+        const preferred = moduleSelect.dataset.preferred;
+        if (response.data.some(row => row.id === preferred)) moduleSelect.value = preferred;
+        delete moduleSelect.dataset.preferred;
       }
       course.addEventListener('change', loadClassModules);
       course.addEventListener('focus', () => {
