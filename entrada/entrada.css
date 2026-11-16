@@ -256,3 +256,17 @@
   border-radius: .75rem;
   padding: .75rem;
 }
+
+.calendar-legend .calendar-teaching.weekday-1, .calendar-grid .calendar-teaching.weekday-1 { background: #ceeae1; color: #163d31; }
+.calendar-legend .calendar-teaching.weekday-2, .calendar-grid .calendar-teaching.weekday-2 { background: #d3e5ff; color: #183c68; }
+.calendar-legend .calendar-teaching.weekday-3, .calendar-grid .calendar-teaching.weekday-3 { background: #e9ddfa; color: #4e306f; }
+.calendar-legend .calendar-teaching.weekday-4, .calendar-grid .calendar-teaching.weekday-4 { background: #f5e8b7; color: #53400d; }
+.calendar-legend .calendar-teaching.weekday-5, .calendar-grid .calendar-teaching.weekday-5 { background: #f6dbe7; color: #66324b; }
+.calendar-grid button.calendar-teaching[aria-pressed="true"] {
+  outline: 2px solid currentColor;
+  outline-offset: -3px;
+}
+.calendar-grid button.calendar-teaching[aria-pressed="false"] {
+  opacity: .55;
+  text-decoration: line-through;
+}

@@ -44,8 +44,14 @@ function setupSchoolDiary(client, role) {
       : ' · horário de ' + weekdays[row.teaching_weekday - 1].toLowerCase());
   }
 
-  function remaining() {
-    return Math.max(0, 18 - days.filter(row => row.teaching_weekday === Number(batchWeekday.value)).length);
+  function savedDates() {
+    return days.filter(row => row.teaching_weekday === Number(batchWeekday.value))
+      .map(row => row.school_date).sort();
+  }
+
+  function resetBatch() {
+    batch.clear();
+    savedDates().forEach(date => batch.add(date));
   }
 
   function gridDates() {
@@ -60,10 +66,10 @@ function setupSchoolDiary(client, role) {
   }
 
   function updateBatch() {
-    const pending = remaining();
-    find('cal-selecao').textContent = (18 - pending) + '/18 cadastrados · ' +
-      batch.size + ' selecionado(s) · faltam ' + Math.max(0, pending - batch.size) + ' nesta seleção.';
-    find('cal-salvar-lote').disabled = savingCalendar || !calendarReady || batch.size === 0 || batch.size > remaining();
+    const saved = savedDates();
+    const changed = saved.length !== batch.size || saved.some(date => !batch.has(date));
+    find('cal-selecao').textContent = batch.size + '/18 datas selecionadas · ' + saved.length + ' já salvas.';
+    find('cal-salvar-lote').disabled = savingCalendar || !calendarReady || !changed || batch.size > 18;
   }
 
   function renderSemester() {
@@ -86,19 +92,19 @@ function setupSchoolDiary(client, role) {
       for (const date of dates) {
         const value = date.toISOString().slice(0, 10);
         const row = known.get(value);
-        const selectable = coordinator && !row;
+        const selectable = coordinator && (!row || row.teaching_weekday === Number(batchWeekday.value));
         const tile = document.createElement(selectable ? 'button' : 'span');
         tile.textContent = date.getUTCDate();
         tile.title = row ? dayLabel(row) : dateFormat.format(date);
         tile.setAttribute('aria-label', tile.title);
-        if (row) tile.className = row.holiday_name ? 'calendar-holiday' : 'calendar-teaching';
+        if (row) tile.className = row.holiday_name ? 'calendar-holiday' : 'calendar-teaching weekday-' + row.teaching_weekday;
         if (selectable) {
           tile.type = 'button';
           tile.setAttribute('aria-pressed', String(batch.has(value)));
           tile.onclick = () => {
             if (savingCalendar) return;
             if (batch.has(value)) batch.delete(value);
-            else if (batch.size < remaining()) batch.add(value);
+            else if (batch.size < 18) batch.add(value);
             tile.setAttribute('aria-pressed', String(batch.has(value)));
             updateBatch();
           };
@@ -147,6 +153,7 @@ function setupSchoolDiary(client, role) {
         .order('school_date'));
       if (version !== calendarRequest) return;
       days = rows;
+      resetBatch();
       calendarReady = true;
       renderSemester();
       const totals = weekdays.map((_, i) => rows.filter(row => row.teaching_weekday === i + 1).length);
@@ -189,7 +196,7 @@ function setupSchoolDiary(client, role) {
       }
     }
     function clearBatch() {
-      batch.clear();
+      resetBatch();
       renderSemester();
     }
     batchWeekday.onchange = clearBatch;
@@ -202,17 +209,16 @@ function setupSchoolDiary(client, role) {
         .filter(date => date.getUTCDay() === Number(batchWeekday.value))
         .map(date => date.toISOString().slice(0, 10))
         .filter(value => (!start || value >= start) && !used.has(value));
-      batch.clear();
-      candidates.slice(0, remaining()).forEach(value => batch.add(value));
+      candidates.slice(0, Math.max(0, 18 - batch.size)).forEach(value => batch.add(value));
       renderSemester();
     };
     find('cal-lote').onsubmit = (event) => {
       event.preventDefault();
-      if (!calendarReady || savingCalendar || !batch.size || batch.size > remaining()) return;
+      if (find('cal-salvar-lote').disabled) return;
       writeCalendar(async () => {
-        expect(await client.rpc('save_school_days_bulk', {
+        expect(await client.rpc('replace_school_days_bulk', {
           p_year: Number(year.value), p_semester: Number(semester.value),
-          p_weekday: Number(batchWeekday.value), p_dates: [...batch].sort(),
+          p_weekday: Number(batchWeekday.value), p_dates: [...batch].sort(), p_previous: savedDates(),
         }));
       }, 'Datas marcadas salvas.');
     };
