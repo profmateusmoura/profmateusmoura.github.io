@@ -11,7 +11,7 @@ function setupSchoolDiary(client, role) {
   const dateFormat = new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC', dateStyle: 'full' });
   const year = find('cal-ano');
   const semester = find('cal-semestre');
-  let batchWeekday = 1;
+  let batchWeekday = null;
   const batch = new Set();
   const coordinator = role === 'coordenacao';
   let calendarReady = false;
@@ -45,6 +45,7 @@ function setupSchoolDiary(client, role) {
   }
 
   function savedDates() {
+    if (batchWeekday === null) return [];
     return days.filter(row => row.teaching_weekday === batchWeekday)
       .map(row => row.school_date).sort();
   }
@@ -68,7 +69,7 @@ function setupSchoolDiary(client, role) {
   function updateBatch() {
     const saved = savedDates();
     const changed = saved.length !== batch.size || saved.some(date => !batch.has(date));
-    find('cal-selecao').textContent = batch.size + '/18 datas selecionadas · ' + saved.length + ' já salvas.';
+    find('cal-selecao').textContent = batchWeekday === null ? 'Escolha um dia pedagógico para editar as datas.' : batch.size + '/18 datas selecionadas · ' + saved.length + ' já salvas.';
     find('cal-salvar-lote').disabled = savingCalendar || !calendarReady || !changed || batch.size > 18;
   }
 
@@ -92,7 +93,7 @@ function setupSchoolDiary(client, role) {
       for (const date of dates) {
         const value = date.toISOString().slice(0, 10);
         const row = known.get(value);
-        const selectable = coordinator && (!row || row.teaching_weekday === batchWeekday);
+        const selectable = coordinator && batchWeekday !== null && (!row || row.teaching_weekday === batchWeekday);
         const tile = document.createElement(selectable ? 'button' : 'span');
         tile.textContent = date.getUTCDate();
         tile.title = row ? dayLabel(row) : dateFormat.format(date);
@@ -205,10 +206,10 @@ function setupSchoolDiary(client, role) {
       button.className = 'calendar-teaching weekday-' + weekday;
       button.setAttribute('aria-pressed', String(weekday === batchWeekday));
       button.onclick = () => {
-        if (savingCalendar || weekday === batchWeekday) return;
-        batchWeekday = weekday;
+        if (savingCalendar) return;
+        batchWeekday = weekday === batchWeekday ? null : weekday;
         for (const control of controls.children) {
-          control.setAttribute('aria-pressed', String(control === button));
+          control.setAttribute('aria-pressed', String(batchWeekday !== null && control === button));
         }
         resetBatch();
         renderSemester();

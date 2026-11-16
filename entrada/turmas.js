@@ -150,6 +150,7 @@ async function showClasses(client, userId, role) {
     const catalog = await client.from('courses').select('id, code, title').eq('active', true).order('code');
     if (catalog.error) throw catalog.error;
     setupAcademicPlanning(client, role, catalog.data);
+    if (role === 'coordenacao') setupAcademicRegistry(client, refreshClasses);
     course.replaceChildren(...catalog.data.map(entry => new Option(entry.code + ' · ' + entry.title, entry.id)));
     year.value = new Date().getFullYear();
     create.hidden = !catalog.data.length;
