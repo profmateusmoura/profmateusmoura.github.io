@@ -282,3 +282,23 @@
   color: #fff;
   border-color: var(--navy);
 }
+
+.setup-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: .75rem;
+  margin-block: 1rem;
+}
+.setup-cards button {
+  display: grid;
+  gap: .3rem;
+  text-align: left;
+}
+.setup-cards button span { font-size: .9rem; }
+
+.setup-matrix { overflow-x: auto; }
+.setup-matrix th, .setup-matrix td {
+  padding: .55rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
