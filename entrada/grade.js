@@ -2,8 +2,13 @@ function setupAcademicPlanning(client, role, courses) {
   const $ = (id) => document.getElementById(id);
   const coordinator = role === 'coordenacao';
   const tabs = ['cadastro', 'gestao', 'calendario', 'curriculo', 'distribuicao', 'chamada'];
+  if (coordinator) {
+    const curriculum = document.querySelector('#menu-gestao a[href="#curriculo"]');
+    curriculum.hidden = true;
+  }
   const tabLinks = [...document.querySelectorAll('#menu-gestao a')];
   function showTab(id, updateHash = true) {
+    if (id === 'curriculo' && coordinator) id = 'cadastro';
     if (!tabs.includes(id) || (!coordinator && ['curriculo', 'distribuicao'].includes(id))) id = 'gestao';
     for (const tab of tabs) { const section = $(tab); if (section) section.hidden = tab !== id; }
     tabLinks.forEach(link => { const active = link.hash === '#' + id; link.classList.toggle('is-active', active); if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });

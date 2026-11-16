@@ -116,5 +116,45 @@ function setupAcademicRegistry(client, refreshClasses) {
     materialForm.querySelector('button').disabled = true;
     status.textContent = 'Não foi possível carregar os vínculos de materiais: ' + error.message;
   });
+  const guide = panel.nextElementSibling;
+  if (guide?.classList.contains('setup-guide')) guide.hidden = true;
+  const groups = [
+    ['Cursos', 'Cadastre o curso e sua ementa.', ['cadastro-curso']],
+    ['Módulos', 'Agrupe as disciplinas do curso até completar 25 aulas semanais.', ['modulo-form']],
+    ['Disciplinas', 'Defina a carga semanal e vincule os materiais.', ['materia-form', 'materias-lista', 'materia-estado', 'vinculo-material']],
+    ['Turmas', 'Escolha um curso, um módulo e o semestre da turma.', ['nova-turma', 'edicao-turma', 'matriculas']],
+  ];
+  const nav = document.createElement('div');
+  nav.className = 'calendar-legend';
+  nav.setAttribute('role', 'group');
+  nav.setAttribute('aria-label', 'Cadastros acadêmicos');
+  panel.prepend(nav);
+  const sections = groups.map(([title, description, ids]) => {
+    const section = document.createElement('section');
+    const heading = document.createElement('h3');
+    heading.textContent = title;
+    const help = document.createElement('p');
+    help.className = 'setup-guide';
+    help.textContent = description;
+    section.append(heading, help);
+    for (const id of ids) {
+      const control = document.getElementById(id);
+      if (control) section.append(control);
+    }
+    panel.insertBefore(section, status);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = title;
+    nav.append(button);
+    return { section, button };
+  });
+  function selectGroup(active) {
+    sections.forEach(({ section, button }, index) => {
+      section.hidden = index !== active;
+      button.setAttribute('aria-pressed', String(index === active));
+    });
+  }
+  sections.forEach(({ button }, index) => { button.onclick = () => selectGroup(index); });
+  selectGroup(0);
   load().catch(error => { status.textContent = error.message; });
 }

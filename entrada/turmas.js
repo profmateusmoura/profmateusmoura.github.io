@@ -150,8 +150,31 @@ async function showClasses(client, userId, role) {
     const catalog = await client.from('courses').select('id, code, title').eq('active', true).order('code');
     if (catalog.error) throw catalog.error;
     setupAcademicPlanning(client, role, catalog.data);
-    if (role === 'coordenacao') setupAcademicRegistry(client, refreshClasses);
+    const period = document.querySelector('#turma-periodo');
+    const moduleSelect = document.querySelector('#turma-modulo');
+    const coordinator = role === 'coordenacao';
+    if (coordinator) {
+      setupAcademicRegistry(client, refreshClasses);
+      period.hidden = false;
+      period.disabled = false;
+      async function loadClassModules() {
+        const selectedCourse = course.value;
+        moduleSelect.replaceChildren(new Option('Selecione um módulo', ''));
+        if (!selectedCourse) return;
+        const response = await client.from('course_modules').select('id,title')
+          .eq('course_id', selectedCourse).order('module_number');
+        if (course.value !== selectedCourse) return;
+        if (response.error) { state.textContent = response.error.message; return; }
+        moduleSelect.append(...response.data.map(row => new Option(row.title, row.id)));
+      }
+      course.addEventListener('change', loadClassModules);
+      course.addEventListener('focus', () => {
+        if (moduleSelect.options.length <= 1) loadClassModules();
+      });
+      document.querySelector('#turma-semestre').value = new Date().getMonth() < 6 ? '1' : '2';
+    }
     course.replaceChildren(...catalog.data.map(entry => new Option(entry.code + ' · ' + entry.title, entry.id)));
+    if (coordinator) course.dispatchEvent(new Event('change'));
     year.value = new Date().getFullYear();
     create.hidden = !catalog.data.length;
     if (role === 'coordenacao') {
@@ -181,9 +204,13 @@ async function showClasses(client, userId, role) {
     }));
     handleSubmit(create, async () => {
       const name = document.querySelector('#nome-turma');
-      const result = await client.rpc('create_managed_class', {
+      const result = await client.rpc(coordinator ? 'create_semester_class' : 'create_managed_class', {
         p_course_id: course.value, p_name: name.value.trim(), p_year: Number(year.value),
         ...(supportsModality ? { p_modality: modality.value } : {}),
+        ...(coordinator ? {
+          p_module: moduleSelect.value,
+          p_semester: Number(document.querySelector('#turma-semestre').value),
+        } : {}),
       });
       if (result.error) throw result.error;
       name.value = '';
