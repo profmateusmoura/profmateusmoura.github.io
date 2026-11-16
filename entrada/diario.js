@@ -11,7 +11,7 @@ function setupSchoolDiary(client, role) {
   const dateFormat = new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC', dateStyle: 'full' });
   const year = find('cal-ano');
   const semester = find('cal-semestre');
-  const batchWeekday = find('cal-lote-dia');
+  let batchWeekday = 1;
   const batch = new Set();
   const coordinator = role === 'coordenacao';
   let calendarReady = false;
@@ -45,7 +45,7 @@ function setupSchoolDiary(client, role) {
   }
 
   function savedDates() {
-    return days.filter(row => row.teaching_weekday === Number(batchWeekday.value))
+    return days.filter(row => row.teaching_weekday === batchWeekday)
       .map(row => row.school_date).sort();
   }
 
@@ -92,7 +92,7 @@ function setupSchoolDiary(client, role) {
       for (const date of dates) {
         const value = date.toISOString().slice(0, 10);
         const row = known.get(value);
-        const selectable = coordinator && (!row || row.teaching_weekday === Number(batchWeekday.value));
+        const selectable = coordinator && (!row || row.teaching_weekday === batchWeekday);
         const tile = document.createElement(selectable ? 'button' : 'span');
         tile.textContent = date.getUTCDate();
         tile.title = row ? dayLabel(row) : dateFormat.format(date);
@@ -105,6 +105,11 @@ function setupSchoolDiary(client, role) {
             if (savingCalendar) return;
             if (batch.has(value)) batch.delete(value);
             else if (batch.size < 18) batch.add(value);
+            else {
+              calendarStatus.textContent = 'Retire uma data marcada antes de incluir outra.';
+              return;
+            }
+            calendarStatus.textContent = '';
             tile.setAttribute('aria-pressed', String(batch.has(value)));
             updateBatch();
           };
@@ -173,11 +178,7 @@ function setupSchoolDiary(client, role) {
   year.value = new Intl.DateTimeFormat('pt-BR', { timeZone: zone, year: 'numeric' }).format();
   const month = new Intl.DateTimeFormat('pt-BR', { timeZone: zone, month: 'numeric' }).format();
   semester.value = Number(month) <= 6 ? '1' : '2';
-  batchWeekday.replaceChildren(...weekdays.map((name, index) => new Option(name, index + 1)));
-  year.onchange = semester.onchange = () => {
-    find('cal-lote-inicio').value = '';
-    refreshCalendar();
-  };
+  year.onchange = semester.onchange = refreshCalendar;
 
   if (coordinator) {
     find('cal-lote').hidden = false;
@@ -195,30 +196,32 @@ function setupSchoolDiary(client, role) {
         updateBatch();
       }
     }
-    function clearBatch() {
-      resetBatch();
-      renderSemester();
-    }
-    batchWeekday.onchange = clearBatch;
-    find('cal-limpar').onclick = clearBatch;
-    find('cal-sugerir').onclick = () => {
-      if (!calendarReady || savingCalendar) return;
-      const used = new Set(days.map(row => row.school_date));
-      const start = find('cal-lote-inicio').value;
-      const candidates = gridDates().flatMap(month => month.dates)
-        .filter(date => date.getUTCDay() === Number(batchWeekday.value))
-        .map(date => date.toISOString().slice(0, 10))
-        .filter(value => (!start || value >= start) && !used.has(value));
-      candidates.slice(0, Math.max(0, 18 - batch.size)).forEach(value => batch.add(value));
-      renderSemester();
-    };
+    const controls = find('cal-lote-dia');
+    weekdays.forEach((name, index) => {
+      const weekday = index + 1;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = name;
+      button.className = 'calendar-teaching weekday-' + weekday;
+      button.setAttribute('aria-pressed', String(weekday === batchWeekday));
+      button.onclick = () => {
+        if (savingCalendar || weekday === batchWeekday) return;
+        batchWeekday = weekday;
+        for (const control of controls.children) {
+          control.setAttribute('aria-pressed', String(control === button));
+        }
+        resetBatch();
+        renderSemester();
+      };
+      controls.append(button);
+    });
     find('cal-lote').onsubmit = (event) => {
       event.preventDefault();
       if (find('cal-salvar-lote').disabled) return;
       writeCalendar(async () => {
         expect(await client.rpc('replace_school_days_bulk', {
           p_year: Number(year.value), p_semester: Number(semester.value),
-          p_weekday: Number(batchWeekday.value), p_dates: [...batch].sort(), p_previous: savedDates(),
+          p_weekday: batchWeekday, p_dates: [...batch].sort(), p_previous: savedDates(),
         }));
       }, 'Datas marcadas salvas.');
     };
