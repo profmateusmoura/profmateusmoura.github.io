@@ -39,15 +39,16 @@
       <h2 id="titulo-turmas">Minhas turmas</h2>
       <ul id="lista-turmas"></ul>
       <nav id="menu-gestao" hidden aria-label="Áreas da gestão">
-        <a href="#cadastro">Cadastro</a>
+        <a href="#cadastro">Cursos, módulos e disciplinas</a>
         <a href="#gestao">Gestão de turmas</a>
         <a href="#calendario">Calendário semestral</a>
         <a href="#curriculo">Grade curricular</a>
-        <a href="#distribuicao">Distribuição semanal</a>
+        <a href="#distribuicao">Montar turma e horários</a>
         <a href="#chamada">Chamada</a>
       </nav>
       <section id="cadastro" hidden>
-      <h2>Cadastro</h2>
+      <h2>Configuração acadêmica</h2>
+        <div id="module-configuration" hidden></div>
         <div id="cadastro-academico" hidden></div>
         <p class="setup-guide">Crie a turma e cadastre os e-mails dos alunos que poderão acessá-la.</p>
       <form id="nova-turma" hidden>
@@ -123,6 +124,8 @@
         <div id="materias-lista"></div>
       </section>
       <section id="distribuicao" hidden>
+        <div id="turma-builder"></div>
+        <div id="legacy-distribution" hidden>
         <h2>Distribuição semanal</h2>
         <p class="setup-guide">Escolha a turma, a matéria e o professor. Marque todos os horários da matéria e salve de uma vez. Os horários ocupados pelo professor ficam bloqueados.</p>
         <div id="ofertas-semestrais"></div>
@@ -137,6 +140,8 @@
         </form>
         <p id="grade-estado" role="status"></p>
         <div id="grade-atual"></div>
+
+        </div>
       </section>
       <section id="chamada" hidden>
         <h2>Chamada</h2>
@@ -161,6 +166,7 @@
   <script src="./ofertas.js" defer></script>
   <script src="../conteudos.js" defer></script>
   <script src="./cadastro-academico.js" defer></script>
+  <script src="./turma-builder.js" defer></script>
   <script src="./grade.js" defer></script>
   <script src="./diario.js" defer></script>
 </body>

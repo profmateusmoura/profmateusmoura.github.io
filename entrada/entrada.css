@@ -319,3 +319,16 @@
   display: flex;
   align-items: center;
 }
+
+#builder-grid td, #builder-grid th {
+  padding: .4rem;
+  border-bottom: 1px solid var(--line);
+  min-width: 8rem;
+}
+#builder-grid button { width: 100%; min-height: 4rem; font-size: .85rem; }
+#builder-grid button[aria-pressed="true"], #builder-subjects button[aria-pressed="true"] {
+  background: var(--accent-soft);
+  border: 2px solid var(--accent);
+}
+#builder-week .access-actions { margin-top: 1rem; }
+#legacy-distribution[hidden] { display: none; }

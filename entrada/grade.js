@@ -114,4 +114,5 @@ function setupAcademicPlanning(client, role, courses) {
   };
   loadPlanningOptions();
   setupSemesterOfferings(client, courses);
+  setupTurmaBuilder(client);
 }
