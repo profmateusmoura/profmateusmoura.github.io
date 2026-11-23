@@ -9,7 +9,11 @@
     ${settings.kind === 'prices' ? '<label>Organização <select name="order"><option value="mixed">Misturados</option><option value="ascending">Crescente</option><option value="descending">Decrescente</option><option value="duplicates">Com repetições</option></select></label>' : ''}
     ${settings.kind === 'search' ? '<label>ID procurado <input name="target" type="number" min="1" max="999" value="7" required></label>' : ''}
     <button>Preparar elementos</button>`;
-  container.querySelector('canvas').before(form);
+  const configuration = document.createElement('details');
+  const summary = document.createElement('summary');
+  summary.textContent = 'Alterar elementos e cenário';
+  configuration.append(summary, form);
+  container.querySelector('canvas').before(configuration);
   const next = document.createElement('button');
   next.type = 'button';
   next.textContent = 'Próxima operação';
