@@ -122,7 +122,7 @@
         button:active { transform: scale(0.98); }
     </style>
 
-<link rel="stylesheet" href="../assets/animacao.css"></head>
+<link rel="stylesheet" href="../assets/animacao.css"><link rel="stylesheet" href="../assets/demo-display.css"></head>
 <body>
     <div class="header">
         <h1>Pilha (LIFO)</h1>
@@ -178,6 +178,8 @@ function loop() {
 function reiniciar() { pilha = []; timer = 0; pushing = true; actionIdx = 0; }
 loop();
 
+window.pedAnimationOptions = { kind: 'stack', min: 4, max: 8, interval: 40, tick: () => timer, apply: ({values,count,target}) => { statusPedido.splice(0,statusPedido.length,...Array.from({length:count},(_,i)=>'Operação '+(i+1))); reiniciar(); } };
+
 </script>
-</body>
+<script src="../assets/demo-display.js" defer></script><script src="../assets/animation-options.js" defer></script></body>
 </html>
