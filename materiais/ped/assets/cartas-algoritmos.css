@@ -1,0 +1,44 @@
+.number-card-demo {
+  border: 1px solid var(--line, #cbd5d9);
+  border-radius: 1rem;
+  padding: clamp(.8rem, 3vw, 1.5rem);
+  margin-block: 1.5rem 2rem;
+  background: var(--surface, transparent);
+}
+.number-card-demo p { line-height: 1.65; }
+.cards-settings, .cards-controls, .cards-legend { display: flex; flex-wrap: wrap; gap: .65rem; align-items: end; margin-block: 1rem; }
+.cards-settings label { display: grid; gap: .4rem; flex: 1 1 12rem; }
+.cards-settings input { width: 100%; min-width: 0; }
+.number-card-demo button, .number-card-demo input {
+  font: inherit; color: inherit; border: 1px solid #8295a4; border-radius: .5rem;
+  padding: .55rem .8rem; background: transparent;
+}
+.number-card-demo button { cursor: pointer; }
+.number-card-demo button:disabled { opacity: .5; cursor: default; }
+.number-card-demo :focus-visible { outline: 3px solid #397be0; outline-offset: 3px; }
+.cards-line { display: flex; flex-wrap: wrap; gap: .6rem; padding-block: .5rem; }
+.number-card-cell { display: grid; width: 5.2rem; gap: .2rem; text-align: center; align-content: start; }
+.number-card-cell small { font-size: .72rem; line-height: 1.4; min-height: 1em; }
+.number-card {
+  display: grid; place-items: center; width: 4.7rem; height: 6.3rem; margin-inline: auto;
+  border: 2px solid #718495; border-radius: .65rem; background: #f8fafc; color: #172b3a;
+  box-shadow: 0 3px 0 #71849533;
+}
+.number-card strong { font-size: 1.8rem; font-variant-numeric: tabular-nums; }
+.cards-legend { font-size: .76rem; align-items: center; }
+.cards-legend span { border: 2px solid transparent; border-radius: .4rem; padding: .25rem .45rem; }
+.number-card-demo .state-fixed { background: #d5f0df; color: #153d28; border-color: #31844d; }
+.number-card-demo .state-ordered { background: #dcebf8; color: #163754; border-color: #497ca6; }
+.number-card-demo .state-compare { background: #fff0b9; color: #513a08; border-color: #ad790c; }
+.number-card-demo .state-changed { background: #fbe0cd; color: #613219; border-color: #bf6336; }
+.number-card-demo .state-candidate { border: 3px dashed #8b52b8; }
+.number-card-demo .state-excluded { background: #e2e6eb; color: #57616e; border-color: #9099a3; text-decoration: line-through; }
+.cards-explanation { border-inline-start: 4px solid #497ca6; padding: .8rem 1rem; background: #497ca612; }
+.cards-counter { font-size: .85rem; }
+.cards-trays > div { border-top: 1px dashed #8295a4; padding-top: .5rem; }
+.cards-error { color: #ba4a38; }
+.number-card-demo details summary { cursor: pointer; font-weight: 650; }
+@media print {
+  .cards-settings, .cards-controls { display: none; }
+  .number-card-demo { break-inside: avoid; }
+}
