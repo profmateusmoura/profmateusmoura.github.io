@@ -43,5 +43,8 @@
     panel.prepend(button);
   }
   document.querySelectorAll('.ped-animation,[data-practice]').forEach(attach);
-  if (document.getElementById('animCanvas')) attach(document.querySelector('.container'));
+  // Quando embutida, a animação usa o único controle do caderno.
+  if (document.getElementById('animCanvas') && window.self === window.top) {
+    attach(document.querySelector('.container'));
+  }
 })();
