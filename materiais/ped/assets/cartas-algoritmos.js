@@ -189,25 +189,28 @@ function pedCardTrace(method, numbers, target) {
         <p>Entregue uma carta com apenas um número a cada participante. Use 7 alunos para acompanhar o exemplo ou divida a turma em grupos. Escreva os índices no chão ou no quadro. Um aluno narra as decisões e outro contabiliza as comparações. Antes de avançar, peça que prevejam a próxima ação.</p>
         <p>Use a sequência 7, 3, 5, 3, 9, 1, 5. Nas cartas repetidas, acompanhe a identidade dos alunos pela ordem inicial. Na tela, “carta 1”, “carta 2” etc. identifica cada participante, sem mudar o valor comparado. Troque os papéis e repita com cartas já ordenadas, em ordem inversa e com todos os valores iguais.</p>
       </details>
+      <details class="cards-customize"><summary>Alterar cartas e desafio</summary>
       <form class="cards-settings">
         <label>Valores das cartas <input name="values" value="${method === 'binary' ? '1, 3, 3, 5, 5, 7, 9' : '7, 3, 5, 3, 9, 1, 5'}" required></label>
         ${method === 'linear' || method === 'binary' ? '<label>Número procurado <input name="target" type="number" value="3" required></label>' : ''}
         <button>Preparar cartas</button>
-      </form>
+      </form></details>
       <p class="cards-error" role="alert"></p>
-      <div class="cards-legend">
+      <details class="cards-key"><summary>Entender as marcações</summary><div class="cards-legend">
         <span class="state-compare">Comparando</span><span class="state-changed">Acabou de trocar</span>
         <span class="state-fixed">Posição definitiva / encontrado</span><span class="state-ordered">Grupo ordenado, pode mudar</span>
         <span class="state-excluded">Descartado na busca</span><span class="state-candidate">Candidato / pivô</span>
-      </div>
-      <div class="cards-line"></div><div class="cards-trays"></div>
+      </div></details>
       <p class="cards-explanation" aria-live="polite"></p>
+      <div class="cards-line" aria-label="Cartas na sequência principal"></div><div class="cards-trays"></div>
+      <div class="cards-playback">
       <p class="cards-counter"></p>
+      <label class="cards-timeline">Percorrer a resolução <input type="range" min="0" value="0" step="1"></label>
       <div class="cards-controls">
         <button type="button" data-action="first">Reiniciar</button>
         <button type="button" data-action="back">Passo anterior</button>
         <button type="button" data-action="next">Próximo passo</button>
-      </div>`;
+      </div></div>`;
     heading.after(panel);
     const fullscreenButton = panel.querySelector('.cards-fullscreen');
     let previousFocus = null;
@@ -273,6 +276,17 @@ function pedCardTrace(method, numbers, target) {
     });
     const form = panel.querySelector('form');
     const error = panel.querySelector('.cards-error');
+    const timeline = panel.querySelector('.cards-timeline input');
+    const nextButton = panel.querySelector('[data-action="next"]');
+    timeline.oninput = () => { step = Number(timeline.value); render(); };
+    panel.addEventListener('keydown', event => {
+      if (event.target.matches('input,textarea,select,summary') || event.altKey || event.ctrlKey || event.metaKey) return;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+        event.preventDefault();
+        step = Math.max(0, Math.min(frames.length - 1, step + (event.key === 'ArrowRight' ? 1 : -1)));
+        render();
+      }
+    });
     let frames = [], step = 0;
     function cardNode(card, index, state, trayCompare = false) {
       const wrapper = document.createElement('div');
@@ -331,7 +345,12 @@ function pedCardTrace(method, numbers, target) {
       panel.querySelector('.cards-counter').textContent = 'Passo ' + step + ' de ' + (frames.length - 1) +
         ' · Comparações: ' + state.comparisons + ' · ' + (method === 'merge' ? 'Cartas levadas à saída: ' : 'Trocas: ') + state.moves;
       panel.querySelector('[data-action="back"]').disabled = step === 0;
-      panel.querySelector('[data-action="next"]').disabled = step === frames.length - 1;
+      timeline.max = frames.length - 1;
+      timeline.value = step;
+      timeline.setAttribute('aria-valuetext', 'Passo ' + step + ' de ' + (frames.length - 1) + '. ' + state.message);
+      nextButton.disabled = step === frames.length - 1;
+      nextButton.textContent = step === 0 ? 'Começar resolução →' :
+        step === frames.length - 1 ? 'Resolução concluída' : 'Próximo passo →';
     }
     function prepare() {
       const tokens = form.elements.values.value.trim().split(/[\s,;]+/);
