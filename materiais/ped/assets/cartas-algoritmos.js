@@ -180,7 +180,10 @@ function pedCardTrace(method, numbers, target) {
     panel.className = 'number-card-demo';
     panel.setAttribute('aria-label', title + ' com cartas numeradas');
     panel.innerHTML = `
-      <h3>Dinâmica com cartas · ${title}</h3>
+      <div class="cards-titlebar">
+        <h3>Dinâmica com cartas · ${title}</h3>
+        <button type="button" class="cards-fullscreen" aria-pressed="false">Abrir em tela inteira</button>
+      </div>
       <p>${guide}</p>
       <details><summary>Preparar a turma e explorar repetições</summary>
         <p>Entregue uma carta com apenas um número a cada participante. Use 7 alunos para acompanhar o exemplo ou divida a turma em grupos. Escreva os índices no chão ou no quadro. Um aluno narra as decisões e outro contabiliza as comparações. Antes de avançar, peça que prevejam a próxima ação.</p>
@@ -206,6 +209,68 @@ function pedCardTrace(method, numbers, target) {
         <button type="button" data-action="next">Próximo passo</button>
       </div>`;
     heading.after(panel);
+    const fullscreenButton = panel.querySelector('.cards-fullscreen');
+    let previousFocus = null;
+    function syncFullscreen() {
+      const open = document.fullscreenElement === panel || panel.classList.contains('cards-expanded');
+      fullscreenButton.textContent = open ? 'Voltar ao caderno' : 'Abrir em tela inteira';
+      fullscreenButton.setAttribute('aria-pressed', String(open));
+      document.body.classList.toggle('cards-overlay-open',
+        Boolean(document.querySelector('.cards-expanded')));
+    }
+    function closeOverlay() {
+      panel.classList.remove('cards-expanded');
+      syncFullscreen();
+      previousFocus?.focus();
+    }
+    fullscreenButton.onclick = async () => {
+      if (document.fullscreenElement === panel) {
+        await document.exitFullscreen();
+        return;
+      }
+      if (panel.classList.contains('cards-expanded')) {
+        closeOverlay();
+        return;
+      }
+      previousFocus = document.activeElement;
+      if (panel.requestFullscreen) {
+        try {
+          await panel.requestFullscreen();
+          return;
+        } catch {
+          // Navegadores que bloqueiam fullscreen usam a expansão dentro da página.
+        }
+      }
+      panel.classList.add('cards-expanded');
+      syncFullscreen();
+      fullscreenButton.focus();
+    };
+    document.addEventListener('fullscreenchange', () => {
+      syncFullscreen();
+      if (!document.fullscreenElement && previousFocus && !panel.classList.contains('cards-expanded')) {
+        previousFocus.focus();
+        previousFocus = null;
+      }
+    });
+    panel.addEventListener('keydown', event => {
+      if (!panel.classList.contains('cards-expanded')) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeOverlay();
+      }
+      if (event.key === 'Tab') {
+        const controls = [...panel.querySelectorAll('button:not(:disabled), input, summary')]
+          .filter(control => control.getClientRects().length);
+        const first = controls[0], last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
     const form = panel.querySelector('form');
     const error = panel.querySelector('.cards-error');
     let frames = [], step = 0;

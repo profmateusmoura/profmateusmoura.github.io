@@ -1,0 +1,12 @@
+.ped-expand-button { display: block; margin: .5rem 0 1rem auto; padding: .65rem 1rem; font: inherit; border: 1px solid currentColor; border-radius: .5rem; cursor: pointer; color: inherit; background: transparent; }
+.ped-expanded-open { overflow: hidden; }
+.ped-expanded, .ped-animation:fullscreen, [data-practice]:fullscreen, .container:fullscreen {
+  box-sizing: border-box; width: 100%; max-width: none; height: 100%; margin: 0; padding: clamp(1rem,3vw,2rem);
+  border: 0; border-radius: 0; overflow: auto; background: #f5f8f6; color: #17382d;
+}
+.ped-expanded { position: fixed; inset: 0; z-index: 10000; height: 100dvh; }
+[data-theme="dark"] .ped-expanded, [data-theme="dark"] :fullscreen { background: #102019; color: #edf6ef; }
+.ped-animation:fullscreen iframe, .ped-animation.ped-expanded iframe { height: calc(100dvh - 8rem) !important; min-height: 20rem; }
+.container:fullscreen canvas, .container.ped-expanded canvas { max-width: 720px; }
+.container:fullscreen .controls, .container.ped-expanded .controls { position: sticky; bottom: 0; padding: .5rem; background: var(--card-bg); z-index: 1; }
+[data-practice]:fullscreen .ped-cell, [data-practice].ped-expanded .ped-cell { font-size: 1.4rem; padding: 1rem; }

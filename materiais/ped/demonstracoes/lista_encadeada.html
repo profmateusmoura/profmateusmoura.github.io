@@ -122,7 +122,7 @@
         button:active { transform: scale(0.98); }
     </style>
 
-<link rel="stylesheet" href="../assets/animacao.css"></head>
+<link rel="stylesheet" href="../assets/animacao.css"><link rel="stylesheet" href="../assets/demo-display.css"></head>
 <body>
     <div class="header">
         <h1>Lista Encadeada</h1>
@@ -181,6 +181,8 @@ function loop() {
 function reiniciar() { atual = 0; timer = 0; }
 loop();
 
+window.pedAnimationOptions = { kind: 'linked', min: 4, max: 10, interval: 50, tick: () => timer, apply: ({values,count,target}) => { nos.splice(0,nos.length,...Array.from({length:count},(_,i)=>({id:i+1,nome:'Nó '+(i+1),next:i===count-1?'NULL':'nó '+(i+2)}))); canvas.height=200+120*count; reiniciar(); } };
+
 </script>
-</body>
+<script src="../assets/demo-display.js" defer></script><script src="../assets/animation-options.js" defer></script></body>
 </html>

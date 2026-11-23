@@ -4,7 +4,7 @@
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)entry.target.contentWindow?.postMessage({type:'ped-pause'},location.origin==='null'?'*':location.origin);}),{threshold:0});
   document.querySelectorAll('[data-load-animation]').forEach(button=>{
     button.onclick=()=>{
-      const frame=document.createElement('iframe');frame.src=button.dataset.loadAnimation;frame.title='Demonstração animada: '+button.dataset.title;
+      const frame=document.createElement('iframe');frame.src=button.dataset.loadAnimation;frame.allowFullscreen=true;frame.title='Demonstração animada: '+button.dataset.title;
       button.parentElement.querySelector('[data-animation-slot]').append(frame);frames.add(frame);observer.observe(frame);button.hidden=true;
     };
   });

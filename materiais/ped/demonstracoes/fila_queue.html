@@ -122,7 +122,7 @@
         button:active { transform: scale(0.98); }
     </style>
 
-<link rel="stylesheet" href="../assets/animacao.css"></head>
+<link rel="stylesheet" href="../assets/animacao.css"><link rel="stylesheet" href="../assets/demo-display.css"></head>
 <body>
     <div class="header">
         <h1>Fila (FIFO)</h1>
@@ -148,6 +148,7 @@ function loop() {
     ctx.fillStyle = getVar('--text-canvas-light'); ctx.font = "18px Inter";
     ctx.fillText("Primeiro a entrar, primeiro a sair", canvas.width / 2, 110);
 
+    const cardWidth = Math.min(110, 620 / clientes.length - 10);
     let x = 40;
     for (let i = 0; i < fila.length; i++) {
         let cor = i === 0 ? getVar('--bar-sorted') : getVar('--card-bg');
@@ -155,15 +156,15 @@ function loop() {
         let corTexto = i === 0 ? "#ffffff" : getVar('--text-canvas');
         
         ctx.fillStyle = cor; ctx.strokeStyle = stroke; ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.roundRect(x, 400, 110, 150, 10); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.roundRect(x, 400, cardWidth, 150, 10); ctx.fill(); ctx.stroke();
         ctx.fillStyle = corTexto; ctx.font = "bold 20px Inter"; ctx.textAlign = "center";
-        ctx.fillText(fila[i], x + 55, 480);
+        ctx.fillText(fila[i], x + cardWidth / 2, 480);
         
         if (i === 0) {
             ctx.fillStyle = getVar('--text-canvas'); ctx.font = "16px Inter";
-            ctx.fillText("Head", x + 55, 530);
+            ctx.fillText("Head", x + cardWidth / 2, 530);
         }
-        x += 130;
+        x += cardWidth + 10;
     }
 
     if (!window.pedIsPaused()) timer++;
@@ -181,6 +182,8 @@ function loop() {
 function reiniciar() { fila = []; timer = 0; addIdx = 0; adding = true; }
 loop();
 
+window.pedAnimationOptions = { kind: 'queue', min: 4, max: 10, interval: 50, tick: () => timer, apply: ({values,count,target}) => { clientes.splice(0,clientes.length,...Array.from({length:count},(_,i)=>'C'+(i+1))); reiniciar(); } };
+
 </script>
-</body>
+<script src="../assets/demo-display.js" defer></script><script src="../assets/animation-options.js" defer></script></body>
 </html>

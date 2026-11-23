@@ -122,7 +122,7 @@
         button:active { transform: scale(0.98); }
     </style>
 
-<link rel="stylesheet" href="../assets/animacao.css"></head>
+<link rel="stylesheet" href="../assets/animacao.css"><link rel="stylesheet" href="../assets/demo-display.css"></head>
 <body>
     <div class="header">
         <h1>Busca Linear</h1>
@@ -144,7 +144,7 @@ const produtos = [
     { id: 7, nome: "Máscara Cílios" }, { id: 8, nome: "Sabonete Líq." }, { id: 9, nome: "Desodorante" },
     { id: 10, nome: "Protetor FPS60" }, { id: 11, nome: "Hidratante" }, { id: 12, nome: "Água Micelar" }
 ];
-const alvo = 10;
+let alvo = 10;
 let idx = 0, timer = 0;
 
 function loop() {
@@ -152,7 +152,7 @@ function loop() {
     ctx.fillStyle = getVar('--text-canvas'); ctx.font = "bold 30px Inter"; ctx.textAlign = "center";
     ctx.fillText("Busca Linear O(n)", canvas.width / 2, 70);
     ctx.fillStyle = getVar('--text-canvas-light'); ctx.font = "18px Inter";
-    ctx.fillText(`Procurando: Protetor (ID ${alvo})`, canvas.width / 2, 110);
+    ctx.fillText(`Procurando ID ${alvo}`, canvas.width / 2, 110);
 
     let y = 160;
     for (let i = 0; i < produtos.length; i++) {
@@ -180,6 +180,8 @@ function loop() {
 function reiniciar() { idx = 0; timer = 0; }
 loop();
 
+window.pedAnimationOptions = { kind: 'search', min: 8, max: 20, interval: 30, tick: () => timer, apply: ({values,count,target}) => { produtos.splice(0,produtos.length,...Array.from({length: count},(_,i)=>({id:i+1,nome:'Produto '+(i+1)}))); alvo=target; canvas.height=200+72*count; reiniciar(); } };
+
 </script>
-</body>
+<script src="../assets/demo-display.js" defer></script><script src="../assets/animation-options.js" defer></script></body>
 </html>
