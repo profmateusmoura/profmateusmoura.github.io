@@ -415,6 +415,21 @@ function setupAcademicRegistry(client, refreshClasses) {
       selectGroup(2);
     } catch (error) { status.textContent = error.message; }
   });
+  // A montagem da turma tem sua própria sequência até a grade.
+  sections[2].button.hidden = true;
+  const management = document.querySelector('#gestao');
+  for (const control of [classForm, matrixTitle, filters, matrix, document.querySelector('#matriculas')]) {
+    management.append(control);
+  }
+  newClass.textContent = 'Montar turma e horários';
+  newClass.onclick = () => document.querySelector('#menu-gestao a[href="#distribuicao"]').click();
+  const moduleConfiguration = document.querySelector('#module-configuration');
+  moduleConfiguration.hidden = false;
+  sections[3].section.prepend(moduleConfiguration);
+  // O vínculo e a carga semanal agora são editados juntos por módulo.
+  for (const id of ['materia-form','materias-lista','materia-estado']) {
+    document.getElementById(id).hidden = true;
+  }
   selectGroup(0);
   load().catch(error => { status.textContent = error.message; });
 }
